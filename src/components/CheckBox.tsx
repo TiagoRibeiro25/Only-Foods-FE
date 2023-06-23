@@ -28,7 +28,7 @@ const CheckBox = ({ ...props }: CheckBoxProps) => {
 				onChange={handleChange}
 			/>
 			<label
-				htmlFor="link-checkbox"
+				htmlFor={props.id}
 				className="ml-2 text-sm font-medium text-gray-900 select-none"
 			>
 				{props.placeholder}
