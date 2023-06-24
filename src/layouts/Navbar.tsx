@@ -63,10 +63,10 @@ const Navbar = () => {
 							Recipes
 						</Link>
 						<Link
-							to="discussions"
+							to="groups"
 							className="md:block hidden text-gray-900 text-md font-semibold hover:text-gray-700 mr-4"
 						>
-							Discussions
+							Groups
 						</Link>
 
 						<div className="relative" ref={menuRef}>
@@ -106,10 +106,10 @@ const Navbar = () => {
 												Recipes
 											</Link>
 											<Link
-												to="discussions"
+												to="groups"
 												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 											>
-												Discussions
+												Groups
 											</Link>
 										</li>
 									</ul>
@@ -128,14 +128,6 @@ const Navbar = () => {
 												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 											>
 												Messages
-											</Link>
-										</li>
-										<li>
-											<Link
-												to="groups"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-											>
-												Groups
 											</Link>
 										</li>
 										<li>
