@@ -35,50 +35,50 @@ const Home = () => {
 
 	return (
 		<>
-			<h1 className="font-bellefair text-4xl text-center mb-2 mt-36">
+			<h1 className="mb-2 text-4xl text-center font-bellefair mt-36">
 				Discover, Connect, and Share the Joy of Food!
 			</h1>
 			<p className="text-center">
-				Unleash your culinary genius, explore new flavors, and inspire others. Join Social
-				Eat to share your recipes, discover endless possibilities, and connect with fellow
-				food enthusiasts. Let your creativity shine in the kitchen!
+				Unleash your culinary genius, explore new flavors, and inspire others. Join Only
+				Foods to share your recipes, discover endless possibilities, and connect with
+				fellow food enthusiasts. Let your creativity shine in the kitchen!
 			</p>
 			<div className="flex flex-col md:mt-10 md:flex-row">
-				<div className="w-full md:w-1/2 mb-8 md:mb-0 flex items-center justify-center">
+				<div className="flex items-center justify-center w-full mb-8 md:w-1/2 md:mb-0">
 					<LazyLoadImage
 						src={AuthIllustration}
 						placeholderSrc={AuthIllustrationPlaceholder}
 						effect="opacity"
 						alt="Home Illustration"
-						className="hidden md:block mx-auto"
+						className="hidden mx-auto md:block"
 						width="auto"
 						height="auto"
 					/>
 				</div>
-				<div className="w-full md:w-1/2 pl-0 md:pl-10">{renderForm()}</div>
+				<div className="w-full pl-0 md:w-1/2 md:pl-10">{renderForm()}</div>
 			</div>
-			<h2 className="font-bellefair text-4xl text-center mb-2 mt-28">
+			<h2 className="mb-2 text-4xl text-center font-bellefair mt-28">
 				Foodie Community. Connection & Culinary Delights
 			</h2>
 			<p className="text-center">
-				Unleash your culinary genius, explore new flavors, and inspire others. Join Social
-				Eat to share your recipes, discover endless possibilities, and connect with fellow
-				food enthusiasts. Let your creativity shine in the kitchen!
+				Unleash your culinary genius, explore new flavors, and inspire others. Join Only
+				Foods to share your recipes, discover endless possibilities, and connect with
+				fellow food enthusiasts. Let your creativity shine in the kitchen!
 			</p>
 			<div className="flex flex-col mt-16 mb-10">
 				<div className="flex flex-col-reverse md:flex-row">
-					<div className="w-full md:w-1/2 flex flex-col items-center justify-center md:pr-10 md:mt-0 mt-10">
-						<h3 className="font-bellefair w-full text-4xl text-start mb-2">
+					<div className="flex flex-col items-center justify-center w-full mt-10 md:w-1/2 md:pr-10 md:mt-0">
+						<h3 className="w-full mb-2 text-4xl font-bellefair text-start">
 							Integrity &amp; Confidentiality
 						</h3>
 						<p>
 							Unleash your culinary genius, explore new flavors, and inspire others. Join
-							Social Eat to share your recipes, discover endless possibilities, and
+							Only Foods to share your recipes, discover endless possibilities, and
 							connect with fellow food enthusiasts. Let your creativity shine in the
 							kitchen!
 						</p>
 					</div>
-					<div className="w-full md:w-1/2 md:mt-0 mt-10 flex items-center justify-center">
+					<div className="flex items-center justify-center w-full mt-10 md:w-1/2 md:mt-0">
 						<LazyLoadImage
 							src={TransparencyIllustration}
 							placeholderSrc={TransparencyIllustrationPlaceholder}
@@ -89,8 +89,8 @@ const Home = () => {
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col md:flex-row mt-20">
-					<div className="w-full md:w-1/2 md:mt-0 mt-10 flex items-center justify-center">
+				<div className="flex flex-col mt-20 md:flex-row">
+					<div className="flex items-center justify-center w-full mt-10 md:w-1/2 md:mt-0">
 						<LazyLoadImage
 							src={SocialIllustration}
 							placeholderSrc={SocialIllustrationPlaceholder}
@@ -100,12 +100,12 @@ const Home = () => {
 							height="auto"
 						/>
 					</div>
-					<div className="w-full md:w-1/2 flex flex-col items-center justify-center md:pr-10">
-						<h3 className="font-bellefair w-full text-4xl text-start mb-2">
+					<div className="flex flex-col items-center justify-center w-full md:w-1/2 md:pr-10">
+						<h3 className="w-full mb-2 text-4xl font-bellefair text-start">
 							Explore &amp; Savor
 						</h3>
 						<p>
-							At Social Eat, we're passionate about bringing food enthusiasts together.
+							At Only Foods, we're passionate about bringing food enthusiasts together.
 							Our platform is designed to create a vibrant community where food lovers can
 							connect, share their culinary adventures, and savor the joys of good food.
 							From discovering mouthwatering recipes to engaging in lively discussions, we
@@ -115,22 +115,22 @@ const Home = () => {
 						</p>
 					</div>
 				</div>
-				<div className="flex flex-col-reverse md:flex-row mt-16">
-					<div className="w-full md:w-1/2 flex flex-col items-center justify-center md:pr-10 md:mt-0 mt-10">
-						<h3 className="font-bellefair w-full text-4xl text-start mb-2">
+				<div className="flex flex-col-reverse mt-16 md:flex-row">
+					<div className="flex flex-col items-center justify-center w-full mt-10 md:w-1/2 md:pr-10 md:mt-0">
+						<h3 className="w-full mb-2 text-4xl font-bellefair text-start">
 							Personalize &amp; Connect
 						</h3>
 						<p>
-							At Social Eat, we believe in providing you with a personalized space that
+							At Only Foods, we believe in providing you with a personalized space that
 							revolves around your love for food. Say goodbye to generic platforms! Join
 							our vibrant community where you can create your own culinary haven.
 							Customize your profile, share your favorite recipes, showcase your food
-							creations, and connect with fellow food enthusiasts. With Social Eat, it's
+							creations, and connect with fellow food enthusiasts. With Only Foods, it's
 							all about you and your unique culinary journey. Embrace the flavors, share
 							your passion, and make lasting connections within our foodie community.
 						</p>
 					</div>
-					<div className="w-full md:w-1/2 md:mt-0 mt-10 flex items-center justify-center">
+					<div className="flex items-center justify-center w-full mt-10 md:w-1/2 md:mt-0">
 						<LazyLoadImage
 							src={CustomizeIllustration}
 							placeholderSrc={CustomizeIllustrationPlaceholder}
@@ -142,17 +142,17 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<h2 className="font-bellefair text-4xl text-center mb-2 mt-28">
+			<h2 className="mb-2 text-4xl text-center font-bellefair mt-28">
 				Discover a World of Culinary Possibilities
 			</h2>
 			<p className="text-center">
-				Embark on a gastronomic adventure with Social Eat. Our platform is packed with a
+				Embark on a gastronomic adventure with Only Foods. Our platform is packed with a
 				range of exciting features designed to enhance your foodie experience.
 			</p>
 			<div className="flex flex-col mt-16 mb-10">
-				<div className="flex md:flex-row flex-col">
-					<div className="w-full md:w-1/2 flex flex-col items-center justify-center md:pr-5 md:mt-0 mt-10">
-						<div className="h-26 flex items-center justify-center">
+				<div className="flex flex-col md:flex-row">
+					<div className="flex flex-col items-center justify-center w-full mt-10 md:w-1/2 md:pr-5 md:mt-0">
+						<div className="flex items-center justify-center h-26">
 							<LazyLoadImage
 								src={ThoughtIcon}
 								effect="opacity"
@@ -161,7 +161,7 @@ const Home = () => {
 								height={100}
 							/>
 						</div>
-						<h3 className="font-bellefair text-3xl text-center mt-6 mb-2">
+						<h3 className="mt-6 mb-2 text-3xl text-center font-bellefair">
 							Share your current thoughts
 						</h3>
 						<p className="text-center">
@@ -170,8 +170,8 @@ const Home = () => {
 							your culinary moments shine.
 						</p>
 					</div>
-					<div className="w-full md:w-1/2 flex flex-col items-center justify-center md:pl-5 md:mt-0 mt-28">
-						<div className="h-26 flex items-center justify-center">
+					<div className="flex flex-col items-center justify-center w-full md:w-1/2 md:pl-5 md:mt-0 mt-28">
+						<div className="flex items-center justify-center h-26">
 							<LazyLoadImage
 								src={RecipeIcon}
 								effect="opacity"
@@ -180,19 +180,19 @@ const Home = () => {
 								height={75}
 							/>
 						</div>
-						<h3 className="font-bellefair text-3xl text-center mt-6 mb-2">
+						<h3 className="mt-6 mb-2 text-3xl text-center font-bellefair">
 							Delightful Recipes Unleashed
 						</h3>
 						<p className="text-center">
 							Unleash your culinary creativity by sharing your favorite recipes with the
-							Social Eat community. From treasured family secrets to innovative
+							Only Foods community. From treasured family secrets to innovative
 							experiments, inspire and be inspired by fellow food lovers.
 						</p>
 					</div>
 				</div>
-				<div className="flex md:flex-row flex-col mt-16">
-					<div className="w-full md:w-1/2 flex flex-col items-center justify-center md:pr-5 md:mt-0 mt-10">
-						<div className="h-26 flex items-center justify-center">
+				<div className="flex flex-col mt-16 md:flex-row">
+					<div className="flex flex-col items-center justify-center w-full mt-10 md:w-1/2 md:pr-5 md:mt-0">
+						<div className="flex items-center justify-center h-26">
 							<LazyLoadImage
 								src={DiscussionIcon}
 								effect="opacity"
@@ -201,7 +201,7 @@ const Home = () => {
 								height={80}
 							/>
 						</div>
-						<h3 className="font-bellefair text-3xl text-center mt-6 mb-2">
+						<h3 className="mt-6 mb-2 text-3xl text-center font-bellefair">
 							Engage in Flavorful Conversations
 						</h3>
 						<p className="text-center">
@@ -210,8 +210,8 @@ const Home = () => {
 							techniques to trends.
 						</p>
 					</div>
-					<div className="w-full md:w-1/2 flex flex-col items-center justify-center md:pl-5 md:mt-0 mt-28">
-						<div className="h-26 flex items-center justify-center">
+					<div className="flex flex-col items-center justify-center w-full md:w-1/2 md:pl-5 md:mt-0 mt-28">
+						<div className="flex items-center justify-center h-26">
 							<LazyLoadImage
 								src={GroupIcon}
 								effect="opacity"
@@ -220,7 +220,7 @@ const Home = () => {
 								height={100}
 							/>
 						</div>
-						<h3 className="font-bellefair text-3xl text-center mt-6 mb-2">
+						<h3 className="mt-6 mb-2 text-3xl text-center font-bellefair">
 							Unite with Foodie Communities
 						</h3>
 						<p className="text-center">
@@ -230,13 +230,13 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className="w-full flex items-center justify-center mt-36 mb-16">
+			<div className="flex items-center justify-center w-full mb-16 mt-36">
 				<button
 					type="button"
-					className="font-bellefair text-3xl rounded-md border-2 border-black sm:px-16 px-3 py-6 hover:scale-105 transition-transform duration-300 ease-in-out"
+					className="px-3 py-6 text-3xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md font-bellefair sm:px-16 hover:scale-105"
 					onClick={() => window.scrollTo(0, 0)}
 				>
-					Join the Social Eat Community
+					Join the Only Foods Community
 				</button>
 			</div>
 		</>

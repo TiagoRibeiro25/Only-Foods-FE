@@ -30,9 +30,10 @@ const Navbar = () => {
 	}, []);
 
 	return (
-		<nav className="bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg fixed top-0 w-full z-50">
-			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">
+		<nav className="fixed top-0 z-50 w-full bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg">
+			<div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 py-3 mx-auto">
 				<Link
+					onClick={() => window.scrollTo(0, 0)}
 					to={isUserLogged ? 'feed' : '/'}
 					className="flex items-center"
 					onMouseEnter={toggleLogoHovered}
@@ -40,31 +41,31 @@ const Navbar = () => {
 				>
 					<img
 						src={isLogoHovered ? LogoHovered : Logo}
-						alt="Social Eat Logo"
+						alt="Only Foods Logo"
 						width={32}
 						height={32}
 					/>
-					<span className="font-bellefair self-center text-3xl font-semibold whitespace-nowrap mt-1">
-						Social Eat
+					<span className="self-center mt-1 text-3xl font-semibold font-bellefair whitespace-nowrap">
+						Only Foods
 					</span>
 				</Link>
 				{isUserLogged && (
-					<div className="flex items-center relative">
+					<div className="relative flex items-center">
 						<Link
 							to="feed"
-							className="md:block hidden text-gray-900 text-md font-semibold hover:text-gray-700 mr-4"
+							className="hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700"
 						>
 							Feed
 						</Link>
 						<Link
 							to="recipes"
-							className="md:block hidden text-gray-900 text-md font-semibold hover:text-gray-700 mr-4"
+							className="hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700"
 						>
 							Recipes
 						</Link>
 						<Link
 							to="groups"
-							className="md:block hidden text-gray-900 text-md font-semibold hover:text-gray-700 mr-4"
+							className="hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700"
 						>
 							Groups
 						</Link>
@@ -82,7 +83,7 @@ const Navbar = () => {
 							</button>
 							{isMenuOpen && (
 								<div
-									className="absolute z-50 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 bg-opacity-70 backdrop-filter backdrop-blur-lg rounded-lg shadow right-0"
+									className="absolute right-0 z-50 w-48 mt-2 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow bg-opacity-70 backdrop-filter backdrop-blur-lg"
 									id="user-dropdown"
 								>
 									<div className="px-4 py-3">
@@ -91,7 +92,7 @@ const Navbar = () => {
 											tiago.d.ribeiro@hotmail.com
 										</span>
 									</div>
-									<ul className="md:hidden block py-2" aria-labelledby="user-menu-button">
+									<ul className="block py-2 md:hidden" aria-labelledby="user-menu-button">
 										<li>
 											<Link
 												to="feed"
@@ -131,7 +132,7 @@ const Navbar = () => {
 											</Link>
 										</li>
 										<li>
-											<button className="w-full text-start block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+											<button className="block w-full px-4 py-2 text-sm text-gray-700 text-start hover:bg-gray-100">
 												Sign out
 											</button>
 										</li>
