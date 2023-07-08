@@ -41,7 +41,7 @@ const LoginForm = () => {
 
 	return (
 		<>
-			<h2 className="font-bellefair text-3xl text-center md:mt-2 mb-6">Login</h2>
+			<h2 className="mb-6 text-3xl text-center font-bellefair md:mt-2">Login</h2>
 
 			<form onSubmit={handleSubmit}>
 				<Input
@@ -71,7 +71,7 @@ const LoginForm = () => {
 					onChange={value => setRememberMe(value)}
 				/>
 
-				<div className="w-full text-center my-5">
+				<div className="w-full my-5 text-center">
 					<p
 						className="text-sm text-gray-950"
 						style={{ visibility: errorMsg === 'Error Message' ? 'hidden' : 'visible' }}
@@ -95,18 +95,18 @@ const LoginForm = () => {
 				</div>
 			</form>
 
-			<div className="w-full text-center mt-5">
+			<div className="w-full mt-5 text-center">
 				<p className="text-sm text-gray-950">
 					Don't have an account?{' '}
 					<span
-						className="cursor-pointer underline"
+						className="underline cursor-pointer"
 						onClick={() => editUrlQuery('register')}
 					>
 						Sign Up
 					</span>
 					<br className="my-1" />
 					<span
-						className="cursor-pointer underline"
+						className="underline cursor-pointer"
 						onClick={() => editUrlQuery('forgotPassword')}
 					>
 						Forgot password?

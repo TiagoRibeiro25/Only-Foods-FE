@@ -34,7 +34,7 @@ const ForgotPasswordForm = () => {
 
 	return (
 		<>
-			<h2 className="font-bellefair text-3xl text-center md:mt-2 mb-6">
+			<h2 className="mb-6 text-3xl text-center font-bellefair md:mt-2">
 				Forgot Password
 			</h2>
 			<p className="text-center">
@@ -54,7 +54,7 @@ const ForgotPasswordForm = () => {
 					onChange={value => setEmail(value)}
 				/>
 
-				<div className="w-full text-center mt-12 mb-10">
+				<div className="w-full mt-12 mb-10 text-center">
 					<p
 						className="text-sm text-gray-950"
 						style={{ visibility: errorMsg === 'Error Message' ? 'hidden' : 'visible' }}
@@ -63,8 +63,8 @@ const ForgotPasswordForm = () => {
 					</p>
 				</div>
 
-				<div className="w-full flex flex-row">
-					<div className="w-1/2 flex justify-center">
+				<div className="flex flex-row w-full">
+					<div className="flex justify-center w-1/2">
 						<Button
 							type="reset"
 							text="Cancel"
@@ -77,7 +77,7 @@ const ForgotPasswordForm = () => {
 							disabled={loading}
 						/>
 					</div>
-					<div className="w-1/2 flex justify-center">
+					<div className="flex justify-center w-1/2">
 						<Button
 							type="submit"
 							backgroundColor="#333333"

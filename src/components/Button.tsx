@@ -25,7 +25,7 @@ const Button = ({ ...props }: ButtonProps) => {
 		<button
 			type={props.type}
 			style={buttonStyle}
-			className="font-normal rounded-md text-md text-center inline-flex items-center hover:scale-105 transition-transform ease-in-out duration-300 disabled:opacity-50 disabled:cursor-default disabled:scale-100"
+			className="inline-flex items-center font-normal text-center transition-transform duration-300 ease-in-out rounded-md text-md hover:scale-105 disabled:opacity-50 disabled:cursor-default disabled:scale-100"
 			disabled={props.disabled}
 			onClick={props.onClick}
 		>

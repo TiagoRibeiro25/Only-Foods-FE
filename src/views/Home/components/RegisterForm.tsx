@@ -48,7 +48,7 @@ const RegisterForm = () => {
 
 	return (
 		<>
-			<h2 className="font-bellefair text-3xl text-center md:mt-2 mb-6">Create Account</h2>
+			<h2 className="mb-6 text-3xl text-center font-bellefair md:mt-2">Create Account</h2>
 
 			<form onSubmit={handleSubmit}>
 				<Input
@@ -96,7 +96,7 @@ const RegisterForm = () => {
 					</div>
 				</div>
 
-				<div className="w-full text-center mt-1 mb-5">
+				<div className="w-full mt-1 mb-5 text-center">
 					<p
 						className="text-sm text-gray-950"
 						style={{ visibility: errorMsg === 'Error Message' ? 'hidden' : 'visible' }}
@@ -120,10 +120,10 @@ const RegisterForm = () => {
 				</div>
 			</form>
 
-			<div className="w-full text-center mt-5">
+			<div className="w-full mt-5 text-center">
 				<p className="text-sm text-gray-950">
 					Already have an account?{' '}
-					<span className="cursor-pointer underline" onClick={editUrlQuery}>
+					<span className="underline cursor-pointer" onClick={editUrlQuery}>
 						Sign In
 					</span>
 				</p>
