@@ -35,7 +35,7 @@ const Home = () => {
 
 	return (
 		<>
-			<h1 className="mb-2 text-4xl text-center font-bellefair mt-36">
+			<h1 className="mb-2 text-4xl text-center font-bellefair sm:mt-36">
 				Discover, Connect, and Share the Joy of Food!
 			</h1>
 			<p className="text-center">
@@ -230,10 +230,10 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className="flex items-center justify-center w-full mb-16 mt-36">
+			<div className="flex items-center justify-center w-full mb-10 mt-28 sm:mb-16 sm:mt-36">
 				<button
 					type="button"
-					className="px-3 py-6 text-3xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md font-bellefair sm:px-16 hover:scale-105"
+					className="px-3 py-6 text-2xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md sm:text-3xl font-bellefair sm:px-16 hover:scale-105"
 					onClick={() => window.scrollTo(0, 0)}
 				>
 					Join the Only Foods Community
