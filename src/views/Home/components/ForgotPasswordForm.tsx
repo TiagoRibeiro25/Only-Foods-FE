@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import requests from '../../../api/requests';
 import LoadingIcon from '../../../assets/icons/loading.svg';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
@@ -8,9 +9,9 @@ const ForgotPasswordForm = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	const [email, setEmail] = useState('');
-	const [errorMsg, setErrorMsg] = useState('Error Message');
-	const [loading, setLoading] = useState(false);
+	const [email, setEmail] = useState<string>('');
+	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const editUrlQuery = () => {
 		const searchParams = new URLSearchParams(location.search);
@@ -18,18 +19,22 @@ const ForgotPasswordForm = () => {
 		navigate(`${location.pathname}?${searchParams.toString()}`);
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	// API call to send email
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		setLoading(true);
-		setErrorMsg('Error Message');
+		setStatusMsg('Error Message');
 
-		console.log('Email: ', email);
+		const response = await requests.users.forgotPassword(email);
 
-		setTimeout(() => {
-			setErrorMsg('Invalid email address');
-			setLoading(false);
-		}, 2000);
+		// If the email was sent successfully, clear the input field
+		if (response.data.success) {
+			setEmail('');
+		}
+
+		setStatusMsg(response.data.message);
+		setLoading(false);
 	};
 
 	return (
@@ -57,9 +62,9 @@ const ForgotPasswordForm = () => {
 				<div className="w-full mt-12 mb-10 text-center">
 					<p
 						className="text-sm text-gray-950"
-						style={{ visibility: errorMsg === 'Error Message' ? 'hidden' : 'visible' }}
+						style={{ visibility: statusMsg === 'Error Message' ? 'hidden' : 'visible' }}
 					>
-						{errorMsg}
+						{statusMsg}
 					</p>
 				</div>
 
@@ -67,7 +72,6 @@ const ForgotPasswordForm = () => {
 					<div className="flex justify-center w-1/2">
 						<Button
 							type="reset"
-							text="Cancel"
 							backgroundColor="#FFFFFF"
 							textColor="#050708"
 							border={true}
@@ -75,21 +79,24 @@ const ForgotPasswordForm = () => {
 							padding="0.4rem 2.5rem"
 							onClick={editUrlQuery}
 							disabled={loading}
-						/>
+						>
+							Cancel
+						</Button>
 					</div>
 					<div className="flex justify-center w-1/2">
 						<Button
 							type="submit"
 							backgroundColor="#333333"
 							textColor="#FFFFFF"
-							text={loading ? 'Sending...' : 'Send'}
 							border={false}
 							padding={loading ? '0.4rem 1rem' : '0.4rem 3rem'}
 							icon={loading ? LoadingIcon : ''}
 							iconAlt="Loading Icon"
 							iconAnimation="spin"
 							disabled={loading}
-						/>
+						>
+							{loading ? 'Sending...' : 'Send'}
+						</Button>
 					</div>
 				</div>
 			</form>

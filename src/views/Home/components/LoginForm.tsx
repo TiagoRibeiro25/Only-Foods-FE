@@ -85,13 +85,14 @@ const LoginForm = () => {
 						type="submit"
 						backgroundColor="#333333"
 						textColor="#FFFFFF"
-						text={loading ? 'Signing In' : 'Sign In'}
 						padding={loading ? '0.4rem 2.5rem' : '0.4rem 4rem'}
 						icon={loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"
 						iconAnimation="spin"
 						disabled={loading}
-					/>
+					>
+						{loading ? 'Signing In' : 'Sign In'}
+					</Button>
 				</div>
 			</form>
 

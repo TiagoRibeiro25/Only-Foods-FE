@@ -1,22 +1,21 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from './layouts/Navbar';
-import Home from './views/Home/Home';
+import Navigation from './navigation';
+import store from './redux/index';
 
 function App() {
 	return (
-		<>
+		<Provider store={store}>
 			<Router>
 				<header>
 					<Navbar />
 				</header>
-				<main className="max-w-screen-xl mx-auto mt-20 px-4">
-					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="*" element={<div>404</div>} />
-					</Routes>
+				<main className="max-w-screen-xl px-4 mx-auto mt-20">
+					<Navigation />
 				</main>
 			</Router>
-		</>
+		</Provider>
 	);
 }
 

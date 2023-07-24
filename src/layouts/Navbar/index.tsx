@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import User from '../assets/imgs/user.png';
-import Logo from '../assets/logo/logo_bw_1.png';
-import LogoHovered from '../assets/logo/logo_color_2.png';
+import User from '../../assets/imgs/user.png';
+import Logo from '../../assets/logo/logo_bw_1.png';
+import LogoHovered from '../../assets/logo/logo_color_2.png';
+
+const userLogged = {
+	name: 'Tiago Ribeiro',
+	email: 'tiago.d.ribeiro@hotmail.com',
+};
 
 const Navbar = () => {
 	const [isUserLogged, setUserLogged] = useState(false);
@@ -49,6 +54,7 @@ const Navbar = () => {
 						Only Foods
 					</span>
 				</Link>
+
 				{isUserLogged && (
 					<div className="relative flex items-center">
 						<Link
@@ -64,10 +70,10 @@ const Navbar = () => {
 							Recipes
 						</Link>
 						<Link
-							to="groups"
+							to="search"
 							className="hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700"
 						>
-							Groups
+							Search
 						</Link>
 
 						<div className="relative" ref={menuRef}>
@@ -87,9 +93,9 @@ const Navbar = () => {
 									id="user-dropdown"
 								>
 									<div className="px-4 py-3">
-										<span className="block text-sm text-gray-900">Tiago Ribeiro</span>
+										<span className="block text-sm text-gray-900">{userLogged.name}</span>
 										<span className="block text-sm text-gray-500 truncate">
-											tiago.d.ribeiro@hotmail.com
+											{userLogged.email}
 										</span>
 									</div>
 									<ul className="block py-2 md:hidden" aria-labelledby="user-menu-button">
@@ -107,10 +113,10 @@ const Navbar = () => {
 												Recipes
 											</Link>
 											<Link
-												to="groups"
+												to="search"
 												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 											>
-												Groups
+												Search
 											</Link>
 										</li>
 									</ul>

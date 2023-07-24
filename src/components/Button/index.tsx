@@ -1,6 +1,5 @@
 interface ButtonProps {
 	type: 'button' | 'submit' | 'reset';
-	text: string;
 	padding?: string;
 	backgroundColor?: string;
 	border?: boolean;
@@ -11,6 +10,7 @@ interface ButtonProps {
 	iconAnimation?: 'spin' | 'pulse' | 'ping' | 'bounce' | 'none';
 	disabled?: boolean;
 	onClick?: () => void;
+	children?: React.ReactNode;
 }
 
 const Button = ({ ...props }: ButtonProps) => {
@@ -38,7 +38,7 @@ const Button = ({ ...props }: ButtonProps) => {
 					height={20}
 				/>
 			)}
-			{props.text}
+			{props.children}
 		</button>
 	);
 };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 interface InputProps {
 	placeholder: string;
-	type: string;
+	type: 'text' | 'password' | 'email' | 'number' | 'tel';
 	name: string;
 	id: string;
 	required: boolean;

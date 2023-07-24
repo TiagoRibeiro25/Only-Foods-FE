@@ -110,13 +110,14 @@ const RegisterForm = () => {
 						type="submit"
 						backgroundColor="#333333"
 						textColor="#FFFFFF"
-						text={loading ? 'Signing Up' : 'Sign Up'}
 						padding={loading ? '0.4rem 2.5rem' : '0.4rem 4rem'}
 						icon={loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"
 						iconAnimation="spin"
 						disabled={loading}
-					/>
+					>
+						{loading ? 'Signing Up' : 'Sign Up'}
+					</Button>
 				</div>
 			</form>
 
