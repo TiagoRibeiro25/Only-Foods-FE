@@ -20,6 +20,11 @@ const Input = ({ ...props }: InputProps) => {
 		props.onChange(newValue);
 	};
 
+	// when props.value changes, update the input value
+	if (props.value !== value) {
+		setValue(props.value);
+	}
+
 	return (
 		<div className="relative z-0 w-full mb-6 group">
 			<input
