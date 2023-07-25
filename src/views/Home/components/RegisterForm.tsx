@@ -58,6 +58,7 @@ const RegisterForm = () => {
 					id="username"
 					required
 					disabled={loading}
+					value={username}
 					onChange={value => setUsername(value)}
 				/>
 
@@ -68,6 +69,7 @@ const RegisterForm = () => {
 					id="email"
 					required
 					disabled={loading}
+					value={email}
 					onChange={value => setEmail(value)}
 				/>
 
@@ -80,6 +82,7 @@ const RegisterForm = () => {
 							id="password"
 							required
 							disabled={loading}
+							value={password}
 							onChange={value => setPassword(value)}
 						/>
 					</div>
@@ -91,6 +94,7 @@ const RegisterForm = () => {
 							id="confirm-password"
 							required
 							disabled={loading}
+							value={confirmPassword}
 							onChange={value => setConfirmPassword(value)}
 						/>
 					</div>
@@ -108,8 +112,6 @@ const RegisterForm = () => {
 				<div className="w-full text-center">
 					<Button
 						type="submit"
-						backgroundColor="#333333"
-						textColor="#FFFFFF"
 						padding={loading ? '0.4rem 2.5rem' : '0.4rem 4rem'}
 						icon={loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"

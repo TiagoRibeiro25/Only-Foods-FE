@@ -15,7 +15,7 @@ interface ButtonProps {
 
 const Button = ({ ...props }: ButtonProps) => {
 	const buttonStyle = {
-		backgroundColor: props.backgroundColor ?? '#050708',
+		backgroundColor: props.backgroundColor ?? '#333333',
 		color: props.textColor ?? '#FFFFFF',
 		padding: props.padding ?? '0.75rem 1.5rem',
 		border: props.border ? `1px solid ${props.borderColor ?? '#050708'}` : 'none',

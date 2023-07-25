@@ -5,13 +5,14 @@ interface InputProps {
 	type: 'text' | 'password' | 'email' | 'number' | 'tel';
 	name: string;
 	id: string;
+	value: string;
 	required: boolean;
 	disabled?: boolean;
 	onChange: (value: string) => void;
 }
 
 const Input = ({ ...props }: InputProps) => {
-	const [value, setValue] = useState('');
+	const [value, setValue] = useState(props.value ?? '');
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = event.target.value;

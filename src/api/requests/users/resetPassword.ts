@@ -2,9 +2,17 @@ import api from '../../axios.config';
 import { ErrorResponse, Response } from '../types';
 import { isAxiosError } from '../utils';
 
-export default async (email: string): Promise<Response> => {
+interface Props {
+	token: string;
+	password: string;
+}
+
+export default async (props: Props): Promise<Response> => {
 	try {
-		const response: Response = await api.post('/users/forgot-password', { email });
+		const response: Response = await api.patch(`/users/reset-password/${props.token}`, {
+			password: props.password,
+		});
+
 		return response;
 	} catch (error: unknown) {
 		if (isAxiosError(error)) {

@@ -51,6 +51,7 @@ const LoginForm = () => {
 					id="email"
 					required
 					disabled={loading}
+					value={email}
 					onChange={value => setEmail(value)}
 				/>
 
@@ -61,6 +62,7 @@ const LoginForm = () => {
 					id="password"
 					required
 					disabled={loading}
+					value={password}
 					onChange={value => setPassword(value)}
 				/>
 
@@ -83,8 +85,6 @@ const LoginForm = () => {
 				<div className="w-full text-center">
 					<Button
 						type="submit"
-						backgroundColor="#333333"
-						textColor="#FFFFFF"
 						padding={loading ? '0.4rem 2.5rem' : '0.4rem 4rem'}
 						icon={loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"

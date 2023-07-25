@@ -56,6 +56,7 @@ const ForgotPasswordForm = () => {
 					id="email"
 					required
 					disabled={loading}
+					value={email}
 					onChange={value => setEmail(value)}
 				/>
 
@@ -86,8 +87,6 @@ const ForgotPasswordForm = () => {
 					<div className="flex justify-center w-1/2">
 						<Button
 							type="submit"
-							backgroundColor="#333333"
-							textColor="#FFFFFF"
 							border={false}
 							padding={loading ? '0.4rem 1rem' : '0.4rem 3rem'}
 							icon={loading ? LoadingIcon : ''}

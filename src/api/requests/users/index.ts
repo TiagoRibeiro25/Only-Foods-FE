@@ -1,3 +1,4 @@
 import forgotPassword from './forgotPassword';
+import resetPassword from './resetPassword';
 
-export default { forgotPassword };
+export default { forgotPassword, resetPassword };
