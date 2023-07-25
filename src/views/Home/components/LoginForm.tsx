@@ -96,7 +96,7 @@ const LoginForm = () => {
 				</div>
 			</form>
 
-			<div className="w-full mt-5 text-center">
+			<div className="w-full mt-5 mb-16 text-center">
 				<p className="text-sm text-gray-950">
 					Don't have an account?{' '}
 					<span

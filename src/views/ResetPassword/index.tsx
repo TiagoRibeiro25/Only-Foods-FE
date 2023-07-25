@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import requests from '../../api/requests';
 import LoadingIcon from '../../assets/icons/loading.svg';
@@ -20,20 +20,29 @@ const ResetPassword = () => {
 		e.preventDefault();
 		setLoading(true);
 
-		// Validations
 		if (!validatePassword(password)) {
+			setLoading(false);
 			setStatusMsg(
 				'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.',
 			);
-		} else {
+			return;
+		}
+
+		try {
 			// Make the API call to reset the password
 			const response = await requests.users.resetPassword({ token, password });
-			setStatusMsg(response.data.message);
 
+			// If the password was reset successfully, clear the input fields
 			if (response.data.success) {
 				setPassword('');
 				setConfirmPassword('');
 			}
+
+			// Display the response message
+			setStatusMsg(response.data.message);
+		} catch (error) {
+			console.log(error);
+			setStatusMsg('An error occurred. Please try again.');
 		}
 
 		setLoading(false);

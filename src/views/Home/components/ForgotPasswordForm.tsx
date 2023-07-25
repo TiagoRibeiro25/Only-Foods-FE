@@ -26,14 +26,20 @@ const ForgotPasswordForm = () => {
 		setLoading(true);
 		setStatusMsg('Error Message');
 
-		const response = await requests.users.forgotPassword(email);
+		try {
+			const response = await requests.users.forgotPassword(email);
 
-		// If the email was sent successfully, clear the input field
-		if (response.data.success) {
-			setEmail('');
+			// If the email was sent successfully, clear the input field
+			if (response.data.success) {
+				setEmail('');
+			}
+
+			setStatusMsg(response.data.message);
+		} catch (error) {
+			console.error(error);
+			setStatusMsg('An error occurred. Please try again.');
 		}
 
-		setStatusMsg(response.data.message);
 		setLoading(false);
 	};
 
@@ -69,7 +75,7 @@ const ForgotPasswordForm = () => {
 					</p>
 				</div>
 
-				<div className="flex flex-row w-full">
+				<div className="flex flex-row w-full mb-10">
 					<div className="flex justify-center w-1/2">
 						<Button
 							type="reset"

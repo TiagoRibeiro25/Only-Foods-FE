@@ -123,7 +123,7 @@ const RegisterForm = () => {
 				</div>
 			</form>
 
-			<div className="w-full mt-5 text-center">
+			<div className="w-full mt-5 mb-10 text-center">
 				<p className="text-sm text-gray-950">
 					Already have an account?{' '}
 					<span className="underline cursor-pointer" onClick={editUrlQuery}>
