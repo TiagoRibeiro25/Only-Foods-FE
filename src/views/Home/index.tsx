@@ -20,7 +20,7 @@ import RegisterForm from './components/RegisterForm';
 const Home = () => {
 	const location = useLocation();
 
-	const renderForm = () => {
+	const renderForm = (): React.JSX.Element => {
 		const query = new URLSearchParams(location.search);
 		const formType = query.get('form');
 

@@ -10,18 +10,18 @@ const userLogged = {
 };
 
 const Navbar = () => {
-	const [isUserLogged, setUserLogged] = useState(false);
-	const [isMenuOpen, setMenuOpen] = useState(false);
-	const [isLogoHovered, setLogoHovered] = useState(false);
+	const [isUserLogged, setUserLogged] = useState<boolean>(false);
+	const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
+	const [isLogoHovered, setLogoHovered] = useState<boolean>(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 
-	const toggleMenu = () => setMenuOpen(!isMenuOpen);
-	const toggleLogoHovered = () => setLogoHovered(!isLogoHovered);
+	const toggleMenu = (): void => setMenuOpen(!isMenuOpen);
+	const toggleLogoHovered = (): void => setLogoHovered(!isLogoHovered);
 
 	useEffect(() => {
 		setUserLogged(false);
 
-		const handleClickOutside = (event: MouseEvent) => {
+		const handleClickOutside = (event: MouseEvent): void => {
 			if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
 				setMenuOpen(false);
 			}

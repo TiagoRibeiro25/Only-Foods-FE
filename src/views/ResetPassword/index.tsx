@@ -16,7 +16,7 @@ const ResetPassword = () => {
 	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 		setLoading(true);
 

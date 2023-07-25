@@ -9,20 +9,20 @@ const LoginForm = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [rememberMe, setRememberMe] = useState(false);
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [rememberMe, setRememberMe] = useState<boolean>(false);
 
-	const [errorMsg, setErrorMsg] = useState('Error Message');
-	const [loading, setLoading] = useState(false);
+	const [errorMsg, setErrorMsg] = useState<string>('Error Message');
+	const [loading, setLoading] = useState<boolean>(false);
 
-	const editUrlQuery = (value: 'register' | 'forgotPassword') => {
+	const editUrlQuery = (value: 'register' | 'forgotPassword'): void => {
 		const searchParams = new URLSearchParams(location.search);
 		searchParams.set('form', value);
 		navigate(`${location.pathname}?${searchParams.toString()}`);
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
 		setLoading(true);
 		setErrorMsg('Error Message');

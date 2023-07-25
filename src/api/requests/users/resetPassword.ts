@@ -1,27 +1,22 @@
 import api from '../../axios.config';
-import { ErrorResponse, Response } from '../types';
-import { isAxiosError } from '../utils';
+import { Response } from '../types';
+import { handleError } from '../utils';
 
 interface Props {
 	token: string;
 	password: string;
 }
 
+const ROUTE = '/users/reset-password';
+
 export default async (props: Props): Promise<Response> => {
 	try {
-		const response: Response = await api.patch(`/users/reset-password/${props.token}`, {
-			password: props.password,
-		});
+		const route = `${ROUTE}/${props.token}`;
+		const bodyData = { password: props.password };
 
+		const response: Response = await api.patch(route, bodyData);
 		return response;
 	} catch (error: unknown) {
-		if (isAxiosError(error)) {
-			if (error.response) {
-				// Return your custom ErrorResponse for handling error responses
-				return error.response as ErrorResponse;
-			}
-		}
-		// Handle other types of errors (e.g., network error) or custom errors
-		throw error;
+		return handleError(error);
 	}
 };

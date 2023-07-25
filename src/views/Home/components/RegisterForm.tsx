@@ -1,28 +1,28 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 import LoadingIcon from '../../../assets/icons/loading.svg';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 
 const RegisterForm = () => {
-	const location = useLocation();
-	const navigate = useNavigate();
+	const location: Location = useLocation();
+	const navigate: NavigateFunction = useNavigate();
 
-	const [username, setUsername] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [confirmPassword, setConfirmPassword] = useState('');
+	const [username, setUsername] = useState<string>('');
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-	const [errorMsg, setErrorMsg] = useState('Error Message');
-	const [loading, setLoading] = useState(false);
+	const [errorMsg, setErrorMsg] = useState<string>('Error Message');
+	const [loading, setLoading] = useState<boolean>(false);
 
-	const editUrlQuery = () => {
+	const editUrlQuery = (): void => {
 		const searchParams = new URLSearchParams(location.search);
 		searchParams.set('form', 'login');
 		navigate(`${location.pathname}?${searchParams.toString()}`);
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
 		setLoading(true);
 		setErrorMsg('Error Message');

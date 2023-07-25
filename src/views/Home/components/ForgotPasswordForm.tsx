@@ -1,28 +1,27 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../../api/requests';
 import LoadingIcon from '../../../assets/icons/loading.svg';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 
 const ForgotPasswordForm = () => {
-	const location = useLocation();
-	const navigate = useNavigate();
+	const location: Location = useLocation();
+	const navigate: NavigateFunction = useNavigate();
 
 	const [email, setEmail] = useState<string>('');
 	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const editUrlQuery = () => {
+	const editUrlQuery = (): void => {
 		const searchParams = new URLSearchParams(location.search);
 		searchParams.set('form', 'login');
 		navigate(`${location.pathname}?${searchParams.toString()}`);
 	};
 
 	// API call to send email
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
-
 		setLoading(true);
 		setStatusMsg('Error Message');
 
