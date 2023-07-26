@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import requests from '../../../api/requests';
-import LoadingIcon from '../../../assets/icons/loading.svg';
-import Button from '../../../components/Button';
-import CheckBox from '../../../components/CheckBox';
-import Input from '../../../components/Input';
+import requests from '../../../../api/requests';
+import LoadingIcon from '../../../../assets/icons/loading.svg';
+import Button from '../../../../components/Button';
+import CheckBox from '../../../../components/CheckBox';
+import Input from '../../../../components/Input';
 
 const LoginForm = () => {
 	const location = useLocation();
@@ -38,7 +38,6 @@ const LoginForm = () => {
 		}
 
 		setLoading(false);
-		console.log(document.cookie);
 	};
 
 	return (

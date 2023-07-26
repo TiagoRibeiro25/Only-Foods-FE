@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
-import requests from '../../../api/requests';
-import LoadingIcon from '../../../assets/icons/loading.svg';
-import Button from '../../../components/Button';
-import Input from '../../../components/Input';
-import { validatePassword } from '../../../utils/validateData';
+import requests from '../../../../api/requests';
+import LoadingIcon from '../../../../assets/icons/loading.svg';
+import Button from '../../../../components/Button';
+import Input from '../../../../components/Input';
+import { validatePassword } from '../../../../utils/validateData';
 
 const RegisterForm = () => {
 	const location: Location = useLocation();
