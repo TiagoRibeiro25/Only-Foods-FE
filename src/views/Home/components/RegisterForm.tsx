@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
+import requests from '../../../api/requests';
 import LoadingIcon from '../../../assets/icons/loading.svg';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
+import { validatePassword } from '../../../utils/validateData';
 
 const RegisterForm = () => {
 	const location: Location = useLocation();
@@ -13,7 +15,7 @@ const RegisterForm = () => {
 	const [password, setPassword] = useState<string>('');
 	const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-	const [errorMsg, setErrorMsg] = useState<string>('Error Message');
+	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const editUrlQuery = (): void => {
@@ -22,28 +24,44 @@ const RegisterForm = () => {
 		navigate(`${location.pathname}?${searchParams.toString()}`);
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 		setLoading(true);
-		setErrorMsg('Error Message');
-
-		console.log('Registering...');
-		console.log('Username:', username);
-		console.log('Email:', email);
-		console.log('Password', password);
-		console.log('Confirm Password', confirmPassword);
+		setStatusMsg('Error Message');
 
 		if (password !== confirmPassword) {
 			setLoading(false);
-			setErrorMsg("Passwords don't match");
+			setStatusMsg("Passwords don't match");
 			return;
 		}
 
-		//TODO: Add register logic here
-		setTimeout(() => {
+		if (!validatePassword(password)) {
 			setLoading(false);
-			setErrorMsg("There's already an account with that email");
-		}, 2000);
+			setStatusMsg(
+				'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.',
+			);
+			return;
+		}
+
+		try {
+			// Attempt to create a new account
+			const response = await requests.users.register({ username, email, password });
+
+			// If the account was created successfully, clear the input fields
+			if (response.data.success) {
+				setUsername('');
+				setEmail('');
+				setPassword('');
+				setConfirmPassword('');
+			}
+
+			setStatusMsg(response.data.message);
+		} catch (error) {
+			console.error(error);
+			setStatusMsg('An error occurred. Please try again.');
+		}
+
+		setLoading(false);
 	};
 
 	return (
@@ -103,9 +121,9 @@ const RegisterForm = () => {
 				<div className="w-full mt-1 mb-5 text-center">
 					<p
 						className="text-sm text-gray-950"
-						style={{ visibility: errorMsg === 'Error Message' ? 'hidden' : 'visible' }}
+						style={{ visibility: statusMsg === 'Error Message' ? 'hidden' : 'visible' }}
 					>
-						{errorMsg}
+						{statusMsg}
 					</p>
 				</div>
 
