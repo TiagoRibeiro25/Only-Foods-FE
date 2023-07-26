@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import requests from '../../../api/requests';
 import LoadingIcon from '../../../assets/icons/loading.svg';
 import Button from '../../../components/Button';
 import CheckBox from '../../../components/CheckBox';
@@ -13,7 +14,7 @@ const LoginForm = () => {
 	const [password, setPassword] = useState<string>('');
 	const [rememberMe, setRememberMe] = useState<boolean>(false);
 
-	const [errorMsg, setErrorMsg] = useState<string>('Error Message');
+	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const editUrlQuery = (value: 'register' | 'forgotPassword'): void => {
@@ -22,21 +23,22 @@ const LoginForm = () => {
 		navigate(`${location.pathname}?${searchParams.toString()}`);
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 		setLoading(true);
-		setErrorMsg('Error Message');
+		setStatusMsg('Error Message');
 
-		console.log('Logging in...');
-		console.log('Email:', email);
-		console.log('Password', password);
-		console.log('Remember Me:', rememberMe);
+		try {
+			const response = await requests.users.login({ email, password, rememberMe });
 
-		//TODO: Add login logic here
-		setTimeout(() => {
-			setLoading(false);
-			setErrorMsg('Invalid email or password');
-		}, 2000);
+			setStatusMsg(response.data.message);
+		} catch (error) {
+			console.log(error);
+			setStatusMsg('An error occurred. Please try again.');
+		}
+
+		setLoading(false);
+		console.log(document.cookie);
 	};
 
 	return (
@@ -76,9 +78,9 @@ const LoginForm = () => {
 				<div className="w-full my-5 text-center">
 					<p
 						className="text-sm text-gray-950"
-						style={{ visibility: errorMsg === 'Error Message' ? 'hidden' : 'visible' }}
+						style={{ visibility: statusMsg === 'Error Message' ? 'hidden' : 'visible' }}
 					>
-						{errorMsg}
+						{statusMsg}
 					</p>
 				</div>
 
