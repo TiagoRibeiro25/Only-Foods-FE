@@ -44,7 +44,7 @@ const ForgotPasswordForm = () => {
 
 	return (
 		<>
-			<h2 className="mb-6 text-3xl text-center font-bellefair md:mt-2">
+			<h2 className="text-3xl text-center mb-14 font-bellefair md:mt-2">
 				Forgot Password
 			</h2>
 			<p className="text-center">
