@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
-import User from '../../assets/imgs/user.png';
+import UserNoPicture from '../../assets/imgs/user.png';
 import Logo from '../../assets/logo/logo_bw_1.png';
 import LogoHovered from '../../assets/logo/logo_color_2.png';
 import { UserContext } from '../../contextProviders/user.context';
@@ -99,7 +99,7 @@ const Navbar = () => {
 								<span className="sr-only">Open user menu</span>
 								<img
 									className="w-8 h-8 rounded-full"
-									src={loggedUser.picture ?? User}
+									src={loggedUser.picture ?? UserNoPicture}
 									alt="user photo"
 								/>
 							</button>
