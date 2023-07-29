@@ -8,9 +8,9 @@ interface CheckBoxProps {
 }
 
 const CheckBox = ({ ...props }: CheckBoxProps) => {
-	const [isChecked, SetIsChecked] = useState(false);
+	const [isChecked, SetIsChecked] = useState<boolean>(false);
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		const newValue = event.target.checked;
 		SetIsChecked(event.target.checked);
 		props.onChange(newValue);

@@ -14,7 +14,7 @@ interface InputProps {
 const Input = ({ ...props }: InputProps) => {
 	const [value, setValue] = useState(props.value ?? '');
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		const newValue = event.target.value;
 		setValue(event.target.value);
 		props.onChange(newValue);
