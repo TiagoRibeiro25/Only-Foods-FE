@@ -1,16 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import User from '../../assets/imgs/user.png';
 import Logo from '../../assets/logo/logo_bw_1.png';
 import LogoHovered from '../../assets/logo/logo_color_2.png';
-
-const userLogged = {
-	name: 'Tiago Ribeiro',
-	email: 'tiago.d.ribeiro@hotmail.com',
-};
+import { UserContext } from '../../contextProviders/user.context';
 
 const Navbar = () => {
-	const [isUserLogged, setUserLogged] = useState<boolean>(false);
+	const { loggedUser } = useContext(UserContext);
+
 	const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
 	const [isLogoHovered, setLogoHovered] = useState<boolean>(false);
 	const menuRef = useRef<HTMLDivElement>(null);
@@ -19,8 +16,6 @@ const Navbar = () => {
 	const toggleLogoHovered = (): void => setLogoHovered(!isLogoHovered);
 
 	useEffect(() => {
-		setUserLogged(false);
-
 		const handleClickOutside = (event: MouseEvent): void => {
 			if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
 				setMenuOpen(false);
@@ -39,7 +34,7 @@ const Navbar = () => {
 			<div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 py-3 mx-auto">
 				<Link
 					onClick={() => window.scrollTo(0, 0)}
-					to={isUserLogged ? 'feed' : '/'}
+					to={loggedUser ? 'feed' : '/'}
 					className="flex items-center"
 					onMouseEnter={toggleLogoHovered}
 					onMouseLeave={toggleLogoHovered}
@@ -54,8 +49,7 @@ const Navbar = () => {
 						Only Foods
 					</span>
 				</Link>
-
-				{isUserLogged && (
+				{loggedUser && (
 					<div className="relative flex items-center">
 						<Link
 							to="feed"
@@ -85,7 +79,11 @@ const Navbar = () => {
 								onClick={toggleMenu}
 							>
 								<span className="sr-only">Open user menu</span>
-								<img className="w-8 h-8 rounded-full" src={User} alt="user photo" />
+								<img
+									className="w-8 h-8 rounded-full"
+									src={loggedUser.picture ?? User}
+									alt="user photo"
+								/>
 							</button>
 							{isMenuOpen && (
 								<div
@@ -93,9 +91,11 @@ const Navbar = () => {
 									id="user-dropdown"
 								>
 									<div className="px-4 py-3">
-										<span className="block text-sm text-gray-900">{userLogged.name}</span>
+										<span className="block text-sm text-gray-900">
+											{loggedUser.username}
+										</span>
 										<span className="block text-sm text-gray-500 truncate">
-											{userLogged.email}
+											{loggedUser.email}
 										</span>
 									</div>
 									<ul className="block py-2 md:hidden" aria-labelledby="user-menu-button">
