@@ -1,19 +1,24 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../../../api/requests';
 import LoadingIcon from '../../../../assets/icons/loading.svg';
 import Button from '../../../../components/Button';
 import CheckBox from '../../../../components/CheckBox';
 import Input from '../../../../components/Input';
+import { UserContext } from '../../../../contextProviders/user.context';
 
 const LoginForm = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	const { setLoggedUser } = useContext(UserContext);
+
+	// Login Form State Management
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [rememberMe, setRememberMe] = useState<boolean>(false);
 
+	// API Request State Management
 	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -31,7 +36,7 @@ const LoginForm = () => {
 		try {
 			const response = await requests.users.login({ email, password, rememberMe });
 
-			setStatusMsg(response.data.message);
+			setLoggedUser(response.data.data?.user ?? null);
 		} catch (error) {
 			console.log(error);
 			setStatusMsg('An error occurred. Please try again.');
