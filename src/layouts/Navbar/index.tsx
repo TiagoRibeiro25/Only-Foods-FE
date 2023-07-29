@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
 import UserNoPicture from '../../assets/imgs/user.png';
 import Logo from '../../assets/logo/logo_bw_1.png';
@@ -8,6 +8,7 @@ import { UserContext } from '../../contextProviders/user.context';
 
 const Navbar = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const { loggedUser, setLoggedUser } = useContext(UserContext);
 
@@ -71,19 +72,25 @@ const Navbar = () => {
 					<div className="relative flex items-center">
 						<Link
 							to="feed"
-							className="hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700"
+							className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
+								location.pathname === '/feed' && 'underline underline-offset-2'
+							}`}
 						>
 							Feed
 						</Link>
 						<Link
 							to="recipes"
-							className="hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700"
+							className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
+								location.pathname === '/recipes' && 'underline underline-offset-2'
+							}`}
 						>
 							Recipes
 						</Link>
 						<Link
 							to="search"
-							className="hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700"
+							className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
+								location.pathname === '/search' && 'underline underline-offset-2'
+							}`}
 						>
 							Search
 						</Link>
