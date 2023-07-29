@@ -36,7 +36,11 @@ const LoginForm = () => {
 		try {
 			const response = await requests.users.login({ email, password, rememberMe });
 
-			setLoggedUser(response.data.data?.user ?? null);
+			if (response.data.success) {
+				setLoggedUser(response.data.data?.user ?? null);
+			} else {
+				setStatusMsg(response.data.message);
+			}
 		} catch (error) {
 			console.log(error);
 			setStatusMsg('An error occurred. Please try again.');
