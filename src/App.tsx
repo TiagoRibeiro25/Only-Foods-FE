@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import requests from './api/requests';
 import { UserContext } from './contextProviders/user.context';
+import Footer from './layouts/Footer';
 import Navbar from './layouts/Navbar';
 import Navigation from './navigation';
 import Loading from './views/Loading';
@@ -48,9 +49,10 @@ function App() {
 					<header>
 						<Navbar />
 					</header>
-					<main className="max-w-screen-xl px-4 mx-auto mt-20">
+					<main className="max-w-screen-xl min-h-screen px-4 mx-auto mt-20">
 						<Navigation />
 					</main>
+					<Footer />
 				</Router>
 			)}
 		</>
