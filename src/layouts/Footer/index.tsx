@@ -4,7 +4,7 @@ const Footer = () => {
 			<span className="text-gray-500 text-md md:text-center">
 				Only Foods - Made by{' '}
 				<a
-					href="https://tiagoribeiro.tech/"
+					href="https://github.com/TiagoRibeiro25"
 					className="hover:underline"
 					target="_blank"
 					rel="noreferrer"
