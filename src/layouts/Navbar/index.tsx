@@ -57,7 +57,6 @@ const Navbar = () => {
 		<nav className="fixed top-0 z-50 w-full bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg">
 			<div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 py-3 mx-auto">
 				<Link
-					onClick={() => window.scrollTo(0, 0)}
 					to={loggedUser ? 'feed' : '/'}
 					className="flex items-center"
 					onMouseEnter={toggleLogoHovered}

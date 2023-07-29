@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { UserContext } from '../contextProviders/user.context';
 import Feed from '../views/Feed';
 import Home from '../views/Home';
@@ -8,6 +8,11 @@ import ResetPassword from '../views/ResetPassword';
 
 const Navigation = () => {
 	const { loggedUser } = useContext(UserContext);
+	const location = useLocation();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [location]);
 
 	return (
 		<Routes>
