@@ -1,12 +1,15 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import requests from '../../api/requests';
 import User from '../../assets/imgs/user.png';
 import Logo from '../../assets/logo/logo_bw_1.png';
 import LogoHovered from '../../assets/logo/logo_color_2.png';
 import { UserContext } from '../../contextProviders/user.context';
 
 const Navbar = () => {
-	const { loggedUser } = useContext(UserContext);
+	const navigate = useNavigate();
+
+	const { loggedUser, setLoggedUser } = useContext(UserContext);
 
 	const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
 	const [isLogoHovered, setLogoHovered] = useState<boolean>(false);
@@ -14,6 +17,21 @@ const Navbar = () => {
 
 	const toggleMenu = (): void => setMenuOpen(!isMenuOpen);
 	const toggleLogoHovered = (): void => setLogoHovered(!isLogoHovered);
+
+	const signOut = async (): Promise<void> => {
+		try {
+			const response = await requests.users.logout();
+
+			if (response.data.success) {
+				setLoggedUser(null);
+			}
+
+			// Go to home page
+			navigate('/');
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent): void => {
@@ -138,7 +156,10 @@ const Navbar = () => {
 											</Link>
 										</li>
 										<li>
-											<button className="block w-full px-4 py-2 text-sm text-gray-700 text-start hover:bg-gray-100">
+											<button
+												className="block w-full px-4 py-2 text-sm text-gray-700 text-start hover:bg-gray-100"
+												onClick={signOut}
+											>
 												Sign out
 											</button>
 										</li>
