@@ -15,7 +15,10 @@ const Navigation = () => {
 				path="/"
 				element={!loggedUser ? <Home /> : <Navigate to="/feed" replace />}
 			/>
-			<Route path="/reset-password/:token" element={<ResetPassword />} />
+			<Route
+				path="/reset-password/:token"
+				element={!loggedUser ? <ResetPassword /> : <Navigate to="/404" replace />}
+			/>
 			<Route path="/feed" element={loggedUser ? <Feed /> : <Navigate to="/" replace />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>

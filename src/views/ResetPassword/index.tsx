@@ -6,7 +6,6 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { validatePassword } from '../../utils/validateData';
 
-// TODO: Add logic so that if the user is logged in, they can't access this page ( redirect to home )
 const ResetPassword = () => {
 	const params = useParams();
 	const token = params.token as string;
@@ -49,7 +48,7 @@ const ResetPassword = () => {
 	};
 
 	return (
-		<div className="max-w-3xl mx-auto mb-12 sm:mt-36 mt-28">
+		<div className="max-w-3xl mx-auto mb-28 sm:mt-36 mt-28">
 			<h1 className="mb-10 text-4xl text-center font-bellefair md:mt-2">
 				Reset Password
 			</h1>
