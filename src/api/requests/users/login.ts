@@ -33,7 +33,7 @@ export default async (props: Props): Promise<LocalResponse> => {
 	try {
 		const response: AxiosResponse<LocalRequestData> = await api.post(ROUTE, props);
 		return response;
-	} catch (error) {
+	} catch (error: unknown) {
 		return handleError(error);
 	}
 };
