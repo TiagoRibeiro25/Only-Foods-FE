@@ -9,6 +9,7 @@ import Loading from './views/Loading';
 function App() {
 	const { setLoggedUser } = useContext(UserContext);
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 
 	// Function to fetch logged user data
 	const fetchLoggedUser = useCallback(async () => {
@@ -27,6 +28,7 @@ function App() {
 		} catch (error) {
 			console.log(error);
 			setLoggedUser(null);
+			setError(true);
 		}
 
 		setLoading(false);
@@ -39,8 +41,8 @@ function App() {
 
 	return (
 		<>
-			{loading ? (
-				<Loading />
+			{loading || error ? (
+				<Loading state={error ? 'error' : 'loading'} />
 			) : (
 				<Router>
 					<header>
