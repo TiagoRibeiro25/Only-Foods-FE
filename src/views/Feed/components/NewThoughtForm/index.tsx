@@ -1,28 +1,39 @@
 import { useState } from 'react';
+import requests from '../../../../api/requests';
 import PostTextArea from '../../../../components/PostTextarea';
 
-const NewThoughtForm = () => {
+interface NewThoughtFormProps {
+	onSubmit: () => void;
+}
+
+const NewThoughtForm = (props: NewThoughtFormProps) => {
 	const [newThoughtText, setNewThoughtText] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 	const [statusMsg, setStatusMsg] = useState('Error Message');
 
-	const handleNewPost = (): void => {
-		console.log(newThoughtText);
+	const handleNewPost = async (): Promise<void> => {
 		setLoading(true);
 		setStatusMsg('Error Message');
 
-		//TODO: Remove this
-		// Simulate a delay
-		setTimeout(() => {
-			setLoading(false);
-			setStatusMsg('Success Message');
-			setNewThoughtText('');
+		try {
+			const response = await requests.thoughts.addThought({
+				content: newThoughtText,
+			});
 
-			// After 5 seconds, reset the status message
-			setTimeout(() => {
-				setStatusMsg('Error Message');
-			}, 5000);
-		}, 2000);
+			setStatusMsg(response.data.message);
+		} catch (error) {
+			console.log(error);
+			setStatusMsg('An error occurred. Please try again.');
+		}
+
+		setLoading(false);
+		props.onSubmit();
+
+		// Hide status message and clear the textarea input after 5 seconds
+		setTimeout(() => {
+			setStatusMsg('Error Message');
+			setNewThoughtText('');
+		}, 5000);
 	};
 
 	return (
