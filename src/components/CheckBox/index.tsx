@@ -22,7 +22,7 @@ const CheckBox = ({ ...props }: CheckBoxProps) => {
 				id={props.id}
 				type="checkbox"
 				value=""
-				className="w-4 h-4 bg-gray-100 border-gray-300 rounded cursor-pointer focus:ring-gray-500 focus:ring-2"
+				className="w-4 h-4 bg-gray-100 border-gray-300 rounded cursor-pointer focus:ring-0"
 				checked={isChecked}
 				disabled={props.disabled}
 				onChange={handleChange}
