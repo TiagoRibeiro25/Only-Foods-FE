@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import Logo from '../../assets/logo/logo_color_2.png';
-import phrases from './phrases';
+import phrases from './phrases.json';
 
 interface LoadingProps {
 	state: 'loading' | 'error';
