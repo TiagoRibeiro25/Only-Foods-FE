@@ -1,3 +1,4 @@
 import addThought from './addThought';
+import getThoughts from './getThoughts';
 
-export default { addThought };
+export default { addThought, getThoughts };
