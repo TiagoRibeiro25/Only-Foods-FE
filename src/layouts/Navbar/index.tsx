@@ -4,6 +4,7 @@ import requests from '../../api/requests';
 import UserNoPicture from '../../assets/imgs/user.png';
 import Logo from '../../assets/logo/logo_bw_1.png';
 import LogoHovered from '../../assets/logo/logo_color_2.png';
+import ConfirmActionModal from '../../components/ConfirmActionModal';
 import { UserContext } from '../../contextProviders/user.context';
 
 const Navbar = () => {
@@ -14,12 +15,15 @@ const Navbar = () => {
 
 	const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
 	const [isLogoHovered, setLogoHovered] = useState<boolean>(false);
+	const [showModal, setShowModal] = useState<boolean>(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 
 	const toggleMenu = (): void => setMenuOpen(!isMenuOpen);
 	const toggleLogoHovered = (): void => setLogoHovered(!isLogoHovered);
 
 	const signOut = async (): Promise<void> => {
+		setShowModal(false);
+
 		try {
 			const response = await requests.users.logout();
 
@@ -169,7 +173,7 @@ const Navbar = () => {
 										<li>
 											<button
 												className="block w-full px-4 py-2 text-sm text-gray-700 text-start hover:bg-gray-100"
-												onClick={signOut}
+												onClick={() => setShowModal(true)}
 											>
 												Sign out
 											</button>
@@ -182,6 +186,14 @@ const Navbar = () => {
 				)}
 			</div>
 			<hr className="max-w-screen-xl mx-auto border-black border-opacity-50 border-1" />
+
+			<ConfirmActionModal
+				id="confirm-sign-out"
+				message="Are you sure you want to sign out?"
+				onConfirm={signOut}
+				onCancel={() => setShowModal(false)}
+				show={showModal}
+			/>
 		</nav>
 	);
 };
