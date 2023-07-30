@@ -58,7 +58,7 @@ const Navbar = () => {
 	}, [location.pathname]);
 
 	return (
-		<nav className="fixed top-0 z-50 w-full bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg">
+		<nav className="fixed top-0 z-50 w-full bg-white bg-opacity-95 backdrop-filter">
 			<div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 py-3 mx-auto">
 				<Link
 					to={loggedUser ? 'feed' : '/'}
