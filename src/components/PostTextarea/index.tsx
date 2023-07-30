@@ -27,12 +27,12 @@ const PostTextArea = (props: PostTextAreaProps) => {
 		const minLen = props.minLength ?? 1;
 		const maxLen = props.maxLength ?? 500;
 
-		if (text.length < minLen) return true;
-		if (text.length > maxLen) return true;
+		if (text.trim().length < minLen) return true;
+		if (text.trim().length > maxLen) return true;
 		if (props.loading) return true;
 
 		return false;
-	}, [props.minLength, props.maxLength, text.length, props.loading]);
+	}, [props.minLength, props.maxLength, text, props.loading]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
 		setText(event.target.value);
