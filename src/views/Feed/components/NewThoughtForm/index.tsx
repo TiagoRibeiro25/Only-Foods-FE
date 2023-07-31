@@ -21,6 +21,7 @@ const NewThoughtForm = (props: NewThoughtFormProps) => {
 			});
 
 			setStatusMsg(response.data.message);
+			setNewThoughtText('');
 		} catch (error) {
 			console.log(error);
 			setStatusMsg('An error occurred. Please try again.');
@@ -32,7 +33,6 @@ const NewThoughtForm = (props: NewThoughtFormProps) => {
 		// Hide status message and clear the textarea input after 5 seconds
 		setTimeout(() => {
 			setStatusMsg('Error Message');
-			setNewThoughtText('');
 		}, 5000);
 	};
 
