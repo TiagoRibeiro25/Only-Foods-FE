@@ -20,6 +20,58 @@ interface Props {
 }
 
 const Post = (props: Props) => {
+	const paragraphs = props.content.split('\n'); // Split content into paragraphs
+
+	// Regular expression to identify links in the paragraph and capture the link text and URL
+	const linkRegex = /(?:(?:https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/gi;
+
+	// Function to replace links with anchor tags
+	const renderParagraphWithLinks = (paragraph: string) => {
+		const matches = paragraph.match(linkRegex);
+
+		// if the link doesn't have http or https, add http to it
+		// if it has www replace it with http
+
+		const newMatches = matches?.map(match => {
+			if (match.startsWith('www')) {
+				return `http://${match}`;
+			} else {
+				return match;
+			}
+		});
+
+		if (newMatches && newMatches.length > 0) {
+			return (
+				<p key={crypto.randomUUID()} className="text-md">
+					{paragraph.split(linkRegex).map((part, index) => {
+						if (index % 2 === 0) {
+							return part; // Non-link text
+						} else {
+							// Link text and URL
+							return (
+								<a
+									key={crypto.randomUUID()}
+									href={newMatches[index - 1]}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-blue-500 hover:underline"
+								>
+									{newMatches[index - 1].replace(/(^\w+:|^)\/\//, '')}
+								</a>
+							);
+						}
+					})}
+				</p>
+			);
+		} else {
+			return (
+				<p key={crypto.randomUUID()} className="text-md">
+					{paragraph}
+				</p>
+			);
+		}
+	};
+
 	return (
 		<div id={`post-${props.id}`} className="mb-16">
 			{/* First Row */}
@@ -41,7 +93,14 @@ const Post = (props: Props) => {
 
 			{/* Second Row */}
 			<div className="mt-4">
-				<p className="text-md">{props.content}</p>
+				{/* Render paragraphs */}
+				{paragraphs.map(paragraph => {
+					if (paragraph.trim() === '') {
+						return <br key={crypto.randomUUID()} />;
+					} else {
+						return renderParagraphWithLinks(paragraph);
+					}
+				})}
 			</div>
 		</div>
 	);
