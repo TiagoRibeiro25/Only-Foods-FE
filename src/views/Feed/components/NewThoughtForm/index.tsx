@@ -21,19 +21,22 @@ const NewThoughtForm = (props: NewThoughtFormProps) => {
 			});
 
 			setStatusMsg(response.data.message);
-			setNewThoughtText('');
+
+			if (response.data.success) {
+				setNewThoughtText('');
+				props.onSubmit();
+			}
 		} catch (error) {
 			console.log(error);
 			setStatusMsg('An error occurred. Please try again.');
+		} finally {
+			setLoading(false);
+
+			// Hide status message and clear the textarea input after 5 seconds
+			setTimeout(() => {
+				setStatusMsg('Error Message');
+			}, 5000);
 		}
-
-		setLoading(false);
-		props.onSubmit();
-
-		// Hide status message and clear the textarea input after 5 seconds
-		setTimeout(() => {
-			setStatusMsg('Error Message');
-		}, 5000);
 	};
 
 	return (
