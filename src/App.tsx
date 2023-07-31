@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import requests from './api/requests';
-import { UserContext } from './contextProviders/user.context';
+import { UserContext } from './contextProviders/UserContext';
 import Footer from './layouts/Footer';
 import Navbar from './layouts/Navbar';
 import Navigation from './navigation';

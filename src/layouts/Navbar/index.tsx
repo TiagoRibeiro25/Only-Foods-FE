@@ -5,7 +5,7 @@ import UserNoPicture from '../../assets/imgs/user.png';
 import Logo from '../../assets/logo/logo_bw_1.png';
 import LogoHovered from '../../assets/logo/logo_color_2.png';
 import ConfirmActionModal from '../../components/ConfirmActionModal';
-import { UserContext } from '../../contextProviders/user.context';
+import { UserContext } from '../../contextProviders/UserContext';
 
 const Navbar = () => {
 	const navigate = useNavigate();

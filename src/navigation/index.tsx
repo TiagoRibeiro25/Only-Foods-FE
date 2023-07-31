@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { UserContext } from '../contextProviders/user.context';
+import { UserContext } from '../contextProviders/UserContext';
 import Feed from '../views/Feed';
 import Home from '../views/Home';
 import NotFound from '../views/NotFound';
