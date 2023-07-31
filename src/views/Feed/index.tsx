@@ -4,6 +4,7 @@ import LoadingIcon from '../../assets/icons/loading.svg';
 import Post from '../../components/Post';
 import Reveal from '../../components/Reveal';
 import Select from '../../components/Select';
+import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
 import NewThoughtForm from './components/NewThoughtForm';
 
 type Filter = 'recent' | 'popular' | 'following';
@@ -33,7 +34,9 @@ const options = [
 ];
 
 const Feed = () => {
-	const [filter, setFilter] = useState<Filter>('recent');
+	const [filter, setFilter] = useState<Filter>(
+		getLocalStorage('feedThoughtFilter') ?? 'recent',
+	);
 	const [thoughts, setThoughts] = useState<Thought[]>([]);
 	const [page, setPage] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
@@ -99,8 +102,6 @@ const Feed = () => {
 		const handleScroll = () => {
 			// When the user scrolls to the bottom (minus 200px), load more thoughts
 			if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-				console.log('fetching more thoughts...');
-
 				debouncedFetchMoreThoughts(); // Call the debounced version instead
 			}
 		};
@@ -127,6 +128,7 @@ const Feed = () => {
 
 	useEffect(() => {
 		setShouldRefetch(true);
+		setLocalStorage('feedThoughtFilter', filter);
 	}, [filter]);
 
 	return (
