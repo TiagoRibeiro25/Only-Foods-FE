@@ -5,22 +5,25 @@ import { handleError } from '../utils';
 
 interface LocalRequestData extends ResponseData {
 	data?: {
-		id: number;
-		content: string;
-		author: {
+		thoughts: {
 			id: number;
-			username: string;
-			userImage?: {
-				cloudinaryImage: string;
+			content: string;
+			author: {
+				id: number;
+				username: string;
+				userImage?: {
+					cloudinaryImage: string;
+				};
 			};
-		};
-		likes: number;
-		comments: number;
-		isAuthor: boolean;
-		isLiked: boolean;
-		createdAgo: string;
-		createdAt: string;
-	}[];
+			likes: number;
+			comments: number;
+			isAuthor: boolean;
+			isLiked: boolean;
+			createdAgo: string;
+			createdAt: string;
+		}[];
+		totalCount: number;
+	};
 }
 
 interface LocalResponse extends AxiosResponse<LocalRequestData> {
