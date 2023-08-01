@@ -11,6 +11,7 @@ interface LocalRequestData extends ResponseData {
 			username: string;
 			email: string;
 			isAdmin: boolean;
+			isBlocked: boolean;
 			picture: string;
 		};
 	};
