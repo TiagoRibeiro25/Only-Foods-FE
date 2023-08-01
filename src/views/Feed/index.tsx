@@ -16,7 +16,6 @@ type Filter = 'recent' | 'popular' | 'following';
 
 const options = [
 	{ text: 'Recent', value: 'recent' },
-	// TODO: Fix popular filter (duplicate thoughts)
 	{ text: 'Most Popular', value: 'popular' },
 	{ text: 'Following', value: 'following' },
 ];
@@ -26,6 +25,9 @@ function getFilterFromLocalStorage(): Filter {
 	return options.some(option => option.value === filter) ? (filter as Filter) : 'recent';
 }
 
+// TODO: Refactor this component
+// TODO: Fix React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead.
+// TODO: Fix Promise returned in function argument where a void return was expected.
 const Feed = () => {
 	const thoughtsContext = useContext(ThoughtsContext);
 	const { loggedUser } = useContext(UserContext);
@@ -99,8 +101,6 @@ const Feed = () => {
 	};
 
 	// Create a debounced version of the fetchMoreThoughts function using debounce
-	// TODO: Fix React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead.
-	// TODO: Fix Promise returned in function argument where a void return was expected.
 	const debouncedFetchMoreThoughts = useCallback(debounce(fetchMoreThoughts, 300), [
 		fetchMoreThoughts,
 	]);
