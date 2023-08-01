@@ -1,5 +1,5 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import DiscussionIcon from '../../assets/icons/discussion.svg';
 import GroupIcon from '../../assets/icons/group.svg';
 import RecipeIcon from '../../assets/icons/recipe.svg';
@@ -257,13 +257,13 @@ const Home = () => {
 			</div>
 			<Reveal width="100%" animation="slide-bottom">
 				<div className="flex items-center justify-center w-full mb-10 mt-28 sm:mb-16 sm:mt-36">
-					<button
+					<Link
+						to="/?form=register"
 						type="button"
 						className="px-3 py-6 text-2xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md sm:text-3xl font-bellefair sm:px-16 hover:scale-105"
-						onClick={() => window.scrollTo(0, 0)}
 					>
 						Join the Only Foods Community
-					</button>
+					</Link>
 				</div>
 			</Reveal>
 		</>
