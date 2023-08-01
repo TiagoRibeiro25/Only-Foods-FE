@@ -22,6 +22,7 @@ function App() {
 				username: response.data.data.username,
 				email: response.data.data.email,
 				isAdmin: response.data.data.isAdmin,
+				isBlocked: response.data.data.blocked,
 				picture: response.data.data.userImage?.cloudinaryImage ?? undefined,
 			};
 
