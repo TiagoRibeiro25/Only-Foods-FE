@@ -2,8 +2,16 @@ import { useState } from 'react';
 import requests from '../../../../api/requests';
 import PostTextArea from '../../../../components/PostTextarea';
 
+export interface NewThought {
+	id: number;
+	content: string;
+	authorId: number;
+	createdAt: string;
+	updatedAt: string;
+}
+
 interface NewThoughtFormProps {
-	onSubmit: () => void;
+	onSubmit: (arg: NewThought) => void;
 }
 
 const NewThoughtForm = (props: NewThoughtFormProps) => {
@@ -24,7 +32,7 @@ const NewThoughtForm = (props: NewThoughtFormProps) => {
 
 			if (response.data.success) {
 				setNewThoughtText('');
-				props.onSubmit();
+				props.onSubmit(response.data.data as NewThought);
 			}
 		} catch (error) {
 			console.log(error);

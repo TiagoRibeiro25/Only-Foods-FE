@@ -5,8 +5,9 @@ import Post from '../../components/Post';
 import Reveal from '../../components/Reveal';
 import Select from '../../components/Select';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
+import { UserContext } from '../../contextProviders/UserContext';
 import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
-import NewThoughtForm from './components/NewThoughtForm';
+import NewThoughtForm, { NewThought } from './components/NewThoughtForm';
 
 type Filter = 'recent' | 'popular' | 'following';
 
@@ -27,6 +28,7 @@ const Feed = () => {
 	const [filter, setFilter] = useState<Filter>(getFilterFromLocalStorage());
 
 	const thoughtsContext = useContext(ThoughtsContext);
+	const { loggedUser } = useContext(UserContext);
 	const [isLoading, setIsLoading] = useState(false);
 
 	// Function to fetch more thoughts and update the state
@@ -80,6 +82,29 @@ const Feed = () => {
 		fetchMoreThoughts,
 	]);
 
+	const handleNewThought = (newThought: NewThought): void => {
+		const thought = {
+			id: newThought.id,
+			content: newThought.content,
+			author: {
+				id: newThought.authorId,
+				username: loggedUser?.username ?? '',
+				userImage: loggedUser?.picture
+					? { cloudinaryImage: loggedUser?.picture }
+					: undefined,
+			},
+			likes: 0,
+			comments: 0,
+			isAuthor: true,
+			isLiked: false,
+			createdAgo: '0 seconds ago',
+			createdAt: newThought.createdAt,
+		};
+
+		// Add the new thought to the recent thoughts
+		thoughtsContext.recent.setThoughts([thought, ...thoughtsContext.recent.thoughts]);
+	};
+
 	// Attach scroll event listener to load more thoughts when reaching the bottom
 	useEffect(() => {
 		// Fetch initial thoughts on the first render
@@ -114,7 +139,7 @@ const Feed = () => {
 	return (
 		<div className="flex flex-col items-center max-w-3xl mx-auto mt-28">
 			<Reveal width="100%" animation="slide-top" delay={0.05}>
-				<NewThoughtForm onSubmit={() => console.log('hello world')} />
+				<NewThoughtForm onSubmit={handleNewThought} />
 			</Reveal>
 
 			{/* Filter Thoughts */}
@@ -135,7 +160,7 @@ const Feed = () => {
 			{/* Posts (Thoughts) */}
 			<div className="w-full mt-14">
 				{thoughtsContext[filter].thoughts.map(thought => (
-					<Reveal key={thought.id} width="100%" animation="slide-bottom" delay={0.05}>
+					<Reveal key={thought.id} width="100%" animation="slide-right" delay={0.05}>
 						<Post key={thought.id} {...thought} />
 					</Reveal>
 				))}
