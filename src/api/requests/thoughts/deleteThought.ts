@@ -1,6 +1,5 @@
-import { AxiosResponse } from 'axios';
 import api from '../../axios.config';
-import { ResponseData } from '../types';
+import { Response } from '../types';
 import { handleError } from '../utils';
 
 const ROUTE = '/thoughts';
@@ -9,11 +8,9 @@ interface Props {
 	id: number;
 }
 
-export default async (props: Props): Promise<AxiosResponse<ResponseData>> => {
+export default async (props: Props): Promise<Response> => {
 	try {
-		const response: AxiosResponse<ResponseData> = await api.delete(
-			`${ROUTE}/${props.id}`,
-		);
+		const response: Response = await api.delete(`${ROUTE}/${props.id}`);
 
 		response.data = {
 			success: true,
