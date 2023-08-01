@@ -28,16 +28,17 @@ function getFilterFromLocalStorage(): Filter {
 }
 
 const Feed = () => {
-	const [filter, setFilter] = useState<Filter>(getFilterFromLocalStorage());
-
 	const thoughtsContext = useContext(ThoughtsContext);
 	const { loggedUser } = useContext(UserContext);
+
+	const [filter, setFilter] = useState<Filter>(getFilterFromLocalStorage());
 	const [isLoading, setIsLoading] = useState(false);
+	const [anErrorOccurred, setAnErrorOccurred] = useState(false);
 
 	// Function to fetch more thoughts and update the state
 	const fetchMoreThoughts = useCallback(async () => {
 		// Prevent making duplicate requests while loading or if reached the end
-		if (isLoading || thoughtsContext[filter].reachedEnd) {
+		if (isLoading || thoughtsContext[filter].reachedEnd || anErrorOccurred) {
 			return;
 		}
 
@@ -62,6 +63,8 @@ const Feed = () => {
 				if (response.data.data?.totalCount === totalThoughts.length) {
 					thoughtsContext[filter].setReachedEnd(true);
 				}
+			} else {
+				setAnErrorOccurred(true);
 			}
 		} catch (error) {
 			console.error('Error fetching more thoughts:', error);
@@ -106,6 +109,23 @@ const Feed = () => {
 
 		// Add the new thought to the recent thoughts
 		thoughtsContext.recent.setThoughts([thought, ...thoughtsContext.recent.thoughts]);
+	};
+
+	const deleteThoughtFromList = (thoughtId: number) => {
+		// Remove the thought from the recent thoughts
+		thoughtsContext.recent.setThoughts(
+			thoughtsContext.recent.thoughts.filter(thought => thought.id !== thoughtId),
+		);
+
+		// Remove the thought from the popular thoughts
+		thoughtsContext.popular.setThoughts(
+			thoughtsContext.popular.thoughts.filter(thought => thought.id !== thoughtId),
+		);
+
+		// Remove the thought from the following thoughts
+		thoughtsContext.following.setThoughts(
+			thoughtsContext.following.thoughts.filter(thought => thought.id !== thoughtId),
+		);
 	};
 
 	// Attach scroll event listener to load more thoughts when reaching the bottom
@@ -164,7 +184,12 @@ const Feed = () => {
 			<div className="w-full mt-14">
 				{thoughtsContext[filter].thoughts.map(thought => (
 					<Reveal key={thought.id} width="100%" animation="slide-right" delay={0.05}>
-						<Post key={thought.id} {...thought} />
+						<Post
+							key={thought.id}
+							isAdmin={loggedUser?.isAdmin ?? false}
+							thought={thought}
+							onDelete={deleteThoughtFromList}
+						/>
 					</Reveal>
 				))}
 				{isLoading && (
