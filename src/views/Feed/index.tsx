@@ -1,69 +1,61 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import requests from '../../api/requests';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import Post from '../../components/Post';
 import Reveal from '../../components/Reveal';
 import Select from '../../components/Select';
+import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
 import NewThoughtForm from './components/NewThoughtForm';
 
 type Filter = 'recent' | 'popular' | 'following';
 
-interface Thought {
-	id: number;
-	content: string;
-	author: {
-		id: number;
-		username: string;
-		userImage?: {
-			cloudinaryImage: string;
-		};
-	};
-	likes: number;
-	comments: number;
-	isAuthor: boolean;
-	isLiked: boolean;
-	createdAgo: string;
-	createdAt: string;
-}
-
 const options = [
 	{ text: 'Recent', value: 'recent' },
-	{ text: 'Most Popular', value: 'popular' },
+	// TODO: Fix popular filter (duplicate thoughts)
+	// { text: 'Most Popular', value: 'popular' },
 	{ text: 'Following', value: 'following' },
 ];
 
+function getFilterFromLocalStorage(): Filter {
+	const filter = getLocalStorage('feedThoughtFilter');
+
+	return options.some(option => option.value === filter) ? (filter as Filter) : 'recent';
+}
+
 const Feed = () => {
-	const [filter, setFilter] = useState<Filter>(
-		getLocalStorage('feedThoughtFilter') ?? 'recent',
-	);
-	const [thoughts, setThoughts] = useState<Thought[]>([]);
-	const [page, setPage] = useState(0);
+	const [filter, setFilter] = useState<Filter>(getFilterFromLocalStorage());
+
+	const thoughtsContext = useContext(ThoughtsContext);
 	const [isLoading, setIsLoading] = useState(false);
-	const [reachedEnd, setReachedEnd] = useState(false);
-	const [isInitialLoad, setIsInitialLoad] = useState(true);
-	const [shouldRefetch, setShouldRefetch] = useState(false);
 
 	// Function to fetch more thoughts and update the state
 	const fetchMoreThoughts = useCallback(async () => {
-		if (isLoading || reachedEnd) return; // Prevent making duplicate requests while loading
+		// Prevent making duplicate requests while loading or if reached the end
+		if (isLoading || thoughtsContext[filter].reachedEnd) {
+			return;
+		}
 
 		setIsLoading(true);
+
 		try {
 			const response = await requests.thoughts.getThoughts({
 				filter,
-				page: page + 1,
+				page: thoughtsContext[filter].page,
 				limit: 5,
 			});
 
 			if (response.data.success) {
 				const newThoughts = response.data.data?.thoughts ?? [];
-				setThoughts(prevThoughts => [...prevThoughts, ...newThoughts]);
-				setPage(prevPage => prevPage + 1);
+
+				const totalThoughts = [...thoughtsContext[filter].thoughts, ...newThoughts];
+
+				thoughtsContext[filter].setThoughts(totalThoughts);
+				thoughtsContext[filter].incrementPage();
 
 				// Check if reached the end of thoughts to disable further loading
-				if (response.data.data?.totalCount === thoughts.length + newThoughts.length) {
-					setReachedEnd(true);
+				if (response.data.data?.totalCount === totalThoughts.length) {
+					thoughtsContext[filter].setReachedEnd(true);
 				}
 			}
 		} catch (error) {
@@ -71,9 +63,8 @@ const Feed = () => {
 		} finally {
 			setIsLoading(false);
 		}
-	}, [filter, isLoading, page, reachedEnd, thoughts.length]);
+	}, [filter, isLoading, thoughtsContext]);
 
-	// Custom debouncing function inside the Feed component to prevent rapid requests
 	const debounce = <T extends unknown[]>(func: (...args: T) => void, delay: number) => {
 		let timer: ReturnType<typeof setTimeout>;
 		return (...args: T) => {
@@ -83,9 +74,8 @@ const Feed = () => {
 	};
 
 	// Create a debounced version of the fetchMoreThoughts function using debounce
-	// TODO: Fix linting errors:
-	// (React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead)
-	// (Promise returned in function argument where a void return was expected.)
+	// TODO: Fix React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead.
+	// TODO: Fix Promise returned in function argument where a void return was expected.
 	const debouncedFetchMoreThoughts = useCallback(debounce(fetchMoreThoughts, 300), [
 		fetchMoreThoughts,
 	]);
@@ -93,16 +83,16 @@ const Feed = () => {
 	// Attach scroll event listener to load more thoughts when reaching the bottom
 	useEffect(() => {
 		// Fetch initial thoughts on the first render
-		if (isInitialLoad) {
+		if (thoughtsContext[filter].isInitialLoad) {
 			debouncedFetchMoreThoughts();
-			setIsInitialLoad(false);
+			thoughtsContext[filter].setIsInitialLoad(false);
 			return;
 		}
 
 		const handleScroll = () => {
 			// When the user scrolls to the bottom (minus 200px), load more thoughts
 			if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-				if (!isLoading && thoughts.length === 0) {
+				if (!isLoading && thoughtsContext[filter].thoughts.length === 0) {
 					return;
 				}
 
@@ -115,30 +105,16 @@ const Feed = () => {
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
 		};
-	}, [debouncedFetchMoreThoughts, isInitialLoad]);
-
-	// Fetch thoughts when the filter changes
-	// Watch for changes in the 'filter' state and clear thoughts and pagination on change
-	useEffect(() => {
-		if (shouldRefetch) {
-			setThoughts([]); // Clear existing thoughts
-			setPage(0); // Reset pagination
-			setReachedEnd(false); // Reset the end of thoughts flag
-			setIsInitialLoad(true); // Reset initial load flag
-			debouncedFetchMoreThoughts(); // Fetch thoughts with the new filter
-			setShouldRefetch(false); // Reset the flag after refetching
-		}
-	}, [shouldRefetch, debouncedFetchMoreThoughts]);
+	}, [debouncedFetchMoreThoughts, filter, isLoading, thoughtsContext]);
 
 	useEffect(() => {
-		setShouldRefetch(true);
 		setLocalStorage('feedThoughtFilter', filter);
 	}, [filter]);
 
 	return (
 		<div className="flex flex-col items-center max-w-3xl mx-auto mt-28">
 			<Reveal width="100%" animation="slide-top" delay={0.05}>
-				<NewThoughtForm onSubmit={() => setShouldRefetch(true)} />
+				<NewThoughtForm onSubmit={() => console.log('hello world')} />
 			</Reveal>
 
 			{/* Filter Thoughts */}
@@ -158,7 +134,7 @@ const Feed = () => {
 
 			{/* Posts (Thoughts) */}
 			<div className="w-full mt-14">
-				{thoughts.map(thought => (
+				{thoughtsContext[filter].thoughts.map(thought => (
 					<Reveal key={thought.id} width="100%" animation="slide-bottom" delay={0.05}>
 						<Post key={thought.id} {...thought} />
 					</Reveal>
@@ -174,7 +150,7 @@ const Feed = () => {
 						/>
 					</div>
 				)}
-				{reachedEnd && (
+				{thoughtsContext[filter].reachedEnd && (
 					<Reveal width="100%" animation="slide-bottom" delay={0.05}>
 						<div className="flex flex-col items-center justify-center gap-2 pt-8 pb-12 text-center col-span-full md:pb-6">
 							<svg
@@ -192,7 +168,7 @@ const Feed = () => {
 						</div>
 					</Reveal>
 				)}
-				{!isLoading && thoughts.length === 0 && (
+				{!isLoading && thoughtsContext[filter].thoughts.length === 0 && (
 					<Reveal width="100%" animation="slide-bottom" delay={0.3}>
 						<div className="flex flex-col items-center justify-center gap-2 pt-8 pb-12 text-center col-span-full md:pb-6">
 							<svg
