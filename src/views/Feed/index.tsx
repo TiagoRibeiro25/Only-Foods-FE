@@ -17,7 +17,7 @@ type Filter = 'recent' | 'popular' | 'following';
 const options = [
 	{ text: 'Recent', value: 'recent' },
 	// TODO: Fix popular filter (duplicate thoughts)
-	// { text: 'Most Popular', value: 'popular' },
+	{ text: 'Most Popular', value: 'popular' },
 	{ text: 'Following', value: 'following' },
 ];
 
@@ -53,7 +53,20 @@ const Feed = () => {
 			if (response.data.success) {
 				const newThoughts = response.data.data?.thoughts ?? [];
 
-				const totalThoughts = [...thoughtsContext[filter].thoughts, ...newThoughts];
+				// Check if there are duplicate thoughts,
+				const duplicateThoughts = newThoughts.filter(newThought =>
+					thoughtsContext[filter].thoughts.some(thought => thought.id === newThought.id),
+				);
+
+				// Remove the duplicate thoughts from the new thoughts
+				const filteredNewThoughts = newThoughts.filter(
+					newThought => !duplicateThoughts.includes(newThought),
+				);
+
+				const totalThoughts = [
+					...thoughtsContext[filter].thoughts,
+					...filteredNewThoughts,
+				];
 
 				thoughtsContext[filter].setThoughts(totalThoughts);
 				thoughtsContext[filter].incrementPage();
@@ -63,14 +76,19 @@ const Feed = () => {
 					thoughtsContext[filter].setReachedEnd(true);
 				}
 			} else {
-				setAnErrorOccurred(true);
+				// if the response was an 404 and there are thoughts in the list, then it reached the end
+				if (response.status === 404 && thoughtsContext[filter].thoughts.length > 0) {
+					thoughtsContext[filter].setReachedEnd(true);
+				} else {
+					setAnErrorOccurred(true);
+				}
 			}
 		} catch (error) {
 			console.error('Error fetching more thoughts:', error);
 		} finally {
 			setIsLoading(false);
 		}
-	}, [filter, isLoading, thoughtsContext]);
+	}, [anErrorOccurred, filter, isLoading, thoughtsContext]);
 
 	const debounce = <T extends unknown[]>(func: (...args: T) => void, delay: number) => {
 		let timer: ReturnType<typeof setTimeout>;
@@ -154,6 +172,8 @@ const Feed = () => {
 	useEffect(() => {
 		// Fetch initial thoughts on the first render
 		if (thoughtsContext[filter].isInitialLoad) {
+			if (thoughtsContext[filter].thoughts.length > 0 || anErrorOccurred) return;
+
 			debouncedFetchMoreThoughts();
 			thoughtsContext[filter].setIsInitialLoad(false);
 			return;
@@ -162,10 +182,6 @@ const Feed = () => {
 		const handleScroll = () => {
 			// When the user scrolls to the bottom (minus 200px), load more thoughts
 			if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-				if (!isLoading && thoughtsContext[filter].thoughts.length === 0) {
-					return;
-				}
-
 				debouncedFetchMoreThoughts(); // Call the debounced version instead
 			}
 		};
@@ -175,10 +191,11 @@ const Feed = () => {
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
 		};
-	}, [debouncedFetchMoreThoughts, filter, isLoading, thoughtsContext]);
+	}, [anErrorOccurred, debouncedFetchMoreThoughts, filter, isLoading, thoughtsContext]);
 
 	useEffect(() => {
 		setLocalStorage('feedThoughtFilter', filter);
+		setAnErrorOccurred(false);
 	}, [filter]);
 
 	return (
