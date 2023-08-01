@@ -15,16 +15,16 @@
   <p align="center">
     This is the front end of the Only Foods project, a web application that allows users to share thoughts, recipes, and chat with each other about food.
     <br />
-    <strong>Status: </strong> In development
+    <strong>Status: <u>In development</u></strong>
     <br />
     <a href="https://github.com/TiagoRibeiro25/Only-Foods-Docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://onlyfoods.netlify.app/">View Demo</a>
     ·
-    <a href="https://github.com/TiagoRibeiro25/Only-Foods-BE/issues">Report Bug</a>
+    <a href="https://github.com/TiagoRibeiro25/Only-Foods-FE/issues">Report Bug</a>
     ·
-    <a href="https://github.com/TiagoRibeiro25/Only-Foods-BE/issues">Request Feature</a>
+    <a href="https://github.com/TiagoRibeiro25/Only-Foods-FE/issues">Request Feature</a>
   </p>
 </div>
 
@@ -84,7 +84,7 @@ In order to run this project, you need to have installed
 * Nodejs
 * npm
 
-You also need to have this [API](https://github.com/TiagoRibeiro25/Only-Foods-BE) running locally.
+You also need to have this [API](https://github.com/TiagoRibeiro25/Only-Foods-FE) running locally.
 
 ### Installation
 
@@ -164,14 +164,14 @@ Contact section of my personal website:
 [tiagoribeiro.tech](https://tiagoribeiro.tech/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/TiagoRibeiro25/Only-Foods-BE.svg?style=for-the-badge
-[contributors-url]: https://github.com/TiagoRibeiro25/Only-Foods-BE/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/TiagoRibeiro25/Only-Foods-BE.svg?style=for-the-badge
-[forks-url]: https://github.com/TiagoRibeiro25/Only-Foods-BE/network/members
-[stars-shield]: https://img.shields.io/github/stars/TiagoRibeiro25/Only-Foods-BE.svg?style=for-the-badge
-[stars-url]: https://github.com/TiagoRibeiro25/Only-Foods-BE/stargazers
-[issues-shield]: https://img.shields.io/github/issues/TiagoRibeiro25/Only-Foods-BE.svg?style=for-the-badge
-[issues-url]: https://github.com/TiagoRibeiro25/Only-Foods-BE/issues
-[license-shield]: https://img.shields.io/github/license/TiagoRibeiro25/Only-Foods-BE.svg?style=for-the-badge
-[license-url]: https://github.com/TiagoRibeiro25/Only-Foods-BE/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/TiagoRibeiro25/Only-Foods-FE.svg?style=for-the-badge
+[contributors-url]: https://github.com/TiagoRibeiro25/Only-Foods-FE/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/TiagoRibeiro25/Only-Foods-FE.svg?style=for-the-badge
+[forks-url]: https://github.com/TiagoRibeiro25/Only-Foods-FE/network/members
+[stars-shield]: https://img.shields.io/github/stars/TiagoRibeiro25/Only-Foods-FE.svg?style=for-the-badge
+[stars-url]: https://github.com/TiagoRibeiro25/Only-Foods-FE/stargazers
+[issues-shield]: https://img.shields.io/github/issues/TiagoRibeiro25/Only-Foods-FE.svg?style=for-the-badge
+[issues-url]: https://github.com/TiagoRibeiro25/Only-Foods-FE/issues
+[license-shield]: https://img.shields.io/github/license/TiagoRibeiro25/Only-Foods-FE.svg?style=for-the-badge
+[license-url]: https://github.com/TiagoRibeiro25/Only-Foods-FE/blob/master/LICENSE.txt
 [product-screenshot]: images/screenshot.png
