@@ -13,30 +13,30 @@ const Footer = () => {
 				</a>
 			</span>
 			<ul className="flex items-center justify-center mt-3 font-medium text-gray-500 text-md lg:flex-wrap lg:mt-0">
-				<li>
+				<li className="mx-2 text-center">
 					<a
 						href="https://github.com/TiagoRibeiro25/Only-Foods-FE"
-						className="mr-4 hover:underline lg:mr-6 "
+						className="w-full hover:underline"
 						target="_blank"
 						rel="noreferrer"
 					>
 						Front End
 					</a>
 				</li>
-				<li>
+				<li className="mx-2 text-center">
 					<a
 						href="https://github.com/TiagoRibeiro25/Only-Foods-BE"
-						className="mr-4 hover:underline lg:mr-6"
+						className=" hover:underline"
 						target="_blank"
 						rel="noreferrer"
 					>
 						Back End
 					</a>
 				</li>
-				<li>
+				<li className="mx-2 text-center">
 					<a
 						href="https://github.com/TiagoRibeiro25/Only-Foods-Docs"
-						className="mr-4 hover:underline lg:mr-6"
+						className=" hover:underline"
 						target="_blank"
 						rel="noreferrer"
 					>
