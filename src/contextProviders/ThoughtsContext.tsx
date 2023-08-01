@@ -49,6 +49,7 @@ interface ThoughtsContextType {
 		isInitialLoad: boolean;
 		setIsInitialLoad: (isInitialLoad: boolean) => void;
 	};
+	resetAllState: () => void;
 }
 
 interface ThoughtsProviderProps {
@@ -90,6 +91,8 @@ const ThoughtsContext = createContext<ThoughtsContextType>({
 		isInitialLoad: true,
 		setIsInitialLoad: (isInitialLoad: boolean) => isInitialLoad,
 	},
+
+	resetAllState: () => {},
 });
 
 const ThoughtsProvider = (props: ThoughtsProviderProps) => {
@@ -179,11 +182,32 @@ const ThoughtsProvider = (props: ThoughtsProviderProps) => {
 		],
 	);
 
+	const resetAllState = () => {
+		// Reset all recent state variables
+		setRecentThoughts([]);
+		setRecentPage(1);
+		setRecentReachedEnd(false);
+		setRecentIsInitialLoad(true);
+
+		// Reset all popular state variables
+		setPopularThoughts([]);
+		setPopularPage(1);
+		setPopularReachedEnd(false);
+		setPopularIsInitialLoad(true);
+
+		// Reset all following state variables
+		setFollowingThoughts([]);
+		setFollowingPage(1);
+		setFollowingReachedEnd(false);
+		setFollowingIsInitialLoad(true);
+	};
+
 	const contextValue = useMemo(
 		() => ({
 			recent: recentContextValue,
 			popular: popularContextValue,
 			following: followingContextValue,
+			resetAllState,
 		}),
 		[recentContextValue, popularContextValue, followingContextValue],
 	);

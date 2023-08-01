@@ -5,6 +5,7 @@ import UserNoPicture from '../../assets/imgs/user.png';
 import Logo from '../../assets/logo/logo_bw_1.png';
 import LogoHovered from '../../assets/logo/logo_color_2.png';
 import ConfirmActionModal from '../../components/ConfirmActionModal';
+import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 
 const Navbar = () => {
@@ -12,6 +13,7 @@ const Navbar = () => {
 	const location = useLocation();
 
 	const { loggedUser, setLoggedUser } = useContext(UserContext);
+	const thoughtsContext = useContext(ThoughtsContext);
 
 	const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
 	const [isLogoHovered, setLogoHovered] = useState<boolean>(false);
@@ -28,11 +30,15 @@ const Navbar = () => {
 			const response = await requests.users.logout();
 
 			if (response.data.success) {
+				// Remove the logged user from the context
 				setLoggedUser(null);
-			}
 
-			// Go to home page
-			navigate('/');
+				// Reset all thoughts state
+				thoughtsContext.resetAllState();
+
+				// Navigate to the home page
+				navigate('/');
+			}
 		} catch (error) {
 			console.log(error);
 		}
