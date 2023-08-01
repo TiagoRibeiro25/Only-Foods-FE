@@ -123,12 +123,12 @@ const Post = (props: Props) => {
 
 			if (response.data.success) {
 				props.onEdit(props.thought.id, editedPost);
+				setEditModeEnabled(false);
 			}
 		} catch (error) {
 			console.log(error);
 		} finally {
 			setEditingPost(false);
-			setEditModeEnabled(false);
 		}
 	};
 
