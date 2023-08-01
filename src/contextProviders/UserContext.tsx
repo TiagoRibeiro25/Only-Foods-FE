@@ -1,12 +1,12 @@
 import { createContext, useMemo, useState } from 'react';
 
-export type User = {
+export interface User {
 	id: number;
 	username: string;
 	email: string;
 	isAdmin: boolean;
 	picture?: string;
-};
+}
 
 interface UserContextType {
 	loggedUser: User | null;
