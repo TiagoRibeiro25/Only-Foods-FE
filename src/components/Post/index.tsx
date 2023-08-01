@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import requests from '../../api/requests';
+import CancelIcon from '../../assets/icons/cancel.svg';
 import DeleteIcon from '../../assets/icons/delete.svg';
 import EditIcon from '../../assets/icons/edit.svg';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import UserPlaceholderPicture from '../../assets/imgs/user.png';
 import ConfirmActionModal from '../ConfirmActionModal';
+import PostTextArea from '../PostTextarea';
 
 interface Props {
 	thought: {
@@ -26,17 +28,22 @@ interface Props {
 		createdAt: string;
 	};
 	isAdmin: boolean;
+	isBlocked: boolean;
 	onDelete: (id: number) => void;
+	onEdit: (id: number, content: string) => void;
 }
+
+// Regular expression to identify links in the paragraph and capture the link text and URL
+const linkRegex = /(?:(?:https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/gi;
 
 const Post = (props: Props) => {
 	const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 	const [deletingPost, setDeletingPost] = useState<boolean>(false);
+	const [editModeEnabled, setEditModeEnabled] = useState<boolean>(false);
+	const [editingPost, setEditingPost] = useState<boolean>(false);
+	const [editedPost, setEditedPost] = useState<string>('');
 
 	const paragraphs = props.thought.content.split('\n'); // Split content into paragraphs
-
-	// Regular expression to identify links in the paragraph and capture the link text and URL
-	const linkRegex = /(?:(?:https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/gi;
 
 	// Function to replace links with anchor tags
 	const renderParagraphWithLinks = (paragraph: string): React.JSX.Element => {
@@ -86,6 +93,7 @@ const Post = (props: Props) => {
 		}
 	};
 
+	// Function to delete a post
 	const deletePost = async (): Promise<void> => {
 		setDeletingPost(true);
 		setShowDeleteModal(false);
@@ -102,6 +110,31 @@ const Post = (props: Props) => {
 			setDeletingPost(false);
 		}
 	};
+
+	// Function to edit a post
+	const editPost = async (): Promise<void> => {
+		setEditingPost(true);
+
+		try {
+			const response = await requests.thoughts.editThought({
+				id: props.thought.id,
+				content: editedPost,
+			});
+
+			if (response.data.success) {
+				props.onEdit(props.thought.id, editedPost);
+			}
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setEditingPost(false);
+			setEditModeEnabled(false);
+		}
+	};
+
+	useEffect(() => {
+		setEditedPost(props.thought.content);
+	}, [editModeEnabled, props.thought.content]);
 
 	return (
 		<div id={`post-${props.thought.id}`} className="mb-16">
@@ -124,10 +157,15 @@ const Post = (props: Props) => {
 				{/* Actions - Edit / Delete */}
 				<div className="flex items-center justify-end flex-1">
 					<div className="flex flex-row items-center justify-end">
-						{props.thought.isAuthor && (
-							<button className="text-sm text-gray-500 hover:text-gray-700">
+						{/* Edit Post */}
+						{props.thought.isAuthor && !props.isBlocked && (
+							<button
+								className="text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+								disabled={deletingPost || editingPost}
+								onClick={() => setEditModeEnabled(!editModeEnabled)}
+							>
 								<LazyLoadImage
-									src={EditIcon}
+									src={editModeEnabled ? CancelIcon : EditIcon}
 									effect="opacity"
 									alt="Edit Icon"
 									width={20}
@@ -136,10 +174,14 @@ const Post = (props: Props) => {
 							</button>
 						)}
 
+						{/* Delete Post */}
 						{(props.thought.isAuthor || props.isAdmin) && (
 							<button
-								className="ml-4 text-sm text-gray-500 hover:text-gray-700"
-								onClick={() => setShowDeleteModal(true)}
+								className="ml-4 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+								disabled={editModeEnabled}
+								onClick={() => {
+									if (!deletingPost) setShowDeleteModal(true);
+								}}
 							>
 								<LazyLoadImage
 									src={deletingPost ? LoadingIcon : DeleteIcon}
@@ -157,13 +199,28 @@ const Post = (props: Props) => {
 
 			{/* Second Row */}
 			<div className="mt-4">
-				{paragraphs.map(paragraph => {
-					if (paragraph.trim() === '') {
-						return <br key={crypto.randomUUID()} />;
-					} else {
-						return renderParagraphWithLinks(paragraph);
-					}
-				})}
+				{!editModeEnabled ? (
+					paragraphs.map(paragraph => {
+						if (paragraph.trim() === '') {
+							return <br key={crypto.randomUUID()} />;
+						} else {
+							return renderParagraphWithLinks(paragraph);
+						}
+					})
+				) : (
+					<PostTextArea
+						id={`post-${props.thought.id}-edit`}
+						labelText="Edit Post"
+						placeholder="What are you thinking about?"
+						buttonText="Apply Changes"
+						buttonDisabled={editedPost.trim() === props.thought.content.trim()}
+						maxLength={1000}
+						loading={editingPost}
+						value={editedPost}
+						onChange={setEditedPost}
+						onSubmit={editPost}
+					/>
+				)}
 			</div>
 
 			<ConfirmActionModal

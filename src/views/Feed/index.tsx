@@ -23,7 +23,6 @@ const options = [
 
 function getFilterFromLocalStorage(): Filter {
 	const filter = getLocalStorage('feedThoughtFilter');
-
 	return options.some(option => option.value === filter) ? (filter as Filter) : 'recent';
 }
 
@@ -128,6 +127,29 @@ const Feed = () => {
 		);
 	};
 
+	const editThoughtFromList = (thoughtId: number, newContent: string) => {
+		// Edit the thought from the recent thoughts
+		thoughtsContext.recent.setThoughts(
+			thoughtsContext.recent.thoughts.map(thought =>
+				thought.id === thoughtId ? { ...thought, content: newContent } : thought,
+			),
+		);
+
+		// Edit the thought from the popular thoughts
+		thoughtsContext.popular.setThoughts(
+			thoughtsContext.popular.thoughts.map(thought =>
+				thought.id === thoughtId ? { ...thought, content: newContent } : thought,
+			),
+		);
+
+		// Edit the thought from the following thoughts
+		thoughtsContext.following.setThoughts(
+			thoughtsContext.following.thoughts.map(thought =>
+				thought.id === thoughtId ? { ...thought, content: newContent } : thought,
+			),
+		);
+	};
+
 	// Attach scroll event listener to load more thoughts when reaching the bottom
 	useEffect(() => {
 		// Fetch initial thoughts on the first render
@@ -187,8 +209,10 @@ const Feed = () => {
 						<Post
 							key={thought.id}
 							isAdmin={loggedUser?.isAdmin ?? false}
+							isBlocked={loggedUser?.isBlocked ?? false}
 							thought={thought}
 							onDelete={deleteThoughtFromList}
+							onEdit={editThoughtFromList}
 						/>
 					</Reveal>
 				))}
