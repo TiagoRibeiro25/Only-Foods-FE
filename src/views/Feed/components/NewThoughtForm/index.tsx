@@ -54,6 +54,7 @@ const NewThoughtForm = (props: NewThoughtFormProps) => {
 				id="new-thought-textarea"
 				labelText="New Thought"
 				placeholder="Share your current thought with the world..."
+				buttonText="Post Thought"
 				maxLength={1000}
 				value={newThoughtText}
 				loading={loading}

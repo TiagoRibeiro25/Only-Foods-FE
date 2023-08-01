@@ -8,6 +8,8 @@ interface PostTextAreaProps {
 	placeholder: string;
 	value: string;
 	loading: boolean;
+	buttonDisabled?: boolean;
+	buttonText?: string;
 	resizable?: boolean;
 	rows?: number;
 	cols?: number;
@@ -95,9 +97,9 @@ const PostTextArea = (props: PostTextAreaProps) => {
 						icon={props.loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"
 						iconAnimation="spin"
-						disabled={isButtonDisabled}
+						disabled={isButtonDisabled || props.buttonDisabled}
 					>
-						Post Thought
+						{props.buttonText ?? 'Post'}
 					</Button>
 				</div>
 			</div>
