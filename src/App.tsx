@@ -14,6 +14,8 @@ function App() {
 
 	// Function to fetch logged user data
 	const fetchLoggedUser = useCallback(async () => {
+		document.title = 'Only Foods - Loading...';
+
 		try {
 			const response = await requests.users.getLoggedUser();
 
@@ -27,13 +29,16 @@ function App() {
 			};
 
 			setLoggedUser(user ?? null);
+
+			document.title = 'Only Foods';
 		} catch (error) {
 			console.log(error);
 			setLoggedUser(null);
 			setError(true);
+			document.title = 'Only Foods - Error';
+		} finally {
+			setLoading(false);
 		}
-
-		setLoading(false);
 	}, [setLoggedUser]);
 
 	// Check if the user is logged in by sending a request to the server
