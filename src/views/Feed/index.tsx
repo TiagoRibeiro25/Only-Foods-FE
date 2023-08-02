@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import requests from '../../api/requests';
-import LoadingIcon from '../../assets/icons/loading.svg';
 import Post from '../../components/Post';
 import Reveal from '../../components/Reveal';
 import Select from '../../components/Select';
@@ -8,6 +7,7 @@ import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
 import ErrorOccurred from './components/ErrorOccurred';
+import Loading from './components/Loading';
 import NewThoughtForm, { NewThought } from './components/NewThoughtForm';
 import NoThoughtsFound from './components/NoThoughtsFound';
 import ReachedEnd from './components/ReachedEnd';
@@ -233,17 +233,7 @@ const Feed = () => {
 						/>
 					</Reveal>
 				))}
-				{isLoading && (
-					<div className="flex items-center justify-center">
-						<img
-							src={LoadingIcon}
-							alt="Loading Icon"
-							className="ml-1 mr-2 animate-spin"
-							width={35}
-							height={35}
-						/>
-					</div>
-				)}
+				{isLoading && <Loading />}
 				{thoughtsContext[filter].reachedEnd && <ReachedEnd />}
 				{anErrorOccurred && thoughtsContext[filter].thoughts.length !== 0 && (
 					<ErrorOccurred />
