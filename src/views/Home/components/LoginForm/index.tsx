@@ -59,6 +59,7 @@ const LoginForm = () => {
 					type="email"
 					name="email"
 					id="email"
+					autoComplete="login-email"
 					required
 					disabled={loading}
 					value={email}
@@ -70,6 +71,7 @@ const LoginForm = () => {
 					type="password"
 					name="password"
 					id="password"
+					autoComplete="login-password"
 					required
 					disabled={loading}
 					value={password}
@@ -79,6 +81,7 @@ const LoginForm = () => {
 				<CheckBox
 					placeholder="Remember me"
 					id="remember-me"
+					name="remember-me"
 					disabled={loading}
 					onChange={value => setRememberMe(value)}
 				/>

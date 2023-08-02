@@ -59,6 +59,7 @@ const ForgotPasswordForm = () => {
 					type="email"
 					name="email"
 					id="email"
+					autoComplete="login-email"
 					required
 					disabled={loading}
 					value={email}

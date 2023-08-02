@@ -8,6 +8,7 @@ interface InputProps {
 	value: string;
 	required: boolean;
 	disabled?: boolean;
+	autoComplete?: string;
 	onChange: (value: string) => void;
 }
 
@@ -33,6 +34,7 @@ const Input = ({ ...props }: InputProps) => {
 				id={props.id}
 				className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-b-gray-900 peer"
 				placeholder=" "
+				autoComplete={props.autoComplete ?? 'off'}
 				required={props.required}
 				value={value}
 				onChange={handleChange}

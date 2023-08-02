@@ -76,6 +76,7 @@ const RegisterForm = () => {
 					type="text"
 					name="username"
 					id="username"
+					autoComplete="register-username"
 					required
 					disabled={loading}
 					value={username}
@@ -87,6 +88,7 @@ const RegisterForm = () => {
 					type="email"
 					name="email"
 					id="email"
+					autoComplete="register-email"
 					required
 					disabled={loading}
 					value={email}
@@ -100,6 +102,7 @@ const RegisterForm = () => {
 							type="password"
 							name="password"
 							id="password"
+							autoComplete="register-password"
 							required
 							disabled={loading}
 							value={password}
@@ -112,6 +115,7 @@ const RegisterForm = () => {
 							type="password"
 							name="confirm-password"
 							id="confirm-password"
+							autoComplete="register-password"
 							required
 							disabled={loading}
 							value={confirmPassword}
