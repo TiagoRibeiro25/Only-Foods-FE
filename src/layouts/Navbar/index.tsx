@@ -71,6 +71,7 @@ const Navbar = () => {
 					className="flex items-center"
 					onMouseEnter={toggleLogoHovered}
 					onMouseLeave={toggleLogoHovered}
+					onClick={() => window.scrollTo(0, 0)}
 				>
 					<img
 						src={isLogoHovered ? LogoHovered : Logo}
