@@ -232,7 +232,6 @@ const Post = (props: Props) => {
 					id={props.thought.id}
 					likes={props.thought.likes}
 					comments={props.thought.comments}
-					isAuthor={props.thought.isAuthor}
 					isLiked={props.thought.isLiked}
 					onLikeUpdate={props.onLikeUpdate}
 				/>

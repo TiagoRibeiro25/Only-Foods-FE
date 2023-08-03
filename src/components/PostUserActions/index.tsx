@@ -16,7 +16,6 @@ interface PostUserActionsProps {
 	id: number;
 	likes: number;
 	comments: number;
-	isAuthor: boolean;
 	isLiked: boolean;
 	onLikeUpdate: (id: number, newLikes: number, isLiked: boolean) => void;
 }
