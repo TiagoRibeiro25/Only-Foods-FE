@@ -5,6 +5,7 @@ import LoadingIcon from '../../../../assets/icons/loading.svg';
 import Button from '../../../../components/Button';
 import CheckBox from '../../../../components/CheckBox';
 import Input from '../../../../components/Input';
+import { ThoughtsContext } from '../../../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../../../contextProviders/UserContext';
 
 const LoginForm = () => {
@@ -12,6 +13,7 @@ const LoginForm = () => {
 	const navigate = useNavigate();
 
 	const { setLoggedUser } = useContext(UserContext);
+	const thoughtsContext = useContext(ThoughtsContext);
 
 	// Login Form State Management
 	const [email, setEmail] = useState<string>('');
@@ -37,6 +39,9 @@ const LoginForm = () => {
 			const response = await requests.users.login({ email, password, rememberMe });
 
 			if (response.data.success) {
+				// Reset all thoughts state
+				thoughtsContext.resetAllState();
+
 				setLoggedUser(response.data.data?.user ?? null);
 			} else {
 				setStatusMsg(response.data.message);
