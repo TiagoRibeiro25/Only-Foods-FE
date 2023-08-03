@@ -230,18 +230,24 @@ const Feed = () => {
 
 	return (
 		<div className="flex flex-col items-center max-w-3xl mx-auto mt-28">
-			<Reveal width="100%" animation="slide-top" delay={0.05}>
-				<NewThoughtForm onSubmit={handleNewThought} />
-			</Reveal>
+			{loggedUser && (
+				<Reveal width="100%" animation="slide-top" delay={0.05}>
+					<NewThoughtForm onSubmit={handleNewThought} />
+				</Reveal>
+			)}
 
 			{/* Filter Thoughts */}
-			<Reveal width="100%" animation="slide-left" delay={0.05}>
-				<div className="flex justify-end w-full mt-6">
+			<Reveal
+				width="100%"
+				animation={loggedUser ? 'slide-left' : 'slide-top'}
+				delay={0.05}
+			>
+				<div className={`flex justify-end w-full ${loggedUser ? 'mt-6' : 'mt-0'}`}>
 					<div className="w-40">
 						<Select
 							id="filter-thoughts"
 							labelText="Filter Thoughts"
-							options={options}
+							options={loggedUser ? options : options.slice(0, 2)}
 							value={filter}
 							onChange={e => setFilter(e.target.value as Filter)}
 						/>

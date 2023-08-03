@@ -24,7 +24,7 @@ const Navigation = () => {
 				path="/reset-password/:token"
 				element={!loggedUser ? <ResetPassword /> : <Navigate to="/404" replace />}
 			/>
-			<Route path="/feed" element={loggedUser ? <Feed /> : <Navigate to="/" replace />} />
+			<Route path="/feed" element={<Feed />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);

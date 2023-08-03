@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import requests from '../../api/requests';
@@ -8,6 +8,7 @@ import CopyIcon from '../../assets/icons/copy.svg';
 import LikeIcon from '../../assets/icons/like.svg';
 import LikedIcon from '../../assets/icons/liked.svg';
 import LoadingIcon from '../../assets/icons/loading.svg';
+import { UserContext } from '../../contextProviders/UserContext';
 import formatData from '../../utils/formatData';
 import Reveal from '../Reveal';
 
@@ -21,13 +22,18 @@ interface PostUserActionsProps {
 }
 
 const PostUserActions = (props: PostUserActionsProps) => {
+	const { loggedUser } = useContext(UserContext);
+
 	const [isCopied, setIsCopied] = useState<boolean>(false);
 	const [isLiked, setIsLiked] = useState<boolean>(props.isLiked);
 	const [liking, setLiking] = useState<boolean>(false);
 	const [likeIcon, setLikeIcon] = useState<string>(LikeIcon);
 
 	const handleLike = async (): Promise<void> => {
-		if (liking) return;
+		// If the user is not logged in or the like request is being processed, return
+		if (!loggedUser || liking) {
+			return;
+		}
 
 		setLiking(true);
 
@@ -100,7 +106,9 @@ const PostUserActions = (props: PostUserActionsProps) => {
 					src={likeIcon}
 					alt={'Like' + props.type}
 					effect="opacity"
-					className={`cursor-pointer hover:opacity-80 ${liking ? 'animate-spin' : ''}`}
+					className={`${liking ? 'animate-spin' : ''} ${
+						loggedUser ? 'cursor-pointer hover:opacity-80' : 'cursor-default'
+					}`}
 					width={22}
 					onClick={handleLike}
 				/>
