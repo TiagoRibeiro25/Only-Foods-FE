@@ -84,7 +84,7 @@ In order to run this project, you need to have installed
 * Nodejs
 * npm
 
-You also need to have this [API](https://github.com/TiagoRibeiro25/Only-Foods-FE) running locally.
+You also need to have this [API](https://github.com/TiagoRibeiro25/Only-Foods-BE) running locally.
 
 ### Installation
 
