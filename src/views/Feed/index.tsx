@@ -109,6 +109,7 @@ const Feed = () => {
 		const thought = {
 			id: newThought.id,
 			content: newThought.content,
+			edited: false,
 			author: {
 				id: newThought.authorId,
 				username: loggedUser?.username ?? '',
@@ -149,21 +150,27 @@ const Feed = () => {
 		// Edit the thought from the recent thoughts
 		thoughtsContext.recent.setThoughts(
 			thoughtsContext.recent.thoughts.map(thought =>
-				thought.id === thoughtId ? { ...thought, content: newContent } : thought,
+				thought.id === thoughtId
+					? { ...thought, content: newContent, edited: true }
+					: thought,
 			),
 		);
 
 		// Edit the thought from the popular thoughts
 		thoughtsContext.popular.setThoughts(
 			thoughtsContext.popular.thoughts.map(thought =>
-				thought.id === thoughtId ? { ...thought, content: newContent } : thought,
+				thought.id === thoughtId
+					? { ...thought, content: newContent, edited: true }
+					: thought,
 			),
 		);
 
 		// Edit the thought from the following thoughts
 		thoughtsContext.following.setThoughts(
 			thoughtsContext.following.thoughts.map(thought =>
-				thought.id === thoughtId ? { ...thought, content: newContent } : thought,
+				thought.id === thoughtId
+					? { ...thought, content: newContent, edited: true }
+					: thought,
 			),
 		);
 	};

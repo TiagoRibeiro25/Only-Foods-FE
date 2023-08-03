@@ -8,6 +8,7 @@ interface LocalRequestData extends ResponseData {
 		thoughts: {
 			id: number;
 			content: string;
+			edited: boolean;
 			author: {
 				id: number;
 				username: string;

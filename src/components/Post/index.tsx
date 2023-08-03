@@ -14,6 +14,7 @@ interface Props {
 	thought: {
 		id: number;
 		content: string;
+		edited: boolean;
 		author: {
 			id: number;
 			username: string;
@@ -158,7 +159,12 @@ const Post = (props: Props) => {
 							<span className="text-sm text-gray-500">(You)</span>
 						)}
 					</h3>
-					<p className="text-sm text-gray-500">{props.thought.createdAgo}</p>
+					<p className="text-sm text-gray-500">
+						{props.thought.createdAgo}{' '}
+						{props.thought.edited && (
+							<span className="text-sm text-gray-500">(edited)</span>
+						)}
+					</p>
 				</div>
 
 				{/* Actions - Edit / Delete */}

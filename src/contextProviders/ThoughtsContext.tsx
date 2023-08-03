@@ -3,6 +3,7 @@ import { createContext, useMemo, useState } from 'react';
 export interface Thought {
 	id: number;
 	content: string;
+	edited: boolean;
 	author: {
 		id: number;
 		username: string;
