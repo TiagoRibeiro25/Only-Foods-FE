@@ -9,6 +9,7 @@ import LikeIcon from '../../assets/icons/like.svg';
 import LikedIcon from '../../assets/icons/liked.svg';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import formatData from '../../utils/formatData';
+import Reveal from '../Reveal';
 
 interface PostUserActionsProps {
 	type: 'thought' | 'recipe';
@@ -50,16 +51,12 @@ const PostUserActions = (props: PostUserActionsProps) => {
 	};
 
 	const handleCopy = (): void => {
-		if (!isCopied) {
-			setIsCopied(true);
-			navigator.clipboard.writeText(
-				`${window.location.origin}/${props.type}/${props.id}`,
-			);
+		setIsCopied(true);
+		navigator.clipboard.writeText(`${window.location.origin}/${props.type}/${props.id}`);
 
-			setTimeout(() => {
-				setIsCopied(false);
-			}, 700);
-		}
+		setTimeout(() => {
+			setIsCopied(false);
+		}, 3000);
 	};
 
 	useEffect(() => {
@@ -74,14 +71,28 @@ const PostUserActions = (props: PostUserActionsProps) => {
 		<>
 			{/* Copy Link */}
 			<div className="flex items-center">
-				<LazyLoadImage
-					src={isCopied ? CopiedIcon : CopyIcon}
-					alt={'Copy' + props.type + 'Link'}
-					effect="opacity"
-					className="cursor-pointer hover:opacity-80"
-					width={20}
-					onClick={handleCopy}
-				/>
+				{isCopied ? (
+					<Reveal width="fit-content" animation="fade" delay={0} duration={0.7}>
+						<div className="flex items-center justify-center">
+							<LazyLoadImage
+								src={CopiedIcon}
+								alt={'Copy' + props.type + 'Link'}
+								effect="opacity"
+								className="cursor-pointer hover:opacity-80"
+								width={20}
+							/>
+						</div>
+					</Reveal>
+				) : (
+					<LazyLoadImage
+						src={CopyIcon}
+						alt={'Copy' + props.type + 'Link'}
+						effect="opacity"
+						className="cursor-pointer hover:opacity-80"
+						width={20}
+						onClick={handleCopy}
+					/>
+				)}
 			</div>
 
 			{/* Likes */}
