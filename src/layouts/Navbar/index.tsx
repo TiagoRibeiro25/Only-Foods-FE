@@ -83,33 +83,33 @@ const Navbar = () => {
 						Only Foods
 					</span>
 				</Link>
-				{loggedUser && (
-					<div className="relative flex items-center">
-						<Link
-							to="feed"
-							className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-								location.pathname === '/feed' && 'underline underline-offset-2'
-							}`}
-						>
-							Feed
-						</Link>
-						<Link
-							to="recipes"
-							className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-								location.pathname === '/recipes' && 'underline underline-offset-2'
-							}`}
-						>
-							Recipes
-						</Link>
-						<Link
-							to="search"
-							className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-								location.pathname === '/search' && 'underline underline-offset-2'
-							}`}
-						>
-							Search
-						</Link>
+				<div className="relative flex items-center">
+					<Link
+						to="feed"
+						className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
+							location.pathname === '/feed' && 'underline underline-offset-2'
+						}`}
+					>
+						Feed
+					</Link>
+					<Link
+						to="recipes"
+						className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
+							location.pathname === '/recipes' && 'underline underline-offset-2'
+						}`}
+					>
+						Recipes
+					</Link>
+					<Link
+						to="search"
+						className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
+							location.pathname === '/search' && 'underline underline-offset-2'
+						}`}
+					>
+						Search
+					</Link>
 
+					{loggedUser && (
 						<div className="relative" ref={menuRef}>
 							<button
 								type="button"
@@ -211,8 +211,8 @@ const Navbar = () => {
 								</div>
 							)}
 						</div>
-					</div>
-				)}
+					)}
+				</div>
 			</div>
 			<hr className="max-w-screen-xl mx-auto border-black border-opacity-50 border-1" />
 
