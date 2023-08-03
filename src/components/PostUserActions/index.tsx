@@ -113,7 +113,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 					/>
 				</Link>
 
-				{/* Like Count */}
+				{/* Comment Count */}
 				<span className="ml-1 text-sm font-semibold">
 					{formatData.comments(props.comments)}
 				</span>
