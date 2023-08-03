@@ -83,7 +83,7 @@ const PostTextArea = (props: PostTextAreaProps) => {
 						value={text}
 						onChange={handleChange}
 						required
-						style={{ minHeight: '7rem', maxHeight: '20rem' }}
+						style={{ minHeight: '7rem', maxHeight: '40rem' }}
 					></textarea>
 				</div>
 				<div className="flex items-center justify-between px-3 py-2 border-t">
