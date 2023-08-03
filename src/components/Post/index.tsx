@@ -8,6 +8,7 @@ import LoadingIcon from '../../assets/icons/loading.svg';
 import UserPlaceholderPicture from '../../assets/imgs/user.png';
 import ConfirmActionModal from '../ConfirmActionModal';
 import PostTextArea from '../PostTextarea';
+import PostUserActions from '../PostUserActions';
 
 interface Props {
 	thought: {
@@ -31,6 +32,7 @@ interface Props {
 	isBlocked: boolean;
 	onDelete: (id: number) => void;
 	onEdit: (id: number, content: string) => void;
+	onLikeUpdate: (id: number, newLikes: number, isLiked: boolean) => void;
 }
 
 // Regular expression to identify links in the paragraph and capture the link text and URL
@@ -198,7 +200,7 @@ const Post = (props: Props) => {
 			</div>
 
 			{/* Second Row */}
-			<div className="mt-4">
+			<div className="my-4">
 				{!editModeEnabled ? (
 					paragraphs.map(paragraph => {
 						if (paragraph.trim() === '') {
@@ -221,6 +223,19 @@ const Post = (props: Props) => {
 						onSubmit={editPost}
 					/>
 				)}
+			</div>
+
+			{/* Third Row */}
+			<div className="flex flex-row gap-3 mt-2">
+				<PostUserActions
+					type="thought"
+					id={props.thought.id}
+					likes={props.thought.likes}
+					comments={props.thought.comments}
+					isAuthor={props.thought.isAuthor}
+					isLiked={props.thought.isLiked}
+					onLikeUpdate={props.onLikeUpdate}
+				/>
 			</div>
 
 			<ConfirmActionModal

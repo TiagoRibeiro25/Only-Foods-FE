@@ -128,7 +128,7 @@ const Feed = () => {
 		thoughtsContext.recent.setThoughts([thought, ...thoughtsContext.recent.thoughts]);
 	};
 
-	const deleteThoughtFromList = (thoughtId: number) => {
+	const deleteThoughtFromList = (thoughtId: number): void => {
 		// Remove the thought from the recent thoughts
 		thoughtsContext.recent.setThoughts(
 			thoughtsContext.recent.thoughts.filter(thought => thought.id !== thoughtId),
@@ -145,7 +145,7 @@ const Feed = () => {
 		);
 	};
 
-	const editThoughtFromList = (thoughtId: number, newContent: string) => {
+	const editThoughtFromList = (thoughtId: number, newContent: string): void => {
 		// Edit the thought from the recent thoughts
 		thoughtsContext.recent.setThoughts(
 			thoughtsContext.recent.thoughts.map(thought =>
@@ -164,6 +164,29 @@ const Feed = () => {
 		thoughtsContext.following.setThoughts(
 			thoughtsContext.following.thoughts.map(thought =>
 				thought.id === thoughtId ? { ...thought, content: newContent } : thought,
+			),
+		);
+	};
+
+	const updateLikes = (thoughtId: number, newLikes: number, isLiked: boolean): void => {
+		// Update the thought from the recent thoughts
+		thoughtsContext.recent.setThoughts(
+			thoughtsContext.recent.thoughts.map(thought =>
+				thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought,
+			),
+		);
+
+		// Update the thought from the popular thoughts
+		thoughtsContext.popular.setThoughts(
+			thoughtsContext.popular.thoughts.map(thought =>
+				thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought,
+			),
+		);
+
+		// Update the thought from the following thoughts
+		thoughtsContext.following.setThoughts(
+			thoughtsContext.following.thoughts.map(thought =>
+				thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought,
 			),
 		);
 	};
@@ -230,6 +253,7 @@ const Feed = () => {
 							thought={thought}
 							onDelete={deleteThoughtFromList}
 							onEdit={editThoughtFromList}
+							onLikeUpdate={updateLikes}
 						/>
 					</Reveal>
 				))}
