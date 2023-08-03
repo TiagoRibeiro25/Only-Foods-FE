@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useLocation } from 'react-router-dom';
 import DiscussionIcon from '../../assets/icons/discussion.svg';
 import GroupIcon from '../../assets/icons/group.svg';
+import HamburgerIcon from '../../assets/icons/hamburger.svg';
+import PizzaIcon from '../../assets/icons/pizza.svg';
 import RecipeIcon from '../../assets/icons/recipe.svg';
 import ThoughtIcon from '../../assets/icons/thought.svg';
 import CustomizeIllustration from '../../assets/imgs/home_customize_picture.png';
@@ -19,6 +22,7 @@ import RegisterForm from './components/RegisterForm';
 
 const Home = () => {
 	const location = useLocation();
+	const [isExploreButtonHovered, setIsExploreButtonHovered] = useState<boolean>(false);
 
 	const renderForm = (): React.JSX.Element => {
 		const query = new URLSearchParams(location.search);
@@ -73,7 +77,7 @@ const Home = () => {
 				</p>
 			</Reveal>
 			<div className="flex flex-col mt-16 mb-10">
-				<Reveal width="100%" animation="slide-left">
+				<Reveal width="100%" animation="slide-right">
 					<div className="flex flex-col-reverse md:flex-row">
 						<div className="flex flex-col items-center justify-center w-full mt-10 md:w-1/2 md:pr-10 md:mt-0">
 							<h3 className="w-full mb-2 text-4xl font-bellefair text-start">
@@ -98,7 +102,7 @@ const Home = () => {
 						</div>
 					</div>
 				</Reveal>
-				<Reveal width="100%" animation="slide-right">
+				<Reveal width="100%" animation="slide-left">
 					<div className="flex flex-col mt-20 md:flex-row">
 						<div className="flex items-center justify-center w-full mt-10 md:w-1/2 md:mt-0">
 							<LazyLoadImage
@@ -128,7 +132,7 @@ const Home = () => {
 					</div>
 				</Reveal>
 
-				<Reveal width="100%" animation="slide-left">
+				<Reveal width="100%" animation="slide-right">
 					<div className="flex flex-col-reverse mt-16 md:flex-row">
 						<div className="flex flex-col items-center justify-center w-full mt-10 md:w-1/2 md:pr-10 md:mt-0">
 							<h3 className="w-full mb-2 text-4xl font-bellefair text-start">
@@ -258,12 +262,35 @@ const Home = () => {
 			<Reveal width="100%" animation="slide-bottom">
 				<div className="flex items-center justify-center w-full mb-10 mt-28 sm:mb-16 sm:mt-36">
 					<Link
-						to="/?form=register"
+						to="/feed"
 						type="button"
-						className="px-3 py-6 text-2xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md sm:text-3xl font-bellefair sm:px-16 hover:scale-105"
-						onClick={() => window.scrollTo(0, 0)}
+						className="flex items-center px-4 py-6 text-2xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md sm:text-3xl font-bellefair sm:px-16 hover:scale-105"
+						onMouseEnter={() => setIsExploreButtonHovered(true)}
+						onMouseLeave={() => setIsExploreButtonHovered(false)}
 					>
-						Join the Only Foods Community
+						<LazyLoadImage
+							src={PizzaIcon}
+							effect="opacity"
+							alt="Pizza Icon"
+							width={50}
+							height={50}
+							className={
+								'inline-block scale-75 sm:scale-100' +
+								(isExploreButtonHovered ? ' animate-spin' : '')
+							}
+						/>
+						<span className="text-center sm:mx-4">Start Exploring Now</span>
+						<LazyLoadImage
+							src={HamburgerIcon}
+							effect="opacity"
+							alt="Pizza Icon"
+							width={50}
+							height={50}
+							className={
+								'inline-block scale-75 sm:scale-100' +
+								(isExploreButtonHovered ? ' animate-spin' : '')
+							}
+						/>
 					</Link>
 				</div>
 			</Reveal>
