@@ -152,7 +152,12 @@ const Post = (props: Props) => {
 				/>
 
 				<div className="flex flex-col ml-4">
-					<h3 className="text-lg font-semibold">{props.thought.author.username}</h3>
+					<h3 className="text-lg font-semibold">
+						{props.thought.author.username}{' '}
+						{props.thought.isAuthor && (
+							<span className="text-sm text-gray-500">(You)</span>
+						)}
+					</h3>
 					<p className="text-sm text-gray-500">{props.thought.createdAgo}</p>
 				</div>
 
