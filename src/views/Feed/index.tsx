@@ -205,7 +205,7 @@ const Feed = () => {
 			</Reveal>
 
 			{/* Filter Thoughts */}
-			<Reveal width="100%" animation="slide-right" delay={0.05}>
+			<Reveal width="100%" animation="slide-left" delay={0.05}>
 				<div className="flex justify-end w-full mt-6">
 					<div className="w-40">
 						<Select
