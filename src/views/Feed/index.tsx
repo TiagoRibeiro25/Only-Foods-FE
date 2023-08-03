@@ -20,9 +20,13 @@ const options = [
 	{ text: 'Following', value: 'following' },
 ];
 
-function getFilterFromLocalStorage(): Filter {
+function getFilterFromLocalStorage(isUserLogged: boolean): Filter {
 	const filter = getLocalStorage('feedThoughtFilter');
-	return options.some(option => option.value === filter) ? (filter as Filter) : 'recent';
+	const result = options.some(option => option.value === filter)
+		? (filter as Filter)
+		: 'recent';
+
+	return result === 'following' && !isUserLogged ? 'recent' : result;
 }
 
 // TODO: Refactor this component
@@ -32,7 +36,9 @@ const Feed = () => {
 	const thoughtsContext = useContext(ThoughtsContext);
 	const { loggedUser } = useContext(UserContext);
 
-	const [filter, setFilter] = useState<Filter>(getFilterFromLocalStorage());
+	const [filter, setFilter] = useState<Filter>(
+		getFilterFromLocalStorage(loggedUser ? true : false),
+	);
 	const [isLoading, setIsLoading] = useState(false);
 	const [anErrorOccurred, setAnErrorOccurred] = useState(false);
 
