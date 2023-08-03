@@ -178,9 +178,31 @@ const Navbar = () => {
 											</Link>
 										</li>
 										<li>
+											<Link
+												to="settings"
+												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+											>
+												Settings
+											</Link>
+										</li>
+										{loggedUser.isAdmin && (
+											<li>
+												<Link
+													to="admin"
+													className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+												>
+													Admin Panel
+												</Link>
+											</li>
+										)}
+
+										<li>
 											<button
 												className="block w-full px-4 py-2 text-sm text-gray-700 text-start hover:bg-gray-100"
-												onClick={() => setShowModal(true)}
+												onClick={() => {
+													setShowModal(true);
+													setMenuOpen(false);
+												}}
 											>
 												Sign out
 											</button>
