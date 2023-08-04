@@ -219,9 +219,7 @@ const Navbar = () => {
 					) : (
 						<Link
 							to="/?form=register"
-							className={`mr-4 font-semibold text-gray-900 text-md hover:text-gray-700 ${
-								location.pathname === '/create-account' && 'underline underline-offset-2'
-							}`}
+							className="mr-4 font-semibold text-gray-900 text-md hover:text-gray-700 hover:underline"
 						>
 							{location.pathname === '/' ? '' : 'Create Account'}
 						</Link>
