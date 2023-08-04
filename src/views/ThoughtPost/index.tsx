@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import requests from '../../api/requests';
+import Comments from '../../components/Comments';
 import Loading from '../../components/Loading';
 import Reveal from '../../components/Reveal';
 import Thought from '../../components/Thought';
@@ -96,7 +97,7 @@ const ThoughtPost = () => {
 			</div>
 
 			{/* Comments */}
-			<div className="flex justify-center w-full">{}</div>
+			{!isLoading && thought && <Comments type="thought" id={thought.id ?? 0} />}
 		</div>
 	);
 };
