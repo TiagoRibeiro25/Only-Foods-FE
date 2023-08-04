@@ -39,6 +39,14 @@ const LoginForm = () => {
 			const response = await requests.users.login({ email, password, rememberMe });
 
 			if (response.data.success) {
+				// Check if the user has third-party cookies enabled by sending a request to the server
+				const areThirdPartyCookiesEnabled = await requests.users.getLoggedUser();
+				if (!areThirdPartyCookiesEnabled.data.success) {
+					setStatusMsg('You need to enable third-party cookies to use this website.');
+					setLoading(false);
+					return;
+				}
+
 				// Reset all thoughts state
 				thoughtsContext.resetAllState();
 
@@ -49,9 +57,9 @@ const LoginForm = () => {
 		} catch (error) {
 			console.log(error);
 			setStatusMsg('An error occurred. Please try again.');
+		} finally {
+			setLoading(false);
 		}
-
-		setLoading(false);
 	};
 
 	return (
