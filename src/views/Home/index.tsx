@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useLocation } from 'react-router-dom';
 import DiscussionIcon from '../../assets/icons/discussion.svg';
@@ -22,7 +21,6 @@ import RegisterForm from './components/RegisterForm';
 
 const Home = () => {
 	const location = useLocation();
-	const [isExploreButtonHovered, setIsExploreButtonHovered] = useState<boolean>(false);
 
 	const renderForm = (): React.JSX.Element => {
 		const query = new URLSearchParams(location.search);
@@ -265,8 +263,6 @@ const Home = () => {
 						to="/feed"
 						type="button"
 						className="flex items-center px-4 py-6 text-2xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md sm:text-3xl font-bellefair sm:px-16 hover:scale-105"
-						onMouseEnter={() => setIsExploreButtonHovered(true)}
-						onMouseLeave={() => setIsExploreButtonHovered(false)}
 					>
 						<LazyLoadImage
 							src={PizzaIcon}
@@ -274,10 +270,7 @@ const Home = () => {
 							alt="Pizza Icon"
 							width={50}
 							height={50}
-							className={
-								'inline-block scale-75 sm:scale-100' +
-								(isExploreButtonHovered ? ' animate-spin' : '')
-							}
+							className="inline-block pt-1 scale-75 sm:scale-100 animate-bounce"
 						/>
 						<span className="text-center sm:mx-4">Start Exploring Now</span>
 						<LazyLoadImage
@@ -286,10 +279,7 @@ const Home = () => {
 							alt="Pizza Icon"
 							width={50}
 							height={50}
-							className={
-								'inline-block scale-75 sm:scale-100' +
-								(isExploreButtonHovered ? ' animate-spin' : '')
-							}
+							className="inline-block pt-1 scale-75 sm:scale-100 animate-bounce"
 						/>
 					</Link>
 				</div>
