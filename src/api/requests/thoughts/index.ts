@@ -1,3 +1,4 @@
+import addComment from './addComment';
 import addThought from './addThought';
 import deleteThought from './deleteThought';
 import editThought from './editThought';
@@ -12,4 +13,5 @@ export default {
 	deleteThought,
 	editThought,
 	handleLike,
+	addComment,
 };
