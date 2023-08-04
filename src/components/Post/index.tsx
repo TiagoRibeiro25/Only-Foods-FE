@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link } from 'react-router-dom';
 import requests from '../../api/requests';
 import CancelIcon from '../../assets/icons/cancel.svg';
 import DeleteIcon from '../../assets/icons/delete.svg';
@@ -143,18 +144,27 @@ const Post = (props: Props) => {
 		<div id={`post-${props.thought.id}`} className="mb-16">
 			{/* First Row */}
 			<div className="flex flex-row">
-				<LazyLoadImage
-					className="rounded-full"
-					src={props.thought.author.userImage?.cloudinaryImage ?? UserPlaceholderPicture}
-					placeholderSrc={UserPlaceholderPicture}
-					alt="User Profile Picture"
-					effect="opacity"
-					style={{ width: '55px', height: '55px' }}
-				/>
+				<Link to={`/profile/${props.thought.isAuthor ? 'me' : props.thought.author.id}`}>
+					<LazyLoadImage
+						className="rounded-full"
+						src={
+							props.thought.author.userImage?.cloudinaryImage ?? UserPlaceholderPicture
+						}
+						placeholderSrc={UserPlaceholderPicture}
+						alt="User Profile Picture"
+						effect="opacity"
+						style={{ width: '55px', height: '55px' }}
+					/>
+				</Link>
 
 				<div className="flex flex-col ml-4">
 					<h3 className="text-lg font-semibold">
-						{props.thought.author.username}{' '}
+						<Link
+							to={`/profile/${props.thought.isAuthor ? 'me' : props.thought.author.id}`}
+							className="hover:underline"
+						>
+							{props.thought.author.username}{' '}
+						</Link>
 						{props.thought.isAuthor && (
 							<span className="text-sm text-gray-500">(You)</span>
 						)}
@@ -209,7 +219,6 @@ const Post = (props: Props) => {
 					</div>
 				</div>
 			</div>
-
 			{/* Second Row */}
 			<div className="my-4">
 				{!editModeEnabled ? (
@@ -235,7 +244,6 @@ const Post = (props: Props) => {
 					/>
 				)}
 			</div>
-
 			{/* Third Row */}
 			<div className="flex flex-row gap-3 mt-2">
 				<PostUserActions
@@ -247,7 +255,6 @@ const Post = (props: Props) => {
 					onLikeUpdate={props.onLikeUpdate}
 				/>
 			</div>
-
 			<ConfirmActionModal
 				id="confirm-delete-post"
 				message="Are you sure you want to delete this post?"
