@@ -38,7 +38,7 @@ const Home = () => {
 
 	return (
 		<>
-			<h1 className="mb-2 text-4xl text-center font-bellefair sm:mt-36">
+			<h1 className="mt-24 mb-2 text-4xl text-center font-bellefair sm:mt-36">
 				Discover, Connect, and Share the Joy of Food!
 			</h1>
 			<p className="text-center">
@@ -260,7 +260,7 @@ const Home = () => {
 			<Reveal width="100%" animation="slide-bottom">
 				<div className="flex items-center justify-center w-full mb-10 mt-28 sm:mb-16 sm:mt-36">
 					<Link
-						to="/feed"
+						to="/explore"
 						type="button"
 						className="flex items-center px-4 py-6 text-2xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md sm:text-3xl font-bellefair sm:px-16 hover:scale-105"
 					>
