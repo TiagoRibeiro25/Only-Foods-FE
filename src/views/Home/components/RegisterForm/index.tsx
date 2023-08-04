@@ -15,7 +15,7 @@ const RegisterForm = () => {
 	const [password, setPassword] = useState<string>('');
 	const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
+	const [statusMsg, setStatusMsg] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const editUrlQuery = (): void => {
@@ -27,7 +27,7 @@ const RegisterForm = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 		setLoading(true);
-		setStatusMsg('Error Message');
+		setStatusMsg('');
 
 		if (password !== confirmPassword) {
 			setLoading(false);
@@ -127,7 +127,7 @@ const RegisterForm = () => {
 				<div className="w-full mt-1 mb-5 text-center">
 					<p
 						className="text-sm text-gray-950"
-						style={{ visibility: statusMsg === 'Error Message' ? 'hidden' : 'visible' }}
+						style={{ visibility: statusMsg === '' ? 'hidden' : 'visible' }}
 					>
 						{statusMsg}
 					</p>

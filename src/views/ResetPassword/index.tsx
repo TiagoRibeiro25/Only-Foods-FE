@@ -12,7 +12,7 @@ const ResetPassword = () => {
 
 	const [password, setPassword] = useState<string>('');
 	const [confirmPassword, setConfirmPassword] = useState<string>('');
-	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
+	const [statusMsg, setStatusMsg] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -81,7 +81,7 @@ const ResetPassword = () => {
 				<div className="w-full my-3 text-center">
 					<p
 						className="text-sm text-gray-950"
-						style={{ visibility: statusMsg === 'Error Message' ? 'hidden' : 'visible' }}
+						style={{ visibility: statusMsg === '' ? 'hidden' : 'visible' }}
 					>
 						{statusMsg}
 					</p>

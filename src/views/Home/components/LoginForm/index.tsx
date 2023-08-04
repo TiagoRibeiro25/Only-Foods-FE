@@ -21,7 +21,7 @@ const LoginForm = () => {
 	const [rememberMe, setRememberMe] = useState<boolean>(false);
 
 	// API Request State Management
-	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
+	const [statusMsg, setStatusMsg] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const editUrlQuery = (value: 'register' | 'forgotPassword'): void => {
@@ -33,7 +33,7 @@ const LoginForm = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 		setLoading(true);
-		setStatusMsg('Error Message');
+		setStatusMsg('');
 
 		try {
 			const response = await requests.users.login({ email, password, rememberMe });
@@ -102,7 +102,7 @@ const LoginForm = () => {
 				<div className="w-full my-5 text-center">
 					<p
 						className="text-sm text-gray-950"
-						style={{ visibility: statusMsg === 'Error Message' ? 'hidden' : 'visible' }}
+						style={{ visibility: statusMsg === '' ? 'hidden' : 'visible' }}
 					>
 						{statusMsg}
 					</p>

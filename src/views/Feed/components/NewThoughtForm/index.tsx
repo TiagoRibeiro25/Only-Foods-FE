@@ -17,11 +17,11 @@ interface NewThoughtFormProps {
 const NewThoughtForm = (props: NewThoughtFormProps) => {
 	const [newThoughtText, setNewThoughtText] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
-	const [statusMsg, setStatusMsg] = useState('Error Message');
+	const [statusMsg, setStatusMsg] = useState('');
 
 	const handleNewPost = async (): Promise<void> => {
 		setLoading(true);
-		setStatusMsg('Error Message');
+		setStatusMsg('');
 
 		try {
 			const response = await requests.thoughts.addThought({
@@ -42,7 +42,7 @@ const NewThoughtForm = (props: NewThoughtFormProps) => {
 
 			// Hide status message and clear the textarea input after 5 seconds
 			setTimeout(() => {
-				setStatusMsg('Error Message');
+				setStatusMsg('');
 			}, 5000);
 		}
 	};
@@ -66,7 +66,7 @@ const NewThoughtForm = (props: NewThoughtFormProps) => {
 			<div className="w-full my-3 text-center">
 				<p
 					className="text-sm text-gray-950"
-					style={{ visibility: statusMsg === 'Error Message' ? 'hidden' : 'visible' }}
+					style={{ visibility: statusMsg === '' ? 'hidden' : 'visible' }}
 				>
 					{statusMsg}
 				</p>

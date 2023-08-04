@@ -10,7 +10,7 @@ const ForgotPasswordForm = () => {
 	const navigate: NavigateFunction = useNavigate();
 
 	const [email, setEmail] = useState<string>('');
-	const [statusMsg, setStatusMsg] = useState<string>('Error Message');
+	const [statusMsg, setStatusMsg] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const editUrlQuery = (): void => {
@@ -23,7 +23,7 @@ const ForgotPasswordForm = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 		setLoading(true);
-		setStatusMsg('Error Message');
+		setStatusMsg('');
 
 		try {
 			const response = await requests.users.forgotPassword(email);
@@ -69,7 +69,7 @@ const ForgotPasswordForm = () => {
 				<div className="w-full mt-12 mb-10 text-center">
 					<p
 						className="text-sm text-gray-950"
-						style={{ visibility: statusMsg === 'Error Message' ? 'hidden' : 'visible' }}
+						style={{ visibility: statusMsg === '' ? 'hidden' : 'visible' }}
 					>
 						{statusMsg}
 					</p>
