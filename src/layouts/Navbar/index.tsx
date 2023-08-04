@@ -84,133 +84,147 @@ const Navbar = () => {
 					</span>
 				</Link>
 				<div className="relative flex items-center">
-					<Link
-						to="feed"
-						className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-							location.pathname === '/feed' && 'underline underline-offset-2'
-						}`}
-					>
-						Feed
-					</Link>
-					<Link
-						to="recipes"
-						className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-							location.pathname === '/recipes' && 'underline underline-offset-2'
-						}`}
-					>
-						Recipes
-					</Link>
-					<Link
-						to="search"
-						className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-							location.pathname === '/search' && 'underline underline-offset-2'
-						}`}
-					>
-						Search
-					</Link>
-
-					{loggedUser && (
-						<div className="relative" ref={menuRef}>
-							<button
-								type="button"
-								className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
-								id="user-menu-button"
-								aria-expanded={isMenuOpen}
-								onClick={toggleMenu}
+					{loggedUser ? (
+						<>
+							<Link
+								to="feed"
+								className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
+									location.pathname === '/feed' && 'underline underline-offset-2'
+								}`}
 							>
-								<span className="sr-only">Open user menu</span>
-								<img
-									className="w-8 h-8 rounded-full"
-									src={loggedUser.picture ?? UserNoPicture}
-									alt="user photo"
-								/>
-							</button>
-							{isMenuOpen && (
-								<div
-									className="absolute right-0 z-50 w-48 mt-2 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow bg-opacity-70 backdrop-filter backdrop-blur-lg"
-									id="user-dropdown"
+								Feed
+							</Link>
+							<Link
+								to="recipes"
+								className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
+									location.pathname === '/recipes' && 'underline underline-offset-2'
+								}`}
+							>
+								Recipes
+							</Link>
+							<Link
+								to="search"
+								className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
+									location.pathname === '/search' && 'underline underline-offset-2'
+								}`}
+							>
+								Search
+							</Link>
+
+							<div className="relative" ref={menuRef}>
+								<button
+									type="button"
+									className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
+									id="user-menu-button"
+									aria-expanded={isMenuOpen}
+									onClick={toggleMenu}
 								>
-									<div className="px-4 py-3">
-										<span className="block text-sm text-gray-900">
-											{loggedUser.username}
-										</span>
-										<span className="block text-sm text-gray-500 truncate">
-											{loggedUser.email}
-										</span>
-									</div>
-									<ul className="block py-2 md:hidden" aria-labelledby="user-menu-button">
-										<li>
-											<Link
-												to="feed"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-											>
-												Feed
-											</Link>
-											<Link
-												to="recipes"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-											>
-												Recipes
-											</Link>
-											<Link
-												to="search"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-											>
-												Search
-											</Link>
-										</li>
-									</ul>
-									<ul className="py-2" aria-labelledby="user-menu-button">
-										<li>
-											<Link
-												to="profile"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-											>
-												Profile
-											</Link>
-										</li>
-										<li>
-											<Link
-												to="messages"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-											>
-												Messages
-											</Link>
-										</li>
-										<li>
-											<Link
-												to="settings"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-											>
-												Settings
-											</Link>
-										</li>
-										{loggedUser.isAdmin && (
+									<span className="sr-only">Open user menu</span>
+									<img
+										className="w-8 h-8 rounded-full"
+										src={loggedUser.picture ?? UserNoPicture}
+										alt="user photo"
+									/>
+								</button>
+								{isMenuOpen && (
+									<div
+										className="absolute right-0 z-50 w-48 mt-2 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow bg-opacity-70 backdrop-filter backdrop-blur-lg"
+										id="user-dropdown"
+									>
+										<div className="px-4 py-3">
+											<span className="block text-sm text-gray-900">
+												{loggedUser.username}
+											</span>
+											<span className="block text-sm text-gray-500 truncate">
+												{loggedUser.email}
+											</span>
+										</div>
+										<ul
+											className="block py-2 md:hidden"
+											aria-labelledby="user-menu-button"
+										>
 											<li>
 												<Link
-													to="admin"
+													to="feed"
 													className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 												>
-													Admin Panel
+													Feed
+												</Link>
+												<Link
+													to="recipes"
+													className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+												>
+													Recipes
+												</Link>
+												<Link
+													to="search"
+													className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+												>
+													Search
 												</Link>
 											</li>
-										)}
+										</ul>
+										<ul className="py-2" aria-labelledby="user-menu-button">
+											<li>
+												<Link
+													to="profile"
+													className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+												>
+													Profile
+												</Link>
+											</li>
+											<li>
+												<Link
+													to="messages"
+													className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+												>
+													Messages
+												</Link>
+											</li>
+											<li>
+												<Link
+													to="settings"
+													className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+												>
+													Settings
+												</Link>
+											</li>
+											{loggedUser.isAdmin && (
+												<li>
+													<Link
+														to="admin"
+														className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+													>
+														Admin Panel
+													</Link>
+												</li>
+											)}
 
-										<li>
-											<button
-												className="block w-full px-4 py-2 text-sm text-gray-700 text-start hover:bg-gray-100"
-												onClick={() => {
-													setShowModal(true);
-													setMenuOpen(false);
-												}}
-											>
-												Sign out
-											</button>
-										</li>
-									</ul>
-								</div>
-							)}
-						</div>
+											<li>
+												<button
+													className="block w-full px-4 py-2 text-sm text-gray-700 text-start hover:bg-gray-100"
+													onClick={() => {
+														setShowModal(true);
+														setMenuOpen(false);
+													}}
+												>
+													Sign out
+												</button>
+											</li>
+										</ul>
+									</div>
+								)}
+							</div>
+						</>
+					) : (
+						<Link
+							to="/?form=register"
+							className={`mr-4 font-semibold text-gray-900 text-md hover:text-gray-700 ${
+								location.pathname === '/create-account' && 'underline underline-offset-2'
+							}`}
+						>
+							Create Account
+						</Link>
 					)}
 				</div>
 			</div>
