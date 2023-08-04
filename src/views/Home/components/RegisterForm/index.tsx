@@ -57,7 +57,7 @@ const RegisterForm = () => {
 
 			setStatusMsg(response.data.message);
 		} catch (error) {
-			console.error(error);
+			console.log(error);
 			setStatusMsg('An error occurred. Please try again.');
 		}
 
