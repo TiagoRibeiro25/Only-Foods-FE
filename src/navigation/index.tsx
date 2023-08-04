@@ -6,11 +6,13 @@ import Feed from '../views/Feed';
 import Home from '../views/Home';
 import NotFound from '../views/NotFound';
 import ResetPassword from '../views/ResetPassword';
+import ThoughtPost from '../views/ThoughtPost';
 
 const Navigation = () => {
 	const { loggedUser } = useContext(UserContext);
 	const location = useLocation();
 
+	// Scroll to top on route change
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [location.pathname]);
@@ -27,6 +29,7 @@ const Navigation = () => {
 			/>
 			<Route path="/explore" element={<Explore />} />
 			<Route path="/feed" element={<Feed />} />
+			<Route path="/thought/:id" element={<ThoughtPost />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);

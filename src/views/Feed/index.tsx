@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import requests from '../../api/requests';
+import Loading from '../../components/Loading';
 import Post from '../../components/Post';
 import Reveal from '../../components/Reveal';
 import Select from '../../components/Select';
@@ -7,7 +8,6 @@ import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
 import ErrorOccurred from './components/ErrorOccurred';
-import Loading from './components/Loading';
 import NewThoughtForm, { NewThought } from './components/NewThoughtForm';
 import NoThoughtsFound from './components/NoThoughtsFound';
 import ReachedEnd from './components/ReachedEnd';
