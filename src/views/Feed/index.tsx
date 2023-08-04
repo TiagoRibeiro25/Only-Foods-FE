@@ -37,8 +37,8 @@ const Feed = () => {
 	const { loggedUser } = useContext(UserContext);
 
 	const [filter, setFilter] = useState<Filter>(getFilterFromLocalStorage(!!loggedUser));
-	const [isLoading, setIsLoading] = useState(false);
-	const [anErrorOccurred, setAnErrorOccurred] = useState(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [anErrorOccurred, setAnErrorOccurred] = useState<boolean>(false);
 
 	// Function to fetch more thoughts and update the state
 	const fetchMoreThoughts = useCallback(async () => {
