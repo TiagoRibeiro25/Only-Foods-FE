@@ -59,7 +59,7 @@ const Feed = () => {
 			if (response.data.success) {
 				const newThoughts = response.data.data?.thoughts ?? [];
 
-				// Check if there are duplicate thoughts,
+				// Check if there are duplicate thoughts
 				const duplicateThoughts = newThoughts.filter(newThought =>
 					thoughtsContext[filter].thoughts.some(thought => thought.id === newThought.id),
 				);
@@ -216,7 +216,7 @@ const Feed = () => {
 		const handleScroll = () => {
 			// When the user scrolls to the bottom (minus 200px), load more thoughts
 			if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-				debouncedFetchMoreThoughts(); // Call the debounced version instead
+				debouncedFetchMoreThoughts();
 			}
 		};
 
