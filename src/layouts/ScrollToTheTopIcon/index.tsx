@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const ScrollToTheTop = () => {
+const ScrollToTheTopIcon = () => {
 	const [showButton, setShowButton] = useState(false);
 
 	const handleScroll = () => setShowButton(window.scrollY > 700);
@@ -45,4 +45,4 @@ const ScrollToTheTop = () => {
 	);
 };
 
-export default ScrollToTheTop;
+export default ScrollToTheTopIcon;
