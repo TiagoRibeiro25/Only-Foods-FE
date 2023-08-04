@@ -36,9 +36,7 @@ const Feed = () => {
 	const thoughtsContext = useContext(ThoughtsContext);
 	const { loggedUser } = useContext(UserContext);
 
-	const [filter, setFilter] = useState<Filter>(
-		getFilterFromLocalStorage(loggedUser ? true : false),
-	);
+	const [filter, setFilter] = useState<Filter>(getFilterFromLocalStorage(!!loggedUser));
 	const [isLoading, setIsLoading] = useState(false);
 	const [anErrorOccurred, setAnErrorOccurred] = useState(false);
 
