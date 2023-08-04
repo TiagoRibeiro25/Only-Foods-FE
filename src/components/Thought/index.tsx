@@ -40,7 +40,7 @@ interface Props {
 // Regular expression to identify links in the paragraph and capture the link text and URL
 const linkRegex = /(?:(?:https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/gi;
 
-const Post = (props: Props) => {
+const Thought = (props: Props) => {
 	const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 	const [deletingPost, setDeletingPost] = useState<boolean>(false);
 	const [editModeEnabled, setEditModeEnabled] = useState<boolean>(false);
@@ -266,4 +266,4 @@ const Post = (props: Props) => {
 	);
 };
 
-export default Post;
+export default Thought;

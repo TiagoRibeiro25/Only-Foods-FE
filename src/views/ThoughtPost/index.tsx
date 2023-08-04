@@ -2,8 +2,8 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import requests from '../../api/requests';
 import Loading from '../../components/Loading';
-import Post from '../../components/Post';
 import Reveal from '../../components/Reveal';
+import Thought from '../../components/Thought';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 import ErrorOccurred from './components/ErrorOccurred';
@@ -73,7 +73,7 @@ const ThoughtPost = () => {
 				{isLoading && <Loading />}
 				{thought && !isLoading && (
 					<Reveal width="100%" animation="slide-right" delay={0.05}>
-						<Post
+						<Thought
 							isAdmin={loggedUser?.isAdmin ?? false}
 							isBlocked={loggedUser?.isBlocked ?? false}
 							thought={thought}

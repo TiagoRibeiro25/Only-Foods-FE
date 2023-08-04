@@ -1,9 +1,9 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import requests from '../../api/requests';
 import Loading from '../../components/Loading';
-import Post from '../../components/Post';
 import Reveal from '../../components/Reveal';
 import Select from '../../components/Select';
+import Thought from '../../components/Thought';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
@@ -261,11 +261,11 @@ const Feed = () => {
 				</div>
 			</Reveal>
 
-			{/* Posts (Thoughts) */}
+			{/* Thoughts */}
 			<div className="w-full mt-14">
 				{thoughtsContext[filter].thoughts.map(thought => (
 					<Reveal key={thought.id} width="100%" animation="slide-right" delay={0.05}>
-						<Post
+						<Thought
 							key={thought.id}
 							isAdmin={loggedUser?.isAdmin ?? false}
 							isBlocked={loggedUser?.isBlocked ?? false}
