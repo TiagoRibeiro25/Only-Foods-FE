@@ -223,7 +223,7 @@ const Navbar = () => {
 								location.pathname === '/create-account' && 'underline underline-offset-2'
 							}`}
 						>
-							Create Account
+							{location.pathname === '/' ? '' : 'Create Account'}
 						</Link>
 					)}
 				</div>
