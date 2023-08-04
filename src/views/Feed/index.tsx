@@ -221,10 +221,7 @@ const Feed = () => {
 		};
 
 		window.addEventListener('scroll', handleScroll);
-
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
+		return () => window.removeEventListener('scroll', handleScroll);
 	}, [anErrorOccurred, debouncedFetchMoreThoughts, filter, isLoading, thoughtsContext]);
 
 	useEffect(() => {
