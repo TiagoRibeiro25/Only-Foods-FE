@@ -9,7 +9,7 @@ import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 import ErrorOccurred from './components/ErrorOccurred';
 
-interface Thought {
+interface ThoughtI {
 	id: number;
 	content: string;
 	edited: boolean;
@@ -34,7 +34,7 @@ const ThoughtPost = () => {
 	const { loggedUser } = useContext(UserContext);
 	const thoughtsContext = useContext(ThoughtsContext);
 
-	const [thought, setThought] = useState<Thought>();
+	const [thought, setThought] = useState<ThoughtI>();
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
@@ -95,6 +95,9 @@ const ThoughtPost = () => {
 				)}
 				{errorOccurred && <ErrorOccurred />}
 			</div>
+
+			{/* Line separating the thought and the comments */}
+			{!loggedUser && <div className="w-full border-t border-gray-200"></div>}
 
 			{/* Comments */}
 			{!isLoading && thought && <Comments type="thought" id={thought.id ?? 0} />}

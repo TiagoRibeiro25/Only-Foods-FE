@@ -1,7 +1,10 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import requests from '../../api/requests';
 import { UserContext } from '../../contextProviders/UserContext';
+import ErrorOccurred from '../ErrorOccurred';
 import Loading from '../Loading';
+import NoItemsFound from '../NoItemsFound';
+import ReachedEnd from '../ReachedEnd';
 import Reveal from '../Reveal';
 import Comment from './components/Comment';
 import NewCommentForm, { NewComment } from './components/NewCommentForm';
@@ -11,14 +14,14 @@ interface CommentsProps {
 	id: number;
 }
 
-interface Comment extends NewComment {
+interface CommentI extends NewComment {
 	id: number;
 }
 
 const Comments = (props: CommentsProps) => {
 	const { loggedUser } = useContext(UserContext);
 
-	const [comments, setComments] = useState<Comment[]>([]);
+	const [comments, setComments] = useState<CommentI[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [reachedEnd, setReachedEnd] = useState<boolean>(false);
 	const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
@@ -72,6 +75,7 @@ const Comments = (props: CommentsProps) => {
 			}
 		} catch (error) {
 			console.log('Error fetching more comments:', error);
+			setAnErrorOccurred(true);
 		} finally {
 			setIsLoading(false);
 		}
@@ -91,12 +95,12 @@ const Comments = (props: CommentsProps) => {
 	]);
 
 	const handleNewComment = (newComment: NewComment): void => {
-		const comment: Comment = {
+		const comment: CommentI = {
 			id: comments.length > 1 ? comments[comments.length - 1].id + 1 : 1,
 			...newComment,
 		};
 
-		setComments(prevComments => [...prevComments, comment]);
+		setComments(prevComments => [comment, ...prevComments]);
 	};
 
 	// Attach scroll event listener to load more comments when the user reaches the bottom of the page
@@ -134,9 +138,16 @@ const Comments = (props: CommentsProps) => {
 					</Reveal>
 				))}
 				{isLoading && <Loading />}
-				{reachedEnd && <p>Reached End</p>}
-				{anErrorOccurred && comments.length !== 0 && <p>An error occurred</p>}
-				{!isLoading && comments.length === 0 && <p>No comments</p>}
+				{reachedEnd && <ReachedEnd />}
+				{anErrorOccurred && comments.length !== 0 && (
+					<ErrorOccurred text="An error occurred while fetching comments." />
+				)}
+				{!isLoading && comments.length === 0 && (
+					<NoItemsFound
+						warning="This thought has no comments yet."
+						message={loggedUser ? 'Be the one who starts the conversation.' : ''}
+					/>
+				)}
 			</div>
 		</section>
 	);
