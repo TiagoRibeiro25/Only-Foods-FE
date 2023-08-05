@@ -1,16 +1,16 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import requests from '../../api/requests';
+import ErrorOccurred from '../../components/ErrorOccurred';
 import Loading from '../../components/Loading';
+import NoItemsFound from '../../components/NoItemsFound';
+import ReachedEnd from '../../components/ReachedEnd';
 import Reveal from '../../components/Reveal';
 import Select from '../../components/Select';
 import Thought from '../../components/Thought';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
-import ErrorOccurred from './components/ErrorOccurred';
 import NewThoughtForm, { NewThought } from './components/NewThoughtForm';
-import NoThoughtsFound from './components/NoThoughtsFound';
-import ReachedEnd from './components/ReachedEnd';
 
 type Filter = 'recent' | 'popular' | 'following';
 
@@ -274,10 +274,13 @@ const Feed = () => {
 				{isLoading && <Loading />}
 				{thoughtsContext[filter].reachedEnd && <ReachedEnd />}
 				{anErrorOccurred && thoughtsContext[filter].thoughts.length !== 0 && (
-					<ErrorOccurred />
+					<ErrorOccurred text="An error occurred while fetching thoughts." />
 				)}
 				{!isLoading && thoughtsContext[filter].thoughts.length === 0 && (
-					<NoThoughtsFound />
+					<NoItemsFound
+						warning="No thoughts found."
+						message="Change the filter or add a new thought."
+					/>
 				)}
 			</div>
 		</div>

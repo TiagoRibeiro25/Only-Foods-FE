@@ -1,6 +1,11 @@
-import Reveal from '../../../../components/Reveal';
+import Reveal from '../Reveal';
 
-const NoThoughtsFound = () => {
+interface NoItemsFoundProps {
+	warning: string;
+	message?: string;
+}
+
+const NoItemsFound = (props: NoItemsFoundProps) => {
 	return (
 		<Reveal width="100%" animation="slide-bottom" delay={0.3}>
 			<div className="flex flex-col items-center justify-center gap-2 pt-8 pb-12 text-center col-span-full md:pb-6">
@@ -14,14 +19,14 @@ const NoThoughtsFound = () => {
 					<path d="M8 9h2v2H8zm4 0h2v2h-2zm-2-2h2v2h-2zm4 0h2v2h-2z"></path>
 				</svg>
 				<p className="text-primary-text-color dark:text-primary-text-color">
-					No thoughts found.
+					{props.warning}
 				</p>
 				<p className="text-primary-text-color dark:text-primary-text-color">
-					Change the filter or add a new thought.
+					{props.message ?? ''}
 				</p>
 			</div>
 		</Reveal>
 	);
 };
 
-export default NoThoughtsFound;
+export default NoItemsFound;

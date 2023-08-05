@@ -1,6 +1,10 @@
-import Reveal from '../../../../components/Reveal';
+import Reveal from '../Reveal';
 
-const ErrorOccurred = () => {
+interface ErrorOccurredProps {
+	text: string;
+}
+
+const ErrorOccurred = (props: ErrorOccurredProps) => {
 	return (
 		<Reveal width="100%" animation="slide-bottom" delay={0.05}>
 			<div className="flex flex-col items-center justify-center gap-2 pt-8 pb-12 text-center col-span-full md:pb-6">
@@ -19,7 +23,7 @@ const ErrorOccurred = () => {
 					/>
 				</svg>
 				<p className="text-primary-text-color dark:text-primary-text-color ">
-					An error occurred while fetching thoughts.
+					{props.text}
 				</p>
 			</div>
 		</Reveal>

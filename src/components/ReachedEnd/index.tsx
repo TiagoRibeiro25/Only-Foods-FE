@@ -1,4 +1,4 @@
-import Reveal from '../../../../components/Reveal';
+import Reveal from '../Reveal';
 
 const ReachedEnd = () => {
 	return (
