@@ -267,8 +267,8 @@ const Home = () => {
 							src={PizzaIcon}
 							effect="opacity"
 							alt="Pizza Icon"
-							width={50}
-							height={50}
+							width={45}
+							height={45}
 							className="inline-block pt-1 scale-75 sm:scale-100 animate-bounce"
 						/>
 						<span className="text-center sm:mx-4">Start Exploring Now</span>
@@ -276,8 +276,8 @@ const Home = () => {
 							src={HamburgerIcon}
 							effect="opacity"
 							alt="Pizza Icon"
-							width={50}
-							height={50}
+							width={45}
+							height={45}
 							className="inline-block pt-1 scale-75 sm:scale-100 animate-bounce"
 						/>
 					</Link>
