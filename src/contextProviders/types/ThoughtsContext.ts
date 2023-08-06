@@ -1,5 +1,7 @@
 import { IThought } from '../../types/types';
 
+export type ContextType = 'recent' | 'popular' | 'following';
+
 interface ThoughtsState {
 	thoughts: IThought[];
 	setThoughts: (thoughts: IThought[]) => void;
