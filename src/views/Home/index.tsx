@@ -250,8 +250,7 @@ const Home = () => {
 								Unite with Foodie Communities
 							</h3>
 							<p className="text-center">
-								Connect with like-minded food enthusiasts through groups. Share, learn,
-								and explore together with fellow culinary enthusiasts.
+								Share, learn, and explore together with fellow culinary enthusiasts.
 							</p>
 						</Reveal>
 					</div>
