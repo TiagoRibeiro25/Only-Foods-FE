@@ -74,19 +74,6 @@ const Comments = (props: CommentsProps) => {
 		}
 	}, [anErrorOccurred, comments, isLoading, page, props.id, reachedEnd]);
 
-	const debounce = <T extends unknown[]>(func: (...args: T) => void, delay: number) => {
-		let timer: ReturnType<typeof setTimeout>;
-		return (...args: T) => {
-			clearTimeout(timer);
-			timer = setTimeout(() => func(...args), delay);
-		};
-	};
-
-	// Create a debounced version of the fetchMoreComments function using debounce
-	const debouncedFetchMoreComments = useCallback(debounce(fetchMoreComments, 500), [
-		fetchMoreComments,
-	]);
-
 	const handleNewComment = (newComment: NewComment): void => {
 		const comment: IComment = {
 			id: comments.length > 1 ? comments[comments.length - 1].id + 1 : 1,
@@ -107,14 +94,14 @@ const Comments = (props: CommentsProps) => {
 		const handleScroll = () => {
 			// When the user scrolls to the bottom (minus 200px), load more comments
 			if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-				debouncedFetchMoreComments();
+				fetchMoreComments();
 			}
 		};
 
 		window.addEventListener('scroll', handleScroll);
 
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, [debouncedFetchMoreComments, fetchMoreComments, isInitialLoad]);
+	}, [fetchMoreComments, isInitialLoad]);
 
 	return (
 		<section className="flex flex-col w-full">

@@ -29,8 +29,6 @@ function getFilterFromLocalStorage(isUserLogged: boolean): Filter {
 }
 
 // TODO: Refactor this component
-// TODO: Fix React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead.
-// TODO: Fix Promise returned in function argument where a void return was expected.
 const Feed = () => {
 	const thoughtsContext = useContext(ThoughtsContext);
 	const { loggedUser } = useContext(UserContext);
@@ -94,19 +92,6 @@ const Feed = () => {
 			setIsLoading(false);
 		}
 	}, [anErrorOccurred, filter, isLoading, thoughtsContext]);
-
-	const debounce = <T extends unknown[]>(func: (...args: T) => void, delay: number) => {
-		let timer: ReturnType<typeof setTimeout>;
-		return (...args: T) => {
-			clearTimeout(timer);
-			timer = setTimeout(() => func(...args), delay);
-		};
-	};
-
-	// Create a debounced version of the fetchMoreThoughts function using debounce
-	const debouncedFetchMoreThoughts = useCallback(debounce(fetchMoreThoughts, 300), [
-		fetchMoreThoughts,
-	]);
 
 	const handleNewThought = (newThought: NewThought): void => {
 		const thought = {
@@ -207,7 +192,7 @@ const Feed = () => {
 		if (thoughtsContext[filter].isInitialLoad) {
 			if (thoughtsContext[filter].thoughts.length > 0 || anErrorOccurred) return;
 
-			debouncedFetchMoreThoughts();
+			fetchMoreThoughts();
 			thoughtsContext[filter].setIsInitialLoad(false);
 			return;
 		}
@@ -215,13 +200,13 @@ const Feed = () => {
 		const handleScroll = () => {
 			// When the user scrolls to the bottom (minus 200px), load more thoughts
 			if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-				debouncedFetchMoreThoughts();
+				fetchMoreThoughts();
 			}
 		};
 
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, [anErrorOccurred, debouncedFetchMoreThoughts, filter, isLoading, thoughtsContext]);
+	}, [anErrorOccurred, fetchMoreThoughts, filter, isLoading, thoughtsContext]);
 
 	useEffect(() => {
 		setLocalStorage('feedThoughtFilter', filter);
