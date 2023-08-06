@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
 import CancelIcon from '../../assets/icons/cancel.svg';
 import DeleteIcon from '../../assets/icons/delete.svg';
@@ -39,6 +39,7 @@ interface Props {
 }
 
 const Thought = (props: Props) => {
+	const navigate = useNavigate();
 	const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 	const [deletingPost, setDeletingPost] = useState<boolean>(false);
 	const [editModeEnabled, setEditModeEnabled] = useState<boolean>(false);
@@ -149,10 +150,8 @@ const Thought = (props: Props) => {
 						{(props.thought.isAuthor || props.isAdmin) && (
 							<button
 								className="ml-4 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
-								disabled={editModeEnabled}
-								onClick={() => {
-									if (!deletingPost) setShowDeleteModal(true);
-								}}
+								disabled={editModeEnabled || deletingPost}
+								onClick={() => setShowDeleteModal(true)}
 							>
 								<LazyLoadImage
 									src={deletingPost ? LoadingIcon : DeleteIcon}
