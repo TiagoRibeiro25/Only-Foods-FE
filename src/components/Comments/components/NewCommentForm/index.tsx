@@ -2,25 +2,7 @@ import { useContext, useState } from 'react';
 import requests from '../../../../api/requests';
 import PostTextArea from '../../../../components/PostTextarea';
 import { UserContext } from '../../../../contextProviders/UserContext';
-
-export interface NewComment {
-	content: string;
-	author: {
-		id: number;
-		username: string;
-		userImage?: {
-			cloudinaryImage: string;
-		};
-	};
-	createdAt: string;
-	createdAgo: string;
-}
-
-interface NewCommentFormProps {
-	type: 'thought' | 'recipe';
-	id: number;
-	onSubmit: (arg: NewComment) => void;
-}
+import { NewComment, NewCommentFormProps } from '../../types';
 
 const NewCommentForm = (props: NewCommentFormProps) => {
 	const { loggedUser } = useContext(UserContext);

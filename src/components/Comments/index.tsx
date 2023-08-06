@@ -1,27 +1,20 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import requests from '../../api/requests';
 import { UserContext } from '../../contextProviders/UserContext';
+import { IComment } from '../../types/types';
 import ErrorOccurred from '../ErrorOccurred';
 import Loading from '../Loading';
 import NoItemsFound from '../NoItemsFound';
 import ReachedEnd from '../ReachedEnd';
 import Reveal from '../Reveal';
 import Comment from './components/Comment';
-import NewCommentForm, { NewComment } from './components/NewCommentForm';
-
-interface CommentsProps {
-	type: 'thought' | 'recipe';
-	id: number;
-}
-
-interface CommentI extends NewComment {
-	id: number;
-}
+import NewCommentForm from './components/NewCommentForm';
+import { CommentsProps, NewComment } from './types';
 
 const Comments = (props: CommentsProps) => {
 	const { loggedUser } = useContext(UserContext);
 
-	const [comments, setComments] = useState<CommentI[]>([]);
+	const [comments, setComments] = useState<IComment[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [reachedEnd, setReachedEnd] = useState<boolean>(false);
 	const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
@@ -95,7 +88,7 @@ const Comments = (props: CommentsProps) => {
 	]);
 
 	const handleNewComment = (newComment: NewComment): void => {
-		const comment: CommentI = {
+		const comment: IComment = {
 			id: comments.length > 1 ? comments[comments.length - 1].id + 1 : 1,
 			...newComment,
 		};

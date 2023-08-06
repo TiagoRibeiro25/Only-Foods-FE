@@ -3,23 +3,10 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import UserPlaceholderPicture from '../../../../assets/imgs/user.png';
 import { UserContext } from '../../../../contextProviders/UserContext';
+import { IComment } from '../../../../types/types';
 import HTMLText from '../../../HTMLText';
 
-interface CommentProps {
-	id: number;
-	content: string;
-	author: {
-		id: number;
-		username: string;
-		userImage?: {
-			cloudinaryImage: string;
-		};
-	};
-	createdAt: string;
-	createdAgo: string;
-}
-
-const Comment = (props: CommentProps) => {
+const Comment = (props: IComment) => {
 	const { loggedUser } = useContext(UserContext);
 
 	return (

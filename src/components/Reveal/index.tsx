@@ -1,16 +1,7 @@
 import { AnimationControls, motion, useAnimation, useInView } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import ANIMATIONS from './animations';
-
-type Animation = 'fade' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right';
-
-interface Props {
-	children?: React.ReactNode;
-	width?: 'fit-content' | '100%';
-	animation?: Animation;
-	duration?: number;
-	delay?: number;
-}
+import { RevealProps } from './types';
 
 const Reveal = ({
 	children,
@@ -18,7 +9,7 @@ const Reveal = ({
 	animation = 'fade',
 	duration = 0.5,
 	delay = 0.3,
-}: Props) => {
+}: RevealProps) => {
 	const ref: React.MutableRefObject<null> = useRef(null);
 	const isInView: boolean = useInView(ref, { once: true });
 	const mainControls: AnimationControls = useAnimation();

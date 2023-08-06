@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Reveal from '../../../../components/Reveal';
-
-interface OptionProps {
-	title: string;
-	backgroundImage: string;
-	description: string;
-	path: string;
-}
+import { OptionProps } from '../../types';
 
 const Option = (props: OptionProps) => {
 	const [isHovered, setIsHovered] = useState<boolean>(false);

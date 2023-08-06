@@ -1,10 +1,6 @@
 import Reveal from '../Reveal';
 
-interface ErrorOccurredProps {
-	text: string;
-}
-
-const ErrorOccurred = (props: ErrorOccurredProps) => {
+const ErrorOccurred = ({ text }: { text: string }) => {
 	return (
 		<Reveal width="100%" animation="slide-bottom" delay={0.05}>
 			<div className="flex flex-col items-center justify-center gap-2 pt-8 pb-12 text-center col-span-full md:pb-6">
@@ -22,9 +18,7 @@ const ErrorOccurred = (props: ErrorOccurredProps) => {
 						d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
 					/>
 				</svg>
-				<p className="text-primary-text-color dark:text-primary-text-color ">
-					{props.text}
-				</p>
+				<p className="text-primary-text-color dark:text-primary-text-color ">{text}</p>
 			</div>
 		</Reveal>
 	);

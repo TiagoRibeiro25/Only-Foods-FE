@@ -1,23 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import Button from '../Button';
-
-interface PostTextAreaProps {
-	id: string;
-	labelText: string;
-	placeholder: string;
-	value: string;
-	loading: boolean;
-	buttonDisabled?: boolean;
-	buttonText?: string;
-	resizable?: boolean;
-	rows?: number;
-	cols?: number;
-	minLength?: number;
-	maxLength?: number;
-	onChange: (value: string) => void;
-	onSubmit: () => void;
-}
+import { PostTextAreaProps } from './types';
 
 const PostTextArea = (props: PostTextAreaProps) => {
 	const { value, onChange } = props;

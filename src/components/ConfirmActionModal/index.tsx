@@ -1,15 +1,6 @@
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-
-interface ConfirmActionModalProps {
-	id: string;
-	message: string;
-	show: boolean;
-	confirmText?: string;
-	cancelText?: string;
-	onConfirm: () => void;
-	onCancel?: () => void;
-}
+import { ConfirmActionModalProps } from './types';
 
 const ConfirmActionModal = (props: ConfirmActionModalProps) => {
 	useEffect(() => {

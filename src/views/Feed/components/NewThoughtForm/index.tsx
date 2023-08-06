@@ -1,18 +1,7 @@
 import { useState } from 'react';
 import requests from '../../../../api/requests';
 import PostTextArea from '../../../../components/PostTextarea';
-
-export interface NewThought {
-	id: number;
-	content: string;
-	authorId: number;
-	createdAt: string;
-	updatedAt: string;
-}
-
-interface NewThoughtFormProps {
-	onSubmit: (arg: NewThought) => void;
-}
+import { NewThought, NewThoughtFormProps } from '../../types';
 
 const NewThoughtForm = (props: NewThoughtFormProps) => {
 	const [newThoughtText, setNewThoughtText] = useState<string>('');

@@ -10,9 +10,8 @@ import Thought from '../../components/Thought';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
-import NewThoughtForm, { NewThought } from './components/NewThoughtForm';
-
-type Filter = 'recent' | 'popular' | 'following';
+import NewThoughtForm from './components/NewThoughtForm';
+import { Filter, NewThought } from './types';
 
 const options = [
 	{ text: 'Recent', value: 'recent' },

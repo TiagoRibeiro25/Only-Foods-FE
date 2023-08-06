@@ -1,13 +1,5 @@
 import { useState } from 'react';
-
-interface CheckBoxProps {
-	placeholder: string;
-	id: string;
-	name: string;
-	autoComplete?: string;
-	disabled?: boolean;
-	onChange: (value: boolean) => void;
-}
+import { CheckBoxProps } from './types';
 
 const CheckBox = ({ ...props }: CheckBoxProps) => {
 	const [isChecked, SetIsChecked] = useState<boolean>(false);

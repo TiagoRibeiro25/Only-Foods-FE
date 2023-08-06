@@ -11,34 +11,9 @@ import ConfirmActionModal from '../ConfirmActionModal';
 import HTMLText from '../HTMLText';
 import PostTextArea from '../PostTextarea';
 import PostUserActions from '../PostUserActions';
+import { ThoughtProps } from './types';
 
-interface Props {
-	thought: {
-		id: number;
-		content: string;
-		edited: boolean;
-		author: {
-			id: number;
-			username: string;
-			userImage?: {
-				cloudinaryImage: string;
-			};
-		};
-		likes: number;
-		comments: number;
-		isAuthor: boolean;
-		isLiked: boolean;
-		createdAgo: string;
-		createdAt: string;
-	};
-	isAdmin: boolean;
-	isBlocked: boolean;
-	onDelete: (id: number) => void;
-	onEdit: (id: number, content: string) => void;
-	onLikeUpdate: (id: number, newLikes: number, isLiked: boolean) => void;
-}
-
-const Thought = (props: Props) => {
+const Thought = (props: ThoughtProps) => {
 	const navigate = useNavigate();
 	const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 	const [deletingPost, setDeletingPost] = useState<boolean>(false);

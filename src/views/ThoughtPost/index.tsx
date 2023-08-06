@@ -7,26 +7,8 @@ import Reveal from '../../components/Reveal';
 import Thought from '../../components/Thought';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
+import { IThought } from '../../types/types';
 import ErrorOccurred from './components/ErrorOccurred';
-
-interface ThoughtI {
-	id: number;
-	content: string;
-	edited: boolean;
-	author: {
-		id: number;
-		username: string;
-		userImage?: {
-			cloudinaryImage: string;
-		};
-	};
-	likes: number;
-	comments: number;
-	isAuthor: boolean;
-	isLiked: boolean;
-	createdAgo: string;
-	createdAt: string;
-}
 
 const ThoughtPost = () => {
 	const { id } = useParams(); // Thought id
@@ -34,7 +16,7 @@ const ThoughtPost = () => {
 	const { loggedUser } = useContext(UserContext);
 	const thoughtsContext = useContext(ThoughtsContext);
 
-	const [thought, setThought] = useState<ThoughtI>();
+	const [thought, setThought] = useState<IThought>();
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 

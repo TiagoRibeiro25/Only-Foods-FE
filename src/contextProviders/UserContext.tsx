@@ -1,22 +1,5 @@
 import { createContext, useMemo, useState } from 'react';
-
-export interface User {
-	id: number;
-	username: string;
-	email: string;
-	isAdmin: boolean;
-	isBlocked: boolean;
-	picture?: string;
-}
-
-interface UserContextType {
-	loggedUser: User | null;
-	setLoggedUser: (user: User | null) => void;
-}
-
-interface UserProviderProps {
-	children: React.ReactNode;
-}
+import { User, UserContextType, UserProviderProps } from './types/UserContext';
 
 // Helper function for the placeholder setLoggedUser
 const warnSetLoggedUser = (): void => {

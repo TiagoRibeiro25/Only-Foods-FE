@@ -1,61 +1,6 @@
 import { createContext, useMemo, useState } from 'react';
-
-export interface Thought {
-	id: number;
-	content: string;
-	edited: boolean;
-	author: {
-		id: number;
-		username: string;
-		userImage?: {
-			cloudinaryImage: string;
-		};
-	};
-	likes: number;
-	comments: number;
-	isAuthor: boolean;
-	isLiked: boolean;
-	createdAgo: string;
-	createdAt: string;
-}
-
-interface ThoughtsContextType {
-	recent: {
-		thoughts: Thought[];
-		setThoughts: (thoughts: Thought[]) => void;
-		page: number;
-		incrementPage: () => void;
-		reachedEnd: boolean;
-		setReachedEnd: (reachedEnd: boolean) => void;
-		isInitialLoad: boolean;
-		setIsInitialLoad: (isInitialLoad: boolean) => void;
-	};
-	popular: {
-		thoughts: Thought[];
-		setThoughts: (thoughts: Thought[]) => void;
-		page: number;
-		incrementPage: () => void;
-		reachedEnd: boolean;
-		setReachedEnd: (reachedEnd: boolean) => void;
-		isInitialLoad: boolean;
-		setIsInitialLoad: (isInitialLoad: boolean) => void;
-	};
-	following: {
-		thoughts: Thought[];
-		setThoughts: (thoughts: Thought[]) => void;
-		page: number;
-		incrementPage: () => void;
-		reachedEnd: boolean;
-		setReachedEnd: (reachedEnd: boolean) => void;
-		isInitialLoad: boolean;
-		setIsInitialLoad: (isInitialLoad: boolean) => void;
-	};
-	resetAllState: () => void;
-}
-
-interface ThoughtsProviderProps {
-	children: React.ReactNode;
-}
+import { IThought } from '../types/types';
+import { ThoughtsContextType, ThoughtsProviderProps } from './types/ThoughtsContext';
 
 const warnSetThoughts = (): void => {
 	// eslint-disable-next-line no-console
@@ -97,17 +42,17 @@ const ThoughtsContext = createContext<ThoughtsContextType>({
 });
 
 const ThoughtsProvider = (props: ThoughtsProviderProps) => {
-	const [recentThoughts, setRecentThoughts] = useState<Thought[]>([]);
+	const [recentThoughts, setRecentThoughts] = useState<IThought[]>([]);
 	const [recentPage, setRecentPage] = useState<number>(1);
 	const [recentReachedEnd, setRecentReachedEnd] = useState<boolean>(false);
 	const [recentIsInitialLoad, setRecentIsInitialLoad] = useState<boolean>(true);
 
-	const [popularThoughts, setPopularThoughts] = useState<Thought[]>([]);
+	const [popularThoughts, setPopularThoughts] = useState<IThought[]>([]);
 	const [popularPage, setPopularPage] = useState<number>(1);
 	const [popularReachedEnd, setPopularReachedEnd] = useState<boolean>(false);
 	const [popularIsInitialLoad, setPopularIsInitialLoad] = useState<boolean>(true);
 
-	const [followingThoughts, setFollowingThoughts] = useState<Thought[]>([]);
+	const [followingThoughts, setFollowingThoughts] = useState<IThought[]>([]);
 	const [followingPage, setFollowingPage] = useState<number>(1);
 	const [followingReachedEnd, setFollowingReachedEnd] = useState<boolean>(false);
 	const [followingIsInitialLoad, setFollowingIsInitialLoad] = useState<boolean>(true);

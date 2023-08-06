@@ -1,15 +1,4 @@
-interface Option {
-	text: string;
-	value: string;
-}
-
-interface SelectProps {
-	id: string;
-	labelText: string;
-	value: string;
-	options: Option[];
-	onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
+import { SelectProps } from './types';
 
 const Select = (props: SelectProps) => {
 	return (

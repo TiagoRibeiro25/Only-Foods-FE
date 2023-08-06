@@ -11,15 +11,7 @@ import LoadingIcon from '../../assets/icons/loading.svg';
 import { UserContext } from '../../contextProviders/UserContext';
 import formatData from '../../utils/formatData';
 import Reveal from '../Reveal';
-
-interface PostUserActionsProps {
-	type: 'thought' | 'recipe';
-	id: number;
-	likes: number;
-	comments: number;
-	isLiked: boolean;
-	onLikeUpdate: (id: number, newLikes: number, isLiked: boolean) => void;
-}
+import { PostUserActionsProps } from './types';
 
 const PostUserActions = (props: PostUserActionsProps) => {
 	const { loggedUser } = useContext(UserContext);
