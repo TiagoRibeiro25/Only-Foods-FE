@@ -79,7 +79,7 @@ const ThoughtPost = () => {
 			</div>
 
 			{/* Line separating the thought and the comments */}
-			{!loggedUser && <div className="w-full border-t border-gray-200"></div>}
+			{!loggedUser && thought && <div className="w-full border-t border-gray-200"></div>}
 
 			{/* Comments */}
 			{!isLoading && thought && <Comments type="thought" id={thought.id ?? 0} />}
