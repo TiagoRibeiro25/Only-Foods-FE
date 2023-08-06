@@ -170,10 +170,6 @@ const Feed = () => {
 	useEffect(() => {
 		// Fetch initial thoughts on the first render
 		if (thoughtsContext[filter].isInitialLoad) {
-			if (thoughtsContext[filter].thoughts.length > 0 || anErrorOccurredRef.current) {
-				return;
-			}
-
 			fetchMoreThoughts();
 			thoughtsContext[filter].setIsInitialLoad(false);
 			return;
