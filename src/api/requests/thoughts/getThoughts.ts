@@ -38,11 +38,9 @@ interface Props {
 	limit?: number;
 }
 
-const ROUTE = '/thoughts';
-
 export default async (props: Props): Promise<LocalResponse> => {
 	try {
-		const response: AxiosResponse<LocalRequestData> = await api.get(ROUTE, {
+		const response: AxiosResponse<LocalRequestData> = await api.get('/thoughts', {
 			params: {
 				filter: props.filter,
 				authorId: props.authorId,

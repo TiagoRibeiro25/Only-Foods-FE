@@ -8,11 +8,9 @@ interface Props {
 	password: string;
 }
 
-const ROUTE = '/users';
-
 export default async (props: Props): Promise<Response> => {
 	try {
-		const response: Response = await api.post(ROUTE, props);
+		const response: Response = await api.post('/users', props);
 		return response;
 	} catch (error) {
 		return handleError(error);

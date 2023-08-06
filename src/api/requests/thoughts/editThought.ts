@@ -7,11 +7,9 @@ interface Props {
 	content: string;
 }
 
-const ROUTE = '/thoughts';
-
 export default async (props: Props): Promise<Response> => {
 	try {
-		const response: Response = await api.put(`${ROUTE}/${props.id}`, {
+		const response: Response = await api.put(`/thoughts/${props.id}`, {
 			content: props.content,
 		});
 		return response;

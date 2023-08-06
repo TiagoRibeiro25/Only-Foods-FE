@@ -7,14 +7,11 @@ interface Props {
 	password: string;
 }
 
-const ROUTE = '/users/reset-password';
-
 export default async (props: Props): Promise<Response> => {
 	try {
-		const route = `${ROUTE}/${props.token}`;
-		const bodyData = { password: props.password };
-
-		const response: Response = await api.patch(route, bodyData);
+		const response: Response = await api.patch(`/users/reset-password/${props.token}`, {
+			password: props.password,
+		});
 		return response;
 	} catch (error: unknown) {
 		return handleError(error);

@@ -7,11 +7,9 @@ interface Props {
 	content: string;
 }
 
-const ROUTE = '/comments';
-
 export default async (props: Props): Promise<Response> => {
 	try {
-		const response: Response = await api.post(`${ROUTE}/${props.id}/recipe`, {
+		const response: Response = await api.post(`/comments/${props.id}/recipe`, {
 			comment: props.content,
 		});
 

@@ -28,11 +28,12 @@ interface Props {
 	rememberMe: boolean;
 }
 
-const ROUTE = '/users/login';
-
 export default async (props: Props): Promise<LocalResponse> => {
 	try {
-		const response: AxiosResponse<LocalRequestData> = await api.post(ROUTE, props);
+		const response: AxiosResponse<LocalRequestData> = await api.post(
+			'/users/login',
+			props,
+		);
 		return response;
 	} catch (error: unknown) {
 		return handleError(error);

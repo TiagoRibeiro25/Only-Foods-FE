@@ -32,12 +32,10 @@ interface Props {
 	limit?: number;
 }
 
-const ROUTE = '/comments';
-
 export default async (props: Props): Promise<LocalResponse> => {
 	try {
 		const response: AxiosResponse<LocalRequestData> = await api.get(
-			`${ROUTE}/${props.id}/thought`,
+			`/comments/${props.id}/thought`,
 			{
 				params: {
 					page: props.page,

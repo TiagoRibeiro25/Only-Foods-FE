@@ -26,11 +26,9 @@ interface LocalResponse extends AxiosResponse<LocalResponseData> {
 	data: LocalResponseData;
 }
 
-const ROUTE = '/users/me';
-
 export default async (): Promise<LocalResponse> => {
 	try {
-		const response: AxiosResponse<LocalResponseData> = await api.get(ROUTE);
+		const response: AxiosResponse<LocalResponseData> = await api.get('/users/me');
 		return response;
 	} catch (error: unknown) {
 		return handleError(error);
