@@ -9,6 +9,8 @@ import Select from '../../components/Select';
 import Thought from '../../components/Thought';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
+import { ContextType } from '../../contextProviders/types/ThoughtsContext';
+import { IThought } from '../../types/types';
 import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
 import NewThoughtForm from './components/NewThoughtForm';
 import { Filter, NewThought } from './types';
@@ -118,72 +120,39 @@ const Feed = () => {
 	};
 
 	const deleteThoughtFromList = (thoughtId: number): void => {
-		// Remove the thought from the recent thoughts
-		thoughtsContext.recent.setThoughts(
-			thoughtsContext.recent.thoughts.filter(thought => thought.id !== thoughtId),
-		);
-
-		// Remove the thought from the popular thoughts
-		thoughtsContext.popular.setThoughts(
-			thoughtsContext.popular.thoughts.filter(thought => thought.id !== thoughtId),
-		);
-
-		// Remove the thought from the following thoughts
-		thoughtsContext.following.setThoughts(
-			thoughtsContext.following.thoughts.filter(thought => thought.id !== thoughtId),
-		);
+		// Loop through each context and remove the thought
+		const contextTypes: ContextType[] = ['recent', 'popular', 'following'];
+		contextTypes.forEach(contextType => {
+			const context = thoughtsContext[contextType];
+			context.setThoughts(context.thoughts.filter(thought => thought.id !== thoughtId));
+		});
 	};
 
 	const editThoughtFromList = (thoughtId: number, newContent: string): void => {
-		// Edit the thought from the recent thoughts
-		thoughtsContext.recent.setThoughts(
-			thoughtsContext.recent.thoughts.map(thought =>
-				thought.id === thoughtId
-					? { ...thought, content: newContent, edited: true }
-					: thought,
-			),
-		);
-
-		// Edit the thought from the popular thoughts
-		thoughtsContext.popular.setThoughts(
-			thoughtsContext.popular.thoughts.map(thought =>
-				thought.id === thoughtId
-					? { ...thought, content: newContent, edited: true }
-					: thought,
-			),
-		);
-
-		// Edit the thought from the following thoughts
-		thoughtsContext.following.setThoughts(
-			thoughtsContext.following.thoughts.map(thought =>
-				thought.id === thoughtId
-					? { ...thought, content: newContent, edited: true }
-					: thought,
-			),
-		);
+		// Loop through each context and update the thoughts
+		const contextTypes: ContextType[] = ['recent', 'popular', 'following'];
+		contextTypes.forEach(contextType => {
+			const context = thoughtsContext[contextType];
+			context.setThoughts(
+				context.thoughts.map(thought =>
+					thought.id === thoughtId
+						? { ...thought, content: newContent, edited: true }
+						: thought,
+				),
+			);
+		});
 	};
 
 	const updateLikes = (thoughtId: number, newLikes: number, isLiked: boolean): void => {
-		// Update the thought from the recent thoughts
-		thoughtsContext.recent.setThoughts(
-			thoughtsContext.recent.thoughts.map(thought =>
-				thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought,
-			),
-		);
+		// Create a function to update the likes and isLiked for a thought
+		const updateThoughtLikes = (thought: IThought): IThought =>
+			thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought;
 
-		// Update the thought from the popular thoughts
-		thoughtsContext.popular.setThoughts(
-			thoughtsContext.popular.thoughts.map(thought =>
-				thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought,
-			),
-		);
-
-		// Update the thought from the following thoughts
-		thoughtsContext.following.setThoughts(
-			thoughtsContext.following.thoughts.map(thought =>
-				thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought,
-			),
-		);
+		const contextTypes: ContextType[] = ['recent', 'popular', 'following'];
+		contextTypes.forEach(contextType => {
+			const context = thoughtsContext[contextType];
+			context.setThoughts(context.thoughts.map(updateThoughtLikes));
+		});
 	};
 
 	// Attach scroll event listener to load more thoughts when reaching the bottom
@@ -215,6 +184,7 @@ const Feed = () => {
 
 	return (
 		<div className="flex flex-col items-center max-w-3xl mx-auto mt-28">
+			{/* Add New Thought Form */}
 			{loggedUser && (
 				<Reveal width="100%" animation="slide-top" delay={0.05}>
 					<NewThoughtForm onSubmit={handleNewThought} />
@@ -255,6 +225,7 @@ const Feed = () => {
 						/>
 					</Reveal>
 				))}
+
 				{isLoading && <Loading />}
 				{thoughtsContext[filter].reachedEnd && <ReachedEnd />}
 				{anErrorOccurred && thoughtsContext[filter].thoughts.length !== 0 && (
