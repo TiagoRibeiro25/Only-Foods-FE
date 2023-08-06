@@ -169,7 +169,12 @@ const Thought = (props: Props) => {
 			{/* Second Row */}
 			<div className="my-4">
 				{!editModeEnabled ? (
-					<HTMLText text={props.thought.content} />
+					<div
+						className="hover:cursor-pointer"
+						onClick={() => navigate(`/thought/${props.thought.id}`)}
+					>
+						<HTMLText text={props.thought.content} />
+					</div>
 				) : (
 					<PostTextArea
 						id={`post-${props.thought.id}-edit`}
