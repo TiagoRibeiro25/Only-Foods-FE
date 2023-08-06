@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import requests from '../../api/requests';
 import ErrorOccurred from '../../components/ErrorOccurred';
 import Loading from '../../components/Loading';
@@ -38,13 +38,21 @@ const Feed = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [anErrorOccurred, setAnErrorOccurred] = useState<boolean>(false);
 
+	const loadingRef = useRef<boolean>(false);
+	const anErrorOccurredRef = useRef<boolean>(false);
+
 	// Function to fetch more thoughts and update the state
 	const fetchMoreThoughts = useCallback(async () => {
 		// Prevent making duplicate requests while loading or if reached the end
-		if (isLoading || thoughtsContext[filter].reachedEnd || anErrorOccurred) {
+		if (
+			loadingRef.current ||
+			thoughtsContext[filter].reachedEnd ||
+			anErrorOccurredRef.current
+		) {
 			return;
 		}
 
+		loadingRef.current = true;
 		setIsLoading(true);
 
 		try {
@@ -83,17 +91,20 @@ const Feed = () => {
 				// if the response was an 404 and there are thoughts in the list, then it reached the end
 				if (response.status === 404 && thoughtsContext[filter].thoughts.length > 0) {
 					thoughtsContext[filter].setReachedEnd(true);
-				} else {
-					setAnErrorOccurred(true);
+					return;
 				}
+
+				anErrorOccurredRef.current = true;
 			}
 		} catch (error) {
 			console.log('Error fetching more thoughts:', error);
+			anErrorOccurredRef.current = true;
 			setAnErrorOccurred(true);
 		} finally {
+			loadingRef.current = false;
 			setIsLoading(false);
 		}
-	}, [anErrorOccurred, filter, isLoading, thoughtsContext]);
+	}, [filter, thoughtsContext]);
 
 	const handleNewThought = (newThought: NewThought): void => {
 		const thought = {
@@ -159,7 +170,9 @@ const Feed = () => {
 	useEffect(() => {
 		// Fetch initial thoughts on the first render
 		if (thoughtsContext[filter].isInitialLoad) {
-			if (thoughtsContext[filter].thoughts.length > 0 || anErrorOccurred) return;
+			if (thoughtsContext[filter].thoughts.length > 0 || anErrorOccurredRef.current) {
+				return;
+			}
 
 			fetchMoreThoughts();
 			thoughtsContext[filter].setIsInitialLoad(false);
@@ -175,10 +188,11 @@ const Feed = () => {
 
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, [anErrorOccurred, fetchMoreThoughts, filter, isLoading, thoughtsContext]);
+	}, [filter, fetchMoreThoughts, thoughtsContext]);
 
 	useEffect(() => {
 		setLocalStorage('feedThoughtFilter', filter);
+		anErrorOccurredRef.current = false;
 		setAnErrorOccurred(false);
 	}, [filter]);
 
