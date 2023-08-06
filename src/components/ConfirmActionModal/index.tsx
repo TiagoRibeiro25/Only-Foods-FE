@@ -13,7 +13,7 @@ const ConfirmActionModal = (props: ConfirmActionModalProps) => {
 			<div
 				id={props.id}
 				tabIndex={-1}
-				className={`fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 ${
+				className={`fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 px-3 ${
 					props.show ? 'block' : 'hidden'
 				}`}
 			>
