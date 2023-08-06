@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import requests from '../../api/requests';
 import { UserContext } from '../../contextProviders/UserContext';
 import { IComment } from '../../types/types';
@@ -21,12 +21,17 @@ const Comments = (props: CommentsProps) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [anErrorOccurred, setAnErrorOccurred] = useState<boolean>(false);
 
+	const loadingRef = useRef<boolean>(false);
+	const anErrorOccurredRef = useRef<boolean>(false);
+	const reachedEndRef = useRef<boolean>(false);
+
 	const fetchMoreComments = useCallback(async () => {
 		// Prevent making duplicate requests while loading or if reached the end
-		if (isLoading || reachedEnd || anErrorOccurred) {
+		if (loadingRef.current || reachedEndRef.current || anErrorOccurredRef.current) {
 			return;
 		}
 
+		loadingRef.current = true;
 		setIsLoading(true);
 
 		try {
@@ -57,22 +62,27 @@ const Comments = (props: CommentsProps) => {
 				// Check if reached the end of comments to disable further loading
 				if (response.data.data?.totalCount === totalComments.length) {
 					setReachedEnd(true);
+					reachedEndRef.current = true;
 				}
 			} else {
 				// if the response was an 404 and there are comments in the list, then it reached the end
 				if (response.status === 404 && comments.length > 0) {
 					setReachedEnd(true);
+					reachedEndRef.current = true;
 				} else {
 					setAnErrorOccurred(true);
+					anErrorOccurredRef.current = true;
 				}
 			}
 		} catch (error) {
 			console.log('Error fetching more comments:', error);
 			setAnErrorOccurred(true);
+			anErrorOccurredRef.current = true;
 		} finally {
 			setIsLoading(false);
+			loadingRef.current = false;
 		}
-	}, [anErrorOccurred, comments, isLoading, page, props.id, reachedEnd]);
+	}, [comments, page, props.id]);
 
 	const handleNewComment = (newComment: NewComment): void => {
 		const comment: IComment = {
@@ -89,6 +99,7 @@ const Comments = (props: CommentsProps) => {
 		if (isInitialLoad) {
 			fetchMoreComments();
 			setIsInitialLoad(false);
+			return;
 		}
 
 		const handleScroll = () => {
@@ -101,7 +112,7 @@ const Comments = (props: CommentsProps) => {
 		window.addEventListener('scroll', handleScroll);
 
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, [fetchMoreComments, isInitialLoad]);
+	}, [comments.length, fetchMoreComments, isInitialLoad]);
 
 	return (
 		<section className="flex flex-col w-full">
