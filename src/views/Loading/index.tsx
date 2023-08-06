@@ -15,7 +15,7 @@ const Loading = (props: LoadingProps) => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setCurrentPhrase(phrases[Math.floor(Math.random() * phrases.length)]);
-		}, 5000); // Change the phrase 5 seconds
+		}, 5000); // Change the phrase every 5 seconds
 
 		return () => {
 			clearInterval(interval);
