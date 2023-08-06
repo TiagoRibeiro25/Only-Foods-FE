@@ -30,7 +30,6 @@ function getFilterFromLocalStorage(isUserLogged: boolean): Filter {
 	return result === 'following' && !isUserLogged ? 'recent' : result;
 }
 
-// TODO: Refactor this component
 const Feed = () => {
 	const thoughtsContext = useContext(ThoughtsContext);
 	const { loggedUser } = useContext(UserContext);
