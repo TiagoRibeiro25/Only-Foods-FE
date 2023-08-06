@@ -89,6 +89,7 @@ const Feed = () => {
 			}
 		} catch (error) {
 			console.log('Error fetching more thoughts:', error);
+			setAnErrorOccurred(true);
 		} finally {
 			setIsLoading(false);
 		}
