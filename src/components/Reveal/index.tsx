@@ -1,5 +1,6 @@
 import { AnimationControls, motion, useAnimation, useInView } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import { isMotionReduced } from '../../utils/checkUserSettings';
 import ANIMATIONS from './animations';
 import { RevealProps } from './types';
 
@@ -10,6 +11,8 @@ const Reveal = ({
 	duration = 0.5,
 	delay = 0.3,
 }: RevealProps) => {
+	const disableMotion: boolean = isMotionReduced();
+
 	const ref: React.MutableRefObject<null> = useRef(null);
 	const isInView: boolean = useInView(ref, { once: true });
 	const mainControls: AnimationControls = useAnimation();
@@ -25,14 +28,18 @@ const Reveal = ({
 
 	return (
 		<div ref={ref} style={{ position: 'relative', width, overflow: 'hidden' }}>
-			<motion.div
-				variants={variants}
-				initial="hidden"
-				animate={mainControls}
-				transition={transition}
-			>
-				{children}
-			</motion.div>
+			{disableMotion ? (
+				<div>{children}</div>
+			) : (
+				<motion.div
+					variants={variants}
+					initial="hidden"
+					animate={mainControls}
+					transition={transition}
+				>
+					{children}
+				</motion.div>
+			)}
 		</div>
 	);
 };
