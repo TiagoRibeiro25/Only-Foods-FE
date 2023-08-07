@@ -174,7 +174,7 @@ const Navbar = () => {
 										<ul className="py-2" aria-labelledby="user-menu-button">
 											<li>
 												<Link
-													to="profile"
+													to="user/me"
 													className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 												>
 													Profile
