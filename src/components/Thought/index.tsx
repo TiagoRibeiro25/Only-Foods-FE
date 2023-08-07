@@ -53,6 +53,8 @@ const Thought = (props: ThoughtProps) => {
 			});
 
 			if (response.data.success) {
+				props.thought.content = editedPost;
+				props.thought.edited = true;
 				thoughtsContext.editThought(props.thought.id, editedPost);
 				setEditModeEnabled(false);
 			}
@@ -177,6 +179,8 @@ const Thought = (props: ThoughtProps) => {
 					comments={props.thought.comments}
 					isLiked={props.thought.isLiked}
 					onLikeUpdate={(id, newLikes, isLiked) => {
+						props.thought.isLiked = isLiked;
+						props.thought.likes = newLikes;
 						thoughtsContext.updateLikes(id, newLikes, isLiked);
 					}}
 				/>
