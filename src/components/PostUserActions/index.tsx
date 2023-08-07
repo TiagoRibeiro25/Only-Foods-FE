@@ -101,7 +101,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 					effect="opacity"
 					className={classNames({
 						'cursor-pointer hover:opacity-80': loggedUser && !liking,
-						'cursor-default animate-spin': !loggedUser || liking,
+						'cursor-default animate-spin': liking,
 					})}
 					width={22}
 					onClick={handleLike}
