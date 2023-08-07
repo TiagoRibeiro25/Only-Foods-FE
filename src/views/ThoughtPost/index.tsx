@@ -5,7 +5,6 @@ import Comments from '../../components/Comments';
 import Loading from '../../components/Loading';
 import Reveal from '../../components/Reveal';
 import Thought from '../../components/Thought';
-import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 import { IThought } from '../../types/types';
 import ErrorOccurred from './components/ErrorOccurred';
@@ -14,7 +13,6 @@ const ThoughtPost = () => {
 	const { id } = useParams(); // Thought id
 	const navigate = useNavigate();
 	const { loggedUser } = useContext(UserContext);
-	const thoughtsContext = useContext(ThoughtsContext);
 
 	const [thought, setThought] = useState<IThought>();
 	const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -60,18 +58,6 @@ const ThoughtPost = () => {
 							isAdmin={loggedUser?.isAdmin ?? false}
 							isBlocked={loggedUser?.isBlocked ?? false}
 							thought={thought}
-							onDelete={() => {
-								thoughtsContext.resetAllState();
-								navigate('/feed');
-							}}
-							onEdit={(id: number, content: string) => {
-								thoughtsContext.resetAllState();
-								setThought({ ...thought, id, content, edited: true });
-							}}
-							onLikeUpdate={(id: number, newLikes: number, isLiked: boolean) => {
-								thoughtsContext.resetAllState();
-								setThought({ ...thought, id, likes: newLikes, isLiked });
-							}}
 						/>
 					</Reveal>
 				)}
