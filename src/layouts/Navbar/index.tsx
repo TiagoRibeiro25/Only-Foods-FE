@@ -22,7 +22,7 @@ const Navbar = () => {
 	const menuRef = useRef<HTMLDivElement>(null);
 
 	const toggleMenu = (): void => setMenuOpen(!isMenuOpen);
-	const toggleLogoHovered = (): void => setLogoHovered(!isLogoHovered);
+	const toggleLogoHovered = (newValue: boolean): void => setLogoHovered(newValue);
 
 	const signOut = async (): Promise<void> => {
 		setShowModal(false);
@@ -70,8 +70,8 @@ const Navbar = () => {
 				<Link
 					to={loggedUser ? 'feed' : '/'}
 					className="flex items-center"
-					onMouseEnter={toggleLogoHovered}
-					onMouseLeave={toggleLogoHovered}
+					onMouseEnter={() => toggleLogoHovered(true)}
+					onMouseLeave={() => toggleLogoHovered(false)}
 					onClick={() => window.scrollTo(0, 0)}
 				>
 					<img
