@@ -97,7 +97,8 @@ const Navbar = () => {
 							<Link
 								to="recipes"
 								className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-									location.pathname === '/recipes' && 'underline underline-offset-2'
+									location.pathname.split('/')[1] === 'recipes' &&
+									'underline underline-offset-2'
 								}`}
 							>
 								Recipes

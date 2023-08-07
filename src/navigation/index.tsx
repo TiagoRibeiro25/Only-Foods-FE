@@ -5,6 +5,7 @@ import Explore from '../views/Explore';
 import Feed from '../views/Feed';
 import Home from '../views/Home';
 import NotFound from '../views/NotFound';
+import Recipes from '../views/Recipes';
 import ResetPassword from '../views/ResetPassword';
 import ThoughtPost from '../views/ThoughtPost';
 
@@ -30,6 +31,8 @@ const Navigation = () => {
 			<Route path="/explore" element={<Explore />} />
 			<Route path="/feed" element={<Feed />} />
 			<Route path="/thought/:id" element={<ThoughtPost />} />
+			<Route path="/recipes" element={<Navigate to={'/recipes/all'} replace />} />
+			<Route path="/recipes/:tab" element={<Recipes />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);
