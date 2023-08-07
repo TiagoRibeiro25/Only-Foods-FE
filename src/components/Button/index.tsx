@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { ButtonProps } from './types';
 
 const Button = ({ ...props }: ButtonProps) => {
@@ -20,7 +21,10 @@ const Button = ({ ...props }: ButtonProps) => {
 				<img
 					src={props.icon}
 					alt={props.iconAlt ?? 'Button Icon'}
-					className={`mr-2 ml-1 animate-${props.iconAnimation ?? 'none'}`}
+					className={classNames(
+						'mr-2 ml-1',
+						props.iconAnimation && `animate-${props.iconAnimation}`,
+					)}
 					width={20}
 					height={20}
 				/>

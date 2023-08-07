@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import Button from '../Button';
@@ -58,9 +59,10 @@ const PostTextArea = (props: PostTextAreaProps) => {
 					<textarea
 						ref={textareaRef}
 						id={props.id}
-						className={`w-full px-0 py-1 text-sm text-gray-900 bg-white border-0 outline-none ${
-							props.resizable ? 'resize-y' : 'resize-none'
-						}`}
+						className={classNames(
+							'w-full px-0 py-1 text-sm text-gray-900 bg-white border-0 outline-none',
+							props.resizable ? 'resize-y' : 'resize-none',
+						)}
 						placeholder={props.placeholder}
 						maxLength={props.maxLength ?? 500}
 						minLength={props.minLength ?? 1}

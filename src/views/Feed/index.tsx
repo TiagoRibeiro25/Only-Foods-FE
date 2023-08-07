@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import requests from '../../api/requests';
 import ErrorOccurred from '../../components/ErrorOccurred';
@@ -207,7 +208,9 @@ const Feed = () => {
 				animation={loggedUser ? 'slide-left' : 'slide-top'}
 				delay={0.05}
 			>
-				<div className={`flex justify-end w-full ${loggedUser ? 'mt-6' : 'mt-0'}`}>
+				<div
+					className={classNames('flex justify-end w-full', loggedUser ? 'mt-6' : 'mt-0')}
+				>
 					<div className="w-40">
 						<Select
 							id="filter-thoughts"

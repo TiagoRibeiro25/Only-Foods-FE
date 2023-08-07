@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 
 const ScrollToTheTopIcon = () => {
@@ -18,11 +19,10 @@ const ScrollToTheTopIcon = () => {
 				type="button"
 				data-te-ripple-init
 				data-te-ripple-color="light"
-				className={`fixed p-3 text-xs font-medium leading-tight text-white uppercase bg-gray-900 rounded-full shadow-md bg-opacity-95 bottom-5 right-5 hover:bg-gray-950 hover:shadow-xl focus:bg-gray-950 focus:shadow-xl hover:scale-105 focus:outline-none focus:ring-0 active:bg-gray-950 active:shadow-xl ${
-					showButton
-						? 'transform translate-x-0 transition-transform duration-300 ease-in-out'
-						: 'transform translate-x-20 transition-transform duration-300 ease-in-out'
-				}`}
+				className={classNames(
+					'fixed p-3 text-xs font-medium leading-tight text-white uppercase bg-gray-900 rounded-full shadow-md bg-opacity-95 bottom-5 right-5 hover:bg-gray-950 hover:shadow-xl focus:bg-gray-950 focus:shadow-xl hover:scale-105 focus:outline-none focus:ring-0 active:bg-gray-950 active:shadow-xl transform transition-transform duration-300 ease-in-out',
+					showButton ? 'translate-x-0' : 'translate-x-20',
+				)}
 				id="btn-back-to-top"
 				onClick={() => window.scrollTo(0, 0)}
 			>

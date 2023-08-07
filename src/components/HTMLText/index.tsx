@@ -41,14 +41,14 @@ const HTMLText = ({ text }: { text: string }) => {
 					})}
 				</p>
 			);
-		} else {
-			// If there are no links in the paragraph, return the paragraph as it is
-			return (
-				<p key={crypto.randomUUID()} className="text-md">
-					{paragraph}
-				</p>
-			);
 		}
+
+		// If there are no links in the paragraph, return the paragraph as it is
+		return (
+			<p key={crypto.randomUUID()} className="text-md">
+				{paragraph}
+			</p>
+		);
 	};
 
 	return paragraphs.map(paragraph => {

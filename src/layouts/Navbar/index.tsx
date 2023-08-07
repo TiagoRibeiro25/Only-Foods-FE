@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
@@ -88,26 +89,31 @@ const Navbar = () => {
 						<>
 							<Link
 								to="feed"
-								className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-									location.pathname === '/feed' && 'underline underline-offset-2'
-								}`}
+								className={classNames(
+									'hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700',
+									{ 'underline underline-offset-2': location.pathname === '/feed' },
+								)}
 							>
 								Feed
 							</Link>
 							<Link
 								to="recipes"
-								className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-									location.pathname.split('/')[1] === 'recipes' &&
-									'underline underline-offset-2'
-								}`}
+								className={classNames(
+									'hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700',
+									{
+										'underline underline-offset-2':
+											location.pathname.split('/')[1] === 'recipes',
+									},
+								)}
 							>
 								Recipes
 							</Link>
 							<Link
 								to="search"
-								className={`hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700 ${
-									location.pathname === '/search' && 'underline underline-offset-2'
-								}`}
+								className={classNames(
+									'hidden mr-4 font-semibold text-gray-900 md:block text-md hover:text-gray-700',
+									{ 'underline underline-offset-2': location.pathname === '/search' },
+								)}
 							>
 								Search
 							</Link>

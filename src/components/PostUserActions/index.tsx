@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useContext, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
@@ -98,9 +99,10 @@ const PostUserActions = (props: PostUserActionsProps) => {
 					src={likeIcon}
 					alt={'Like' + props.type}
 					effect="opacity"
-					className={`${liking ? 'animate-spin' : ''} ${
-						loggedUser ? 'cursor-pointer hover:opacity-80' : 'cursor-default'
-					}`}
+					className={classNames({
+						'cursor-pointer hover:opacity-80': loggedUser && !liking,
+						'cursor-default animate-spin': !loggedUser || liking,
+					})}
 					width={22}
 					onClick={handleLike}
 				/>

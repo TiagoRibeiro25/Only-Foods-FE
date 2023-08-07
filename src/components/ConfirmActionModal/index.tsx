@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Reveal from '../Reveal';
@@ -14,9 +15,10 @@ const ConfirmActionModal = (props: ConfirmActionModalProps) => {
 			<div
 				id={props.id}
 				tabIndex={-1}
-				className={`fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 px-3 ${
-					props.show ? 'block' : 'hidden'
-				}`}
+				className={classNames(
+					'fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 px-3',
+					props.show ? 'block' : 'hidden',
+				)}
 			>
 				<Reveal animation="fade" delay={0.05} duration={0.4}>
 					<div className="relative bg-white rounded-lg shadow">

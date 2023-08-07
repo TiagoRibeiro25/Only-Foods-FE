@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { TabProps } from './types';
 
@@ -9,11 +10,12 @@ const Tabs = (props: TabProps) => {
 					<li key={element.value} className="mr-4 sm:mr-2">
 						<Link
 							to={element.link}
-							className={`inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg group ${
+							className={classNames(
+								'inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg group',
 								props.selected === element.value
 									? 'text-gray-600 border-gray-600 active'
-									: 'border-transparent'
-							}`}
+									: 'border-transparent',
+							)}
 						>
 							<img
 								className="w-6 h-6 sm:w-5 sm:h-5 sm:mr-2"
