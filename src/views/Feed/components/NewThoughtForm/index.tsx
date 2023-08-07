@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import requests from '../../../../api/requests';
 import PostTextArea from '../../../../components/PostTextarea';
-import { NewThought, NewThoughtFormProps } from '../../types';
+import { ThoughtsContext } from '../../../../contextProviders/ThoughtsContext';
+import { UserContext } from '../../../../contextProviders/UserContext';
 
-const NewThoughtForm = (props: NewThoughtFormProps) => {
+const NewThoughtForm = () => {
+	const thoughtsContext = useContext(ThoughtsContext);
+	const { loggedUser } = useContext(UserContext);
+
 	const [newThoughtText, setNewThoughtText] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 	const [statusMsg, setStatusMsg] = useState('');
@@ -19,9 +23,28 @@ const NewThoughtForm = (props: NewThoughtFormProps) => {
 
 			setStatusMsg(response.data.message);
 
-			if (response.data.success) {
+			if (response.data.success && response.data.data) {
 				setNewThoughtText('');
-				props.onSubmit(response.data.data as NewThought);
+
+				// Add the new thought to the recent thoughts
+				thoughtsContext.handleNewThought({
+					id: response.data.data.id,
+					content: response.data.data.content,
+					edited: false,
+					author: {
+						id: response.data.data.authorId,
+						username: loggedUser?.username ?? '',
+						userImage: loggedUser?.picture
+							? { cloudinaryImage: loggedUser?.picture }
+							: undefined,
+					},
+					likes: 0,
+					comments: 0,
+					isAuthor: true,
+					isLiked: false,
+					createdAgo: '0 seconds ago',
+					createdAt: response.data.data.createdAt,
+				});
 			}
 		} catch (error) {
 			console.log(error);

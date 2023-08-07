@@ -39,6 +39,10 @@ const ThoughtsContext = createContext<ThoughtsContextType>({
 	},
 
 	resetAllState: () => {},
+	handleNewThought: () => {},
+	deleteThought: () => {},
+	editThought: () => {},
+	updateLikes: () => {},
 });
 
 const ThoughtsProvider = (props: ThoughtsProviderProps) => {
@@ -148,12 +152,90 @@ const ThoughtsProvider = (props: ThoughtsProviderProps) => {
 		setFollowingIsInitialLoad(true);
 	};
 
+	const handleNewThought = (newThought: IThought) => {
+		// Add new thought to recent thoughts
+		setRecentThoughts(prevRecentThoughts => [newThought, ...prevRecentThoughts]);
+	};
+
+	const deleteThought = (thoughtId: number) => {
+		// Delete thought from recent thoughts
+		setRecentThoughts(prevRecentThoughts =>
+			prevRecentThoughts.filter(thought => thought.id !== thoughtId),
+		);
+
+		// Delete thought from popular thoughts
+		setPopularThoughts(prevPopularThoughts =>
+			prevPopularThoughts.filter(thought => thought.id !== thoughtId),
+		);
+
+		// Delete thought from following thoughts
+		setFollowingThoughts(prevFollowingThoughts =>
+			prevFollowingThoughts.filter(thought => thought.id !== thoughtId),
+		);
+	};
+
+	const editThought = (thoughtId: number, newContent: string) => {
+		// Edit thought from recent thoughts
+		setRecentThoughts(prevRecentThoughts =>
+			prevRecentThoughts.map(thought =>
+				thought.id === thoughtId
+					? { ...thought, content: newContent, edited: true }
+					: thought,
+			),
+		);
+
+		// Edit thought from popular thoughts
+		setPopularThoughts(prevPopularThoughts =>
+			prevPopularThoughts.map(thought =>
+				thought.id === thoughtId
+					? { ...thought, content: newContent, edited: true }
+					: thought,
+			),
+		);
+
+		// Edit thought from following thoughts
+		setFollowingThoughts(prevFollowingThoughts =>
+			prevFollowingThoughts.map(thought =>
+				thought.id === thoughtId
+					? { ...thought, content: newContent, edited: true }
+					: thought,
+			),
+		);
+	};
+
+	const updateLikes = (thoughtId: number, newLikes: number, isLiked: boolean) => {
+		// Update thought from recent thoughts
+		setRecentThoughts(prevRecentThoughts =>
+			prevRecentThoughts.map(thought =>
+				thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought,
+			),
+		);
+
+		// Update thought from popular thoughts
+		setPopularThoughts(prevPopularThoughts =>
+			prevPopularThoughts.map(thought =>
+				thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought,
+			),
+		);
+
+		// Update thought from following thoughts
+		setFollowingThoughts(prevFollowingThoughts =>
+			prevFollowingThoughts.map(thought =>
+				thought.id === thoughtId ? { ...thought, likes: newLikes, isLiked } : thought,
+			),
+		);
+	};
+
 	const contextValue = useMemo(
 		() => ({
 			recent: recentContextValue,
 			popular: popularContextValue,
 			following: followingContextValue,
 			resetAllState,
+			handleNewThought,
+			deleteThought,
+			editThought,
+			updateLikes,
 		}),
 		[recentContextValue, popularContextValue, followingContextValue],
 	);

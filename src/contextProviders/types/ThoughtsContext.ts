@@ -18,6 +18,10 @@ export interface ThoughtsContextType {
 	popular: ThoughtsState;
 	following: ThoughtsState;
 	resetAllState: () => void;
+	handleNewThought: (thought: IThought) => void;
+	deleteThought: (thoughtId: number) => void;
+	editThought: (thoughtId: number, newContent: string) => void;
+	updateLikes: (thoughtId: number, newLikes: number, isLiked: boolean) => void;
 }
 
 export interface ThoughtsProviderProps {

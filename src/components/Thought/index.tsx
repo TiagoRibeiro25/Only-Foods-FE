@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
@@ -7,6 +7,7 @@ import DeleteIcon from '../../assets/icons/delete.svg';
 import EditIcon from '../../assets/icons/edit.svg';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import UserPlaceholderPicture from '../../assets/imgs/user.png';
+import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import ConfirmActionModal from '../ConfirmActionModal';
 import HTMLText from '../HTMLText';
 import PostTextArea from '../PostTextarea';
@@ -15,6 +16,8 @@ import { ThoughtProps } from './types';
 
 const Thought = (props: ThoughtProps) => {
 	const navigate = useNavigate();
+	const thoughtsContext = useContext(ThoughtsContext);
+
 	const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 	const [deletingPost, setDeletingPost] = useState<boolean>(false);
 	const [editModeEnabled, setEditModeEnabled] = useState<boolean>(false);
@@ -30,7 +33,7 @@ const Thought = (props: ThoughtProps) => {
 			const response = await requests.thoughts.deleteThought({ id: props.thought.id });
 
 			if (response.data.success) {
-				props.onDelete(props.thought.id);
+				thoughtsContext.deleteThought(props.thought.id);
 			}
 		} catch (error) {
 			console.log(error);
@@ -50,7 +53,7 @@ const Thought = (props: ThoughtProps) => {
 			});
 
 			if (response.data.success) {
-				props.onEdit(props.thought.id, editedPost);
+				thoughtsContext.editThought(props.thought.id, editedPost);
 				setEditModeEnabled(false);
 			}
 		} catch (error) {
@@ -173,7 +176,9 @@ const Thought = (props: ThoughtProps) => {
 					likes={props.thought.likes}
 					comments={props.thought.comments}
 					isLiked={props.thought.isLiked}
-					onLikeUpdate={props.onLikeUpdate}
+					onLikeUpdate={(id, newLikes, isLiked) => {
+						thoughtsContext.updateLikes(id, newLikes, isLiked);
+					}}
 				/>
 			</div>
 			<ConfirmActionModal
