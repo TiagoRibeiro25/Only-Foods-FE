@@ -34,6 +34,7 @@ const Thought = (props: ThoughtProps) => {
 
 			if (response.data.success) {
 				thoughtsContext.deleteThought(props.thought.id);
+				navigate('/');
 			}
 		} catch (error) {
 			console.log(error);
