@@ -1,10 +1,26 @@
 import { useParams } from 'react-router-dom';
 import Reveal from '../../components/Reveal';
 import Tabs from '../../components/Tabs';
+import MyRecipesList from './components/MyRecipesList';
+import RecipesList from './components/RecipesList';
+import Search from './components/Search';
 import { tabs } from './tabsData';
 
 const Recipes = () => {
 	const { tab } = useParams();
+
+	const renderForm = (): React.JSX.Element => {
+		switch (tab) {
+			case 'all':
+				return <RecipesList />;
+			case 'mine':
+				return <MyRecipesList />;
+			case 'search':
+				return <Search />;
+			default:
+				return <RecipesList />;
+		}
+	};
 
 	return (
 		<div className="max-w-3xl mx-auto mt-28">
@@ -18,6 +34,8 @@ const Recipes = () => {
 					}
 				/>
 			</Reveal>
+
+			<div className="mt-8">{renderForm()}</div>
 		</div>
 	);
 };
