@@ -261,7 +261,7 @@ const Home = () => {
 					<Link
 						to="/explore"
 						type="button"
-						className="flex items-center px-4 py-6 text-2xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md sm:text-3xl font-bellefair sm:px-16 hover:scale-105"
+						className="flex items-center px-4 py-6 text-2xl transition-transform duration-300 ease-in-out border-2 border-black rounded-md sm:text-3xl font-bellefair sm:px-16 sm:hover:scale-105"
 					>
 						<LazyLoadImage
 							src={PizzaIcon}
