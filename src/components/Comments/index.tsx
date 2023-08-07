@@ -35,7 +35,9 @@ const Comments = (props: CommentsProps) => {
 		setIsLoading(true);
 
 		try {
-			const response = await requests.thoughts.getComments({
+			const type = props.type === 'thought' ? 'thoughts' : 'recipes';
+
+			const response = await requests[type].getComments({
 				id: props.id,
 				page,
 				limit: 5,
@@ -82,7 +84,7 @@ const Comments = (props: CommentsProps) => {
 			setIsLoading(false);
 			loadingRef.current = false;
 		}
-	}, [comments, page, props.id]);
+	}, [comments, page, props.id, props.type]);
 
 	const handleNewComment = (newComment: NewComment): void => {
 		const comment: IComment = {
@@ -135,7 +137,7 @@ const Comments = (props: CommentsProps) => {
 				)}
 				{!isLoading && comments.length === 0 && (
 					<NoItemsFound
-						warning="This thought has no comments yet."
+						warning={`This ${props.type} has no comments yet.`}
 						message={loggedUser ? 'Be the one who starts the conversation.' : ''}
 					/>
 				)}
