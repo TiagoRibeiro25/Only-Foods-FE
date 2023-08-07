@@ -7,7 +7,7 @@ const Tabs = (props: TabProps) => {
 		<div className="w-full border-b border-gray-700">
 			<ul className="flex flex-wrap justify-center -mb-px text-sm font-medium text-center text-gray-500">
 				{props.elements.map(element => (
-					<li key={element.value} className="mr-4 sm:mr-2">
+					<li key={element.value} className="mx-2 sm:mx-1">
 						<Link
 							to={element.link}
 							className={classNames(
