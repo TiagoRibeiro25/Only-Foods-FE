@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { ButtonProps } from './types';
 
-const Button = ({ ...props }: ButtonProps) => {
+//TODO: Refactor this component to use TailwindCSS classes
+const Button = (props: ButtonProps) => {
 	const buttonStyle = {
 		backgroundColor: props.backgroundColor ?? '#333333',
 		color: props.textColor ?? '#FFFFFF',
