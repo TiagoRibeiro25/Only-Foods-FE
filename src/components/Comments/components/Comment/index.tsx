@@ -19,9 +19,8 @@ const Comment = (props: IComment) => {
 					<LazyLoadImage
 						className="rounded-full"
 						src={props.author.userImage?.cloudinaryImage ?? UserPlaceholderPicture}
-						placeholderSrc={UserPlaceholderPicture}
 						alt="User Profile Picture"
-						effect="opacity"
+						effect="blur"
 						style={{ width: '55px', height: '55px' }}
 					/>
 				</Link>

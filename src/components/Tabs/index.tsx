@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { TabProps } from './types';
 
@@ -17,10 +18,11 @@ const Tabs = (props: TabProps) => {
 									: 'border-transparent',
 							)}
 						>
-							<img
+							<LazyLoadImage
 								className="w-6 h-6 sm:w-5 sm:h-5 sm:mr-2"
 								src={element.icon}
 								alt={element.label}
+								effect="opacity"
 							/>
 							<span className="hidden sm:block">{element.label}</span>
 						</Link>

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useContext, useEffect, useRef, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
 import UserNoPicture from '../../assets/imgs/user.png';
@@ -74,11 +75,12 @@ const Navbar = () => {
 					onMouseLeave={() => toggleLogoHovered(false)}
 					onClick={() => window.scrollTo(0, 0)}
 				>
-					<img
+					<LazyLoadImage
 						src={isLogoHovered ? LogoHovered : Logo}
 						alt="Only Foods Logo"
 						width={32}
 						height={32}
+						effect="black-and-white"
 					/>
 					<span className="self-center mt-1 text-3xl font-semibold font-bellefair whitespace-nowrap">
 						Only Foods
@@ -127,10 +129,11 @@ const Navbar = () => {
 									onClick={toggleMenu}
 								>
 									<span className="sr-only">Open user menu</span>
-									<img
+									<LazyLoadImage
 										className="w-8 h-8 rounded-full"
 										src={loggedUser.picture ?? UserNoPicture}
 										alt="user photo"
+										effect="blur"
 									/>
 								</button>
 								{isMenuOpen && (

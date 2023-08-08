@@ -10,10 +10,6 @@ import CustomizeIllustration from '../../assets/imgs/home_customize_picture.png'
 import AuthIllustration from '../../assets/imgs/home_picture.png';
 import SocialIllustration from '../../assets/imgs/home_social_picture.png';
 import TransparencyIllustration from '../../assets/imgs/home_transparency_picture.png';
-import CustomizeIllustrationPlaceholder from '../../assets/imgs/placeholders/home_customize_picture_loading.webp';
-import AuthIllustrationPlaceholder from '../../assets/imgs/placeholders/home_picture_loading.webp';
-import SocialIllustrationPlaceholder from '../../assets/imgs/placeholders/home_social_picture_loading.webp';
-import TransparencyIllustrationPlaceholder from '../../assets/imgs/placeholders/home_transparency_picture_loading.webp';
 import Reveal from '../../components/Reveal';
 import ForgotPasswordForm from './components/ForgotPasswordForm';
 import LoginForm from './components/LoginForm';
@@ -50,8 +46,7 @@ const Home = () => {
 				<div className="flex items-center justify-center w-full mb-8 md:w-1/2 md:mb-0">
 					<LazyLoadImage
 						src={AuthIllustration}
-						placeholderSrc={AuthIllustrationPlaceholder}
-						effect="opacity"
+						effect="blur"
 						alt="Home Illustration"
 						className="hidden mx-auto md:block"
 						width="auto"
@@ -91,8 +86,7 @@ const Home = () => {
 						<div className="flex items-center justify-center w-full mt-10 md:w-1/2 md:mt-0">
 							<LazyLoadImage
 								src={TransparencyIllustration}
-								placeholderSrc={TransparencyIllustrationPlaceholder}
-								effect="opacity"
+								effect="blur"
 								alt="Home Illustration"
 								width="auto"
 								height="auto"
@@ -105,8 +99,7 @@ const Home = () => {
 						<div className="flex items-center justify-center w-full mt-10 md:w-1/2 md:mt-0">
 							<LazyLoadImage
 								src={SocialIllustration}
-								placeholderSrc={SocialIllustrationPlaceholder}
-								effect="opacity"
+								effect="blur"
 								alt="Home Illustration"
 								width="auto"
 								height="auto"
@@ -149,8 +142,7 @@ const Home = () => {
 						<div className="flex items-center justify-center w-full mt-10 md:w-1/2 md:mt-0">
 							<LazyLoadImage
 								src={CustomizeIllustration}
-								placeholderSrc={CustomizeIllustrationPlaceholder}
-								effect="opacity"
+								effect="blur"
 								alt="Home Illustration"
 								width="auto"
 								height="auto"
@@ -175,7 +167,7 @@ const Home = () => {
 							<div className="flex items-center justify-center h-26">
 								<LazyLoadImage
 									src={ThoughtIcon}
-									effect="opacity"
+									effect="blur"
 									alt="Thought Icon"
 									width={100}
 									height={100}
@@ -196,7 +188,7 @@ const Home = () => {
 							<div className="flex items-center justify-center h-26">
 								<LazyLoadImage
 									src={RecipeIcon}
-									effect="opacity"
+									effect="blur"
 									alt="Recipe Icon"
 									width={75}
 									height={75}
@@ -219,7 +211,7 @@ const Home = () => {
 							<div className="flex items-center justify-center h-26">
 								<LazyLoadImage
 									src={DiscussionIcon}
-									effect="opacity"
+									effect="blur"
 									alt="Discussion Icon"
 									width={80}
 									height={80}
@@ -240,7 +232,7 @@ const Home = () => {
 							<div className="flex items-center justify-center h-26">
 								<LazyLoadImage
 									src={GroupIcon}
-									effect="opacity"
+									effect="blur"
 									alt="Group Icon"
 									width={100}
 									height={100}
@@ -265,7 +257,7 @@ const Home = () => {
 					>
 						<LazyLoadImage
 							src={PizzaIcon}
-							effect="opacity"
+							effect="blur"
 							alt="Pizza Icon"
 							width={45}
 							height={45}
@@ -274,7 +266,7 @@ const Home = () => {
 						<span className="text-center sm:mx-4">Start Exploring Now</span>
 						<LazyLoadImage
 							src={HamburgerIcon}
-							effect="opacity"
+							effect="blur"
 							alt="Pizza Icon"
 							width={45}
 							height={45}

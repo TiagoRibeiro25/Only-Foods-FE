@@ -80,9 +80,8 @@ const Thought = (props: ThoughtProps) => {
 						src={
 							props.thought.author.userImage?.cloudinaryImage ?? UserPlaceholderPicture
 						}
-						placeholderSrc={UserPlaceholderPicture}
 						alt="User Profile Picture"
-						effect="opacity"
+						effect="blur"
 						style={{ width: '55px', height: '55px' }}
 					/>
 				</Link>
@@ -119,7 +118,7 @@ const Thought = (props: ThoughtProps) => {
 							>
 								<LazyLoadImage
 									src={editModeEnabled ? CancelIcon : EditIcon}
-									effect="opacity"
+									effect="blur"
 									alt="Edit Icon"
 									width={20}
 									height={20}
@@ -137,7 +136,7 @@ const Thought = (props: ThoughtProps) => {
 								<LazyLoadImage
 									src={deletingPost ? LoadingIcon : DeleteIcon}
 									className={deletingPost ? 'animate-spin' : ''}
-									effect="opacity"
+									effect="blur"
 									alt="Edit Icon"
 									width={20}
 									height={20}
