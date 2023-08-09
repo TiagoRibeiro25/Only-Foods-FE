@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import UserPlaceholderPicture from '../../../../assets/imgs/user.png';
+import UserPlaceholderPicture from '../../../../assets/imgs/user.webp';
 import { UserContext } from '../../../../contextProviders/UserContext';
 import { IComment } from '../../../../types/types';
 import HTMLText from '../../../HTMLText';

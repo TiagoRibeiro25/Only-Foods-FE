@@ -1,5 +1,5 @@
-import RecipesBackgroundImage from '../../assets/imgs/explore_recipes.png';
-import ThoughtsBackgroundImage from '../../assets/imgs/explore_thoughts.png';
+import RecipesBackgroundImage from '../../assets/imgs/explore_recipes.webp';
+import ThoughtsBackgroundImage from '../../assets/imgs/explore_thoughts.webp';
 import RecipesBackgroundImagePlaceholder from '../../assets/imgs/placeholders/explore_recipes_loading.webp';
 import ThoughtsBackgroundImagePlaceholder from '../../assets/imgs/placeholders/explore_thoughts_loading.webp';
 import Option from './components/Option';

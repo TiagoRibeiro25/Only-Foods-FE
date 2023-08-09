@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Logo from '../../assets/logo/logo_color_2.png';
+import Logo from '../../assets/logo/logo_color_2.webp';
 import LoadingComponent from '../../components/Loading';
 import phrases from './phrases.json';
 import { LoadingProps } from './types';

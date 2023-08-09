@@ -6,7 +6,7 @@ import CancelIcon from '../../assets/icons/cancel.svg';
 import DeleteIcon from '../../assets/icons/delete.svg';
 import EditIcon from '../../assets/icons/edit.svg';
 import LoadingIcon from '../../assets/icons/loading.svg';
-import UserPlaceholderPicture from '../../assets/imgs/user.png';
+import UserPlaceholderPicture from '../../assets/imgs/user.webp';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import ConfirmActionModal from '../ConfirmActionModal';
 import HTMLText from '../HTMLText';
