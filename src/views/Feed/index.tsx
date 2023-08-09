@@ -10,26 +10,21 @@ import Select from '../../components/Select';
 import Thought from '../../components/Thought';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
-import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
+import { Filter, getFilterFromLS, setLocalStorage } from '../../utils/useLocalStorage';
 import NewThoughtForm from './components/NewThoughtForm';
 import { options } from './options';
-
-type Filter = 'recent' | 'popular' | 'following';
-
-function getFilterFromLocalStorage(isUserLogged: boolean): Filter {
-	const filter = getLocalStorage('feedThoughtFilter');
-	const result = options.some(option => option.value === filter)
-		? (filter as Filter)
-		: 'recent';
-
-	return result === 'following' && !isUserLogged ? 'recent' : result;
-}
 
 const Feed = () => {
 	const thoughtsContext = useContext(ThoughtsContext);
 	const { loggedUser } = useContext(UserContext);
 
-	const [filter, setFilter] = useState<Filter>(getFilterFromLocalStorage(!!loggedUser));
+	const [filter, setFilter] = useState<Filter>(
+		getFilterFromLS({
+			key: 'feedThoughtFilter',
+			isUserLogged: !!loggedUser,
+			options,
+		}),
+	);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [anErrorOccurred, setAnErrorOccurred] = useState<boolean>(false);
 
