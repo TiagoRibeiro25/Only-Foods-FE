@@ -75,7 +75,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 							<LazyLoadImage
 								src={CopiedIcon}
 								alt={'Copy' + props.type + 'Link'}
-								effect="blur"
+								effect="opacity"
 								className="cursor-pointer hover:opacity-80"
 								width={20}
 							/>
@@ -85,7 +85,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 					<LazyLoadImage
 						src={CopyIcon}
 						alt={'Copy' + props.type + 'Link'}
-						effect="blur"
+						effect="opacity"
 						className="cursor-pointer hover:opacity-80"
 						width={20}
 						onClick={handleCopy}
@@ -98,7 +98,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 				<LazyLoadImage
 					src={likeIcon}
 					alt={'Like' + props.type}
-					effect="blur"
+					effect="opacity"
 					className={classNames({
 						'cursor-pointer hover:opacity-80': loggedUser && !liking,
 						'cursor-default animate-spin': liking,
@@ -119,7 +119,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 					<LazyLoadImage
 						src={CommentIcon}
 						alt="See Comments"
-						effect="blur"
+						effect="opacity"
 						className="cursor-pointer hover:opacity-80"
 						width={22}
 					/>

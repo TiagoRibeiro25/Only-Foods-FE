@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputProps } from './types';
 
-const Input = ({ ...props }: InputProps) => {
+const Input = (props: InputProps) => {
 	const [value, setValue] = useState(props.value ?? '');
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

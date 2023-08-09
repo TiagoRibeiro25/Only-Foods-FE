@@ -21,6 +21,7 @@ const Tabs = (props: TabProps) => {
 							<LazyLoadImage
 								className="w-6 h-6 sm:w-5 sm:h-5 sm:mr-2"
 								src={element.icon}
+								srcSet={element.icon}
 								alt={element.label}
 								effect="opacity"
 							/>

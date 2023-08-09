@@ -1,5 +1,7 @@
 import RecipesBackgroundImage from '../../assets/imgs/explore_recipes.png';
 import ThoughtsBackgroundImage from '../../assets/imgs/explore_thoughts.png';
+import RecipesBackgroundImagePlaceholder from '../../assets/imgs/placeholders/explore_recipes_loading.webp';
+import ThoughtsBackgroundImagePlaceholder from '../../assets/imgs/placeholders/explore_thoughts_loading.webp';
 import Option from './components/Option';
 
 const Explore = () => {
@@ -16,15 +18,17 @@ const Explore = () => {
 						path="/feed"
 						description="See what others are thinking about and share your thoughts with the world."
 						backgroundImage={ThoughtsBackgroundImage}
+						backgroundImagePlaceholder={ThoughtsBackgroundImagePlaceholder}
 					/>
 				</div>
 
-				<div className="flex items-center justify-center w-1/2 my-20 lg:justify-end sm:my-44 lg:my-0">
+				<div className="flex items-center justify-center w-1/2 my-28 lg:justify-end sm:my-36 lg:my-0">
 					<Option
 						title="Recipes"
 						path="/recipes"
 						description="Find new recipes and share your own recipes with others to try."
 						backgroundImage={RecipesBackgroundImage}
+						backgroundImagePlaceholder={RecipesBackgroundImagePlaceholder}
 					/>
 				</div>
 			</div>

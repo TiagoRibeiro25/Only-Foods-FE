@@ -1,13 +1,11 @@
 import classNames from 'classnames';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
 import MaintenanceImg from '../../assets/imgs/maintenance.png';
+import MaintenanceImgPlaceholder from '../../assets/imgs/placeholders/maintenance_loading.webp';
 import Reveal from '../Reveal';
 import { UnderMaintenanceProps } from './types';
 
 const UnderMaintenance = ({ viewName, className }: UnderMaintenanceProps) => {
-	console.log();
-
 	return (
 		<div
 			className={classNames(
@@ -16,7 +14,12 @@ const UnderMaintenance = ({ viewName, className }: UnderMaintenanceProps) => {
 			)}
 		>
 			<Reveal width="100%" animation="fade" delay={0.1} duration={1}>
-				<LazyLoadImage src={MaintenanceImg} effect="blur" alt="Under Maintenance" />
+				<LazyLoadImage
+					src={MaintenanceImg}
+					placeholderSrc={MaintenanceImgPlaceholder}
+					effect="blur"
+					alt="Under Maintenance"
+				/>
 
 				<h1 className="mb-3 text-4xl font-bold text-center text-gray-900 font-bellefair">
 					Under Development

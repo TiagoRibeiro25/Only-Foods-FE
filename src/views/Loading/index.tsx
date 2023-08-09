@@ -28,7 +28,7 @@ const Loading = (props: LoadingProps) => {
 							alt="Only Foods Logo"
 							width={52}
 							height={32}
-							effect="black-and-white"
+							effect="opacity"
 						/>
 						<span className="self-center mt-3 text-4xl font-semibold select-none font-bellefair whitespace-nowrap">
 							Only Foods
