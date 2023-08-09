@@ -2,7 +2,14 @@ import { AnimationControls, motion, useAnimation, useInView } from 'framer-motio
 import { useEffect, useRef } from 'react';
 import { isMotionReduced } from '../../utils/checkUserSettings';
 import ANIMATIONS from './animations';
-import { RevealProps } from './types';
+
+interface RevealProps {
+	children?: React.ReactNode;
+	width?: 'fit-content' | '100%';
+	animation?: 'fade' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right';
+	duration?: number;
+	delay?: number;
+}
 
 const Reveal = ({
 	children,

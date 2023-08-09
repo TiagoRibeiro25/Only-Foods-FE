@@ -1,6 +1,10 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import LoadingIcon from '../../assets/icons/loading.svg';
-import { LoadingProps } from './types';
+
+interface LoadingProps {
+	width?: number;
+	height?: number;
+}
 
 const Loading = (props: LoadingProps) => {
 	return (

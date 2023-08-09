@@ -1,4 +1,13 @@
-import { SelectProps } from './types';
+interface SelectProps {
+	id: string;
+	labelText: string;
+	value: string;
+	options: {
+		text: string;
+		value: string;
+	}[];
+	onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
 
 const Select = (props: SelectProps) => {
 	return (

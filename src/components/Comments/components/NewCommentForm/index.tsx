@@ -1,8 +1,15 @@
 import { useContext, useState } from 'react';
+import { CommentsProps } from '../..';
 import requests from '../../../../api/requests';
 import PostTextArea from '../../../../components/PostTextarea';
 import { UserContext } from '../../../../contextProviders/UserContext';
-import { NewComment, NewCommentFormProps } from '../../types';
+import { IComment } from '../../../../types/types';
+
+interface NewCommentFormProps extends CommentsProps {
+	onSubmit: (arg: NewComment) => void;
+}
+
+export interface NewComment extends Omit<IComment, 'id'> {}
 
 const NewCommentForm = (props: NewCommentFormProps) => {
 	const { loggedUser } = useContext(UserContext);

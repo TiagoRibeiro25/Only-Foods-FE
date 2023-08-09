@@ -1,6 +1,16 @@
 import classNames from 'classnames';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { ButtonProps } from './types';
+
+interface ButtonProps {
+	type: 'button' | 'submit' | 'reset';
+	className?: string;
+	icon?: string;
+	iconAlt?: string;
+	iconAnimation?: 'spin' | 'pulse' | 'ping' | 'bounce' | 'none';
+	disabled?: boolean;
+	onClick?: () => void;
+	children?: React.ReactNode;
+}
 
 const Button = (props: ButtonProps) => {
 	return (

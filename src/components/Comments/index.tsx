@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import requests from '../../api/requests';
 import { UserContext } from '../../contextProviders/UserContext';
-import { IComment } from '../../types/types';
+import { IComment, ItemType } from '../../types/types';
 import ErrorOccurred from '../ErrorOccurred';
 import Loading from '../Loading';
 import NoItemsFound from '../NoItemsFound';
@@ -9,7 +9,12 @@ import ReachedEnd from '../ReachedEnd';
 import Reveal from '../Reveal';
 import Comment from './components/Comment';
 import NewCommentForm from './components/NewCommentForm';
-import { CommentsProps, NewComment } from './types';
+import { NewComment } from './types';
+
+export interface CommentsProps {
+	type: ItemType;
+	id: number;
+}
 
 const Comments = (props: CommentsProps) => {
 	const { loggedUser } = useContext(UserContext);

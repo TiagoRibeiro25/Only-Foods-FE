@@ -1,11 +1,15 @@
-// Regular expression to identify links in the paragraph and capture the link text and URL
-const linkRegex = /(?:(?:https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/gi;
+interface HTMLTextProps {
+	text: string;
+}
 
-const HTMLText = ({ text }: { text: string }) => {
+// Regular expression to identify links in the paragraph and capture the link text and URL
+const LINK_REGEX = /(?:(?:https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/gi;
+
+const HTMLText = ({ text }: HTMLTextProps) => {
 	const paragraphs = text.split('\n'); // Split content into paragraphs
 
 	const renderParagraphWithLinks = (paragraph: string): React.JSX.Element => {
-		const matches = paragraph.match(linkRegex);
+		const matches = paragraph.match(LINK_REGEX);
 
 		// if the link doesn't have http or https, add http to it
 		// if it has www replace it with http
@@ -21,7 +25,7 @@ const HTMLText = ({ text }: { text: string }) => {
 		if (newMatches && newMatches.length > 0) {
 			return (
 				<p key={crypto.randomUUID()} className="text-md">
-					{paragraph.split(linkRegex).map((part, index) => {
+					{paragraph.split(LINK_REGEX).map((part, index) => {
 						if (index % 2 === 0) {
 							return part; // Non-link text
 						} else {

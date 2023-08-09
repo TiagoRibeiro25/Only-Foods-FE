@@ -10,9 +10,18 @@ import LikeIcon from '../../assets/icons/like.svg';
 import LikedIcon from '../../assets/icons/liked.svg';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import { UserContext } from '../../contextProviders/UserContext';
+import { ItemType } from '../../types/types';
 import formatData from '../../utils/formatData';
 import Reveal from '../Reveal';
-import { PostUserActionsProps } from './types';
+
+interface PostUserActionsProps {
+	type: ItemType;
+	id: number;
+	likes: number;
+	comments: number;
+	isLiked: boolean;
+	onLikeUpdate: (id: number, newLikes: number, isLiked: boolean) => void;
+}
 
 const PostUserActions = (props: PostUserActionsProps) => {
 	const { loggedUser } = useContext(UserContext);

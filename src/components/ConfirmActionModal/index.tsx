@@ -2,7 +2,16 @@ import classNames from 'classnames';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Reveal from '../Reveal';
-import { ConfirmActionModalProps } from './types';
+
+interface ConfirmActionModalProps {
+	id: string;
+	message: string;
+	show: boolean;
+	confirmText?: string;
+	cancelText?: string;
+	onConfirm: () => void;
+	onCancel?: () => void;
+}
 
 const ConfirmActionModal = (props: ConfirmActionModalProps) => {
 	useEffect(() => {

@@ -1,7 +1,17 @@
 import classNames from 'classnames';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import { TabProps } from './types';
+
+interface TabProps {
+	id: string;
+	elements: {
+		link: string;
+		value: string;
+		icon: string;
+		label: string;
+	}[];
+	selected: string;
+}
 
 const Tabs = (props: TabProps) => {
 	return (

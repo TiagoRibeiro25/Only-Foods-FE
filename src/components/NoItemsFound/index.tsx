@@ -1,5 +1,9 @@
 import Reveal from '../Reveal';
-import { NoItemsFoundProps } from './types';
+
+interface NoItemsFoundProps {
+	warning: string;
+	message?: string;
+}
 
 const NoItemsFound = (props: NoItemsFoundProps) => {
 	return (

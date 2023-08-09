@@ -3,7 +3,11 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import MaintenanceImg from '../../assets/imgs/maintenance.webp';
 import MaintenanceImgPlaceholder from '../../assets/imgs/placeholders/maintenance_loading.webp';
 import Reveal from '../Reveal';
-import { UnderMaintenanceProps } from './types';
+
+interface UnderMaintenanceProps {
+	viewName: string;
+	className?: string;
+}
 
 const UnderMaintenance = ({ viewName, className }: UnderMaintenanceProps) => {
 	return (

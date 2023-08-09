@@ -8,12 +8,18 @@ import EditIcon from '../../assets/icons/edit.svg';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import UserPlaceholderPicture from '../../assets/imgs/user.webp';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
+import { IThought } from '../../types/types';
 import formatData from '../../utils/formatData';
 import ConfirmActionModal from '../ConfirmActionModal';
 import HTMLText from '../HTMLText';
 import PostTextArea from '../PostTextarea';
 import PostUserActions from '../PostUserActions';
-import { ThoughtProps } from './types';
+
+interface ThoughtProps {
+	thought: IThought;
+	isAdmin: boolean;
+	isBlocked: boolean;
+}
 
 const Thought = (props: ThoughtProps) => {
 	const navigate = useNavigate();

@@ -1,5 +1,16 @@
 import { useState } from 'react';
-import { InputProps } from './types';
+
+interface InputProps {
+	placeholder: string;
+	type: 'text' | 'password' | 'email' | 'number' | 'tel';
+	name: string;
+	id: string;
+	value: string;
+	required: boolean;
+	disabled?: boolean;
+	autoComplete?: string;
+	onChange: (value: string) => void;
+}
 
 const Input = (props: InputProps) => {
 	const [value, setValue] = useState(props.value ?? '');
