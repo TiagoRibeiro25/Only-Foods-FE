@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Reveal from '../../components/Reveal';
 import Tabs from '../../components/Tabs';
+import { UserContext } from '../../contextProviders/UserContext';
 import MyRecipesList from './components/MyRecipesList';
 import RecipesList from './components/RecipesList';
 import Search from './components/Search';
@@ -8,6 +10,7 @@ import { tabs } from './tabsData';
 
 const Recipes = () => {
 	const { tab } = useParams();
+	const {loggedUser} = useContext(UserContext);
 
 	const renderForm = (): React.JSX.Element => {
 		switch (tab) {
@@ -27,7 +30,9 @@ const Recipes = () => {
 			<Reveal width="100%" animation="slide-top" delay={0.05}>
 				<Tabs
 					id="recipes-tabs"
-					elements={tabs}
+					elements={
+						loggedUser ? tabs : tabs.filter(element => element.value !== 'myRecipes')
+					}
 					selected={
 						tabs.find(element => element.link.split('/')[2] === tab)?.value ??
 						tabs[0].value
