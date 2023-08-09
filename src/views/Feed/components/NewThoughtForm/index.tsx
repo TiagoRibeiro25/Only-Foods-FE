@@ -10,7 +10,7 @@ const NewThoughtForm = () => {
 
 	const [newThoughtText, setNewThoughtText] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
-	const [statusMsg, setStatusMsg] = useState('');
+	const [statusMsg, setStatusMsg] = useState<string>('');
 
 	const handleNewPost = async (): Promise<void> => {
 		setLoading(true);

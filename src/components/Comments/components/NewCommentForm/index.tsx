@@ -16,7 +16,7 @@ const NewCommentForm = (props: NewCommentFormProps) => {
 
 	const [newCommentText, setNewCommentText] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
-	const [statusMsg, setStatusMsg] = useState('');
+	const [statusMsg, setStatusMsg] = useState<string>('');
 
 	const handleNewComment = async (): Promise<void> => {
 		setLoading(true);

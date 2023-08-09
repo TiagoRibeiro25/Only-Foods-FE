@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Button from '../../components/Button';
 
 const ScrollToTheTopIcon = () => {
-	const [showButton, setShowButton] = useState(false);
+	const [showButton, setShowButton] = useState<boolean>(false);
 
 	const handleScroll = () => setShowButton(window.scrollY > 700);
 
