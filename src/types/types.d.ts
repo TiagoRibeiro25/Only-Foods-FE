@@ -18,6 +18,24 @@ export interface IThought {
 	createdAt: string;
 }
 
+export interface IRecipe {
+	id: number;
+	title: string;
+	description: string;
+	author: {
+		id: number;
+		username: string;
+	};
+	recipeImages: {
+		cloudinaryImage: string;
+	}[];
+	likes: number;
+	comments: number;
+	isAuthor: boolean;
+	isLiked: boolean;
+	createdAt: string;
+}
+
 export interface IComment {
 	id: number;
 	content: string;

@@ -6,37 +6,21 @@ const warnSetThoughts = (): void => {
 	// eslint-disable-next-line no-console
 };
 
+const initialContextThoughtsValue = {
+	thoughts: [],
+	setThoughts: warnSetThoughts,
+	page: 1,
+	incrementPage: warnSetThoughts,
+	reachedEnd: false,
+	setReachedEnd: (reachedEnd: boolean) => reachedEnd,
+	isInitialLoad: true,
+	setIsInitialLoad: (isInitialLoad: boolean) => isInitialLoad,
+};
+
 const ThoughtsContext = createContext<ThoughtsContextType>({
-	recent: {
-		thoughts: [],
-		setThoughts: warnSetThoughts,
-		page: 1,
-		incrementPage: warnSetThoughts,
-		reachedEnd: false,
-		setReachedEnd: (reachedEnd: boolean) => reachedEnd,
-		isInitialLoad: true,
-		setIsInitialLoad: (isInitialLoad: boolean) => isInitialLoad,
-	},
-	popular: {
-		thoughts: [],
-		setThoughts: warnSetThoughts,
-		page: 1,
-		incrementPage: warnSetThoughts,
-		reachedEnd: false,
-		setReachedEnd: (reachedEnd: boolean) => reachedEnd,
-		isInitialLoad: true,
-		setIsInitialLoad: (isInitialLoad: boolean) => isInitialLoad,
-	},
-	following: {
-		thoughts: [],
-		setThoughts: warnSetThoughts,
-		page: 1,
-		incrementPage: warnSetThoughts,
-		reachedEnd: false,
-		setReachedEnd: (reachedEnd: boolean) => reachedEnd,
-		isInitialLoad: true,
-		setIsInitialLoad: (isInitialLoad: boolean) => isInitialLoad,
-	},
+	recent: initialContextThoughtsValue,
+	popular: initialContextThoughtsValue,
+	following: initialContextThoughtsValue,
 
 	resetAllState: () => {},
 	handleNewThought: () => {},

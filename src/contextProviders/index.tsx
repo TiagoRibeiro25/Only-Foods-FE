@@ -1,15 +1,14 @@
+import { RecipesProvider } from './RecipesContext.tsx';
 import { ThoughtsProvider } from './ThoughtsContext.tsx';
 import { UserProvider } from './UserContext.tsx';
 
-interface ProvidersProps {
-	children: React.ReactNode;
-}
-
-const Providers = (props: ProvidersProps) => {
+const Providers = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<>
 			<UserProvider>
-				<ThoughtsProvider>{props.children}</ThoughtsProvider>
+				<ThoughtsProvider>
+					<RecipesProvider>{children}</RecipesProvider>
+				</ThoughtsProvider>
 			</UserProvider>
 		</>
 	);
