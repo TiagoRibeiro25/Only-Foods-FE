@@ -140,15 +140,14 @@ const Feed = () => {
 				<div
 					className={classNames('flex justify-end w-full', loggedUser ? 'mt-6' : 'mt-0')}
 				>
-					<div className="w-40">
-						<Select
-							id="filter-thoughts"
-							labelText="Filter Thoughts"
-							options={loggedUser ? options : options.slice(0, 2)}
-							value={filter}
-							onChange={e => setFilter(e.target.value as Filter)}
-						/>
-					</div>
+					<Select
+						className="w-40"
+						id="filter-thoughts"
+						labelText="Filter Thoughts"
+						options={loggedUser ? options : options.slice(0, 2)}
+						value={filter}
+						onChange={e => setFilter(e.target.value as Filter)}
+					/>
 				</div>
 			</Reveal>
 
