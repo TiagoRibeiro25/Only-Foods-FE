@@ -19,13 +19,19 @@ const Tabs = (props: TabProps) => {
 							)}
 						>
 							<LazyLoadImage
-								className="w-6 h-6 sm:w-5 sm:h-5 sm:mr-2"
+								className="w-6 h-6 mr-2 sm:w-5 sm:h-5"
 								src={element.icon}
 								srcSet={element.icon}
 								alt={element.label}
 								effect="opacity"
 							/>
-							<span className="hidden sm:block">{element.label}</span>
+							<span
+								className={classNames(
+									props.elements.length >= 3 ? 'hidden sm:block' : 'block',
+								)}
+							>
+								{element.label}
+							</span>
 						</Link>
 					</li>
 				))}
