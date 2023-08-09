@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface ButtonProps {
+	id?: string;
 	type: 'button' | 'submit' | 'reset';
 	className?: string;
 	icon?: string;
@@ -15,6 +16,7 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => {
 	return (
 		<button
+			{...(props.id ? { id: props.id } : {})}
 			type={props.type}
 			className={classNames(
 				'inline-flex items-center font-normal text-center transition duration-200 ease-in-out rounded-md text-md disabled:opacity-50 disabled:cursor-default hover:shadow-xl active:shadow-none',
