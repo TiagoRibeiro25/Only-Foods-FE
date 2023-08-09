@@ -3,7 +3,14 @@ import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import Reveal from '../../../../components/Reveal';
-import { OptionProps } from '../../types';
+
+interface OptionProps {
+	title: string;
+	backgroundImage: string;
+	backgroundImagePlaceholder: string;
+	description: string;
+	path: string;
+}
 
 const Option = (props: OptionProps) => {
 	const [isHovered, setIsHovered] = useState<boolean>(false);

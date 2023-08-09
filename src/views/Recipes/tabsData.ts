@@ -2,7 +2,14 @@ import MyRecipesIcon from '../../assets/icons/my-recipes.svg';
 import RecipesIcon from '../../assets/icons/recipes.svg';
 import SearchIcon from '../../assets/icons/search.svg';
 
-export const tabs = [
+interface Tab {
+	link: string;
+	value: string;
+	label: string;
+	icon: string;
+}
+
+export const tabs: Tab[] = [
 	{
 		link: '/recipes/all',
 		value: 'recipes',

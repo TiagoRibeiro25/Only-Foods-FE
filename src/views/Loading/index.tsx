@@ -3,10 +3,13 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Logo from '../../assets/logo/logo_color_2.webp';
 import LoadingComponent from '../../components/Loading';
 import phrases from './phrases.json';
-import { LoadingProps } from './types';
+
+interface LoadingProps {
+	state: 'loading' | 'error';
+}
 
 const Loading = (props: LoadingProps) => {
-	const [currentPhrase, setCurrentPhrase] = useState(
+	const [currentPhrase, setCurrentPhrase] = useState<string>(
 		phrases[Math.floor(Math.random() * phrases.length)],
 	);
 

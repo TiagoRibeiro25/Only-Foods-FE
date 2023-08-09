@@ -10,8 +10,8 @@ import Loading from './views/Loading';
 
 function App() {
 	const { setLoggedUser } = useContext(UserContext);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [error, setError] = useState<boolean>(false);
 
 	// Function to fetch logged user data
 	const fetchLoggedUser = useCallback(async () => {

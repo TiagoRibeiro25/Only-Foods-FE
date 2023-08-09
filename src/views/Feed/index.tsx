@@ -12,13 +12,9 @@ import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 import { getLocalStorage, setLocalStorage } from '../../utils/useLocalStorage';
 import NewThoughtForm from './components/NewThoughtForm';
-import { Filter } from './types';
+import { options } from './options';
 
-const options = [
-	{ text: 'Recent', value: 'recent' },
-	{ text: 'Most Popular', value: 'popular' },
-	{ text: 'Following', value: 'following' },
-];
+type Filter = 'recent' | 'popular' | 'following';
 
 function getFilterFromLocalStorage(isUserLogged: boolean): Filter {
 	const filter = getLocalStorage('feedThoughtFilter');
