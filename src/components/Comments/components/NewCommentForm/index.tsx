@@ -36,7 +36,6 @@ const NewCommentForm = (props: NewCommentFormProps) => {
 						},
 					},
 					createdAt: new Date().toISOString(),
-					createdAgo: '0 seconds ago',
 				};
 
 				setNewCommentText('');

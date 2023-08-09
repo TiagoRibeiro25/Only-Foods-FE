@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import UserPlaceholderPicture from '../../../../assets/imgs/user.webp';
 import { UserContext } from '../../../../contextProviders/UserContext';
 import { IComment } from '../../../../types/types';
+import formatData from '../../../../utils/formatData';
 import HTMLText from '../../../HTMLText';
 
 const Comment = (props: IComment) => {
@@ -39,7 +40,7 @@ const Comment = (props: IComment) => {
 							<span className="text-sm text-gray-500">(You)</span>
 						)}
 					</h3>
-					<p className="text-sm text-gray-500">{props.createdAgo} </p>
+					<p className="text-sm text-gray-500">{formatData.timeAgo(props.createdAt)} </p>
 				</div>
 			</div>
 

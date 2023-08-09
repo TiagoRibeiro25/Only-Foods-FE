@@ -8,6 +8,7 @@ import EditIcon from '../../assets/icons/edit.svg';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import UserPlaceholderPicture from '../../assets/imgs/user.webp';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
+import formatData from '../../utils/formatData';
 import ConfirmActionModal from '../ConfirmActionModal';
 import HTMLText from '../HTMLText';
 import PostTextArea from '../PostTextarea';
@@ -99,7 +100,7 @@ const Thought = (props: ThoughtProps) => {
 						)}
 					</h3>
 					<p className="text-sm text-gray-500">
-						{props.thought.createdAgo}{' '}
+						{formatData.timeAgo(props.thought.createdAt)}{' '}
 						{props.thought.edited && (
 							<span className="text-sm text-gray-500">(edited)</span>
 						)}

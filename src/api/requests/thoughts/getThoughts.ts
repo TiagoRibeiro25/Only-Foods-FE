@@ -1,28 +1,12 @@
 import { AxiosResponse } from 'axios';
+import { IThought } from '../../../types/types';
 import api from '../../axios.config';
 import { ResponseData } from '../types';
 import { handleError } from '../utils';
 
 interface LocalRequestData extends ResponseData {
 	data?: {
-		thoughts: {
-			id: number;
-			content: string;
-			edited: boolean;
-			author: {
-				id: number;
-				username: string;
-				userImage?: {
-					cloudinaryImage: string;
-				};
-			};
-			likes: number;
-			comments: number;
-			isAuthor: boolean;
-			isLiked: boolean;
-			createdAgo: string;
-			createdAt: string;
-		}[];
+		thoughts: IThought[];
 		totalCount: number;
 	};
 }

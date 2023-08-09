@@ -11,3 +11,14 @@ export const validatePassword = (password: string): boolean => {
 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 	return passwordRegex.test(password);
 };
+
+/**
+ * Format the time ago string.
+ * @param {number} time - The time value.
+ * @param {string} unit - The unit of time.
+ * @returns {string} The formatted time ago string.
+ */
+export const timeAgo = (time: number, unit: string): string => {
+	const singularForm = time === 1 ? '' : 's';
+	return `${time} ${unit}${singularForm} ago`;
+};

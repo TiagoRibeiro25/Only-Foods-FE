@@ -42,7 +42,6 @@ const NewThoughtForm = () => {
 					comments: 0,
 					isAuthor: true,
 					isLiked: false,
-					createdAgo: '0 seconds ago',
 					createdAt: response.data.data.createdAt,
 				});
 			}

@@ -15,7 +15,6 @@ export interface IThought {
 	comments: number;
 	isAuthor: boolean;
 	isLiked: boolean;
-	createdAgo: string;
 	createdAt: string;
 }
 
@@ -30,5 +29,4 @@ export interface IComment {
 		};
 	};
 	createdAt: string;
-	createdAgo: string;
 }
