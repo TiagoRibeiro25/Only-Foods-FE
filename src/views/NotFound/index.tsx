@@ -16,7 +16,9 @@ const NotFound = () => {
 						can get you back on track!
 					</p>
 					<Link to="/">
-						<Button type="button">Go back home</Button>
+						<Button type="button" className="px-8 py-3 text-white bg-zinc-800">
+							Go back home
+						</Button>
 					</Link>
 				</div>
 			</Reveal>

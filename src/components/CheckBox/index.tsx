@@ -17,7 +17,7 @@ const CheckBox = ({ ...props }: CheckBoxProps) => {
 				name={props.name}
 				type="checkbox"
 				value=""
-				className="w-4 h-4 bg-gray-100 border-gray-300 rounded cursor-pointer focus:ring-0"
+				className="w-4 h-4 bg-gray-100 border-gray-300 rounded cursor-pointer focus:ring-0 disabled:cursor-not-allowed"
 				autoComplete={props.autoComplete ?? 'off'}
 				checked={isChecked}
 				disabled={props.disabled}

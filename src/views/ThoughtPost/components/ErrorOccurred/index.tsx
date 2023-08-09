@@ -27,7 +27,11 @@ const ErrorOccurred = () => {
 				<p className="mb-3 text-xl text-center text-gray-500">
 					Something went wrong. Please try again later.
 				</p>
-				<Button type="button" padding="0.5rem 2rem" onClick={goBack}>
+				<Button
+					type="button"
+					className="py-2 text-white px-9 bg-zinc-800"
+					onClick={goBack}
+				>
 					Go back
 				</Button>
 			</div>

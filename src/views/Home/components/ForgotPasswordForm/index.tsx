@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useState } from 'react';
 import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../../../api/requests';
@@ -79,11 +80,7 @@ const ForgotPasswordForm = () => {
 					<div className="flex justify-center w-1/2">
 						<Button
 							type="reset"
-							backgroundColor="#FFFFFF"
-							textColor="#050708"
-							border={true}
-							borderColor="#050708"
-							padding="0.4rem 2.5rem"
+							className="text-black bg-white border-2 border-zinc-800 px-10 py-1.5"
 							onClick={editUrlQuery}
 							disabled={loading}
 						>
@@ -93,14 +90,16 @@ const ForgotPasswordForm = () => {
 					<div className="flex justify-center w-1/2">
 						<Button
 							type="submit"
-							border={false}
-							padding={loading ? '0.4rem 1rem' : '0.4rem 3rem'}
+							className={classNames(
+								'text-white bg-zinc-800 py-1.5',
+								loading ? 'px-8' : 'px-12',
+							)}
 							icon={loading ? LoadingIcon : ''}
 							iconAlt="Loading Icon"
 							iconAnimation="spin"
 							disabled={loading}
 						>
-							{loading ? 'Sending...' : 'Send'}
+							{loading ? 'Sending' : 'Send'}
 						</Button>
 					</div>
 				</div>

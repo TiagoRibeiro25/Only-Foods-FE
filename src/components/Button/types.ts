@@ -1,10 +1,6 @@
 export interface ButtonProps {
 	type: 'button' | 'submit' | 'reset';
-	padding?: string;
-	backgroundColor?: string;
-	border?: boolean;
-	borderColor?: string;
-	textColor?: string;
+	className?: string;
 	icon?: string;
 	iconAlt?: string;
 	iconAnimation?: 'spin' | 'pulse' | 'ping' | 'bounce' | 'none';

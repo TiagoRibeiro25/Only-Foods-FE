@@ -90,12 +90,13 @@ const ResetPassword = () => {
 				<div className="flex justify-center w-full">
 					<Button
 						type="submit"
+						className="px-6 py-3 text-white bg-zinc-800"
 						icon={loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"
 						iconAnimation="spin"
 						disabled={loading || password.trim() === '' || password !== confirmPassword}
 					>
-						Update Password
+						{loading ? 'Updating Password' : 'Update Password'}
 					</Button>
 				</div>
 			</form>

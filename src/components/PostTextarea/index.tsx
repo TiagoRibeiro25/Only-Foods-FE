@@ -79,7 +79,7 @@ const PostTextArea = (props: PostTextAreaProps) => {
 					</div>
 					<Button
 						type="submit"
-						padding="0.4rem 1.5rem"
+						className="bg-zinc-800 px-6 py-1.5 text-white"
 						icon={props.loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"
 						iconAnimation="spin"

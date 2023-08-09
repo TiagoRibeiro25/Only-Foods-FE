@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useState } from 'react';
 import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../../../api/requests';
@@ -136,7 +137,10 @@ const RegisterForm = () => {
 				<div className="w-full text-center">
 					<Button
 						type="submit"
-						padding={loading ? '0.4rem 2.5rem' : '0.4rem 4rem'}
+						className={classNames(
+							'text-white bg-zinc-800 py-1.5',
+							loading ? 'px-10' : 'px-16',
+						)}
 						icon={loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"
 						iconAnimation="spin"
