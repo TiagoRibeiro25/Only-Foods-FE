@@ -75,7 +75,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 	}, [isLiked, liking]);
 
 	return (
-		<>
+		<div className="flex flex-row gap-3">
 			{/* Copy Link */}
 			<div className="flex items-center">
 				{isCopied ? (
@@ -139,7 +139,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 					{formatData.comments(props.comments)}
 				</span>
 			</div>
-		</>
+		</div>
 	);
 };
 

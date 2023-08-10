@@ -177,21 +177,21 @@ const Thought = (props: ThoughtProps) => {
 					/>
 				)}
 			</div>
+
 			{/* Third Row */}
-			<div className="flex flex-row gap-3 mt-2">
-				<PostUserActions
-					type="thought"
-					id={props.thought.id}
-					likes={props.thought.likes}
-					comments={props.thought.comments}
-					isLiked={props.thought.isLiked}
-					onLikeUpdate={(id, newLikes, isLiked) => {
-						props.thought.isLiked = isLiked;
-						props.thought.likes = newLikes;
-						thoughtsContext.updateLikes(id, newLikes, isLiked);
-					}}
-				/>
-			</div>
+			<PostUserActions
+				type="thought"
+				id={props.thought.id}
+				likes={props.thought.likes}
+				comments={props.thought.comments}
+				isLiked={props.thought.isLiked}
+				onLikeUpdate={(id, newLikes, isLiked) => {
+					props.thought.isLiked = isLiked;
+					props.thought.likes = newLikes;
+					thoughtsContext.updateLikes(id, newLikes, isLiked);
+				}}
+			/>
+
 			<ConfirmActionModal
 				id="confirm-delete-post"
 				message="Are you sure you want to delete this post?"
