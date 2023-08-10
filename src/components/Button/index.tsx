@@ -19,7 +19,7 @@ const Button = (props: ButtonProps) => {
 			{...(props.id ? { id: props.id } : {})}
 			type={props.type}
 			className={classNames(
-				'inline-flex items-center font-normal text-center transition duration-200 ease-in-out rounded-md text-md disabled:opacity-50 disabled:cursor-default hover:shadow-xl active:shadow-none',
+				'inline-flex items-center font-normal text-center transition duration-200 ease-in-out rounded-md text-md disabled:opacity-50 disabled:cursor-default hover:shadow-md active:shadow-none',
 				props.className,
 			)}
 			disabled={props.disabled}
