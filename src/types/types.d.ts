@@ -21,7 +21,7 @@ export interface IThought {
 export interface IRecipe {
 	id: number;
 	title: string;
-	description: string;
+	description?: string;
 	author: {
 		id: number;
 		username: string;
