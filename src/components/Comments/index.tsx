@@ -8,8 +8,7 @@ import NoItemsFound from '../NoItemsFound';
 import ReachedEnd from '../ReachedEnd';
 import Reveal from '../Reveal';
 import Comment from './components/Comment';
-import NewCommentForm from './components/NewCommentForm';
-import { NewComment } from './types';
+import NewCommentForm, { NewComment } from './components/NewCommentForm';
 
 export interface CommentsProps {
 	type: ItemType;
