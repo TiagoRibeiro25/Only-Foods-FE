@@ -1,5 +1,6 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import LoadingIcon from '../../assets/icons/loading.svg';
+import Reveal from '../Reveal';
 
 interface LoadingProps {
 	width?: number;
@@ -8,16 +9,18 @@ interface LoadingProps {
 
 const Loading = (props: LoadingProps) => {
 	return (
-		<div className="flex items-center justify-center">
-			<LazyLoadImage
-				src={LoadingIcon}
-				alt="Loading Icon"
-				className="ml-1 mr-2 animate-spin"
-				width={props.width ?? 35}
-				height={props.height ?? 35}
-				effect="opacity"
-			/>
-		</div>
+		<Reveal width="100%" animation="fade" delay={0}>
+			<div className="flex items-center justify-center">
+				<LazyLoadImage
+					src={LoadingIcon}
+					alt="Loading Icon"
+					className="ml-1 mr-2 animate-spin"
+					width={props.width ?? 35}
+					height={props.height ?? 35}
+					effect="opacity"
+				/>
+			</div>
+		</Reveal>
 	);
 };
 
