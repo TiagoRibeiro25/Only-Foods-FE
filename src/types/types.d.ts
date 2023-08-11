@@ -26,9 +26,11 @@ export interface IRecipe {
 		id: number;
 		username: string;
 	};
-	recipeImages: {
-		cloudinaryImage: string;
-	}[];
+	recipeImages: [
+		{
+			cloudinaryImage: string;
+		},
+	];
 	likes: number;
 	comments: number;
 	isAuthor: boolean;
