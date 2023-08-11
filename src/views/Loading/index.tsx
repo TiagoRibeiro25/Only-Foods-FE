@@ -50,7 +50,7 @@ const Loading = (props: LoadingProps) => {
 							<span className="mx-4 text-2xl select-none font-bellefair">Loading</span>
 							<LoadingComponent width={23} height={23} />
 						</div>
-						<span className="text-xl font-bellefair">{currentPhrase}</span>
+						<span className="text-xl text-center font-bellefair">{currentPhrase}</span>
 					</>
 				)}
 			</div>
