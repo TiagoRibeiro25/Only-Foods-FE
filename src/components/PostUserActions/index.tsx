@@ -38,15 +38,16 @@ const PostUserActions = (props: PostUserActionsProps) => {
 		}
 
 		setLiking(true);
+		const itemType = props.type === 'thought' ? 'thoughts' : 'recipes';
 
 		try {
-			const response = await requests.thoughts.handleLike(props.id);
+			const response = await requests[itemType].handleLike(props.id);
 
 			if (response.data.success) {
 				const newLikeStatus: boolean = !isLiked;
 				setIsLiked(newLikeStatus);
 
-				// Update the number of likes in the thoughts state
+				// Update the number of likes in the state
 				const newLikes: number = isLiked ? props.likes - 1 : props.likes + 1;
 				props.onLikeUpdate(props.id, newLikes, newLikeStatus);
 			}
