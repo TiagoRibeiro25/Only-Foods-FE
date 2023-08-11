@@ -17,6 +17,7 @@ const ScrollToTheTopIcon = () => {
 	return (
 		<Button
 			type="button"
+			id="scroll-to-the-top-button"
 			className={classNames(
 				'fixed p-3 text-xs font-medium text-white bg-zinc-800 bg-opacity-90 bottom-5 right-5 hover:bg-zinc-950 hover:shadow-xl focus:bg-zinc-950 focus:shadow-xl focus:outline-none focus:ring-0 active:bg-zinc-950 active:shadow-xl',
 				showButton ? 'translate-x-0' : 'translate-x-20',

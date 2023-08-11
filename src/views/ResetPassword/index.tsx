@@ -90,6 +90,7 @@ const ResetPassword = () => {
 				<div className="flex justify-center w-full">
 					<Button
 						type="submit"
+						id="reset-password-button"
 						className="px-6 py-3 text-white bg-zinc-800"
 						icon={loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"

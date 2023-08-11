@@ -29,6 +29,7 @@ const ErrorOccurred = () => {
 				</p>
 				<Button
 					type="button"
+					id="go-back"
 					className="py-2 text-white px-9 bg-zinc-800"
 					onClick={goBack}
 				>

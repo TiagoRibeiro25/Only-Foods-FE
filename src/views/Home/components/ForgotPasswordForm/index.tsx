@@ -80,6 +80,7 @@ const ForgotPasswordForm = () => {
 					<div className="flex justify-center w-1/2">
 						<Button
 							type="reset"
+							id="forgot-password-cancel"
 							className="text-black bg-white border-2 border-zinc-800 px-10 py-1.5"
 							onClick={editUrlQuery}
 							disabled={loading}
@@ -90,6 +91,7 @@ const ForgotPasswordForm = () => {
 					<div className="flex justify-center w-1/2">
 						<Button
 							type="submit"
+							id="forgot-password-submit"
 							className={classNames(
 								'text-white bg-zinc-800 py-1.5',
 								loading ? 'px-8' : 'px-12',

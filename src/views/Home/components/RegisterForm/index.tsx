@@ -137,6 +137,7 @@ const RegisterForm = () => {
 				<div className="w-full text-center">
 					<Button
 						type="submit"
+						id="register-button"
 						className={classNames(
 							'text-white bg-zinc-800 py-1.5',
 							loading ? 'px-10' : 'px-16',
