@@ -51,6 +51,13 @@ const Navbar = () => {
 	};
 
 	useEffect(() => {
+		// Preload both logo images on component load
+		const preloadImages = [Logo, LogoHovered];
+		preloadImages.forEach(imageUrl => {
+			const img = new Image();
+			img.src = imageUrl;
+		});
+
 		const handleClickOutside = (event: MouseEvent): void => {
 			if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
 				setMenuOpen(false);
@@ -79,12 +86,11 @@ const Navbar = () => {
 					onMouseLeave={() => toggleLogoHovered(false)}
 					onClick={() => window.scrollTo(0, 0)}
 				>
-					<LazyLoadImage
+					<img
 						src={isLogoHovered ? LogoHovered : Logo}
 						alt="Only Foods Logo"
 						width={32}
 						height={32}
-						effect="black-and-white"
 					/>
 					<span className="self-center mt-1 text-3xl font-semibold font-bellefair whitespace-nowrap">
 						Only Foods
