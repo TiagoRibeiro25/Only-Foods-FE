@@ -30,8 +30,8 @@ const Tabs = (props: TabProps) => {
 						>
 							<LazyLoadImage
 								className={classNames(
-									'w-6 h-6 sm:w-5 sm:h-5 mr-0',
-									props.elements.length >= 3 ? 'sm:mr-2' : '',
+									'w-5 h-5 mr-2',
+									props.elements.length >= 3 && 'mr-0 sm:mr-2',
 								)}
 								src={element.icon}
 								srcSet={element.icon}
