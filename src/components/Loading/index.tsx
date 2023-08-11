@@ -10,7 +10,7 @@ interface LoadingProps {
 const Loading = (props: LoadingProps) => {
 	return (
 		<Reveal width="100%" animation="fade" delay={0}>
-			<div className="flex items-center justify-center py-1">
+			<div className="flex items-center justify-center px-1 py-1">
 				<LazyLoadImage
 					src={LoadingIcon}
 					alt="Loading Icon"
