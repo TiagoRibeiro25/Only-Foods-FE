@@ -40,9 +40,13 @@ const Navbar = () => {
 
 				// Navigate to the home page
 				navigate('/');
+			} else {
+				throw new Error(response.data.message);
 			}
 		} catch (error) {
 			console.log(error);
+			navigate('/');
+			window.location.reload();
 		}
 	};
 
