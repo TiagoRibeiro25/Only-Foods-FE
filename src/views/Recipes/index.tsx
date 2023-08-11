@@ -10,9 +10,9 @@ import { tabs } from './tabsData';
 
 const Recipes = () => {
 	const { tab } = useParams();
-	const {loggedUser} = useContext(UserContext);
+	const { loggedUser } = useContext(UserContext);
 
-	const renderForm = (): React.JSX.Element => {
+	const renderView = (): React.JSX.Element => {
 		switch (tab) {
 			case 'all':
 				return <RecipesList />;
@@ -40,7 +40,7 @@ const Recipes = () => {
 				/>
 			</Reveal>
 
-			<div className="mt-8">{renderForm()}</div>
+			<div className="mt-8">{renderView()}</div>
 		</div>
 	);
 };
