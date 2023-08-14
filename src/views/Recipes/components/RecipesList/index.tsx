@@ -35,7 +35,7 @@ const RecipesList = () => {
 
 	// Function to fetch more recipes and update the state
 	const fetchMoreRecipes = useCallback(async () => {
-		// PRevent making duplicate requests while loading or if reached the end
+		// Prevent making duplicate requests while loading or if reached the end
 		if (
 			loadingRef.current ||
 			recipesContext[filter].reachedEnd ||
@@ -75,14 +75,13 @@ const RecipesList = () => {
 				// Check if reached the end of the recipes to disable further loading
 				if (response.data.data?.totalCount === totalRecipes.length) {
 					recipesContext[filter].setReachedEnd(true);
-				} else {
-					// if the response was an 404 and there are recipes in the list, then it reached the end
-					if (response.status === 404 && recipesContext[filter].recipes.length > 0) {
-						recipesContext[filter].setReachedEnd(true);
-						return;
-					}
+				}
+			} else {
+				anErrorOccurredRef.current = true;
+				// if the response was an 404 and there are recipes in the list, then it reached the end
 
-					anErrorOccurredRef.current = true;
+				if (response.status === 404 && recipesContext[filter].recipes.length > 0) {
+					recipesContext[filter].setReachedEnd(true);
 				}
 			}
 		} catch (error) {
