@@ -1,17 +1,35 @@
+import { AxiosResponse } from 'axios';
 import api from '../../axios.config';
-import { Response } from '../types';
+import { ResponseData } from '../types';
 import { handleError } from '../utils';
+
+interface LocalRequestData extends ResponseData {
+	data?: {
+		id: number;
+		content: string;
+		authorId: number;
+		thoughtId?: number;
+		recipeId?: number;
+		createdAt: string;
+		updatedAt: string;
+	};
+}
+
+interface LocalResponse extends AxiosResponse<LocalRequestData> {
+	data: LocalRequestData;
+}
 
 interface Props {
 	id: number;
 	content: string;
 }
 
-export default async (props: Props): Promise<Response> => {
+export default async (props: Props): Promise<LocalResponse> => {
 	try {
-		const response: Response = await api.post(`/comments/${props.id}/recipe`, {
-			comment: props.content,
-		});
+		const response: AxiosResponse<LocalRequestData> = await api.post(
+			`/comments/${props.id}/recipe`,
+			{ comment: props.content },
+		);
 
 		return response;
 	} catch (error) {
