@@ -124,7 +124,7 @@ const RecipesList = () => {
 			<Reveal width="100%" animation="slide-right" delay={0.05}>
 				<div className="flex justify-end w-full">
 					<Select
-						className="w-40"
+						className="w-full sm:w-40"
 						id="filter-recipes"
 						labelText="Filter Recipes"
 						options={loggedUser ? options : options.slice(0, 2)}
