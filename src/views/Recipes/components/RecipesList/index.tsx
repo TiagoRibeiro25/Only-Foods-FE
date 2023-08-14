@@ -21,11 +21,7 @@ const RecipesList = () => {
 	const { loggedUser } = useContext(UserContext);
 
 	const [filter, setFilter] = useState<Filter>(
-		getFilterFromLS({
-			key: 'feedRecipeFilter',
-			isUserLogged: !!loggedUser,
-			options,
-		}),
+		getFilterFromLS({ key: 'feedRecipeFilter', isUserLogged: !!loggedUser, options }),
 	);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [anErrorOccurred, setAnErrorOccurred] = useState<boolean>(false);
