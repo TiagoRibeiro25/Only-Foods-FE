@@ -16,9 +16,8 @@ const Input = (props: InputProps) => {
 	const [value, setValue] = useState<string>(props.value ?? '');
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-		const newValue = event.target.value;
 		setValue(event.target.value);
-		props.onChange(newValue);
+		props.onChange(event.target.value);
 	};
 
 	// when props.value changes, update the input value
