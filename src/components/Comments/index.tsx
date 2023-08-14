@@ -8,7 +8,7 @@ import NoItemsFound from '../NoItemsFound';
 import ReachedEnd from '../ReachedEnd';
 import Reveal from '../Reveal';
 import Comment from './components/Comment';
-import NewCommentForm, { NewComment } from './components/NewCommentForm';
+import NewCommentForm from './components/NewCommentForm';
 
 export interface CommentsProps {
 	type: ItemType;
@@ -90,15 +90,6 @@ const Comments = (props: CommentsProps) => {
 		}
 	}, [comments, page, props.id, props.type]);
 
-	const handleNewComment = (newComment: NewComment): void => {
-		const comment: IComment = {
-			id: comments.length > 1 ? comments[comments.length - 1].id + 1 : 1,
-			...newComment,
-		};
-
-		setComments(prevComments => [comment, ...prevComments]);
-	};
-
 	// Attach scroll event listener to load more comments when the user reaches the bottom of the page
 	useEffect(() => {
 		// Fetch initial comments on the first render
@@ -124,7 +115,13 @@ const Comments = (props: CommentsProps) => {
 		<section className="flex flex-col w-full">
 			{loggedUser && (
 				<Reveal width="100%" animation="slide-top" delay={0.05}>
-					<NewCommentForm type={props.type} id={props.id} onSubmit={handleNewComment} />
+					<NewCommentForm
+						type={props.type}
+						id={props.id}
+						onSubmit={newComment => {
+							setComments(prevComments => [newComment, ...prevComments]);
+						}}
+					/>
 				</Reveal>
 			)}
 

@@ -6,10 +6,8 @@ import { UserContext } from '../../../../contextProviders/UserContext';
 import { IComment } from '../../../../types/types';
 
 interface NewCommentFormProps extends CommentsProps {
-	onSubmit: (arg: NewComment) => void;
+	onSubmit: (arg: IComment) => void;
 }
-
-export interface NewComment extends Omit<IComment, 'id'> {}
 
 const NewCommentForm = (props: NewCommentFormProps) => {
 	const { loggedUser } = useContext(UserContext);
@@ -32,11 +30,12 @@ const NewCommentForm = (props: NewCommentFormProps) => {
 
 			setStatusMsg(response.data.message);
 
-			if (response.data.success) {
-				const newComment: NewComment = {
+			if (response.data.success && response.data.data) {
+				const newComment: IComment = {
+					id: response.data.data.id,
 					content: newCommentText,
 					author: {
-						id: loggedUser?.id as number,
+						id: response.data.data.authorId,
 						username: loggedUser?.username as string,
 						userImage: {
 							cloudinaryImage: loggedUser?.picture as string,
