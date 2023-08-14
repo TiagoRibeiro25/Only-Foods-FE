@@ -73,10 +73,12 @@ const RecipesList = () => {
 					recipesContext[filter].setReachedEnd(true);
 				}
 			} else {
-				anErrorOccurredRef.current = true;
 				// if the response was an 404 and there are recipes in the list, then it reached the end
 				if (response.status === 404 && recipesContext[filter].recipes.length > 0) {
 					recipesContext[filter].setReachedEnd(true);
+				} else {
+					anErrorOccurredRef.current = true;
+					setAnErrorOccurred(true);
 				}
 			}
 		} catch (error) {
@@ -106,7 +108,7 @@ const RecipesList = () => {
 
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
-	});
+	}, [fetchMoreRecipes, filter, recipesContext]);
 
 	useEffect(() => {
 		setLocalStorage('feedRecipeFilter', filter);
