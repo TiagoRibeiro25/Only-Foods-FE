@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { UserContext } from '../contextProviders/UserContext';
+import AddRecipe from '../views/AddRecipe';
 import AdminPanel from '../views/AdminPanel';
 import Explore from '../views/Explore';
 import Feed from '../views/Feed';
@@ -36,6 +37,7 @@ const Navigation = () => {
 			<Route path="/feed" element={<Feed />} />
 			<Route path="/thought/:id" element={<ThoughtPost />} />
 			<Route path="/recipes" element={<Navigate to={'/recipes/all'} replace />} />
+			<Route path="/recipes/add" element={<AddRecipe />} />
 			<Route path="/recipes/:tab" element={<Recipes />} />
 			<Route path="/search" element={<Search />} />
 			<Route path="/user/:id" element={<User />} />
