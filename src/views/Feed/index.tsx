@@ -137,7 +137,7 @@ const Feed = () => {
 					className={classNames('flex justify-end w-full', loggedUser ? 'mt-6' : 'mt-0')}
 				>
 					<Select
-						className="w-40"
+						className="w-full sm:w-40"
 						id="filter-thoughts"
 						labelText="Filter Thoughts"
 						options={loggedUser ? options : options.slice(0, 2)}
