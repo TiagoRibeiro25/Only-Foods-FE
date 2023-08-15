@@ -1,10 +1,10 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import requests from '../../../../api/requests/index.ts';
-import ErrorOccurred from '../../../../components/ErrorOccurred/index.tsx';
-import Loading from '../../../../components/Loading/index.tsx';
-import NoItemsFound from '../../../../components/NoItemsFound/index.tsx';
-import ReachedEnd from '../../../../components/ReachedEnd/index.tsx';
-import Recipe from '../../../../components/Recipe/index.tsx';
+import ErrorOccurred from '../../../../components/ErrorOccurred';
+import Loading from '../../../../components/Loading';
+import NoItemsFound from '../../../../components/NoItemsFound';
+import ReachedEnd from '../../../../components/ReachedEnd';
+import Recipe from '../../../../components/Recipe';
 import Reveal from '../../../../components/Reveal';
 import Select from '../../../../components/Select';
 import { RecipesContext } from '../../../../contextProviders/RecipesContext.tsx';
