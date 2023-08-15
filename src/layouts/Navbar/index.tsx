@@ -230,10 +230,10 @@ const Navbar = () => {
 						</>
 					) : (
 						<Link
-							to="/?form=register"
+							to="/explore"
 							className="mr-4 font-semibold text-gray-900 text-md hover:text-gray-700 hover:underline"
 						>
-							{location.pathname === '/' ? '' : 'Sign Up'}
+							{location.pathname === '/explore' ? '' : 'Explore'}
 						</Link>
 					)}
 				</div>
