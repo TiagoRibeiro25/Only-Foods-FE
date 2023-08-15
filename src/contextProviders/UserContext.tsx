@@ -3,7 +3,7 @@ import { User, UserContextType, UserProviderProps } from './types/UserContext';
 
 // Helper function for the placeholder setLoggedUser
 const warnSetLoggedUser = (): void => {
-	// eslint-disable-next-line no-console
+	// Empty function
 };
 
 // Initialize UserContext with default values for user and setLoggedUser

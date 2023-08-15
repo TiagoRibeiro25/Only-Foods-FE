@@ -3,7 +3,7 @@ import { IThought } from '../types/types';
 import { ThoughtsContextType, ThoughtsProviderProps } from './types/ThoughtsContext';
 
 const warnSetThoughts = (): void => {
-	// eslint-disable-next-line no-console
+	// Empty function
 };
 
 const initialContextThoughtsValue = {

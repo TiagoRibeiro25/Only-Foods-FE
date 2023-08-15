@@ -3,7 +3,7 @@ import { IRecipe } from '../types/types';
 import { RecipesContextType, RecipesProviderProps } from './types/RecipesContext';
 
 const warnSetRecipes = (): void => {
-	// eslint-disable-next-line no-console
+	// Empty function
 };
 
 const initialContextRecipesValue = {
