@@ -4,7 +4,7 @@ import Marquee from 'react-fast-marquee';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
-import ExploreIcon from '../../assets/icons/magnifying-glass.svg';
+import ExploreIcon from '../../assets/icons/search.svg';
 import UserNoPicture from '../../assets/imgs/user.webp';
 import Logo from '../../assets/logo/logo_bw_1.webp';
 import LogoHovered from '../../assets/logo/logo_color_2.webp';
