@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import requests from './api/requests';
 import { UserContext } from './contextProviders/UserContext';
+import CreateAccountMessage from './layouts/CreateAccountMessage';
 import Footer from './layouts/Footer';
 import Navbar from './layouts/Navbar';
 import ScrollToTheTopIcon from './layouts/ScrollToTheTopIcon';
@@ -9,7 +10,7 @@ import Navigation from './navigation';
 import Loading from './views/Loading';
 
 function App() {
-	const { setLoggedUser } = useContext(UserContext);
+	const { loggedUser, setLoggedUser } = useContext(UserContext);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<boolean>(false);
 
@@ -59,8 +60,10 @@ function App() {
 					<main className="max-w-screen-xl min-h-screen px-4 mx-auto mt-20">
 						<Navigation />
 					</main>
-					<ScrollToTheTopIcon />
 					<Footer />
+
+					<ScrollToTheTopIcon />
+					{!loggedUser && <CreateAccountMessage />}
 				</Router>
 			)}
 		</>
