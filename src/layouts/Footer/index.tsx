@@ -1,6 +1,19 @@
+import classNames from 'classnames';
+import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import { UserContext } from '../../contextProviders/UserContext';
+
 const Footer = () => {
+	const location = useLocation();
+	const { loggedUser } = useContext(UserContext);
+
 	return (
-		<footer className="w-full max-w-screen-xl p-4 mx-auto mb-4 text-center lg:text-start lg:flex lg:items-center lg:justify-between">
+		<footer
+			className={classNames(
+				'w-full max-w-screen-xl p-4 mx-auto text-center lg:text-start lg:flex lg:items-center lg:justify-between',
+				loggedUser || location.pathname === '/' ? 'mb-4' : 'mb-28',
+			)}
+		>
 			<span className="text-gray-500 text-md lg:text-center">
 				🍔 Only Foods - Where Taste Meets Adventure - Made with ♥️ by{' '}
 				<a
