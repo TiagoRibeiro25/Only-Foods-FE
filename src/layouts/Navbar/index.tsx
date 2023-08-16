@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useContext, useEffect, useRef, useState } from 'react';
+import Marquee from 'react-fast-marquee';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
@@ -24,6 +25,18 @@ const Navbar = () => {
 
 	const toggleMenu = (): void => setMenuOpen(!isMenuOpen);
 	const toggleLogoHovered = (newValue: boolean): void => setLogoHovered(newValue);
+
+	const getUserStatus = (): string => {
+		if (loggedUser?.isAdmin) {
+			return '- Admin User -';
+		}
+
+		if (loggedUser?.isBlocked) {
+			return '- Blocked User -';
+		}
+
+		return '- Normal User -';
+	};
 
 	const signOut = async (): Promise<void> => {
 		setShowModal(false);
@@ -155,9 +168,14 @@ const Navbar = () => {
 											<span className="block text-sm text-gray-900">
 												{loggedUser.username}
 											</span>
-											<span className="block text-sm text-gray-500 truncate">
+											<Marquee
+												className="block text-sm text-gray-500 truncate"
+												speed={33}
+												pauseOnHover
+											>
 												{loggedUser.email}
-											</span>
+												<span className="mx-1">{getUserStatus()}</span>
+											</Marquee>
 										</div>
 										<ul
 											className="block py-2 md:hidden"
