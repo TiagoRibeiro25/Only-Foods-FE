@@ -53,7 +53,8 @@ const Footer = () => {
 						target="_blank"
 						rel="noreferrer"
 					>
-						Documentation
+						<span className="hidden sm:block">Documentation</span>
+						<span className="block sm:hidden">Docs</span>
 					</a>
 				</li>
 			</ul>
