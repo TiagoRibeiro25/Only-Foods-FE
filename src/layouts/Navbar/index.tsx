@@ -4,6 +4,7 @@ import Marquee from 'react-fast-marquee';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
+import ExploreIcon from '../../assets/icons/magnifying-glass.svg';
 import UserNoPicture from '../../assets/imgs/user.webp';
 import Logo from '../../assets/logo/logo_bw_1.webp';
 import LogoHovered from '../../assets/logo/logo_color_2.webp';
@@ -238,9 +239,19 @@ const Navbar = () => {
 					) : (
 						<Link
 							to="/explore"
-							className="mr-4 font-semibold text-gray-900 text-md hover:text-gray-700 hover:underline"
+							className={classNames(
+								'flex flex-row mr-1 font-semibold text-gray-900 text-md hover:text-gray-700',
+								location.pathname === '/explore' && 'hidden',
+							)}
 						>
-							{location.pathname === '/explore' ? '' : 'Explore'}
+							<span className="flex items-center justify-center">
+								<img
+									className="w-6 h-6 sm:mr-1 sm:w-4 sm:h-4"
+									src={ExploreIcon}
+									alt="Explore"
+								/>
+							</span>
+							<span className="hidden pt-1 text-xl sm:block font-bellefair">Explore</span>
 						</Link>
 					)}
 				</div>
