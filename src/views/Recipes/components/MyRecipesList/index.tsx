@@ -106,19 +106,21 @@ const MyRecipesList = () => {
 
 	return (
 		<div className="flex flex-col items-center justify-center">
-			<div className="flex w-full">
-				<Link to="/recipes/add" className="w-full sm:w-40">
-					<Reveal width="100%" animation="slide-left" delay={0.05}>
-						<Button
-							id="add-recipe"
-							type="button"
-							className="py-1.5 text-white px-8 bg-zinc-800 text-center w-full flex justify-center"
-						>
-							Add Recipe
-						</Button>
-					</Reveal>
-				</Link>
-			</div>
+			{!loggedUser?.isBlocked && (
+				<div className="flex w-full">
+					<Link to="/recipes/add" className="w-full sm:w-40">
+						<Reveal width="100%" animation="slide-left" delay={0.05}>
+							<Button
+								id="add-recipe"
+								type="button"
+								className="py-1.5 text-white px-8 bg-zinc-800 text-center w-full flex justify-center"
+							>
+								Add Recipe
+							</Button>
+						</Reveal>
+					</Link>
+				</div>
+			)}
 
 			{/* Recipes */}
 			<div className="flex flex-wrap justify-start w-full gap-5 my-10">

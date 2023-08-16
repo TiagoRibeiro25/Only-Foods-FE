@@ -113,7 +113,7 @@ const Comments = (props: CommentsProps) => {
 
 	return (
 		<section className="flex flex-col w-full">
-			{loggedUser && (
+			{loggedUser && !loggedUser.isBlocked && (
 				<Reveal width="100%" animation="slide-top" delay={0.05}>
 					<NewCommentForm
 						type={props.type}

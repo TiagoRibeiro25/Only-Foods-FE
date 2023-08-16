@@ -121,7 +121,7 @@ const Feed = () => {
 	return (
 		<div className="flex flex-col items-center max-w-3xl mx-auto mt-28">
 			{/* Add New Thought Form */}
-			{loggedUser && (
+			{loggedUser && !loggedUser.isBlocked && (
 				<Reveal width="100%" animation="slide-top" delay={0.05}>
 					<NewThoughtForm />
 				</Reveal>

@@ -33,7 +33,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 
 	const handleLike = async (): Promise<void> => {
 		// If the user is not logged in or the like request is being processed, return
-		if (!loggedUser || liking) {
+		if (!loggedUser || loggedUser.isBlocked || liking) {
 			return;
 		}
 
