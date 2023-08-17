@@ -8,6 +8,7 @@ import Feed from '../views/Feed';
 import Home from '../views/Home';
 import Messages from '../views/Messages';
 import NotFound from '../views/NotFound';
+import Recipe from '../views/Recipe';
 import Recipes from '../views/Recipes';
 import ResetPassword from '../views/ResetPassword';
 import Search from '../views/Search';
@@ -39,6 +40,7 @@ const Navigation = () => {
 			<Route path="/recipes" element={<Navigate to={'/recipes/all'} replace />} />
 			<Route path="/recipes/add" element={<AddRecipe />} />
 			<Route path="/recipes/:tab" element={<Recipes />} />
+			<Route path="/recipe/:id" element={<Recipe />} />
 			<Route path="/search" element={<Search />} />
 			<Route path="/user/:id" element={<User />} />
 			<Route path="/messages" element={<Messages />} />
