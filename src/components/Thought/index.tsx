@@ -138,7 +138,7 @@ const Thought: React.FC<ThoughtProps> = ({ thought, isAdmin, isBlocked }) => {
 									src={deletingPost ? LoadingIcon : DeleteIcon}
 									className={deletingPost ? 'animate-spin' : ''}
 									effect="blur"
-									alt="Edit Icon"
+									alt="Delete Icon"
 									width={20}
 									height={20}
 								/>
