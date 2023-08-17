@@ -15,7 +15,7 @@ export interface CommentsProps {
 	id: number;
 }
 
-const Comments = (props: CommentsProps) => {
+const Comments: React.FC<CommentsProps> = ({ type, id }) => {
 	const { loggedUser } = useContext(UserContext);
 
 	const [comments, setComments] = useState<IComment[]>([]);
@@ -39,10 +39,10 @@ const Comments = (props: CommentsProps) => {
 		setIsLoading(true);
 
 		try {
-			const type = props.type === 'thought' ? 'thoughts' : 'recipes';
+			const itemType = type === 'thought' ? 'thoughts' : 'recipes';
 
-			const response = await requests[type].getComments({
-				id: props.id,
+			const response = await requests[itemType].getComments({
+				id: id,
 				page,
 				limit: 5,
 			});
@@ -88,7 +88,7 @@ const Comments = (props: CommentsProps) => {
 			setIsLoading(false);
 			loadingRef.current = false;
 		}
-	}, [comments, page, props.id, props.type]);
+	}, [type, id, page, comments]);
 
 	// Attach scroll event listener to load more comments when the user reaches the bottom of the page
 	useEffect(() => {
@@ -116,8 +116,8 @@ const Comments = (props: CommentsProps) => {
 			{loggedUser && !loggedUser.isBlocked && (
 				<Reveal width="100%" animation="slide-top" delay={0.05}>
 					<NewCommentForm
-						type={props.type}
-						id={props.id}
+						type={type}
+						id={id}
 						onSubmit={newComment => {
 							setComments(prevComments => [newComment, ...prevComments]);
 						}}
@@ -138,7 +138,7 @@ const Comments = (props: CommentsProps) => {
 				)}
 				{!isLoading && comments.length === 0 && (
 					<NoItemsFound
-						warning={`This ${props.type} has no comments yet.`}
+						warning={`This ${type} has no comments yet.`}
 						message={loggedUser ? 'Be the one who starts the conversation.' : ''}
 					/>
 				)}

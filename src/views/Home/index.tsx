@@ -19,7 +19,7 @@ import ForgotPasswordForm from './components/ForgotPasswordForm';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 
-const Home = () => {
+const Home: React.FC = () => {
 	const location = useLocation();
 
 	const renderForm = (): React.JSX.Element => {

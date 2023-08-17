@@ -7,7 +7,7 @@ interface LoadingProps {
 	height?: number;
 }
 
-const Loading = (props: LoadingProps) => {
+const Loading: React.FC<LoadingProps> = ({ width, height }) => {
 	return (
 		<Reveal width="100%" animation="fade" delay={0}>
 			<div className="flex items-center justify-center px-1 py-1">
@@ -15,8 +15,8 @@ const Loading = (props: LoadingProps) => {
 					src={LoadingIcon}
 					alt="Loading Icon"
 					className="ml-1 mr-2 animate-spin"
-					width={props.width ?? 35}
-					height={props.height ?? 35}
+					width={width ?? 35}
+					height={height ?? 35}
 					effect="opacity"
 				/>
 			</div>

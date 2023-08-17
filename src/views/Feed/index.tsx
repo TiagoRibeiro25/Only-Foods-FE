@@ -14,7 +14,7 @@ import { Filter, getFilterFromLS, setLocalStorage } from '../../utils/useLocalSt
 import NewThoughtForm from './components/NewThoughtForm';
 import { options } from './options';
 
-const Feed = () => {
+const Feed: React.FC = () => {
 	const thoughtsContext = useContext(ThoughtsContext);
 	const { loggedUser } = useContext(UserContext);
 

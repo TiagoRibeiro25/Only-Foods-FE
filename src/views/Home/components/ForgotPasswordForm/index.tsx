@@ -6,7 +6,7 @@ import LoadingIcon from '../../../../assets/icons/loading.svg';
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 
-const ForgotPasswordForm = () => {
+const ForgotPasswordForm: React.FC = () => {
 	const location: Location = useLocation();
 	const navigate: NavigateFunction = useNavigate();
 

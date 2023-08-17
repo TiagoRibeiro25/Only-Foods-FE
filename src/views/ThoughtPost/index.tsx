@@ -9,7 +9,7 @@ import { UserContext } from '../../contextProviders/UserContext';
 import { IThought } from '../../types/types';
 import ErrorOccurred from './components/ErrorOccurred';
 
-const ThoughtPost = () => {
+const ThoughtPost: React.FC = () => {
 	const { id } = useParams(); // Thought id
 	const navigate = useNavigate();
 	const { loggedUser } = useContext(UserContext);

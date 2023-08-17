@@ -9,7 +9,7 @@ import Input from '../../../../components/Input';
 import { ThoughtsContext } from '../../../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../../../contextProviders/UserContext';
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 

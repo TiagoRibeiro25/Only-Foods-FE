@@ -9,33 +9,37 @@ interface CheckBoxProps {
 	onChange: (value: boolean) => void;
 }
 
-const CheckBox = ({ ...props }: CheckBoxProps) => {
+const CheckBox: React.FC<CheckBoxProps> = ({
+	placeholder,
+	id,
+	name,
+	autoComplete,
+	disabled,
+	onChange,
+}) => {
 	const [isChecked, SetIsChecked] = useState<boolean>(false);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		const newValue = event.target.checked;
 		SetIsChecked(event.target.checked);
-		props.onChange(newValue);
+		onChange(newValue);
 	};
 
 	return (
 		<div className="flex items-center">
 			<input
-				id={props.id}
-				name={props.name}
+				id={id}
+				name={name}
 				type="checkbox"
 				value=""
 				className="w-4 h-4 bg-gray-100 border-gray-300 rounded cursor-pointer focus:ring-0 disabled:cursor-not-allowed"
-				autoComplete={props.autoComplete ?? 'off'}
+				autoComplete={autoComplete ?? 'off'}
 				checked={isChecked}
-				disabled={props.disabled}
+				disabled={disabled}
 				onChange={handleChange}
 			/>
-			<label
-				htmlFor={props.id}
-				className="ml-2 text-sm font-medium text-gray-900 select-none"
-			>
-				{props.placeholder}
+			<label htmlFor={id} className="ml-2 text-sm font-medium text-gray-900 select-none">
+				{placeholder}
 			</label>
 		</div>
 	);

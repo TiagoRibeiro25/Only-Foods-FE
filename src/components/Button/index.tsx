@@ -13,34 +13,42 @@ interface ButtonProps {
 	children?: React.ReactNode;
 }
 
-const Button = (props: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({
+	id,
+	type,
+	className,
+	icon,
+	iconAlt,
+	iconAnimation,
+	disabled,
+	onClick,
+	children,
+}) => {
 	return (
 		<button
-			{...(props.id ? { id: props.id } : {})}
-			type={props.type}
+			{...(id ? { id: id } : {})}
+			type={type}
 			className={classNames(
 				'inline-flex items-center font-normal text-center transition duration-200 ease-in-out rounded-md text-md disabled:opacity-50 disabled:cursor-default hover:shadow-md active:shadow-none',
-				props.className,
+				className,
 			)}
-			disabled={props.disabled}
-			onClick={props.onClick}
+			disabled={disabled}
+			onClick={onClick}
 		>
 			<div className="flex items-center">
-				{props.icon && (
+				{icon && (
 					<div className="flex mr-2">
 						<LazyLoadImage
-							src={props.icon}
-							alt={props.iconAlt ?? 'Button Icon'}
-							className={classNames(
-								props.iconAnimation && `animate-${props.iconAnimation}`,
-							)}
+							src={icon}
+							alt={iconAlt ?? 'Button Icon'}
+							className={classNames(iconAnimation && `animate-${iconAnimation}`)}
 							width={20}
 							height={20}
 							effect="opacity"
 						/>
 					</div>
 				)}
-				{props.children}
+				{children}
 			</div>
 		</button>
 	);

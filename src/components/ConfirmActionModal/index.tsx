@@ -13,20 +13,28 @@ interface ConfirmActionModalProps {
 	onCancel?: () => void;
 }
 
-const ConfirmActionModal = (props: ConfirmActionModalProps) => {
+const ConfirmActionModal: React.FC<ConfirmActionModalProps> = ({
+	id,
+	message,
+	show,
+	confirmText,
+	cancelText,
+	onConfirm,
+	onCancel,
+}) => {
 	useEffect(() => {
-		document.body.style.overflow = props.show ? 'hidden' : '';
-	}, [props.show]);
+		document.body.style.overflow = show ? 'hidden' : '';
+	}, [show]);
 
 	return (
-		props.show &&
+		show &&
 		ReactDOM.createPortal(
 			<div
-				id={props.id}
+				id={id}
 				tabIndex={-1}
 				className={classNames(
 					'fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 px-3',
-					props.show ? 'block' : 'hidden',
+					show ? 'block' : 'hidden',
 				)}
 			>
 				<Reveal animation="fade" delay={0.05} duration={0.4}>
@@ -34,7 +42,7 @@ const ConfirmActionModal = (props: ConfirmActionModalProps) => {
 						<button
 							type="button"
 							className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
-							onClick={props.onCancel}
+							onClick={onCancel}
 						>
 							<svg
 								className="w-3 h-3"
@@ -69,21 +77,21 @@ const ConfirmActionModal = (props: ConfirmActionModalProps) => {
 									d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
 								/>
 							</svg>
-							<h3 className="mb-5 text-lg font-normal text-gray-500">{props.message}</h3>
+							<h3 className="mb-5 text-lg font-normal text-gray-500">{message}</h3>
 							<button
 								type="button"
 								className="text-white bg-gray-900 hover:bg-gray-950 focus:ring-4 focus:outline-none focus:ring-gray-900 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-								onClick={props.onConfirm}
+								onClick={onConfirm}
 							>
-								{props.confirmText ?? "Yes, I'm sure"}
+								{confirmText ?? "Yes, I'm sure"}
 							</button>
 
 							<button
 								type="button"
 								className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
-								onClick={props.onCancel}
+								onClick={onCancel}
 							>
-								{props.cancelText ?? 'No, cancel'}
+								{cancelText ?? 'No, cancel'}
 							</button>
 						</div>
 					</div>

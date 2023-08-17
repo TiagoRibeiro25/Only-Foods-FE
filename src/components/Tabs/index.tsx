@@ -13,17 +13,17 @@ interface TabProps {
 	selected: string;
 }
 
-const Tabs = (props: TabProps) => {
+const Tabs: React.FC<TabProps> = ({ id, elements, selected }) => {
 	return (
-		<div className="w-full border-b border-gray-700">
+		<div id={id} className="w-full border-b border-gray-700">
 			<ul className="flex flex-wrap justify-center -mb-px text-sm text-center text-gray-500">
-				{props.elements.map(element => (
+				{elements.map(element => (
 					<li key={element.value} className="mx-2 sm:mx-1">
 						<Link
 							to={element.link}
 							className={classNames(
 								'inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg group font-bellefair text-lg',
-								props.selected === element.value
+								selected === element.value
 									? 'text-gray-600 border-gray-600 active'
 									: 'border-transparent',
 							)}
@@ -31,7 +31,7 @@ const Tabs = (props: TabProps) => {
 							<LazyLoadImage
 								className={classNames(
 									'w-5 h-5',
-									props.elements.length >= 3 ? 'mr-0 sm:mr-2' : 'mr-2',
+									elements.length >= 3 ? 'mr-0 sm:mr-2' : 'mr-2',
 								)}
 								src={element.icon}
 								srcSet={element.icon}
@@ -39,9 +39,7 @@ const Tabs = (props: TabProps) => {
 								effect="opacity"
 							/>
 							<span
-								className={classNames(
-									props.elements.length >= 3 ? 'hidden sm:block' : 'block',
-								)}
+								className={classNames(elements.length >= 3 ? 'hidden sm:block' : 'block')}
 							>
 								{element.label}
 							</span>

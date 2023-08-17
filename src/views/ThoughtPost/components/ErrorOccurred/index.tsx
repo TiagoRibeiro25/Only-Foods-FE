@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../../../components/Button';
 import Reveal from '../../../../components/Reveal';
 
-const ErrorOccurred = () => {
+const ErrorOccurred: React.FC = () => {
 	const navigate = useNavigate();
 	const goBack = () => navigate(-1);
 

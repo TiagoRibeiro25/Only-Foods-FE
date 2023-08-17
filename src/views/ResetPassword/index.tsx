@@ -6,7 +6,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { validatePassword } from '../../utils/validateData';
 
-const ResetPassword = () => {
+const ResetPassword: React.FC = () => {
 	const params = useParams();
 	const token = params.token as string;
 

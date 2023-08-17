@@ -1,6 +1,6 @@
 import UnderMaintenance from '../../components/UnderMaintenance';
 
-const Messages = () => {
+const Messages: React.FC = () => {
 	return (
 		<div className="flex items-center justify-center">
 			<UnderMaintenance viewName="Messages" className="sm:mt-24" />

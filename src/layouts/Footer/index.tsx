@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { UserContext } from '../../contextProviders/UserContext';
 
-const Footer = () => {
+const Footer: React.FC = () => {
 	const location = useLocation();
 	const { loggedUser } = useContext(UserContext);
 

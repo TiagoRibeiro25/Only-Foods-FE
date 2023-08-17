@@ -11,13 +11,13 @@ interface RevealProps {
 	delay?: number;
 }
 
-const Reveal = ({
+const Reveal: React.FC<RevealProps> = ({
 	children,
 	width = 'fit-content',
 	animation = 'fade',
 	duration = 0.5,
 	delay = 0.3,
-}: RevealProps) => {
+}) => {
 	const disableMotion: boolean = isMotionReduced();
 
 	const ref: React.MutableRefObject<null> = useRef(null);

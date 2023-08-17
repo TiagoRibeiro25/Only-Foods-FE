@@ -16,7 +16,7 @@ import {
 } from '../../../../utils/useLocalStorage';
 import { options } from './options';
 
-const RecipesList = () => {
+const RecipesList: React.FC = () => {
 	const recipesContext = useContext(RecipesContext);
 	const { loggedUser } = useContext(UserContext);
 

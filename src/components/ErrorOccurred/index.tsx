@@ -4,7 +4,7 @@ interface ErrorOccurredProps {
 	text: string;
 }
 
-const ErrorOccurred = ({ text }: ErrorOccurredProps) => {
+const ErrorOccurred: React.FC<ErrorOccurredProps> = ({ text }) => {
 	return (
 		<Reveal width="100%" animation="slide-bottom" delay={0.05}>
 			<div className="flex flex-col items-center justify-center gap-2 pt-8 pb-12 text-center col-span-full md:pb-6">

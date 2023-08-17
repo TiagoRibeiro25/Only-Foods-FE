@@ -8,7 +8,7 @@ import RecipesList from './components/RecipesList';
 import Search from './components/Search';
 import { tabs } from './tabsData';
 
-const Recipes = () => {
+const Recipes: React.FC = () => {
 	const { tab } = useParams();
 	const { loggedUser } = useContext(UserContext);
 

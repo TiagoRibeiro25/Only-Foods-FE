@@ -7,19 +7,17 @@ import { IComment } from '../../../../types/types';
 import formatData from '../../../../utils/formatData';
 import HTMLText from '../../../HTMLText';
 
-const Comment = (props: IComment) => {
+const Comment: React.FC<IComment> = ({ id, content, author, createdAt }) => {
 	const { loggedUser } = useContext(UserContext);
 
 	return (
-		<div id={`comment-${props.id}`} className="mb-16">
+		<div id={`comment-${id}`} className="mb-16">
 			{/* First Row */}
 			<div className="flex flex-row">
-				<Link
-					to={`/profile/${props.author.id === loggedUser?.id ? 'me' : props.author.id}`}
-				>
+				<Link to={`/profile/${author.id === loggedUser?.id ? 'me' : author.id}`}>
 					<LazyLoadImage
 						className="rounded-full"
-						src={props.author.userImage?.cloudinaryImage ?? UserPlaceholderPicture}
+						src={author.userImage?.cloudinaryImage ?? UserPlaceholderPicture}
 						alt="User Profile Picture"
 						effect="blur"
 						style={{ width: '55px', height: '55px' }}
@@ -29,24 +27,22 @@ const Comment = (props: IComment) => {
 				<div className="flex flex-col ml-4">
 					<h3 className="text-lg font-semibold">
 						<Link
-							to={`/profile/${
-								props.author.id === loggedUser?.id ? 'me' : props.author.id
-							}`}
+							to={`/profile/${author.id === loggedUser?.id ? 'me' : author.id}`}
 							className="hover:underline"
 						>
-							{props.author.username}{' '}
+							{author.username}{' '}
 						</Link>
-						{props.author.id === loggedUser?.id && (
+						{author.id === loggedUser?.id && (
 							<span className="text-sm text-gray-500">(You)</span>
 						)}
 					</h3>
-					<p className="text-sm text-gray-500">{formatData.timeAgo(props.createdAt)} </p>
+					<p className="text-sm text-gray-500">{formatData.timeAgo(createdAt)} </p>
 				</div>
 			</div>
 
 			{/* Second Row */}
 			<div className="my-4">
-				<HTMLText text={props.content} />
+				<HTMLText text={content} />
 			</div>
 		</div>
 	);

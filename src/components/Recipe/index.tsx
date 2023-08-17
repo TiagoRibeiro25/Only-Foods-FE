@@ -6,12 +6,17 @@ import Button from '../Button';
 import PostUserActions from '../PostUserActions';
 import Reveal from '../Reveal';
 
+interface RecipeProps {
+	recipe: IRecipe;
+	index?: number;
+}
+
 function getRevealAnimation(index: number | undefined) {
 	if (index === undefined) return 'slide-bottom';
 	return index % 2 === 0 ? 'slide-left' : 'slide-right';
 }
 
-const Recipe = ({ recipe, index }: { recipe: IRecipe; index?: number }) => {
+const Recipe: React.FC<RecipeProps> = ({ recipe, index }) => {
 	const recipesContext = useContext(RecipesContext);
 
 	return (

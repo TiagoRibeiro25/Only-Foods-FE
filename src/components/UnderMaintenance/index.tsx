@@ -9,7 +9,7 @@ interface UnderMaintenanceProps {
 	className?: string;
 }
 
-const UnderMaintenance = ({ viewName, className }: UnderMaintenanceProps) => {
+const UnderMaintenance: React.FC<UnderMaintenanceProps> = ({ viewName, className }) => {
 	return (
 		<div
 			className={classNames(

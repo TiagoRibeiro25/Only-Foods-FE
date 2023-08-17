@@ -23,11 +23,18 @@ interface PostUserActionsProps {
 	onLikeUpdate: (id: number, newLikes: number, isLiked: boolean) => void;
 }
 
-const PostUserActions = (props: PostUserActionsProps) => {
+const PostUserActions: React.FC<PostUserActionsProps> = ({
+	type,
+	id,
+	likes,
+	comments,
+	isLiked,
+	onLikeUpdate,
+}) => {
 	const { loggedUser } = useContext(UserContext);
 
 	const [isCopied, setIsCopied] = useState<boolean>(false);
-	const [isLiked, setIsLiked] = useState<boolean>(props.isLiked);
+	const [isItemLiked, setIsItemLiked] = useState<boolean>(isLiked);
 	const [liking, setLiking] = useState<boolean>(false);
 	const [likeIcon, setLikeIcon] = useState<string>(LikeIcon);
 
@@ -38,18 +45,18 @@ const PostUserActions = (props: PostUserActionsProps) => {
 		}
 
 		setLiking(true);
-		const itemType = props.type === 'thought' ? 'thoughts' : 'recipes';
+		const itemType = type === 'thought' ? 'thoughts' : 'recipes';
 
 		try {
-			const response = await requests[itemType].handleLike(props.id);
+			const response = await requests[itemType].handleLike(id);
 
 			if (response.data.success) {
-				const newLikeStatus: boolean = !isLiked;
-				setIsLiked(newLikeStatus);
+				const newLikeStatus: boolean = !isItemLiked;
+				setIsItemLiked(newLikeStatus);
 
 				// Update the number of likes in the state
-				const newLikes: number = isLiked ? props.likes - 1 : props.likes + 1;
-				props.onLikeUpdate(props.id, newLikes, newLikeStatus);
+				const newLikes: number = isItemLiked ? likes - 1 : likes + 1;
+				onLikeUpdate(id, newLikes, newLikeStatus);
 			}
 		} catch (error) {
 			console.log(error);
@@ -60,7 +67,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 
 	const handleCopy = (): void => {
 		setIsCopied(true);
-		navigator.clipboard.writeText(`${window.location.origin}/${props.type}/${props.id}`);
+		navigator.clipboard.writeText(`${window.location.origin}/${type}/${id}`);
 
 		setTimeout(() => {
 			setIsCopied(false);
@@ -71,9 +78,9 @@ const PostUserActions = (props: PostUserActionsProps) => {
 		if (liking) {
 			setLikeIcon(LoadingIcon);
 		} else {
-			setLikeIcon(isLiked ? LikedIcon : LikeIcon);
+			setLikeIcon(isItemLiked ? LikedIcon : LikeIcon);
 		}
-	}, [isLiked, liking]);
+	}, [isItemLiked, liking]);
 
 	return (
 		<div className="flex flex-row gap-3">
@@ -84,7 +91,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 						<div className="flex items-center justify-center">
 							<LazyLoadImage
 								src={CopiedIcon}
-								alt={'Copy' + props.type + 'Link'}
+								alt={'Copy' + type + 'Link'}
 								effect="opacity"
 								className="cursor-pointer hover:opacity-80"
 								width={20}
@@ -94,7 +101,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 				) : (
 					<LazyLoadImage
 						src={CopyIcon}
-						alt={'Copy' + props.type + 'Link'}
+						alt={'Copy' + type + 'Link'}
 						effect="opacity"
 						className="cursor-pointer hover:opacity-80"
 						width={20}
@@ -107,7 +114,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 			<div className="flex items-center">
 				<LazyLoadImage
 					src={likeIcon}
-					alt={'Like' + props.type}
+					alt={'Like' + type}
 					effect="opacity"
 					className={classNames({
 						'cursor-pointer hover:opacity-80': loggedUser && !liking,
@@ -118,14 +125,12 @@ const PostUserActions = (props: PostUserActionsProps) => {
 				/>
 
 				{/* Like Count */}
-				<span className="ml-1 text-sm font-semibold">
-					{formatData.likes(props.likes)}
-				</span>
+				<span className="ml-1 text-sm font-semibold">{formatData.likes(likes)}</span>
 			</div>
 
 			{/* Comments */}
 			<div className="flex items-center">
-				<Link to={`/${props.type}/${props.id}`} className="flex items-center">
+				<Link to={`/${type}/${id}`} className="flex items-center">
 					<LazyLoadImage
 						src={CommentIcon}
 						alt="See Comments"
@@ -137,7 +142,7 @@ const PostUserActions = (props: PostUserActionsProps) => {
 
 				{/* Comment Count */}
 				<span className="ml-1 text-sm font-semibold">
-					{formatData.comments(props.comments)}
+					{formatData.comments(comments)}
 				</span>
 			</div>
 		</div>

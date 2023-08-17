@@ -14,20 +14,27 @@ interface SelectProps {
 	onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const Select = (props: SelectProps) => {
+const Select: React.FC<SelectProps> = ({
+	id,
+	labelText,
+	value,
+	options,
+	className,
+	onChange,
+}) => {
 	return (
 		<>
-			<label htmlFor={props.id} className="sr-only">
-				{props.labelText}
+			<label htmlFor={id} className="sr-only">
+				{labelText}
 			</label>
-			<div className={classNames('relative', props.className)}>
+			<div className={classNames('relative', className)}>
 				<select
-					{...(props.id ? { id: props.id } : {})}
+					{...(id ? { id: id } : {})}
 					className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200"
-					defaultValue={props.value}
-					onChange={props.onChange}
+					defaultValue={value}
+					onChange={onChange}
 				>
-					{props.options.map(option => (
+					{options.map(option => (
 						<option key={option.value} value={option.value}>
 							{option.text}
 						</option>

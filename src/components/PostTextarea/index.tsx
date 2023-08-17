@@ -12,30 +12,40 @@ interface PostTextAreaProps {
 	buttonDisabled?: boolean;
 	buttonText?: string;
 	resizable?: boolean;
-	rows?: number;
-	cols?: number;
 	minLength?: number;
 	maxLength?: number;
 	onChange: (value: string) => void;
 	onSubmit: () => void;
 }
 
-const PostTextArea = (props: PostTextAreaProps) => {
-	const { value, onChange } = props;
+const PostTextArea: React.FC<PostTextAreaProps> = ({
+	id,
+	labelText,
+	placeholder,
+	value,
+	loading,
+	buttonDisabled,
+	buttonText,
+	resizable,
+	minLength,
+	maxLength,
+	onChange,
+	onSubmit,
+}) => {
 	const [text, setText] = useState<string>(value);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
 	// Disable the button if the text is too short or too long
 	const isButtonDisabled = useMemo(() => {
-		const minLen = props.minLength ?? 1;
-		const maxLen = props.maxLength ?? 500;
+		const minLen = minLength ?? 1;
+		const maxLen = maxLength ?? 500;
 
 		if (text.trim().length < minLen) return true;
 		if (text.trim().length > maxLen) return true;
-		if (props.loading) return true;
+		if (loading) return true;
 
 		return false;
-	}, [props.minLength, props.maxLength, text, props.loading]);
+	}, [minLength, maxLength, text, loading]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
 		setText(event.target.value);
@@ -44,7 +54,7 @@ const PostTextArea = (props: PostTextAreaProps) => {
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
-		return props.onSubmit();
+		return onSubmit();
 	};
 
 	// Update the textarea height to fit the content
@@ -55,9 +65,9 @@ const PostTextArea = (props: PostTextAreaProps) => {
 		}
 	};
 
-	// when props.value changes, update the input value
+	// when value changes, update the input value
 	if (value !== text) {
-		setText(props.value);
+		setText(value);
 	}
 
 	// Update the textarea height whenever the content changes
@@ -69,19 +79,19 @@ const PostTextArea = (props: PostTextAreaProps) => {
 		<form className="w-full" onSubmit={handleSubmit}>
 			<div className="w-full mb-4 border border-gray-300 rounded-lg bg-gray-50">
 				<div className="px-4 py-2 bg-white rounded-t-lg">
-					<label htmlFor={props.labelText} className="sr-only">
-						{props.labelText}
+					<label htmlFor={labelText} className="sr-only">
+						{labelText}
 					</label>
 					<textarea
 						ref={textareaRef}
-						id={props.id}
+						id={id}
 						className={classNames(
-							'w-full px-0 py-1 text-sm text-gray-900 bg-white border-0 outline-none',
-							props.resizable ? 'resize-y' : 'resize-none',
+							'w-full px-0 py-1 text-sm text-gray-900 bg-white border-0 outline-none focus:ring-0',
+							resizable ? 'resize-y' : 'resize-none',
 						)}
-						placeholder={props.placeholder}
-						maxLength={props.maxLength ?? 500}
-						minLength={props.minLength ?? 1}
+						placeholder={placeholder}
+						maxLength={maxLength ?? 500}
+						minLength={minLength ?? 1}
 						value={text}
 						onChange={handleChange}
 						required
@@ -91,17 +101,17 @@ const PostTextArea = (props: PostTextAreaProps) => {
 				<div className="flex items-center justify-between px-3 py-2 border-t">
 					<div className="flex pl-0 space-x-1 sm:pl-2">
 						<strong className="text-gray-600">{text.length}</strong>
-						<strong className="text-gray-400">/ {props.maxLength ?? 500}</strong>
+						<strong className="text-gray-400">/ {maxLength ?? 500}</strong>
 					</div>
 					<Button
 						type="submit"
 						className="bg-zinc-800 px-6 py-1.5 text-white"
-						icon={props.loading ? LoadingIcon : ''}
+						icon={loading ? LoadingIcon : ''}
 						iconAlt="Loading Icon"
 						iconAnimation="spin"
-						disabled={isButtonDisabled || props.buttonDisabled}
+						disabled={isButtonDisabled || buttonDisabled}
 					>
-						{props.buttonText ?? 'Post'}
+						{buttonText ?? 'Post'}
 					</Button>
 				</div>
 			</div>

@@ -21,7 +21,7 @@ interface ThoughtProps {
 	isBlocked: boolean;
 }
 
-const Thought = (props: ThoughtProps) => {
+const Thought: React.FC<ThoughtProps> = ({ thought, isAdmin, isBlocked }) => {
 	const navigate = useNavigate();
 	const thoughtsContext = useContext(ThoughtsContext);
 
@@ -37,10 +37,10 @@ const Thought = (props: ThoughtProps) => {
 		setShowDeleteModal(false);
 
 		try {
-			const response = await requests.thoughts.deleteThought({ id: props.thought.id });
+			const response = await requests.thoughts.deleteThought({ id: thought.id });
 
 			if (response.data.success) {
-				thoughtsContext.deleteThought(props.thought.id);
+				thoughtsContext.deleteThought(thought.id);
 				navigate('/');
 			}
 		} catch (error) {
@@ -56,14 +56,14 @@ const Thought = (props: ThoughtProps) => {
 
 		try {
 			const response = await requests.thoughts.editThought({
-				id: props.thought.id,
+				id: thought.id,
 				content: editedPost,
 			});
 
 			if (response.data.success) {
-				props.thought.content = editedPost;
-				props.thought.edited = true;
-				thoughtsContext.editThought(props.thought.id, editedPost);
+				thought.content = editedPost;
+				thought.edited = true;
+				thoughtsContext.editThought(thought.id, editedPost);
 				setEditModeEnabled(false);
 			}
 		} catch (error) {
@@ -74,19 +74,17 @@ const Thought = (props: ThoughtProps) => {
 	};
 
 	useEffect(() => {
-		setEditedPost(props.thought.content);
-	}, [editModeEnabled, props.thought.content]);
+		setEditedPost(thought.content);
+	}, [editModeEnabled, thought.content]);
 
 	return (
-		<div id={`post-${props.thought.id}`} className="mb-16">
+		<div id={`post-${thought.id}`} className="mb-16">
 			{/* First Row */}
 			<div className="flex flex-row">
-				<Link to={`/profile/${props.thought.isAuthor ? 'me' : props.thought.author.id}`}>
+				<Link to={`/profile/${thought.isAuthor ? 'me' : thought.author.id}`}>
 					<LazyLoadImage
 						className="rounded-full"
-						src={
-							props.thought.author.userImage?.cloudinaryImage ?? UserPlaceholderPicture
-						}
+						src={thought.author.userImage?.cloudinaryImage ?? UserPlaceholderPicture}
 						alt="User Profile Picture"
 						effect="blur"
 						style={{ width: '55px', height: '55px' }}
@@ -96,20 +94,16 @@ const Thought = (props: ThoughtProps) => {
 				<div className="flex flex-col ml-4">
 					<h3 className="text-lg font-semibold">
 						<Link
-							to={`/profile/${props.thought.isAuthor ? 'me' : props.thought.author.id}`}
+							to={`/profile/${thought.isAuthor ? 'me' : thought.author.id}`}
 							className="hover:underline"
 						>
-							{props.thought.author.username}{' '}
+							{thought.author.username}{' '}
 						</Link>
-						{props.thought.isAuthor && (
-							<span className="text-sm text-gray-500">(You)</span>
-						)}
+						{thought.isAuthor && <span className="text-sm text-gray-500">(You)</span>}
 					</h3>
 					<p className="text-sm text-gray-500">
-						{formatData.timeAgo(props.thought.createdAt)}{' '}
-						{props.thought.edited && (
-							<span className="text-sm text-gray-500">(edited)</span>
-						)}
+						{formatData.timeAgo(thought.createdAt)}{' '}
+						{thought.edited && <span className="text-sm text-gray-500">(edited)</span>}
 					</p>
 				</div>
 
@@ -117,7 +111,7 @@ const Thought = (props: ThoughtProps) => {
 				<div className="flex items-center justify-end flex-1">
 					<div className="flex flex-row items-center justify-end">
 						{/* Edit Post */}
-						{props.thought.isAuthor && !props.isBlocked && (
+						{thought.isAuthor && !isBlocked && (
 							<button
 								className="text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
 								disabled={deletingPost || editingPost}
@@ -134,7 +128,7 @@ const Thought = (props: ThoughtProps) => {
 						)}
 
 						{/* Delete Post */}
-						{(props.thought.isAuthor || props.isAdmin) && (
+						{(thought.isAuthor || isAdmin) && (
 							<button
 								className="ml-4 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
 								disabled={editModeEnabled || deletingPost}
@@ -158,17 +152,17 @@ const Thought = (props: ThoughtProps) => {
 				{!editModeEnabled ? (
 					<div
 						className="hover:cursor-pointer"
-						onClick={() => navigate(`/thought/${props.thought.id}`)}
+						onClick={() => navigate(`/thought/${thought.id}`)}
 					>
-						<HTMLText text={props.thought.content} />
+						<HTMLText text={thought.content} />
 					</div>
 				) : (
 					<PostTextArea
-						id={`post-${props.thought.id}-edit`}
+						id={`post-${thought.id}-edit`}
 						labelText="Edit Post"
 						placeholder="What are you thinking about?"
 						buttonText="Apply Changes"
-						buttonDisabled={editedPost.trim() === props.thought.content.trim()}
+						buttonDisabled={editedPost.trim() === thought.content.trim()}
 						maxLength={1000}
 						loading={editingPost}
 						value={editedPost}
@@ -181,13 +175,13 @@ const Thought = (props: ThoughtProps) => {
 			{/* Third Row */}
 			<PostUserActions
 				type="thought"
-				id={props.thought.id}
-				likes={props.thought.likes}
-				comments={props.thought.comments}
-				isLiked={props.thought.isLiked}
+				id={thought.id}
+				likes={thought.likes}
+				comments={thought.comments}
+				isLiked={thought.isLiked}
 				onLikeUpdate={(id, newLikes, isLiked) => {
-					props.thought.isLiked = isLiked;
-					props.thought.likes = newLikes;
+					thought.isLiked = isLiked;
+					thought.likes = newLikes;
 					thoughtsContext.updateLikes(id, newLikes, isLiked);
 				}}
 			/>

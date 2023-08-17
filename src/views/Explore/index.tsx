@@ -4,7 +4,7 @@ import RecipesBackgroundImagePlaceholder from '../../assets/imgs/placeholders/ex
 import ThoughtsBackgroundImagePlaceholder from '../../assets/imgs/placeholders/explore_thoughts_loading.webp';
 import Option from './components/Option';
 
-const Explore = () => {
+const Explore: React.FC = () => {
 	return (
 		<>
 			<h1 className="mt-24 text-4xl font-bold text-center text-gray-800 font-bellefair sm:mt-36">

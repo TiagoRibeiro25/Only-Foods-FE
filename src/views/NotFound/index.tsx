@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import Reveal from '../../components/Reveal';
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
 	return (
 		<div className="flex items-center justify-center w-full min-h-[70vh] text-gray-900 my-12 px-4">
 			<Reveal width="100%" animation="fade" delay={0.03}>

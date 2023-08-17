@@ -12,12 +12,18 @@ interface OptionProps {
 	path: string;
 }
 
-const Option = (props: OptionProps) => {
+const Option: React.FC<OptionProps> = ({
+	title,
+	backgroundImage,
+	backgroundImagePlaceholder,
+	description,
+	path,
+}) => {
 	const [isHovered, setIsHovered] = useState<boolean>(false);
 
 	return (
 		<Link
-			to={props.path}
+			to={path}
 			className="mx-10"
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
@@ -25,9 +31,9 @@ const Option = (props: OptionProps) => {
 			<div className="max-w-sm overflow-hidden scale-125 shadow-lg cursor-pointer rounded-xl">
 				<div className="relative w-72 h-72 sm:w-96 sm:h-96">
 					<LazyLoadImage
-						src={props.backgroundImage}
-						placeholderSrc={props.backgroundImagePlaceholder}
-						alt={props.title}
+						src={backgroundImage}
+						placeholderSrc={backgroundImagePlaceholder}
+						alt={title}
 						className="w-full h-auto"
 						effect="blur"
 					/>
@@ -43,12 +49,12 @@ const Option = (props: OptionProps) => {
 								{ underline: isHovered },
 							)}
 						>
-							{props.title}
+							{title}
 						</h2>
 						{isHovered && (
 							<Reveal width="100%" animation="slide-bottom" delay={0} duration={0.3}>
 								<p className="text-sm text-center text-gray-700 sm:text-md">
-									{props.description}
+									{description}
 								</p>
 							</Reveal>
 						)}

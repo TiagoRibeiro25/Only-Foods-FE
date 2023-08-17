@@ -11,7 +11,7 @@ import Reveal from '../../../../components/Reveal';
 import { RecipesContext } from '../../../../contextProviders/RecipesContext';
 import { UserContext } from '../../../../contextProviders/UserContext';
 
-const MyRecipesList = () => {
+const MyRecipesList: React.FC = () => {
 	const recipesContext = useContext(RecipesContext);
 	const { loggedUser } = useContext(UserContext);
 

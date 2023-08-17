@@ -8,7 +8,7 @@ interface LoadingProps {
 	state: 'loading' | 'error';
 }
 
-const Loading = (props: LoadingProps) => {
+const Loading: React.FC<LoadingProps> = ({ state }) => {
 	const [currentPhrase, setCurrentPhrase] = useState<string>(
 		phrases[Math.floor(Math.random() * phrases.length)],
 	);
@@ -36,7 +36,7 @@ const Loading = (props: LoadingProps) => {
 						Only Foods
 					</span>
 				</div>
-				{props.state === 'error' ? (
+				{state === 'error' ? (
 					<div className="flex flex-row mx-6 mt-2">
 						<span className="text-2xl text-center font-bellefair">
 							Woops! Looks like we're having problems on our end.

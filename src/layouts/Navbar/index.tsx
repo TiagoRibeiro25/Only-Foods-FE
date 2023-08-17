@@ -12,7 +12,7 @@ import ConfirmActionModal from '../../components/ConfirmActionModal';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 

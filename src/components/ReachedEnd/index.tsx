@@ -1,6 +1,6 @@
 import Reveal from '../Reveal';
 
-const ReachedEnd = () => {
+const ReachedEnd: React.FC = () => {
 	return (
 		<Reveal width="100%" animation="slide-bottom" delay={0.05}>
 			<div className="flex flex-col items-center justify-center gap-2 pt-8 pb-12 text-center col-span-full md:pb-6">

@@ -5,7 +5,7 @@ interface HTMLTextProps {
 // Regular expression to identify links in the paragraph and capture the link text and URL
 const LINK_REGEX = /(?:(?:https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/gi;
 
-const HTMLText = ({ text }: HTMLTextProps) => {
+const HTMLText: React.FC<HTMLTextProps> = ({ text }) => {
 	const paragraphs = text.split('\n'); // Split content into paragraphs
 
 	const renderParagraphWithLinks = (paragraph: string): React.JSX.Element => {

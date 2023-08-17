@@ -9,7 +9,7 @@ interface NewCommentFormProps extends CommentsProps {
 	onSubmit: (arg: IComment) => void;
 }
 
-const NewCommentForm = (props: NewCommentFormProps) => {
+const NewCommentForm: React.FC<NewCommentFormProps> = ({ id, type, onSubmit }) => {
 	const { loggedUser } = useContext(UserContext);
 
 	const [newCommentText, setNewCommentText] = useState<string>('');
@@ -21,10 +21,10 @@ const NewCommentForm = (props: NewCommentFormProps) => {
 		setStatusMsg('');
 
 		try {
-			const type = props.type === 'thought' ? 'thoughts' : 'recipes';
+			const itemType = type === 'thought' ? 'thoughts' : 'recipes';
 
-			const response = await requests[type].addComment({
-				id: props.id,
+			const response = await requests[itemType].addComment({
+				id: id,
 				content: newCommentText,
 			});
 
@@ -45,7 +45,7 @@ const NewCommentForm = (props: NewCommentFormProps) => {
 				};
 
 				setNewCommentText('');
-				props.onSubmit(newComment);
+				onSubmit(newComment);
 			}
 		} catch (error) {
 			console.log(error);
@@ -67,7 +67,7 @@ const NewCommentForm = (props: NewCommentFormProps) => {
 				id="new-comment-textarea"
 				labelText="New Comment"
 				placeholder={`Share your thoughts about this ${
-					props.type === 'thought' ? 'post' : 'recipe'
+					type === 'thought' ? 'post' : 'recipe'
 				}...`}
 				buttonText="Post Comment"
 				minLength={4}

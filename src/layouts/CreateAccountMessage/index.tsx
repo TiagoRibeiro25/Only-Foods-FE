@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-const CreateAccountMessage = () => {
+const CreateAccountMessage: React.FC = () => {
 	const location = useLocation();
 
 	return (

@@ -4,7 +4,7 @@ import PostTextArea from '../../../../components/PostTextarea';
 import { ThoughtsContext } from '../../../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../../../contextProviders/UserContext';
 
-const NewThoughtForm = () => {
+const NewThoughtForm: React.FC = () => {
 	const thoughtsContext = useContext(ThoughtsContext);
 	const { loggedUser } = useContext(UserContext);
 
