@@ -119,7 +119,7 @@ const RecipesList: React.FC = () => {
 	return (
 		<div className="flex flex-col items-center justify-center">
 			{/* Filter Recipes */}
-			<Reveal width="100%" animation="slide-right" delay={0.05}>
+			<Reveal width="100%" animation="slide-left" delay={0.05}>
 				<div className="flex justify-end w-full">
 					<Select
 						className="w-full sm:w-40"
