@@ -30,7 +30,7 @@ const Recipe: React.FC<RecipeProps> = ({ recipe, index }) => {
 						alt="Recipe Image"
 					/>
 
-					<div className="p-2 h-[154px] overflow-hidden">
+					<div className="p-2 h-[145px] overflow-hidden">
 						<h2 className="text-2xl font-bold leading-7 tracking-tight text-gray-900 font-bellefair">
 							{recipe.title.trim()}
 						</h2>
