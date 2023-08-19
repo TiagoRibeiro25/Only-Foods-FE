@@ -1,9 +1,22 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Button from '../../components/Button';
 
 const ScrollToTheTopIcon: React.FC = () => {
+	const location = useLocation();
+
 	const [showButton, setShowButton] = useState<boolean>(false);
+
+	const handleClick = () => {
+		window.scrollTo(0, 0);
+
+		// remove any hash from the url (e.g. /recipes/1#comment-1 -> /recipes/1)
+		window.history.replaceState({}, '', location.pathname + location.search);
+
+		// update hash in react-router-dom
+		location.hash = '';
+	};
 
 	const handleScroll = () => setShowButton(window.scrollY > 700);
 
@@ -22,7 +35,7 @@ const ScrollToTheTopIcon: React.FC = () => {
 				'z-20 fixed p-3 text-xs font-medium text-white bg-zinc-800 bg-opacity-90 bottom-5 right-5 hover:bg-zinc-950 hover:shadow-xl focus:bg-zinc-950 focus:shadow-xl focus:outline-none focus:ring-0 active:bg-zinc-950 active:shadow-xl',
 				showButton ? 'translate-x-0' : 'translate-x-20',
 			)}
-			onClick={() => window.scrollTo(0, 0)}
+			onClick={handleClick}
 		>
 			<svg
 				aria-hidden="true"
