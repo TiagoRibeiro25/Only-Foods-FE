@@ -45,7 +45,7 @@ const Recipe: React.FC = () => {
 
 	return (
 		<div className="flex flex-col items-center max-w-3xl mx-auto mt-28">
-			<div className="w-full mt-14">
+			<div className="w-full">
 				{isLoading && <Loading />}
 				{recipe && !isLoading && <RecipeContent recipe={recipe} />}
 				{errorOccurred && (
