@@ -1,11 +1,14 @@
+import classNames from 'classnames';
+
 interface HTMLTextProps {
 	text: string;
+	className?: string;
 }
 
 // Regular expression to identify links in the paragraph and capture the link text and URL
 const LINK_REGEX = /(?:(?:https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/gi;
 
-const HTMLText: React.FC<HTMLTextProps> = ({ text }) => {
+const HTMLText: React.FC<HTMLTextProps> = ({ text, className }) => {
 	const paragraphs = text.split('\n'); // Split content into paragraphs
 
 	const renderParagraphWithLinks = (paragraph: string): React.JSX.Element => {
@@ -24,7 +27,7 @@ const HTMLText: React.FC<HTMLTextProps> = ({ text }) => {
 		// If there are links in the paragraph, replace them with anchor tags
 		if (newMatches && newMatches.length > 0) {
 			return (
-				<p key={crypto.randomUUID()} className="text-md">
+				<p key={crypto.randomUUID()} className={classNames('text-md', className)}>
 					{paragraph.split(LINK_REGEX).map((part, index) => {
 						if (index % 2 === 0) {
 							return part; // Non-link text
@@ -49,7 +52,7 @@ const HTMLText: React.FC<HTMLTextProps> = ({ text }) => {
 
 		// If there are no links in the paragraph, return the paragraph as it is
 		return (
-			<p key={crypto.randomUUID()} className="text-md">
+			<p key={crypto.randomUUID()} className={classNames('text-md', className)}>
 				{paragraph}
 			</p>
 		);
@@ -57,7 +60,7 @@ const HTMLText: React.FC<HTMLTextProps> = ({ text }) => {
 
 	return paragraphs.map(paragraph => {
 		if (paragraph.trim() === '') {
-			return <br key={crypto.randomUUID()} />;
+			return <br key={crypto.randomUUID()} className="text-sm" />;
 		} else {
 			return renderParagraphWithLinks(paragraph);
 		}
