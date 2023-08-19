@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import requests from '../../api/requests';
 import { Recipe as RecipeType } from '../../api/requests/recipes/getRecipe';
+import Comments from '../../components/Comments';
 import ErrorOccurred from '../../components/ErrorOccurred';
 import Loading from '../../components/Loading';
 import RecipeContent from './components/RecipeContent';
@@ -47,7 +48,12 @@ const Recipe: React.FC = () => {
 		<div className="flex flex-col items-center max-w-3xl mx-auto mt-28">
 			<div className="w-full">
 				{isLoading && <Loading />}
-				{recipe && !isLoading && <RecipeContent recipe={recipe} />}
+				{recipe && !isLoading && (
+					<>
+						<RecipeContent recipe={recipe} />
+						<Comments type="recipe" id={recipe.id} revealAnimation="slide-bottom" />
+					</>
+				)}
 				{errorOccurred && (
 					<ErrorOccurred
 						text={
