@@ -1,7 +1,7 @@
+import { Carousel } from 'flowbite-react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Recipe } from '../../../../api/requests/recipes/getRecipe';
-import Carousel from '../../../../components/Carousel';
 import PostUserActions from '../../../../components/PostUserActions';
 import { RecipesContext } from '../../../../contextProviders/RecipesContext';
 import formatData from '../../../../utils/formatData';
@@ -17,10 +17,21 @@ const RecipeContent: React.FC<RecipeContentProps> = ({ recipe }) => {
 	return (
 		<header>
 			<Carousel
-				images={recipe.recipeImages.map(imageItem => {
-					return { id: imageItem.id, src: imageItem.cloudinaryImage };
+				className="w-full h-64 sm:h-96 hover:cursor-default"
+				leftControl={recipe.recipeImages.length > 1 ? '' : ' '}
+				rightControl={recipe.recipeImages.length > 1 ? '' : ' '}
+			>
+				{recipe.recipeImages.map(image => {
+					return (
+						<img
+							key={image.id}
+							src={image.cloudinaryImage}
+							alt={recipe.title}
+							className="object-cover w-full h-full"
+						/>
+					);
 				})}
-			/>
+			</Carousel>
 
 			<div className="mt-6">
 				<h1 className="text-3xl font-bellefair">{recipe.title}</h1>
