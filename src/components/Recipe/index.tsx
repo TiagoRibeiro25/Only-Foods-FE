@@ -21,7 +21,7 @@ const Recipe: React.FC<RecipeProps> = ({ recipe, index }) => {
 
 	return (
 		<div className="rounded lg:w-[374px] w-full mb-6 lg:mb-0">
-			<Reveal animation={getRevealAnimation(index)} width="100%">
+			<Reveal animation={getRevealAnimation(index)} width="100%" delay={0.15}>
 				<div className="w-full h-full bg-zinc-100">
 					<img
 						className="w-full rounded-t lg:h-[200px] sm:h-[300px] h-[200px] object-cover object-center"
