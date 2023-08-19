@@ -2,13 +2,9 @@ import api from '../../axios.config';
 import { Response } from '../types';
 import { handleError } from '../utils';
 
-interface Props {
-	id: number;
-}
-
-export default async (props: Props): Promise<Response> => {
+export default async (id: number): Promise<Response> => {
 	try {
-		const response: Response = await api.delete(`/thoughts/${props.id}`);
+		const response: Response = await api.delete(`/thoughts/${id}`);
 
 		response.data = {
 			success: true,

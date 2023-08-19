@@ -37,7 +37,7 @@ const Thought: React.FC<ThoughtProps> = ({ thought, isAdmin, isBlocked }) => {
 		setShowDeleteModal(false);
 
 		try {
-			const response = await requests.thoughts.deleteThought({ id: thought.id });
+			const response = await requests.thoughts.deleteThought(thought.id);
 
 			if (response.data.success) {
 				thoughtsContext.deleteThought(thought.id);
