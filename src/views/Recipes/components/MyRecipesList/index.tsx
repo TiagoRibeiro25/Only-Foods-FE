@@ -1,13 +1,10 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import requests from '../../../../api/requests';
-import Button from '../../../../components/Button';
 import ErrorOccurred from '../../../../components/ErrorOccurred';
 import Loading from '../../../../components/Loading';
 import NoItemsFound from '../../../../components/NoItemsFound';
 import ReachedEnd from '../../../../components/ReachedEnd';
 import Recipe from '../../../../components/Recipe';
-import Reveal from '../../../../components/Reveal';
 import { RecipesContext } from '../../../../contextProviders/RecipesContext';
 import { UserContext } from '../../../../contextProviders/UserContext';
 
@@ -106,22 +103,6 @@ const MyRecipesList: React.FC = () => {
 
 	return (
 		<div className="flex flex-col items-center justify-center">
-			{!loggedUser?.isBlocked && (
-				<Reveal width="100%" animation="slide-left" delay={0.05}>
-					<div className="flex justify-end w-full">
-						<Link to="/recipes/add" className="w-full sm:w-40">
-							<Button
-								id="add-recipe"
-								type="button"
-								className="py-1.5 text-white px-8 bg-zinc-800 text-center w-full flex justify-center"
-							>
-								Add Recipe
-							</Button>
-						</Link>
-					</div>
-				</Reveal>
-			)}
-
 			{/* Recipes */}
 			<div className="flex flex-wrap justify-start w-full gap-5 my-10">
 				{recipesContext.mine.recipes.map((recipe, index) => (
