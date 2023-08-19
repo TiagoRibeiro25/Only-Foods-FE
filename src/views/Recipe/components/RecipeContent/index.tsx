@@ -48,9 +48,7 @@ const RecipeContent: React.FC<RecipeContentProps> = ({ recipe }) => {
 						<p className="mt-2 text-justify text-gray-500 text-md">
 							{recipe.description ?? 'This recipe has no description.'}
 						</p>
-					</Reveal>
 
-					<Reveal width="100%" animation="fade" delay={0.7}>
 						<div className="flex flex-col mt-4 sm:flex-row">
 							<div className="flex flex-col sm:items-center sm:flex-row">
 								<span className="mr-2">
