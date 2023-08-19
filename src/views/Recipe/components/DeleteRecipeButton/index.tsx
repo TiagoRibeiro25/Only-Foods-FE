@@ -51,7 +51,7 @@ const DeleteRecipeButton: React.FC<DeleteRecipeButtonProps> = ({ recipe }) => {
 					<LazyLoadImage
 						src={deletingRecipe ? LoadingIcon : DeleteIcon}
 						className={deletingRecipe ? 'animate-spin' : ''}
-						effect="blur"
+						effect="opacity"
 						alt="Delete Icon"
 						width={20}
 						height={20}
