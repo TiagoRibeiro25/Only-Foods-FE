@@ -1,12 +1,16 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Button from '../../components/Button';
+import { UserContext } from '../../contextProviders/UserContext';
 
 const ScrollToTheTopIcon: React.FC = () => {
 	const location = useLocation();
 
+	const { loggedUser } = useContext(UserContext);
+
 	const [showButton, setShowButton] = useState<boolean>(false);
+	const [moveUp, setMoveUp] = useState<boolean>(false);
 
 	const handleClick = () => {
 		window.scrollTo(0, 0);
@@ -21,19 +25,27 @@ const ScrollToTheTopIcon: React.FC = () => {
 	const handleScroll = () => setShowButton(window.scrollY > 700);
 
 	useEffect(() => {
+		// check if the url has /recipes in it
+		if (location.pathname.includes('/recipes') && loggedUser && !loggedUser.isBlocked) {
+			setMoveUp(true);
+		} else {
+			setMoveUp(false);
+		}
+
 		window.addEventListener('scroll', handleScroll);
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
 		};
-	}, []);
+	}, [location.pathname, loggedUser]);
 
 	return (
 		<Button
 			type="button"
 			id="scroll-to-the-top-button"
 			className={classNames(
-				'z-20 fixed p-3 text-xs font-medium text-white bg-zinc-800 bg-opacity-90 bottom-5 right-5 hover:bg-zinc-950 hover:shadow-xl focus:bg-zinc-950 focus:shadow-xl focus:outline-none focus:ring-0 active:bg-zinc-950 active:shadow-xl',
+				'z-20 fixed p-3 text-xs font-medium text-white bg-zinc-800 bg-opacity-90 right-5 hover:bg-zinc-950 hover:shadow-xl focus:bg-zinc-950 focus:shadow-xl focus:outline-none focus:ring-0 active:bg-zinc-950 active:shadow-xl',
 				showButton ? 'translate-x-0' : 'translate-x-20',
+				moveUp ? 'bottom-20' : 'bottom-5',
 			)}
 			onClick={handleClick}
 		>
