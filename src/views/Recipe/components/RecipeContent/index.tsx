@@ -28,6 +28,7 @@ const RecipeContent: React.FC<RecipeContentProps> = ({ recipe }) => {
 							src={image.cloudinaryImage}
 							alt={recipe.title}
 							className="object-cover w-full h-full"
+							loading="lazy"
 						/>
 					);
 				})}
