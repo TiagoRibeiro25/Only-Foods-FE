@@ -81,7 +81,7 @@ const Thought: React.FC<ThoughtProps> = ({ thought, isAdmin, isBlocked }) => {
 		<div id={`post-${thought.id}`} className="mb-16">
 			{/* First Row */}
 			<div className="flex flex-row">
-				<Link to={`/profile/${thought.isAuthor ? 'me' : thought.author.id}`}>
+				<Link to={`/user/${thought.isAuthor ? 'me' : thought.author.id}`}>
 					<LazyLoadImage
 						className="rounded-full"
 						src={thought.author.userImage?.cloudinaryImage ?? UserPlaceholderPicture}
@@ -94,7 +94,7 @@ const Thought: React.FC<ThoughtProps> = ({ thought, isAdmin, isBlocked }) => {
 				<div className="flex flex-col ml-4">
 					<h3 className="text-lg font-semibold">
 						<Link
-							to={`/profile/${thought.isAuthor ? 'me' : thought.author.id}`}
+							to={`/user/${thought.isAuthor ? 'me' : thought.author.id}`}
 							className="hover:underline"
 						>
 							{thought.author.username}{' '}

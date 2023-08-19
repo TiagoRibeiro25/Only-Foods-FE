@@ -14,7 +14,7 @@ const Comment: React.FC<IComment> = ({ id, content, author, createdAt }) => {
 		<div id={`comment-${id}`} className="mb-16">
 			{/* First Row */}
 			<div className="flex flex-row">
-				<Link to={`/profile/${author.id === loggedUser?.id ? 'me' : author.id}`}>
+				<Link to={`/user/${author.id === loggedUser?.id ? 'me' : author.id}`}>
 					<LazyLoadImage
 						className="rounded-full"
 						src={author.userImage?.cloudinaryImage ?? UserPlaceholderPicture}
@@ -27,7 +27,7 @@ const Comment: React.FC<IComment> = ({ id, content, author, createdAt }) => {
 				<div className="flex flex-col ml-4">
 					<h3 className="text-lg font-semibold">
 						<Link
-							to={`/profile/${author.id === loggedUser?.id ? 'me' : author.id}`}
+							to={`/user/${author.id === loggedUser?.id ? 'me' : author.id}`}
 							className="hover:underline"
 						>
 							{author.username}{' '}
