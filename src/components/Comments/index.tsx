@@ -119,7 +119,7 @@ const Comments: React.FC<CommentsProps> = ({ type, id, revealAnimation }) => {
 		if (location.hash === '#comments') {
 			document.getElementById('comments')?.scrollIntoView({ behavior: 'smooth' });
 		}
-	}, [location.hash]);
+	}, [location]);
 
 	return (
 		<section id="comments" className="flex flex-col w-full">
