@@ -3,10 +3,17 @@ import { useEffect, useRef } from 'react';
 import { isMotionReduced } from '../../utils/checkUserSettings';
 import ANIMATIONS from './animations';
 
+export type Animation =
+	| 'fade'
+	| 'slide-top'
+	| 'slide-bottom'
+	| 'slide-left'
+	| 'slide-right';
+
 interface RevealProps {
 	children?: React.ReactNode;
 	width?: 'fit-content' | '100%';
-	animation?: 'fade' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right';
+	animation?: Animation;
 	duration?: number;
 	delay?: number;
 }
