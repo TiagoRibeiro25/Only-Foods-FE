@@ -51,7 +51,11 @@ const Recipe: React.FC = () => {
 				{recipe && !isLoading && (
 					<>
 						<RecipeContent recipe={recipe} />
-						<Comments type="recipe" id={recipe.id} revealAnimation="slide-bottom" />
+
+						<div>
+							<h2 className="mb-3 text-3xl font-bellefair">Comments</h2>
+							<Comments type="recipe" id={recipe.id} revealAnimation="slide-bottom" />
+						</div>
 					</>
 				)}
 				{errorOccurred && (
