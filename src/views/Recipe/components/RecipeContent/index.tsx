@@ -17,7 +17,7 @@ const RecipeContent: React.FC<RecipeContentProps> = ({ recipe }) => {
 	return (
 		<header>
 			<Carousel
-				className="w-full h-64 sm:h-96 hover:cursor-default"
+				className="w-full h-64 sm:h-96"
 				leftControl={recipe.recipeImages.length > 1 ? '' : ' '}
 				rightControl={recipe.recipeImages.length > 1 ? '' : ' '}
 			>
