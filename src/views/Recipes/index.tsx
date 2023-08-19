@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import AddBottomRightButton from '../../components/AddBottomRightButton';
 import Reveal from '../../components/Reveal';
 import Tabs from '../../components/Tabs';
 import { UserContext } from '../../contextProviders/UserContext';
@@ -41,6 +42,7 @@ const Recipes: React.FC = () => {
 			</Reveal>
 
 			<div className="mt-8">{renderView()}</div>
+			{loggedUser && !loggedUser.isBlocked && <AddBottomRightButton />}
 		</div>
 	);
 };
