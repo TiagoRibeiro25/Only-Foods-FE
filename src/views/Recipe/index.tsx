@@ -5,6 +5,7 @@ import { Recipe as RecipeType } from '../../api/requests/recipes/getRecipe';
 import Comments from '../../components/Comments';
 import ErrorOccurred from '../../components/ErrorOccurred';
 import Loading from '../../components/Loading';
+import Reveal from '../../components/Reveal';
 import RecipeContent from './components/RecipeContent';
 
 const Recipe: React.FC = () => {
@@ -53,7 +54,9 @@ const Recipe: React.FC = () => {
 						<RecipeContent recipe={recipe} />
 
 						<div>
-							<h2 className="mb-3 text-3xl font-bellefair">Comments</h2>
+							<Reveal width="100%" animation="slide-right">
+								<h2 className="mb-3 text-3xl font-bellefair">Comments</h2>
+							</Reveal>
 							<Comments type="recipe" id={recipe.id} revealAnimation="slide-bottom" />
 						</div>
 					</>
