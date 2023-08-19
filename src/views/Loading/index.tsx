@@ -22,7 +22,7 @@ const Loading: React.FC<LoadingProps> = ({ state }) => {
 	}, []);
 
 	return (
-		<div className="absolute z-10 flex items-center justify-center w-full h-full bg-white bg-opacity-60">
+		<div className="absolute z-10 flex items-center justify-center w-full h-full">
 			<div className="flex flex-col items-center">
 				<div className="flex flex-row">
 					<LazyLoadImage
