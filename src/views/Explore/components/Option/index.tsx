@@ -28,6 +28,7 @@ const Option: React.FC<OptionProps> = ({
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 		>
+			{/* TODO: Fix shadow that only shows for 1 second when hovering (only happens on Chrome...) */}
 			<div className="max-w-sm overflow-hidden scale-125 shadow-lg cursor-pointer rounded-xl">
 				<div className="relative w-72 h-72 sm:w-96 sm:h-96">
 					<LazyLoadImage
