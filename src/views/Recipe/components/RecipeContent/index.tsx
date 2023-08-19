@@ -130,7 +130,7 @@ const RecipeContent: React.FC<RecipeContentProps> = ({ recipe }) => {
 					</Reveal>
 
 					<div className="mt-3">
-						<Reveal width="100%" animation="slide-bottom">
+						<Reveal width="100%" animation="slide-bottom" delay={0.5}>
 							<HTMLText text={recipe.notes} className="text-gray-500" />
 						</Reveal>
 					</div>
