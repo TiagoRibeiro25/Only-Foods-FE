@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import requests from '../../api/requests';
 import { UserContext } from '../../contextProviders/UserContext';
 import { IComment, ItemType } from '../../types/types';
@@ -16,6 +17,8 @@ export interface CommentsProps {
 }
 
 const Comments: React.FC<CommentsProps> = ({ type, id }) => {
+	const location = useLocation();
+
 	const { loggedUser } = useContext(UserContext);
 
 	const [comments, setComments] = useState<IComment[]>([]);
@@ -111,8 +114,14 @@ const Comments: React.FC<CommentsProps> = ({ type, id }) => {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, [comments.length, fetchMoreComments, isInitialLoad]);
 
+	useEffect(() => {
+		if (location.hash === '#comments') {
+			document.getElementById('comments')?.scrollIntoView({ behavior: 'smooth' });
+		}
+	}, [location.hash]);
+
 	return (
-		<section className="flex flex-col w-full">
+		<section id="comments" className="flex flex-col w-full">
 			{loggedUser && !loggedUser.isBlocked && (
 				<Reveal width="100%" animation="slide-top" delay={0.05}>
 					<NewCommentForm

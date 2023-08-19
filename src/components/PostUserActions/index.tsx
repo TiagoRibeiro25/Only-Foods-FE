@@ -130,7 +130,7 @@ const PostUserActions: React.FC<PostUserActionsProps> = ({
 
 			{/* Comments */}
 			<div className="flex items-center">
-				<Link to={`/${type}/${id}`} className="flex items-center">
+				<Link to={`/${type}/${id}#comments`} className="flex items-center">
 					<LazyLoadImage
 						src={CommentIcon}
 						alt="See Comments"
