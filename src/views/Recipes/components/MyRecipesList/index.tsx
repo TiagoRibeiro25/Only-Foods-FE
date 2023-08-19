@@ -107,9 +107,9 @@ const MyRecipesList: React.FC = () => {
 	return (
 		<div className="flex flex-col items-center justify-center">
 			{!loggedUser?.isBlocked && (
-				<div className="flex w-full">
-					<Link to="/recipes/add" className="w-full sm:w-40">
-						<Reveal width="100%" animation="slide-left" delay={0.05}>
+				<Reveal width="100%" animation="slide-left" delay={0.05}>
+					<div className="flex justify-end w-full">
+						<Link to="/recipes/add" className="w-full sm:w-40">
 							<Button
 								id="add-recipe"
 								type="button"
@@ -117,9 +117,9 @@ const MyRecipesList: React.FC = () => {
 							>
 								Add Recipe
 							</Button>
-						</Reveal>
-					</Link>
-				</div>
+						</Link>
+					</div>
+				</Reveal>
 			)}
 
 			{/* Recipes */}
