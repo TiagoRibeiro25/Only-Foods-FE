@@ -7,16 +7,17 @@ import ErrorOccurred from '../ErrorOccurred';
 import Loading from '../Loading';
 import NoItemsFound from '../NoItemsFound';
 import ReachedEnd from '../ReachedEnd';
-import Reveal from '../Reveal';
+import Reveal, { Animation } from '../Reveal';
 import Comment from './components/Comment';
 import NewCommentForm from './components/NewCommentForm';
 
 export interface CommentsProps {
 	type: ItemType;
 	id: number;
+	revealAnimation?: Animation;
 }
 
-const Comments: React.FC<CommentsProps> = ({ type, id }) => {
+const Comments: React.FC<CommentsProps> = ({ type, id, revealAnimation }) => {
 	const location = useLocation();
 
 	const { loggedUser } = useContext(UserContext);
@@ -123,7 +124,7 @@ const Comments: React.FC<CommentsProps> = ({ type, id }) => {
 	return (
 		<section id="comments" className="flex flex-col w-full">
 			{loggedUser && !loggedUser.isBlocked && (
-				<Reveal width="100%" animation="slide-top" delay={0.05}>
+				<Reveal width="100%" animation={revealAnimation ?? 'slide-top'} delay={0.05}>
 					<NewCommentForm
 						type={type}
 						id={id}
