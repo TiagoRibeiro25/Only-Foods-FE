@@ -81,7 +81,10 @@ const ConfirmActionModal: React.FC<ConfirmActionModalProps> = ({
 							<button
 								type="button"
 								className="text-white bg-gray-900 hover:bg-gray-950 focus:ring-4 focus:outline-none focus:ring-gray-900 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-								onClick={onConfirm}
+								onClick={() => {
+									document.body.style.overflow = '';
+									onConfirm();
+								}}
 							>
 								{confirmText ?? "Yes, I'm sure"}
 							</button>
