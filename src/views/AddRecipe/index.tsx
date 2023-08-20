@@ -20,7 +20,9 @@ const AddRecipe: React.FC = () => {
 				<Reveal width="100%" animation="slide-right" delay={0.2}>
 					<h2 className="mb-3 text-2xl font-bellefair">Images</h2>
 				</Reveal>
-				<AddImages images={images} setImages={setImages} />
+				<Reveal width="100%" delay={0.05} animation="slide-top">
+					<AddImages images={images} setImages={setImages} />
+				</Reveal>
 
 				<Reveal width="100%" animation="slide-bottom" delay={0.2}>
 					<Input
