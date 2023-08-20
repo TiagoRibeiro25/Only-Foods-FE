@@ -10,6 +10,7 @@ import UserPlaceholderPicture from '../../assets/imgs/user.webp';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { IThought } from '../../types/types';
 import formatData from '../../utils/formatData';
+import AuthorName from '../AuthorName';
 import ConfirmActionModal from '../ConfirmActionModal';
 import HTMLText from '../HTMLText';
 import PostTextArea from '../PostTextarea';
@@ -100,7 +101,10 @@ const Thought: React.FC<ThoughtProps> = ({ thought, isAdmin, isBlocked }) => {
 							to={`/user/${thought.isAuthor ? 'me' : thought.author.id}`}
 							className="hover:underline"
 						>
-							{thought.author.username}{' '}
+							<AuthorName
+								authorName={thought.author.username}
+								isBlocked={thought.author.blocked}
+							/>
 						</Link>
 						{thought.isAuthor && <span className="text-sm text-gray-500">(You)</span>}
 					</h3>

@@ -2,6 +2,7 @@ import { Carousel } from 'flowbite-react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Recipe } from '../../../../api/requests/recipes/getRecipe';
+import AuthorName from '../../../../components/AuthorName';
 import HTMLText from '../../../../components/HTMLText';
 import PostUserActions from '../../../../components/PostUserActions';
 import Reveal from '../../../../components/Reveal';
@@ -54,7 +55,10 @@ const RecipeContent: React.FC<RecipeContentProps> = ({ recipe }) => {
 								<span className="mr-2">
 									Author:{' '}
 									<Link to={`/user/${recipe.author.id}`} className="underline">
-										{recipe.author.username}
+										<AuthorName
+											authorName={recipe.author.username}
+											isBlocked={recipe.author.blocked}
+										/>
 									</Link>
 								</span>
 								<span className="hidden sm:block">|</span>

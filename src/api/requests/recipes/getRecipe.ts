@@ -11,6 +11,7 @@ export interface Recipe extends IRecipe {
 	author: {
 		id: number;
 		username: string;
+		blocked: boolean;
 		userImage?: {
 			cloudinaryImage: string;
 		};

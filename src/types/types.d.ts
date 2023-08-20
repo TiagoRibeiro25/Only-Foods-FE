@@ -11,6 +11,7 @@ export interface IThought {
 	author: {
 		id: number;
 		username: string;
+		blocked: boolean;
 		userImage?: {
 			cloudinaryImage: string;
 		};
@@ -28,6 +29,7 @@ export interface IRecipe {
 	description?: string;
 	author: {
 		id: number;
+		blocked: boolean;
 		username: string;
 	};
 	recipeImages: {
@@ -47,6 +49,7 @@ export interface IComment {
 	author: {
 		id: number;
 		username: string;
+		blocked: boolean;
 		userImage?: {
 			cloudinaryImage: string;
 		};
