@@ -39,7 +39,7 @@ const DynamicList: React.FC<DynamicListProps> = ({ type, list, updateList }) => 
 			{list.map(item => (
 				<Reveal key={item.id} width="100%" animation="slide-right" delay={0.05}>
 					<Input
-						id={'dynamic-list-item-' + item.id}
+						id={`dynamic-list-item-${type}-${item.id}`}
 						type="text"
 						className="mt-2"
 						name={type}
