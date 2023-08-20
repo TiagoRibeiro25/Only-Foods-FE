@@ -1,7 +1,9 @@
+import classNames from 'classnames';
 import { useState } from 'react';
 
 interface InputProps {
 	placeholder: string;
+	className?: string;
 	type: 'text' | 'password' | 'email' | 'number' | 'tel';
 	name: string;
 	id: string;
@@ -14,6 +16,7 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({
 	placeholder,
+	className,
 	type,
 	name,
 	id,
@@ -36,7 +39,7 @@ const Input: React.FC<InputProps> = ({
 	}
 
 	return (
-		<div className="relative z-0 w-full mb-6 group">
+		<div className={classNames('relative z-0 w-full mb-6 group', className)}>
 			<input
 				type={type}
 				name={name}
