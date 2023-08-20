@@ -8,6 +8,7 @@ interface LocalRequestData extends ResponseData {
 		recipe: {
 			id: number;
 			title: string;
+			description: string;
 			authorId: number;
 			ingredients: string[];
 			instructions: string[];
@@ -16,6 +17,7 @@ interface LocalRequestData extends ResponseData {
 			updatedAt: string;
 		};
 		images: {
+			id: number;
 			cloudinaryId: string;
 			cloudinaryImage: string;
 			recipeId: number;
