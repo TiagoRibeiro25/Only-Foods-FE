@@ -62,7 +62,9 @@ const Recipe: React.FC = () => {
 								<Reveal width="100%" animation="slide-right">
 									<h2 className="mb-3 text-3xl font-bellefair">Comments</h2>
 								</Reveal>
-								<Comments type="recipe" id={recipe.id} revealAnimation="slide-bottom" />
+								<Reveal width="100%" animation="slide-bottom" delay={0.5}>
+									<Comments type="recipe" id={recipe.id} revealAnimation="slide-bottom" />
+								</Reveal>
 							</div>
 						</>
 					)}
