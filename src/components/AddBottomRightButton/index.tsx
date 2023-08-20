@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Reveal from '../Reveal';
 
-const AddBottomRightButton = () => {
+const AddBottomRightButton: React.FC = () => {
 	return (
 		<div className="fixed right-5 bottom-5 group">
 			<Reveal>
