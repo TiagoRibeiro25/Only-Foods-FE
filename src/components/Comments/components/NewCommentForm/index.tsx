@@ -37,6 +37,7 @@ const NewCommentForm: React.FC<NewCommentFormProps> = ({ id, type, onSubmit }) =
 					author: {
 						id: response.data.data.authorId,
 						username: loggedUser?.username as string,
+						blocked: false,
 						userImage: {
 							cloudinaryImage: loggedUser?.picture as string,
 						},

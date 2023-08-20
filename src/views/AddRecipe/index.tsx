@@ -66,6 +66,7 @@ const AddRecipe: React.FC = () => {
 					description: response.data.data.recipe.description,
 					author: {
 						id: loggedUser.id,
+						blocked: false,
 						username: loggedUser.username,
 					},
 					recipeImages: response.data.data.images.map(image => {

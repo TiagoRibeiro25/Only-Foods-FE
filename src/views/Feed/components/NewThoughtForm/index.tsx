@@ -34,6 +34,7 @@ const NewThoughtForm: React.FC = () => {
 					author: {
 						id: response.data.data.authorId,
 						username: loggedUser?.username ?? '',
+						blocked: false,
 						userImage: loggedUser?.picture
 							? { cloudinaryImage: loggedUser?.picture }
 							: undefined,
