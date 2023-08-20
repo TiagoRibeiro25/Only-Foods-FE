@@ -1,4 +1,5 @@
 import addComment from './addComment';
+import addRecipe from './addRecipe';
 import deleteRecipe from './deleteRecipe';
 import getComments from './getComments';
 import getRecipe from './getRecipe';
@@ -12,4 +13,5 @@ export default {
 	handleLike,
 	getRecipe,
 	deleteRecipe,
+	addRecipe,
 };
