@@ -31,7 +31,7 @@ const RecipeContent: React.FC<RecipeContentProps> = ({ recipe }) => {
 									key={image.id}
 									src={image.cloudinaryImage}
 									alt={recipe.title}
-									className="object-cover w-full h-full"
+									className="object-cover w-full h-full hover:cursor-default"
 									loading="lazy"
 								/>
 							);
