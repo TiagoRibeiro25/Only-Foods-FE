@@ -9,6 +9,7 @@ import UserNoPicture from '../../assets/imgs/user.webp';
 import Logo from '../../assets/logo/logo_bw_1.webp';
 import LogoHovered from '../../assets/logo/logo_color_2.webp';
 import ConfirmActionModal from '../../components/ConfirmActionModal';
+import { RecipesContext } from '../../contextProviders/RecipesContext';
 import { ThoughtsContext } from '../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../contextProviders/UserContext';
 
@@ -18,6 +19,7 @@ const Navbar: React.FC = () => {
 
 	const { loggedUser, setLoggedUser } = useContext(UserContext);
 	const thoughtsContext = useContext(ThoughtsContext);
+	const recipesContext = useContext(RecipesContext)
 
 	const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
 	const [isLogoHovered, setLogoHovered] = useState<boolean>(false);
@@ -51,6 +53,9 @@ const Navbar: React.FC = () => {
 
 				// Reset all thoughts state
 				thoughtsContext.resetAllState();
+
+				// Reset all recipes state
+				recipesContext.resetAllState();
 
 				// Navigate to the home page
 				navigate('/');

@@ -6,6 +6,7 @@ import LoadingIcon from '../../../../assets/icons/loading.svg';
 import Button from '../../../../components/Button';
 import CheckBox from '../../../../components/CheckBox';
 import Input from '../../../../components/Input';
+import { RecipesContext } from '../../../../contextProviders/RecipesContext';
 import { ThoughtsContext } from '../../../../contextProviders/ThoughtsContext';
 import { UserContext } from '../../../../contextProviders/UserContext';
 
@@ -15,6 +16,7 @@ const LoginForm: React.FC = () => {
 
 	const { setLoggedUser } = useContext(UserContext);
 	const thoughtsContext = useContext(ThoughtsContext);
+	const recipesContext = useContext(RecipesContext);
 
 	// Login Form State Management
 	const [email, setEmail] = useState<string>('');
@@ -50,6 +52,9 @@ const LoginForm: React.FC = () => {
 
 				// Reset all thoughts state
 				thoughtsContext.resetAllState();
+
+				// Reset all recipes state
+				recipesContext.resetAllState();
 
 				setLoggedUser(response.data.data?.user ?? null);
 			} else {
