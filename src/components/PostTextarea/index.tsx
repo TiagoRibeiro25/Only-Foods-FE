@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import Button from '../Button';
+import Textarea from '../Textarea';
 
 interface PostTextAreaProps {
 	id: string;
@@ -47,9 +47,9 @@ const PostTextArea: React.FC<PostTextAreaProps> = ({
 		return false;
 	}, [minLength, maxLength, text, loading]);
 
-	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
-		setText(event.target.value);
-		onChange(event.target.value);
+	const handleChange = (value: string): void => {
+		setText(value);
+		onChange(value);
 	};
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -82,21 +82,20 @@ const PostTextArea: React.FC<PostTextAreaProps> = ({
 					<label htmlFor={labelText} className="sr-only">
 						{labelText}
 					</label>
-					<textarea
-						ref={textareaRef}
+
+					<Textarea
+						className="px-0 py-1 text-sm border-0"
+						name="post"
 						id={id}
-						className={classNames(
-							'w-full px-0 py-1 text-sm text-gray-900 bg-white border-0 outline-none focus:ring-0',
-							resizable ? 'resize-y' : 'resize-none',
-						)}
 						placeholder={placeholder}
 						maxLength={maxLength ?? 500}
 						minLength={minLength ?? 1}
-						value={text}
 						onChange={handleChange}
+						resizable={resizable}
 						required
-						style={{ minHeight: '7rem', maxHeight: '40rem' }}
-					></textarea>
+					>
+						{text}
+					</Textarea>
 				</div>
 				<div className="flex items-center justify-between px-3 py-2 border-t">
 					<div className="flex pl-0 space-x-1 sm:pl-2">
