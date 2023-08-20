@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
 import CancelIcon from '../../assets/icons/cancel.svg';
 import DeleteIcon from '../../assets/icons/delete.svg';
@@ -22,6 +22,7 @@ interface ThoughtProps {
 }
 
 const Thought: React.FC<ThoughtProps> = ({ thought, isAdmin, isBlocked }) => {
+	const location = useLocation();
 	const navigate = useNavigate();
 	const thoughtsContext = useContext(ThoughtsContext);
 
@@ -41,7 +42,9 @@ const Thought: React.FC<ThoughtProps> = ({ thought, isAdmin, isBlocked }) => {
 
 			if (response.data.success) {
 				thoughtsContext.deleteThought(thought.id);
-				navigate('/');
+				if (location.pathname.includes('/thought/')) {
+					navigate('/');
+				}
 			}
 		} catch (error) {
 			console.log(error);
