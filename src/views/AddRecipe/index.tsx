@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import requests from '../../api/requests';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import AddImages from '../../components/AddImages';
@@ -8,9 +8,14 @@ import DynamicList, { Item } from '../../components/DynamicList';
 import Input from '../../components/Input';
 import Reveal from '../../components/Reveal';
 import Textarea from '../../components/Textarea';
+import { RecipesContext } from '../../contextProviders/RecipesContext';
+import { UserContext } from '../../contextProviders/UserContext';
 import { Base64Img } from '../../types/types';
 
 const AddRecipe: React.FC = () => {
+	const recipesContext = useContext(RecipesContext);
+	const { loggedUser } = useContext(UserContext);
+
 	const [images, setImages] = useState<Base64Img[]>([]);
 	const [title, setTitle] = useState<string>('');
 	const [description, setDescription] = useState<string>('');
@@ -44,7 +49,7 @@ const AddRecipe: React.FC = () => {
 				recipeImages: images,
 			});
 
-			if (response.data.success) {
+			if (response.data.success && response.data.data && loggedUser) {
 				setStatusMSg('Recipe successfully created!');
 
 				// Reset the form
@@ -54,6 +59,27 @@ const AddRecipe: React.FC = () => {
 				setIngredients([{ id: '1', value: '' }]);
 				setInstructions([{ id: '1', value: '' }]);
 				setNotes('');
+
+				recipesContext.handleNewRecipe({
+					id: response.data.data.recipe.id,
+					title: response.data.data.recipe.title,
+					description: response.data.data.recipe.description,
+					author: {
+						id: loggedUser.id,
+						username: loggedUser.username,
+					},
+					recipeImages: response.data.data.images.map(image => {
+						return {
+							id: image.id,
+							cloudinaryImage: image.cloudinaryImage,
+						};
+					}),
+					likes: 0,
+					comments: 0,
+					isAuthor: true,
+					isLiked: false,
+					createdAt: response.data.data.recipe.createdAt,
+				});
 			} else {
 				setStatusMSg(response.data.message);
 			}
