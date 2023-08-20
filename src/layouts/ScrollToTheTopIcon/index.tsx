@@ -26,7 +26,12 @@ const ScrollToTheTopIcon: React.FC = () => {
 
 	useEffect(() => {
 		// check if the url has /recipes in it
-		if (location.pathname.includes('/recipes') && loggedUser && !loggedUser.isBlocked) {
+		if (
+			(location.pathname.includes('/recipes') || location.pathname.includes('/recipe')) &&
+			!location.pathname.includes('/recipes/add') &&
+			loggedUser &&
+			!loggedUser.isBlocked
+		) {
 			setMoveUp(true);
 		} else {
 			setMoveUp(false);
