@@ -37,7 +37,7 @@ const DynamicList: React.FC<DynamicListProps> = ({ type, list, updateList }) => 
 	return (
 		<ul className="mt-3 space-y-3 text-gray-500 list-disc list-inside">
 			{list.map(item => (
-				<Reveal key={item.id} width="100%" animation="slide-bottom" delay={0.05}>
+				<Reveal key={item.id} width="100%" animation="slide-right" delay={0.05}>
 					<Input
 						id={'dynamic-list-item-' + item.id}
 						type="text"
