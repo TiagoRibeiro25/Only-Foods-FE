@@ -147,7 +147,7 @@ const RecipesList: React.FC = () => {
 			{!isLoading && recipesContext[filter].recipes.length === 0 && (
 				<NoItemsFound
 					warning="No recipes found."
-					message="Change the filter or add a new thought."
+					message="Change the filter or create a new recipe."
 				/>
 			)}
 		</div>

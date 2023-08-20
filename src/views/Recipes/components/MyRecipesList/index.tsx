@@ -118,7 +118,7 @@ const MyRecipesList: React.FC = () => {
 			{!isLoading && recipesContext.mine.recipes.length === 0 && (
 				<NoItemsFound
 					warning="No recipes found."
-					message="Change the filter or add a new thought."
+					message="Create your first recipe to see it here"
 				/>
 			)}
 		</div>
