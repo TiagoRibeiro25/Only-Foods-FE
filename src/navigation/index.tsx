@@ -47,7 +47,10 @@ const Navigation = () => {
 				<Route path="/feed" element={<Feed />} />
 				<Route path="/thought/:id" element={<ThoughtPost />} />
 				<Route path="/recipes" element={<Navigate to={'/recipes/all'} replace />} />
-				<Route path="/recipes/add" element={<AddRecipe />} />
+				<Route
+					path="/recipes/add"
+					element={loggedUser ? <AddRecipe /> : <Navigate to="/" replace />}
+				/>
 				<Route path="/recipes/:tab" element={<Recipes />} />
 				<Route path="/recipe/:id" element={<Recipe />} />
 				<Route path="/search" element={<Search />} />
