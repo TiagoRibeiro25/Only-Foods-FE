@@ -1,4 +1,8 @@
+export type ImgMimeType = 'png' | 'jpg' | 'jpeg' | 'bmp' | 'webp';
+
 export type ItemType = 'thought' | 'recipe';
+
+export type Base64Img = `data:image/${ImgMimeType};base64${string}`;
 
 export interface IThought {
 	id: number;
