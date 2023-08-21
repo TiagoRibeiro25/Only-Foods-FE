@@ -11,7 +11,6 @@ import HTMLText from '../../../../components/HTMLText';
 import Reveal from '../../../../components/Reveal';
 import { UserContext } from '../../../../contextProviders/UserContext';
 import { IUser } from '../../../../types/types';
-import ProfileUsername from './components/ProfileUsername';
 
 interface UserProfileHeaderProps {
 	user: IUser;
@@ -67,11 +66,26 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ user }) => {
 					</div>
 					<div className="flex flex-col items-center flex-grow sm:items-start">
 						<div className="flex flex-col items-center sm:flex-row">
-							<ProfileUsername
-								username={user.username}
-								isAdmin={user.isAdmin}
-								isBlocked={isUserBlocked}
-							/>
+							<h1 className="text-2xl sm:mr-1">
+								{isUserBlocked ? (
+									<s className="text-gray-600">{user.username}</s>
+								) : (
+									user.username
+								)}
+							</h1>
+							{(user.isAdmin || isUserBlocked) && (
+								<span
+									className={classNames(
+										'sm:px-2 sm:py-0.5 px-3 py-1 sm:text-xs text-sm rounded sm:mb-0 mb-4',
+										{
+											'text-white bg-gray-700 animate-pulse sm:mt-0 mt-2': user.isAdmin,
+											'text-gray-700 border-gray-700 border-2 sm:mt-1': isUserBlocked,
+										},
+									)}
+								>
+									{user.isAdmin ? 'Admin' : 'Blocked'}
+								</span>
+							)}
 						</div>
 						<div className="flex flex-row">
 							<span className="mr-3 text-gray-500">{user.followers} Followers</span>
