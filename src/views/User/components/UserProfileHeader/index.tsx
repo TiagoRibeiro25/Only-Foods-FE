@@ -92,7 +92,7 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ user }) => {
 							<span className="text-gray-500 ">{user.following} Following</span>
 						</div>
 						<div className="flex flex-col items-center w-full mt-1 sm:flex-row">
-							<p className="block w-full mb-6 text-gray-500 sm:mb-0">
+							<p className="block w-full mb-6 text-center text-gray-500 sm:text-start sm:mb-0">
 								Joined on{' '}
 								{new Date(user.createdAt).toLocaleDateString(navigator.language, {
 									day: 'numeric',
