@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useContext, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import requests from '../../../../api/requests';
 import LoadingIcon from '../../../../assets/icons/loading.svg';
 import UserNoPicture from '../../../../assets/imgs/user.webp';
@@ -117,7 +117,13 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ user }) => {
 									disabled={loading}
 									onClick={handleButtonClick}
 								>
-									{getButtonText()}
+									{loggedUser?.id === user.id ? (
+										<Link to="/profile/edit" className="w-full">
+											Edit Profile
+										</Link>
+									) : (
+										<>{getButtonText()}</>
+									)}
 								</Button>
 							)}
 
