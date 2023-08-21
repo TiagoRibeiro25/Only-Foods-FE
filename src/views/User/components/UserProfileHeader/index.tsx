@@ -86,21 +86,26 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ user }) => {
 									year: 'numeric',
 								})}
 							</p>
-							<Button
-								type="button"
-								id={loggedUser?.id === user.id ? 'edit-profile-button' : 'follow-button'}
-								className={classNames(
-									'text-white bg-zinc-800 py-1.5 sm:mt-0 sm:ml-auto whitespace-nowrap',
-									loading ? 'px-6' : 'px-10',
-								)}
-								icon={loading ? LoadingIcon : ''}
-								iconAlt="Loading Icon"
-								iconAnimation="spin"
-								disabled={loading}
-								onClick={handleButtonClick}
-							>
-								{getButtonText()}
-							</Button>
+
+							{loggedUser && (
+								<Button
+									type="button"
+									id={
+										loggedUser?.id === user.id ? 'edit-profile-button' : 'follow-button'
+									}
+									className={classNames(
+										'text-white bg-zinc-800 py-1.5 sm:mt-0 sm:ml-auto whitespace-nowrap',
+										loading ? 'px-6' : 'px-10',
+									)}
+									icon={loading ? LoadingIcon : ''}
+									iconAlt="Loading Icon"
+									iconAnimation="spin"
+									disabled={loading}
+									onClick={handleButtonClick}
+								>
+									{getButtonText()}
+								</Button>
+							)}
 
 							{loggedUser?.isAdmin && !user.isAdmin && (
 								<BlockUserButton
