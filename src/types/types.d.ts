@@ -4,6 +4,23 @@ export type ItemType = 'thought' | 'recipe';
 
 export type Base64Img = `data:image/${ImgMimeType};base64${string}`;
 
+export interface IUser {
+	id: number;
+	username: string;
+	email?: string;
+	description: string;
+	blocked: boolean;
+	isAdmin: boolean;
+	userImage?: {
+		cloudinaryImage: string;
+	};
+	followers: number;
+	following: number;
+	isLoggedUser: boolean;
+	isFollowing: boolean;
+	createdAt: string;
+}
+
 export interface IThought {
 	id: number;
 	content: string;
