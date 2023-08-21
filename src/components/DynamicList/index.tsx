@@ -37,17 +37,19 @@ const DynamicList: React.FC<DynamicListProps> = ({ type, list, updateList }) => 
 	return (
 		<ul className="mt-3 space-y-3 text-gray-500 list-disc list-inside">
 			{list.map(item => (
-				<Reveal key={item.id} width="100%" animation="slide-right" delay={0.2}>
-					<Input
-						id={`dynamic-list-item-${type}-${item.id}`}
-						type="text"
-						className="mt-2"
-						name={type}
-						placeholder={type + ' ' + (list.indexOf(item) + 1)}
-						value={item.value}
-						onChange={(newValue: string) => handleItemChange(item.id, newValue)}
-					/>
-				</Reveal>
+				<li key={item.id} className="w-full list-none ">
+					<Reveal width="100%" animation="slide-right" delay={0.2}>
+						<Input
+							id={`dynamic-list-item-${type}-${item.id}`}
+							type="text"
+							className="mt-2"
+							name={type}
+							placeholder={type + ' ' + (list.indexOf(item) + 1)}
+							value={item.value}
+							onChange={(newValue: string) => handleItemChange(item.id, newValue)}
+						/>
+					</Reveal>
+				</li>
 			))}
 		</ul>
 	);
