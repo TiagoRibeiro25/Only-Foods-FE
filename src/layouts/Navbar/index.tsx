@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
 
 	const { loggedUser, setLoggedUser } = useContext(UserContext);
 	const thoughtsContext = useContext(ThoughtsContext);
-	const recipesContext = useContext(RecipesContext)
+	const recipesContext = useContext(RecipesContext);
 
 	const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
 	const [isLogoHovered, setLogoHovered] = useState<boolean>(false);
