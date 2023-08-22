@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import Reveal from '../Reveal';
 
@@ -11,9 +11,27 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ id, show, children, onClose }) => {
+	const modalRef = useRef<HTMLDivElement | null>(null);
+
 	useEffect(() => {
 		document.body.style.overflow = show ? 'hidden' : '';
-	}, [show]);
+
+		const handleOutsideClick = (event: MouseEvent) => {
+			if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+				onClose();
+			}
+		};
+
+		if (show) {
+			document.addEventListener('mousedown', handleOutsideClick);
+		} else {
+			document.removeEventListener('mousedown', handleOutsideClick);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleOutsideClick);
+		};
+	}, [show, onClose]);
 
 	return (
 		show &&
@@ -27,7 +45,7 @@ const Modal: React.FC<ModalProps> = ({ id, show, children, onClose }) => {
 				)}
 			>
 				<Reveal animation="fade" delay={0.05} duration={0.4}>
-					<div className="relative bg-white rounded-lg shadow">
+					<div ref={modalRef} className="relative bg-white rounded-lg shadow">
 						<button
 							type="button"
 							className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
