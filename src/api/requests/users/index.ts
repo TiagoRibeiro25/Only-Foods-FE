@@ -1,4 +1,5 @@
 import forgotPassword from './forgotPassword';
+import { getFollowers, getFollowing } from './getFollowData';
 import getLoggedUser from './getLoggedUser';
 import getUser from './getUser';
 import handleBlockUser from './handleBlockUser';
@@ -18,4 +19,6 @@ export default {
 	getUser,
 	handleFollow,
 	handleBlockUser,
+	getFollowers,
+	getFollowing,
 };
