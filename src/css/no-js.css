@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .no-js {
 	height: 100vh;
 	height: 100dvh;
