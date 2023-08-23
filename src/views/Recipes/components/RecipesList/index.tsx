@@ -1,10 +1,10 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import requests from '../../../../api/requests/index.ts';
 import ErrorOccurred from '../../../../components/ErrorOccurred';
-import Loading from '../../../../components/Loading';
+import LoadingRecipes from '../../../../components/LoadingRecipes/index.tsx';
 import NoItemsFound from '../../../../components/NoItemsFound';
 import ReachedEnd from '../../../../components/ReachedEnd';
-import Recipe from '../../../../components/Recipe';
+import Recipe from '../../../../components/Recipe/index.tsx';
 import Reveal from '../../../../components/Reveal';
 import Select from '../../../../components/Select';
 import { RecipesContext } from '../../../../contextProviders/RecipesContext.tsx';
@@ -139,7 +139,15 @@ const RecipesList: React.FC = () => {
 				))}
 			</div>
 
-			{isLoading && <Loading />}
+			{isLoading && (
+				<div className="flex flex-col w-full mb-12 md:space-x-24 md:flex-row md:w-auto">
+					{Array.from({ length: 2 }).map(() => (
+						<div key={crypto.randomUUID()} className="w-full mb-20 md:max-w-xs md:mb-0">
+							<LoadingRecipes className="w-full md:w-80" />
+						</div>
+					))}
+				</div>
+			)}
 			{recipesContext[filter].reachedEnd && <ReachedEnd />}
 			{anErrorOccurred && recipesContext[filter].recipes.length !== 0 && (
 				<ErrorOccurred text="An error occurred while fetching recipes." />
