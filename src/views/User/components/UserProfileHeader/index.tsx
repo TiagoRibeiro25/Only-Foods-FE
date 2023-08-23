@@ -3,10 +3,15 @@ import { useContext, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useNavigate } from 'react-router-dom';
 import requests from '../../../../api/requests';
+import {
+	FollowUserData,
+	UserDataType,
+} from '../../../../api/requests/users/getFollowData';
 import LoadingIcon from '../../../../assets/icons/loading.svg';
 import UserNoPicture from '../../../../assets/imgs/user.webp';
 import BlockUserButton from '../../../../components/BlockUserButton';
 import Button from '../../../../components/Button';
+import FollowsDataModel from '../../../../components/FollowsDataModal';
 import HTMLText from '../../../../components/HTMLText';
 import Reveal from '../../../../components/Reveal';
 import { UserContext } from '../../../../contextProviders/UserContext';
@@ -24,6 +29,11 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ user }) => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [isUserBlocked, setIsUserBlocked] = useState<boolean>(user.blocked);
 	const [isUserFollowing, setIsUserFollowing] = useState<boolean>(user.isFollowing);
+
+	const [showModal, setShowModal] = useState<boolean>(false);
+	const [selectedType, setSelectedType] = useState<UserDataType>('followers');
+	const [followers, setFollowers] = useState<FollowUserData[]>([]);
+	const [following, setFollowing] = useState<FollowUserData[]>([]);
 
 	const getButtonText = (): string => {
 		if (loggedUser?.id === user.id) return 'Edit Profile';
@@ -48,6 +58,40 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ user }) => {
 			console.log('An error occurred while trying to follow/unfollow the user: ', error);
 		} finally {
 			setLoading(false);
+		}
+	};
+
+	const handleDataUpdate = (newData: FollowUserData[]): void => {
+		if (selectedType === 'followers') {
+			setFollowers(newData);
+
+			// Update the isFollowing property of the user in the following list (if it exists)
+			setFollowing(prevData => {
+				const newFollowing = prevData.map(userData => {
+					if (userData.id === user.id) {
+						return { ...userData, isFollowing: false };
+					}
+
+					return userData;
+				});
+
+				return newFollowing;
+			});
+		} else {
+			setFollowing(newData);
+
+			// Update the isFollowing property of the user in the followers list (if it exists)
+			setFollowers(prevData => {
+				const newFollowers = prevData.map(userData => {
+					if (userData.id === user.id) {
+						return { ...userData, isFollowing: false };
+					}
+
+					return userData;
+				});
+
+				return newFollowers;
+			});
 		}
 	};
 
@@ -88,8 +132,24 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ user }) => {
 							)}
 						</div>
 						<div className="flex flex-row">
-							<span className="mr-3 text-gray-500">{user.followers} Followers</span>
-							<span className="text-gray-500 ">{user.following} Following</span>
+							<button
+								className="mr-3 text-gray-500 hover:underline"
+								onClick={() => {
+									setSelectedType('followers');
+									setShowModal(true);
+								}}
+							>
+								{user.followers} Followers
+							</button>
+							<button
+								className="text-gray-500 hover:underline"
+								onClick={() => {
+									setSelectedType('following');
+									setShowModal(true);
+								}}
+							>
+								{user.following} Following
+							</button>
 						</div>
 						<div className="flex flex-col items-center w-full mt-1 sm:flex-row">
 							<p className="block w-full mb-6 text-center text-gray-500 sm:text-start sm:mb-0">
@@ -148,6 +208,16 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ user }) => {
 
 				<hr className="h-px my-8 bg-gray-200 border-0 " />
 			</Reveal>
+
+			<FollowsDataModel
+				id={selectedType + '-list-modal'}
+				type={selectedType}
+				userId={user.id}
+				show={showModal}
+				data={selectedType === 'followers' ? followers : following}
+				onDataUpdate={handleDataUpdate}
+				onClose={() => setShowModal(false)}
+			/>
 		</header>
 	);
 };
