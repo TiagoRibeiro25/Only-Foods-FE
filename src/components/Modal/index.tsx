@@ -45,7 +45,10 @@ const Modal: React.FC<ModalProps> = ({ id, show, children, onClose }) => {
 				)}
 			>
 				<Reveal animation="fade" delay={0.05} duration={0.4}>
-					<div ref={modalRef} className="relative bg-white rounded-lg shadow">
+					<div
+						ref={modalRef}
+						className="relative overflow-y-auto bg-white rounded-lg shadow max-h-[90vh]"
+					>
 						<button
 							type="button"
 							className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
