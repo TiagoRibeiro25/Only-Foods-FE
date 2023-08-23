@@ -16,6 +16,7 @@ interface RevealProps {
 	animation?: Animation;
 	duration?: number;
 	delay?: number;
+	noAnimation?: boolean;
 }
 
 const Reveal: React.FC<RevealProps> = ({
@@ -24,6 +25,7 @@ const Reveal: React.FC<RevealProps> = ({
 	animation = 'fade',
 	duration = 0.5,
 	delay = 0.3,
+	noAnimation = false,
 }) => {
 	const disableMotion: boolean = isMotionReduced();
 
@@ -42,7 +44,7 @@ const Reveal: React.FC<RevealProps> = ({
 
 	return (
 		<div ref={ref} style={{ position: 'relative', width, overflow: 'hidden' }}>
-			{disableMotion ? (
+			{disableMotion || noAnimation ? (
 				<div>{children}</div>
 			) : (
 				<motion.div

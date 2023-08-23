@@ -1,14 +1,17 @@
+import classNames from 'classnames';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { RecipesContext } from '../../contextProviders/RecipesContext';
 import { IRecipe } from '../../types/types';
 import Button from '../Button';
 import PostUserActions from '../PostUserActions';
-import Reveal from '../Reveal';
+import Reveal, { Animation } from '../Reveal';
 
 interface RecipeProps {
 	recipe: IRecipe;
 	index?: number;
+	className?: string;
+	animation?: Animation | 'none';
 }
 
 function getRevealAnimation(index: number | undefined) {
@@ -16,12 +19,17 @@ function getRevealAnimation(index: number | undefined) {
 	return index % 2 === 0 ? 'slide-left' : 'slide-right';
 }
 
-const Recipe: React.FC<RecipeProps> = ({ recipe, index }) => {
+const Recipe: React.FC<RecipeProps> = ({ recipe, index, className, animation }) => {
 	const recipesContext = useContext(RecipesContext);
 
 	return (
-		<div className="rounded lg:w-[374px] w-full mb-6 lg:mb-0">
-			<Reveal animation={getRevealAnimation(index)} width="100%" delay={0.15}>
+		<div className={classNames('rounded lg:w-[374px] w-full mb-6 lg:mb-0', className)}>
+			<Reveal
+				animation={animation !== 'none' ? animation : getRevealAnimation(index)}
+				width="100%"
+				delay={0.15}
+				noAnimation={animation === 'none'}
+			>
 				<div className="w-full h-full bg-zinc-100">
 					<img
 						className="w-full rounded-t lg:h-[200px] sm:h-[300px] h-[200px] object-cover object-center"
