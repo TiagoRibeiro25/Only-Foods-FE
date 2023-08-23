@@ -95,11 +95,29 @@ const UserProfileMain: React.FC<UserProfileMainProps> = ({ userId }) => {
 					{!isLoading && recipes.length > 0 && (
 						<div className="flex w-full rounded">
 							<Marquee className="block w-full h-full" speed={60} pauseOnHover>
-								{recipes.map((recipe, index) => (
-									<div key={recipe.id} className="max-w-xs scale-90 lg:mr-10">
-										<Recipe index={index} recipe={recipe} animation="none" />
-									</div>
-								))}
+								{recipes.length >= 3 &&
+									recipes.map((recipe, index) => (
+										<div key={recipe.id} className="max-w-xs scale-90 lg:mr-10">
+											<Recipe index={index} recipe={recipe} animation="none" />
+										</div>
+									))}
+
+								{recipes.length === 1 &&
+									Array.from({ length: 3 }).map(() => (
+										<div key={crypto.randomUUID()} className="max-w-xs scale-90 lg:mr-10">
+											<Recipe recipe={recipes[0]} animation="none" />
+										</div>
+									))}
+
+								{recipes.length === 2 &&
+									Array.from({ length: 3 }).map((_, index) => (
+										<div key={crypto.randomUUID()} className="max-w-xs scale-90 lg:mr-10">
+											<Recipe
+												recipe={index % 2 === 0 ? recipes[0] : recipes[1]}
+												animation="none"
+											/>
+										</div>
+									))}
 							</Marquee>
 						</div>
 					)}
