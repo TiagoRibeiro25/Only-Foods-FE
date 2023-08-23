@@ -3,6 +3,7 @@ import classNames from 'classnames';
 export interface Option {
 	text: string;
 	value: string;
+	default: boolean;
 }
 
 interface SelectProps {

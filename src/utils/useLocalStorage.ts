@@ -29,11 +29,16 @@ const getFilterFromLS = (props: GetFilterFromLSProps): Filter => {
 	const { key, isUserLogged, options } = props;
 
 	const filter = getLocalStorage(key);
-	const result = options.some(option => option.value === filter)
-		? (filter as Filter)
-		: 'recent';
 
-	return result === 'following' && !isUserLogged ? 'recent' : result;
+	if (filter === 'following' && !isUserLogged) {
+		return options.find(option => option.default)?.value as Filter;
+	}
+
+	if (options.some(option => option.value === filter)) {
+		return filter as Filter;
+	}
+
+	return options.find(option => option.default)?.value as Filter;
 };
 
 export { getFilterFromLS, getLocalStorage, removeLocalStorage, setLocalStorage };
