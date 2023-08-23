@@ -35,6 +35,18 @@ const FollowsDataModel: React.FC<FollowsDataModelProps> = ({
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
+	const getErrorMessage = (): string => {
+		if (type === 'followers') {
+			return loggedUser?.id === userId
+				? "You don't have any followers yet."
+				: "This user doesn't have any followers yet.";
+		} else {
+			return loggedUser?.id === userId
+				? "You aren't following anyone yet."
+				: "This user isn't following anyone yet.";
+		}
+	};
+
 	useEffect(() => {
 		if (!show || data.length > 0) {
 			return;
@@ -136,11 +148,7 @@ const FollowsDataModel: React.FC<FollowsDataModelProps> = ({
 
 				{!isLoading && !errorOccurred && data.length === 0 && (
 					<div className="flex flex-col items-center justify-center w-full h-full">
-						<p className="text-lg font-bold text-gray-800">
-							{type === 'followers'
-								? "This user doesn't have any followers yet."
-								: "This user isn't following anyone yet."}
-						</p>
+						<p className="text-lg font-bold text-gray-800">{getErrorMessage()}</p>
 					</div>
 				)}
 			</div>
