@@ -15,6 +15,11 @@ const HandleFollowButton: React.FC<HandleFollowButtonProps> = ({
 }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
+	const getButtonText = (): string => {
+		if (isLoading) return 'Loading...';
+		return isFollowing ? 'Unfollow' : 'Follow';
+	};
+
 	const handleFollow = async (): Promise<void> => {
 		setIsLoading(true);
 
@@ -38,7 +43,7 @@ const HandleFollowButton: React.FC<HandleFollowButtonProps> = ({
 			onClick={handleFollow}
 			disabled={isLoading}
 		>
-			{isFollowing ? 'Unfollow' : 'Follow'}
+			{getButtonText()}
 		</Button>
 	);
 };
