@@ -60,9 +60,9 @@ const BlockUserButton: React.FC<BlockUserButtonProps> = ({
 				)}
 				onClick={() => setShowModal(true)}
 			>
-				<div className={classNames('flex items-center justify-center')}>
+				<div className="flex items-center justify-center">
 					<LazyLoadImage
-						className={classNames('sm:mx-2 w-7 h-7', {
+						className={classNames('w-7 h-7 sm:mr-4 sm:ml-2', {
 							'animate-spin': loading,
 						})}
 						src={loading ? LoadingIcon : BlockIcon}
