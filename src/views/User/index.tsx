@@ -5,6 +5,7 @@ import ErrorOccurred from '../../components/ErrorOccurred';
 import Loading from '../../components/Loading';
 import { IUser } from '../../types/types';
 import UserProfileHeader from './components/UserProfileHeader';
+import UserProfileMain from './components/UserProfileMain';
 
 const User: React.FC = () => {
 	const { id } = useParams(); // Thought id
@@ -50,6 +51,7 @@ const User: React.FC = () => {
 				{user && !isLoading && (
 					<>
 						<UserProfileHeader user={user} />
+						<UserProfileMain userId={user.id} />
 					</>
 				)}
 				{errorOccurred && (
