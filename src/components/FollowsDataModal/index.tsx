@@ -133,6 +133,16 @@ const FollowsDataModel: React.FC<FollowsDataModelProps> = ({
 						))}
 					</ul>
 				)}
+
+				{!isLoading && !errorOccurred && data.length === 0 && (
+					<div className="flex flex-col items-center justify-center w-full h-full">
+						<p className="text-lg font-bold text-gray-800">
+							{type === 'followers'
+								? "This user doesn't have any followers yet."
+								: "This user isn't following anyone yet."}
+						</p>
+					</div>
+				)}
 			</div>
 		</Modal>
 	);
