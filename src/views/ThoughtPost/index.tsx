@@ -2,12 +2,12 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import requests from '../../api/requests';
 import Comments from '../../components/Comments';
+import ErrorOccurred from '../../components/ErrorOccurred';
 import Loading from '../../components/Loading';
 import Reveal from '../../components/Reveal';
 import Thought from '../../components/Thought';
 import { UserContext } from '../../contextProviders/UserContext';
 import { IThought } from '../../types/types';
-import ErrorOccurred from './components/ErrorOccurred';
 
 const ThoughtPost: React.FC = () => {
 	const { id } = useParams(); // Thought id
@@ -61,7 +61,9 @@ const ThoughtPost: React.FC = () => {
 						/>
 					</Reveal>
 				)}
-				{errorOccurred && <ErrorOccurred />}
+				{errorOccurred && (
+					<ErrorOccurred text="An error occurred while trying to get the thought." />
+				)}
 			</div>
 
 			{/* Line separating the thought and the comments */}
