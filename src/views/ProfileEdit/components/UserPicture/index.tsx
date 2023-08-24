@@ -1,25 +1,53 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import requests from '../../../../api/requests';
 import LoadingIcon from '../../../../assets/icons/loading.svg';
 import UserNoPicture from '../../../../assets/imgs/user.webp';
 import Button from '../../../../components/Button';
 import DropZone from '../../../../components/DropZone';
 import Reveal from '../../../../components/Reveal';
+import { UserContext } from '../../../../contextProviders/UserContext';
 import { Base64Img } from '../../../../types/types';
 
 interface UserPictureProps {
 	userImage: string;
 }
 
-//TODO: API call to update user image
 const UserPicture: React.FC<UserPictureProps> = ({ userImage }) => {
+	const { loggedUser, setLoggedUser } = useContext(UserContext);
+
 	const [updatedImage, setUpdatedImage] = useState<Base64Img[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [buttonText, setButtonText] = useState<string>('Update Image');
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 		setIsLoading(true);
+
+		try {
+			const response = await requests.users.updateUser({
+				picture: updatedImage[0],
+			});
+
+			if (response.data.success && loggedUser) {
+				setLoggedUser({
+					...loggedUser,
+					picture: updatedImage[0],
+				});
+			}
+
+			setButtonText(response.data.success ? 'Success' : 'Error');
+		} catch (error) {
+			console.log("An error occurred while updating the user's profile picture: ", error);
+			setButtonText('Error');
+		} finally {
+			setIsLoading(false);
+
+			setTimeout(() => {
+				setButtonText('Update Image');
+			}, 3000);
+		}
 	};
 
 	useEffect(() => {
@@ -65,9 +93,11 @@ const UserPicture: React.FC<UserPictureProps> = ({ userImage }) => {
 								icon={isLoading ? LoadingIcon : ''}
 								iconAlt="Loading Icon"
 								iconAnimation="spin"
-								disabled={updatedImage.length === 0}
+								disabled={
+									updatedImage.length === 0 || isLoading || buttonText !== 'Update Image'
+								}
 							>
-								Update Image
+								{isLoading ? 'Updating...' : buttonText}
 							</Button>
 
 							<Button
@@ -77,7 +107,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ userImage }) => {
 									'text-black bg-white border border-zinc-800 py-1.5 w-32 flex justify-center disabled:cursor-not-allowed',
 									isLoading ? 'w-36' : 'w-32',
 								)}
-								disabled={updatedImage.length === 0}
+								disabled={updatedImage.length === 0 || isLoading}
 								onClick={() => setUpdatedImage([])}
 							>
 								Reset
