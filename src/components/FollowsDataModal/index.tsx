@@ -122,7 +122,7 @@ const FollowsDataModel: React.FC<FollowsDataModelProps> = ({
 							/>
 
 							<Input
-								type="text"
+								type="search"
 								id="filter-follows"
 								name="filter-follows"
 								onChange={newValue => setFilter(newValue)}
