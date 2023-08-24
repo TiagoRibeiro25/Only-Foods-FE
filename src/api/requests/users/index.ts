@@ -8,6 +8,7 @@ import login from './login';
 import logout from './logout';
 import register from './register';
 import resetPassword from './resetPassword';
+import updateUser from './updateUser';
 
 export default {
 	forgotPassword,
@@ -21,4 +22,5 @@ export default {
 	handleBlockUser,
 	getFollowers,
 	getFollowing,
+	updateUser,
 };
