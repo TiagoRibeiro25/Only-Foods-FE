@@ -2,9 +2,9 @@ import { Suspense, lazy, useContext, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Loading from '../components/Loading';
 import { UserContext } from '../contextProviders/UserContext';
+import ProfileEdit from '../views/ProfileEdit';
 
 const AddRecipe = lazy(() => import('../views/AddRecipe'));
-const AdminPanel = lazy(() => import('../views/AdminPanel'));
 const Explore = lazy(() => import('../views/Explore'));
 const Feed = lazy(() => import('../views/Feed'));
 const Home = lazy(() => import('../views/Home'));
@@ -55,8 +55,11 @@ const Navigation = () => {
 				<Route path="/recipe/:id" element={<Recipe />} />
 				<Route path="/search" element={<Search />} />
 				<Route path="/user/:id" element={<User />} />
+				<Route
+					path="/profile/edit"
+					element={loggedUser ? <ProfileEdit /> : <Navigate to="/" replace />}
+				/>
 				<Route path="/messages" element={<Messages />} />
-				<Route path="/admin" element={<AdminPanel />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</Suspense>
