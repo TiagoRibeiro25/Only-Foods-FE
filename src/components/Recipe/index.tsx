@@ -39,7 +39,7 @@ const Recipe: React.FC<RecipeProps> = ({ recipe, index, className, animation }) 
 					/>
 
 					<div className="p-2 h-[145px] overflow-hidden">
-						<h2 className="text-2xl font-bold leading-7 tracking-tight text-gray-900 font-bellefair">
+						<h2 className="text-2xl font-bold leading-7 tracking-tight text-gray-900 truncate font-bellefair">
 							{recipe.title.trim()}
 						</h2>
 						<p className="my-2 font-normal leading-5 text-gray-700">
