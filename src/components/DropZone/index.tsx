@@ -5,6 +5,8 @@ import { Base64Img } from '../../types/types';
 interface DropZoneProps {
 	images: Base64Img[];
 	setImages: React.Dispatch<React.SetStateAction<Base64Img[]>>;
+	maxAllowedImages?: number;
+	maxImageSize?: number;
 }
 
 const VALID_IMAGE_TYPES = [
@@ -15,8 +17,12 @@ const VALID_IMAGE_TYPES = [
 	'image/webp',
 ];
 
-//TODO: Customize the DropZone component to work with other file types, max file size, etc.
-const DropZone: React.FC<DropZoneProps> = ({ images, setImages }) => {
+const DropZone: React.FC<DropZoneProps> = ({
+	images,
+	setImages,
+	maxAllowedImages = 5,
+	maxImageSize = 2000000, // 2mb
+}) => {
 	const [isDraggedOver, setIsDraggedOver] = useState<boolean>(false);
 
 	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -36,11 +42,13 @@ const DropZone: React.FC<DropZoneProps> = ({ images, setImages }) => {
 
 			Promise.all(filesPromises)
 				.then(files => {
-					const validFiles = files.filter(
-						file => file && VALID_IMAGE_TYPES.includes(file.type),
-					);
+					const validFiles = files.filter(file => {
+						return (
+							file && VALID_IMAGE_TYPES.includes(file.type) && file.size <= maxImageSize
+						);
+					});
 
-					const slicedFiles = validFiles.slice(0, 5 - images.length);
+					const slicedFiles = validFiles.slice(0, maxAllowedImages - images.length);
 
 					slicedFiles.forEach(file => {
 						if (file) {
@@ -123,10 +131,20 @@ const DropZone: React.FC<DropZoneProps> = ({ images, setImages }) => {
 							d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
 						/>
 					</svg>
-					<p className="mb-2 text-sm text-gray-500">
+					<p className="text-sm text-gray-500">
 						<span className="font-semibold">Click to upload</span> or drag and drop
 					</p>
-					<p className="text-xs text-gray-500">PNG, JPG, JPEG, BMP, WEBP</p>
+					<p className="my-2 text-xs text-gray-500">
+						{VALID_IMAGE_TYPES.map((type, index) => {
+							if (index === VALID_IMAGE_TYPES.length - 1) {
+								return type.split('/')[1].toUpperCase();
+							}
+							return `${type.split('/')[1].toUpperCase()}, `;
+						})}
+					</p>
+					<p className="text-xs text-gray-500">
+						Max file size: {maxImageSize / 1000000}MB
+					</p>
 				</div>
 				<input
 					id="dropzone-file"
