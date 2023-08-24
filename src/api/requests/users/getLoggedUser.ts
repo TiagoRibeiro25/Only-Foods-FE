@@ -18,6 +18,7 @@ interface LocalResponseData extends ResponseData {
 		followers: number;
 		following: number;
 		isLoggedUser: boolean;
+		createdAt: string;
 	};
 }
 
