@@ -151,7 +151,7 @@ const DropZone: React.FC<DropZoneProps> = ({
 					type="file"
 					className="hidden"
 					accept="image/png, image/jpg ,image/jpeg, image/bmp, image/webp"
-					multiple
+					multiple={maxAllowedImages > 1}
 					onChange={e => handleImageChange(e.target.files)}
 				/>
 			</label>
