@@ -81,7 +81,7 @@ const ForgotPasswordForm: React.FC = () => {
 						<Button
 							type="reset"
 							id="forgot-password-cancel"
-							className="text-black bg-white border-2 border-zinc-800 px-10 py-1.5"
+							className="text-black bg-white border border-zinc-800 px-10 py-1.5"
 							onClick={editUrlQuery}
 							disabled={loading}
 						>
