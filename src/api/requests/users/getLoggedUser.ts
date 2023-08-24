@@ -9,6 +9,7 @@ interface LocalResponseData extends ResponseData {
 		id: number;
 		username: string;
 		email: string;
+		resetPasswordToken: string;
 		description?: string;
 		blocked: boolean;
 		isAdmin: boolean;
