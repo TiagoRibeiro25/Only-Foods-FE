@@ -4,6 +4,7 @@ import App from './App.tsx';
 import Providers from './contextProviders';
 
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 import './css/index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
