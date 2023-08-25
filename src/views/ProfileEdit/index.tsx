@@ -6,6 +6,7 @@ import Loading from '../../components/Loading';
 import Reveal from '../../components/Reveal';
 import { IUser } from '../../types/types';
 import AccountInfo from './components/AccountInfo';
+import ChangePassword from './components/ChangePassword';
 import NameAndDescription from './components/NameAndDescription';
 import UserPicture from './components/UserPicture';
 
@@ -76,7 +77,7 @@ const ProfileEdit: React.FC = () => {
 			)}
 
 			{!isLoading && !errorOccurred && Object.keys(user).length > 0 && (
-				<div className="w-full my-6">
+				<div className="w-full mt-6 mb-12">
 					<Reveal width="100%" animation="slide-bottom" delay={0.05}>
 						<AccountInfo id={user.id} email={user.email ?? ''} />
 					</Reveal>
@@ -96,6 +97,10 @@ const ProfileEdit: React.FC = () => {
 					<Reveal width="100%" animation="fade" delay={0.3}>
 						<hr className="h-px my-6 mb-10 bg-gray-200 border-0" />
 					</Reveal>
+
+					{user.resetPasswordToken && (
+						<ChangePassword resetPasswordToken={user.resetPasswordToken} />
+					)}
 				</div>
 			)}
 		</div>
