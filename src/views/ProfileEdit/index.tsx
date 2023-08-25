@@ -6,6 +6,7 @@ import Loading from '../../components/Loading';
 import Reveal from '../../components/Reveal';
 import { IUser } from '../../types/types';
 import AccountInfo from './components/AccountInfo';
+import NameAndDescription from './components/NameAndDescription';
 import UserPicture from './components/UserPicture';
 
 type ExcludedUserProperties =
@@ -88,6 +89,12 @@ const ProfileEdit: React.FC = () => {
 
 					<Reveal width="100%" animation="fade" delay={0.3}>
 						<hr className="h-px my-12 mb-10 bg-gray-200 border-0" />
+					</Reveal>
+
+					<NameAndDescription username={user.username} description={user.description} />
+
+					<Reveal width="100%" animation="fade" delay={0.3}>
+						<hr className="h-px my-6 mb-10 bg-gray-200 border-0" />
 					</Reveal>
 				</div>
 			)}
