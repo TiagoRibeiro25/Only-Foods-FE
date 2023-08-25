@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import requests from '../../api/requests';
 import ErrorOccurred from '../../components/ErrorOccurred';
 import Loading from '../../components/Loading';
+import { UserContext } from '../../contextProviders/UserContext';
 import { IUser } from '../../types/types';
 import UserProfileHeader from './components/UserProfileHeader';
 import UserProfileMain from './components/UserProfileMain';
@@ -10,6 +11,8 @@ import UserProfileMain from './components/UserProfileMain';
 const User: React.FC = () => {
 	const { id } = useParams(); // Thought id
 	const navigate = useNavigate();
+
+	const { loggedUser } = useContext(UserContext);
 
 	const [user, setUser] = useState<IUser>();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,6 +22,10 @@ const User: React.FC = () => {
 		if (!id) {
 			navigate('/404');
 			return;
+		}
+
+		if (id === 'me' && !loggedUser) {
+			navigate('/?form=login');
 		}
 
 		try {
@@ -37,7 +44,7 @@ const User: React.FC = () => {
 		} finally {
 			setIsLoading(false);
 		}
-	}, [id, navigate]);
+	}, [id, loggedUser, navigate]);
 
 	useEffect(() => {
 		setIsLoading(true);

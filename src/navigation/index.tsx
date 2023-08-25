@@ -57,7 +57,7 @@ const Navigation = () => {
 				<Route path="/user/:id" element={<User />} />
 				<Route
 					path="/profile/edit"
-					element={loggedUser ? <ProfileEdit /> : <Navigate to="/" replace />}
+					element={loggedUser ? <ProfileEdit /> : <Navigate to="/?form=login" replace />}
 				/>
 				<Route path="/messages" element={<Messages />} />
 				<Route path="*" element={<NotFound />} />
