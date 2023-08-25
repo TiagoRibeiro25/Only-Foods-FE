@@ -5,7 +5,7 @@ const CreateAccountMessage: React.FC = () => {
 
 	return (
 		location.pathname !== '/' && (
-			<div className="fixed bottom-0 right-0 z-50 flex items-center justify-center w-full py-4 bg-white bg-opacity-90">
+			<div className="fixed bottom-0 right-0 z-10 flex items-center justify-center w-full py-4 bg-white bg-opacity-90">
 				<div className="text-center">
 					<h2 className="text-2xl font-bellefair animate-bounce">Join Us Today!</h2>
 					<p className="hidden text-sm lg:block">
