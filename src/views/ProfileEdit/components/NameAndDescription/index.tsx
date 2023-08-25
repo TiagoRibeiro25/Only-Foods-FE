@@ -107,7 +107,7 @@ const NameAndDescription: React.FC<NameAndDescriptionProps> = ({
 					<div className="flex flex-row justify-center mt-6 space-x-10 sm:space-x-20">
 						<Button
 							type="submit"
-							id="update-user-picture-button"
+							id="update-username-and-description-button"
 							className={classNames(
 								'text-white bg-zinc-800 py-1.5 disabled:cursor-not-allowed flex justify-center',
 								isLoading ? 'w-36' : 'w-32',
@@ -126,7 +126,7 @@ const NameAndDescription: React.FC<NameAndDescriptionProps> = ({
 
 						<Button
 							type="reset"
-							id="reset-user-picture-button"
+							id="reset-username-and-description-button"
 							className={classNames(
 								'text-black bg-white border border-zinc-800 py-1.5 w-32 flex justify-center disabled:cursor-not-allowed',
 								isLoading ? 'w-36' : 'w-32',
