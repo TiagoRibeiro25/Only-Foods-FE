@@ -14,18 +14,22 @@ interface RecipeProps {
 	animation?: Animation | 'none';
 }
 
-function getRevealAnimation(index: number | undefined) {
-	if (index === undefined) return 'slide-bottom';
-	return index % 2 === 0 ? 'slide-left' : 'slide-right';
-}
-
 const Recipe: React.FC<RecipeProps> = ({ recipe, index, className, animation }) => {
 	const recipesContext = useContext(RecipesContext);
+
+	const getRevealAnimation = (index: number | undefined): Animation | undefined => {
+		if (index === undefined) return 'slide-bottom';
+		return index % 2 === 0 ? 'slide-left' : 'slide-right';
+	};
 
 	return (
 		<div className={classNames('rounded lg:w-[374px] w-full mb-6 lg:mb-0', className)}>
 			<Reveal
-				animation={animation !== 'none' ? animation : getRevealAnimation(index)}
+				animation={
+					animation !== 'none' && animation !== undefined
+						? animation
+						: getRevealAnimation(index)
+				}
 				width="100%"
 				delay={0.15}
 				noAnimation={animation === 'none'}
