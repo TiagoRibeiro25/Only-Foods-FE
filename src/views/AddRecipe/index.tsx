@@ -130,7 +130,7 @@ const AddRecipe: React.FC = () => {
 				</Reveal>
 				<Reveal width="100%" animation="slide-bottom" delay={0.2}>
 					<Textarea
-						className="p-3 text-sm border-gray-300 rounded-md focus:border-gray-300"
+						className="p-3 text-sm border-2 border-gray-500 rounded-md focus:border-gray-500"
 						name="description"
 						id="description"
 						placeholder="Enter a description for your recipe (optional)"
@@ -168,7 +168,7 @@ const AddRecipe: React.FC = () => {
 				</Reveal>
 				<Reveal width="100%" animation="slide-bottom" delay={0.2}>
 					<Textarea
-						className="p-3 text-sm border-gray-300 rounded-md focus:border-gray-300"
+						className="p-3 text-sm border-2 border-gray-500 rounded-md focus:border-gray-500"
 						name="notes"
 						id="notes"
 						placeholder="Enter some notes about your recipe (optional)"
