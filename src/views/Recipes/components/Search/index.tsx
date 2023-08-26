@@ -7,6 +7,7 @@ import Input from '../../../../components/Input';
 import Loading from '../../../../components/Loading';
 import Reveal from '../../../../components/Reveal';
 import { IRecipe } from '../../../../types/types';
+import LoadingRecipes from './components/LoadingRecipes';
 import RecipeResult from './components/RecipeResult';
 
 const Search: React.FC = () => {
@@ -101,6 +102,15 @@ const Search: React.FC = () => {
 			</Reveal>
 
 			{loading && <Loading />}
+
+			{loading && !recipes && (
+				<div className="w-full space-y-8">
+					{Array.from(Array(3).keys()).map(index => (
+						<LoadingRecipes key={index} />
+					))}
+				</div>
+			)}
+
 			{recipes && (
 				<div className="flex flex-col w-full space-y-8">
 					{recipes.map(recipe => (
