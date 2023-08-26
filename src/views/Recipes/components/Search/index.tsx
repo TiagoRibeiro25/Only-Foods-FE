@@ -5,6 +5,7 @@ import requests from '../../../../api/requests';
 import SearchIcon from '../../../../assets/icons/search.svg';
 import Input from '../../../../components/Input';
 import Loading from '../../../../components/Loading';
+import NoItemsFound from '../../../../components/NoItemsFound';
 import Reveal from '../../../../components/Reveal';
 import { IRecipe } from '../../../../types/types';
 import LoadingRecipes from './components/LoadingRecipes';
@@ -119,6 +120,13 @@ const Search: React.FC = () => {
 						</Reveal>
 					))}
 				</div>
+			)}
+
+			{!loading && !recipes && searchInput.trim().length > 3 && (
+				<NoItemsFound
+					warning="No recipes found for the given keyword."
+					message="Try searching for something else."
+				/>
 			)}
 		</div>
 	);
