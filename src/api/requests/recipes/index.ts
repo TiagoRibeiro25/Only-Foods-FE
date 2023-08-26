@@ -5,6 +5,7 @@ import getComments from './getComments';
 import getRecipe from './getRecipe';
 import getRecipes from './getRecipes';
 import handleLike from './handleLike';
+import searchRecipe from './searchRecipe';
 
 export default {
 	addComment,
@@ -14,4 +15,5 @@ export default {
 	getRecipe,
 	deleteRecipe,
 	addRecipe,
+	searchRecipe,
 };
