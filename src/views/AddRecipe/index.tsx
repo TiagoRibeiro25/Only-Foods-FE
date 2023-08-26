@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useContext, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import requests from '../../api/requests';
 import LoadingIcon from '../../assets/icons/loading.svg';
 import AddImages from '../../components/AddImages';
@@ -13,6 +14,8 @@ import { UserContext } from '../../contextProviders/UserContext';
 import { Base64Img } from '../../types/types';
 
 const AddRecipe: React.FC = () => {
+	const navigate = useNavigate();
+
 	const recipesContext = useContext(RecipesContext);
 	const { loggedUser } = useContext(UserContext);
 
@@ -52,14 +55,6 @@ const AddRecipe: React.FC = () => {
 			if (response.data.success && response.data.data && loggedUser) {
 				setStatusMSg('Recipe successfully created!');
 
-				// Reset the form
-				setImages([]);
-				setTitle('');
-				setDescription('');
-				setIngredients([{ id: '1', value: '' }]);
-				setInstructions([{ id: '1', value: '' }]);
-				setNotes('');
-
 				recipesContext.handleNewRecipe({
 					id: response.data.data.recipe.id,
 					title: response.data.data.recipe.title,
@@ -81,6 +76,8 @@ const AddRecipe: React.FC = () => {
 					isLiked: false,
 					createdAt: response.data.data.recipe.createdAt,
 				});
+
+				navigate(`/recipe/${response.data.data.recipe.id}`);
 			} else {
 				setStatusMSg(response.data.message);
 			}
