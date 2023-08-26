@@ -63,7 +63,7 @@ const NewThoughtForm: React.FC = () => {
 		<>
 			{/* Add New Thought Form */}
 			<PostTextArea
-				id="new-thought-textarea"
+				id="new-thought"
 				labelText="New Thought"
 				placeholder="Share your current thought with the world..."
 				buttonText="Post Thought"

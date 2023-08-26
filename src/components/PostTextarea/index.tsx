@@ -79,7 +79,7 @@ const PostTextArea: React.FC<PostTextAreaProps> = ({
 		<form className="w-full" onSubmit={handleSubmit}>
 			<div className="w-full mb-4 border border-gray-300 rounded-lg bg-gray-50">
 				<div className="px-4 py-2 bg-white rounded-t-lg">
-					<label htmlFor={labelText} className="sr-only">
+					<label htmlFor={id} className="sr-only">
 						{labelText}
 					</label>
 
