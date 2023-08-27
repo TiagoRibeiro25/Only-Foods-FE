@@ -8,6 +8,7 @@ import login from './login';
 import logout from './logout';
 import register from './register';
 import resetPassword from './resetPassword';
+import searchUsers from './searchUsers';
 import updateUser from './updateUser';
 
 export default {
@@ -23,4 +24,5 @@ export default {
 	getFollowers,
 	getFollowing,
 	updateUser,
+	searchUsers,
 };
