@@ -19,7 +19,7 @@ const RecipeResult: React.FC<RecipeResultProps> = ({ recipe }) => {
 					className="transition-opacity duration-300 hover:opacity-80"
 				>
 					<img
-						className="object-cover object-center w-full h-full rounded-t-lg sm:rounded-l-lg"
+						className="object-cover object-center w-full h-full rounded-t-lg sm:rounded-l-lg sm:rounded-t-none"
 						src={recipe.recipeImages[0].cloudinaryImage}
 						alt="recipe"
 						loading="lazy"
