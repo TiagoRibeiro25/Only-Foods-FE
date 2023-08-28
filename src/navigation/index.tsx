@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Loading from '../components/Loading';
 import { UserContext } from '../contextProviders/UserContext';
 import ProfileEdit from '../views/ProfileEdit';
+import SearchUsers from '../views/SearchUsers';
 
 const AddRecipe = lazy(() => import('../views/AddRecipe'));
 const Explore = lazy(() => import('../views/Explore'));
@@ -54,6 +55,7 @@ const Navigation = () => {
 				<Route path="/recipes/:tab" element={<Recipes />} />
 				<Route path="/recipe/:id" element={<Recipe />} />
 				<Route path="/search" element={<Search />} />
+				<Route path="/users/search" element={<SearchUsers />} />
 				<Route path="/user/:id" element={<User />} />
 				<Route
 					path="/profile/edit"
