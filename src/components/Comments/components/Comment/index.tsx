@@ -17,7 +17,7 @@ const Comment: React.FC<IComment> = ({ id, content, author, createdAt }) => {
 			<div className="flex flex-row">
 				<Link to={`/user/${author.id === loggedUser?.id ? 'me' : author.id}`}>
 					<LazyLoadImage
-						className="rounded-full"
+						className="object-cover object-center rounded-full"
 						src={author.userImage?.cloudinaryImage ?? UserPlaceholderPicture}
 						alt="User Profile Picture"
 						effect="blur"

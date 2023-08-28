@@ -87,7 +87,7 @@ const Thought: React.FC<ThoughtProps> = ({ thought, isAdmin, isBlocked }) => {
 			<div className="flex flex-row">
 				<Link to={`/user/${thought.isAuthor ? 'me' : thought.author.id}`}>
 					<LazyLoadImage
-						className="rounded-full"
+						className="object-cover object-center rounded-full"
 						src={thought.author.userImage?.cloudinaryImage ?? UserPlaceholderPicture}
 						alt="User Profile Picture"
 						effect="blur"

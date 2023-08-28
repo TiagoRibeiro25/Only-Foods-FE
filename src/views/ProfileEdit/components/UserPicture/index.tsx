@@ -72,7 +72,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ userImage }) => {
 					<Reveal width="100%" animation="slide-left" delay={0.05}>
 						<div className="flex justify-center">
 							<LazyLoadImage
-								className="my-4 rounded-full w-60 h-60"
+								className="object-cover object-center my-4 rounded-full w-60 h-60"
 								src={updatedImage.length > 0 ? updatedImage[0] : userImage}
 								placeholderSrc={UserNoPicture}
 								effect="blur"

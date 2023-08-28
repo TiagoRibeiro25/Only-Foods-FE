@@ -159,7 +159,7 @@ const Navbar: React.FC = () => {
 								>
 									<span className="sr-only">Open user menu</span>
 									<LazyLoadImage
-										className="w-8 h-8 rounded-full"
+										className="object-cover object-center w-8 h-8 rounded-full"
 										src={loggedUser.picture ?? UserNoPicture}
 										alt="user photo"
 										effect="blur"

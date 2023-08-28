@@ -139,7 +139,7 @@ const FollowsDataModel: React.FC<FollowsDataModelProps> = ({
 											<div className="flex-shrink-0">
 												<Link to={`/user/${user.id}`}>
 													<LazyLoadImage
-														className="w-12 h-12 rounded-full sm:w-16 sm:h-16"
+														className="object-cover object-center w-12 h-12 rounded-full sm:w-16 sm:h-16"
 														src={user.userImage?.cloudinaryImage ?? UserNoPicture}
 														effect="blur"
 														placeholderSrc={UserNoPicture}

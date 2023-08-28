@@ -101,7 +101,7 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ user }) => {
 				<div className="flex flex-col items-center sm:items-start sm:flex-row">
 					<div className="sm:mr-10">
 						<LazyLoadImage
-							className="w-40 h-40 rounded-full sm:w-36 sm:h-36"
+							className="object-cover object-center w-40 h-40 rounded-full sm:w-36 sm:h-36"
 							src={user.userImage?.cloudinaryImage ?? UserNoPicture}
 							alt="User Profile Picture"
 							placeholderSrc={UserNoPicture}
