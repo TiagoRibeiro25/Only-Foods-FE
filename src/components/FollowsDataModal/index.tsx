@@ -163,7 +163,7 @@ const FollowsDataModel: React.FC<FollowsDataModelProps> = ({
 													</Link>
 												</div>
 												<div className="flex items-center w-full mx-4 mt-1 sm:justify-end sm:mx-0 sm:mt-0">
-													{loggedUser?.id !== user.id && (
+													{loggedUser && loggedUser?.id !== user.id && (
 														<HandleFollowButton
 															userId={user.id}
 															isFollowing={user.isFollowing}
