@@ -53,6 +53,12 @@ const Loading: React.FC<LoadingProps> = ({ state }) => {
 						<span className="mx-4 text-xl text-center font-bellefair">
 							{currentPhrase}
 						</span>
+
+						<div className="absolute bottom-3">
+							<span className="mx-4 text-lg text-center font-bellefair opacity-90">
+								This shouldn't take more than 40 seconds
+							</span>
+						</div>
 					</>
 				)}
 			</div>
