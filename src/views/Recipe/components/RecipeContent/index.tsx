@@ -8,6 +8,7 @@ import PostUserActions from '../../../../components/PostUserActions';
 import Reveal from '../../../../components/Reveal';
 import { RecipesContext } from '../../../../contextProviders/RecipesContext';
 import formatData from '../../../../utils/formatData';
+import { generateRandomId } from '../../../../utils/randomIds';
 import DeleteRecipeButton from '../DeleteRecipeButton';
 
 interface RecipeContentProps {
@@ -98,7 +99,7 @@ const RecipeContent: React.FC<RecipeContentProps> = ({ recipe }) => {
 					<ul className="mt-3 space-y-3 text-gray-500 list-disc list-inside">
 						{recipe.ingredients.map(ingredient => (
 							<Reveal
-								key={crypto.randomUUID()}
+								key={generateRandomId()}
 								width="100%"
 								animation="slide-right"
 								duration={0.4}
@@ -119,7 +120,7 @@ const RecipeContent: React.FC<RecipeContentProps> = ({ recipe }) => {
 
 					<ol className="mt-3 space-y-4 text-gray-500 list-disc list-inside">
 						{recipe.instructions.map((instruction, index) => (
-							<Reveal key={crypto.randomUUID()} width="100%" animation="slide-right">
+							<Reveal key={generateRandomId()} width="100%" animation="slide-right">
 								<div className="flex flex-row">
 									<span className="mr-1 text-black font-bellefair">{index + 1}.</span>
 									<span className="text-justify">{instruction}</span>

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { generateRandomId } from '../../utils/randomIds';
 
 interface HTMLTextProps {
 	text: string;
@@ -27,7 +28,7 @@ const HTMLText: React.FC<HTMLTextProps> = ({ text, className }) => {
 		// If there are links in the paragraph, replace them with anchor tags
 		if (newMatches && newMatches.length > 0) {
 			return (
-				<p key={crypto.randomUUID()} className={classNames('text-md', className)}>
+				<p key={generateRandomId()} className={classNames('text-md', className)}>
 					{paragraph.split(LINK_REGEX).map((part, index) => {
 						if (index % 2 === 0) {
 							return part; // Non-link text
@@ -35,7 +36,7 @@ const HTMLText: React.FC<HTMLTextProps> = ({ text, className }) => {
 							// Link text and URL
 							return (
 								<a
-									key={crypto.randomUUID()}
+									key={generateRandomId()}
 									href={newMatches[index - 1]}
 									target="_blank"
 									rel="noopener noreferrer"
@@ -52,7 +53,7 @@ const HTMLText: React.FC<HTMLTextProps> = ({ text, className }) => {
 
 		// If there are no links in the paragraph, return the paragraph as it is
 		return (
-			<p key={crypto.randomUUID()} className={classNames('text-md', className)}>
+			<p key={generateRandomId()} className={classNames('text-md', className)}>
 				{paragraph}
 			</p>
 		);
@@ -60,7 +61,7 @@ const HTMLText: React.FC<HTMLTextProps> = ({ text, className }) => {
 
 	return paragraphs.map(paragraph => {
 		if (paragraph.trim() === '') {
-			return <br key={crypto.randomUUID()} className="text-sm" />;
+			return <br key={generateRandomId()} className="text-sm" />;
 		} else {
 			return renderParagraphWithLinks(paragraph);
 		}

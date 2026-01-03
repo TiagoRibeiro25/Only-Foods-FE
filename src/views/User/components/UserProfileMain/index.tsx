@@ -10,6 +10,7 @@ import Recipe from '../../../../components/Recipe';
 import Reveal from '../../../../components/Reveal';
 import { UserContext } from '../../../../contextProviders/UserContext';
 import { IRecipe } from '../../../../types/types';
+import { generateRandomId } from '../../../../utils/randomIds';
 
 interface UserProfileMainProps {
 	userId: number;
@@ -64,7 +65,7 @@ const UserProfileMain: React.FC<UserProfileMainProps> = ({ userId }) => {
 							<Marquee speed={60} pauseOnHover>
 								<div className="flex flex-row">
 									{Array.from({ length: 3 }).map(() => (
-										<div key={crypto.randomUUID()} className="max-w-xs lg:mr-4">
+										<div key={generateRandomId()} className="max-w-xs lg:mr-4">
 											<LoadingRecipes className="w-72" />
 										</div>
 									))}
@@ -104,14 +105,14 @@ const UserProfileMain: React.FC<UserProfileMainProps> = ({ userId }) => {
 
 								{recipes.length === 1 &&
 									Array.from({ length: 3 }).map(() => (
-										<div key={crypto.randomUUID()} className="max-w-xs scale-90 lg:mr-10">
+										<div key={generateRandomId()} className="max-w-xs scale-90 lg:mr-10">
 											<Recipe recipe={recipes[0]} animation="none" />
 										</div>
 									))}
 
 								{recipes.length === 2 &&
 									Array.from({ length: 3 }).map((_, index) => (
-										<div key={crypto.randomUUID()} className="max-w-xs scale-90 lg:mr-10">
+										<div key={generateRandomId()} className="max-w-xs scale-90 lg:mr-10">
 											<Recipe
 												recipe={index % 2 === 0 ? recipes[0] : recipes[1]}
 												animation="none"
